@@ -1,65 +1,12 @@
 import RDF
 import time
 import uuid
-import json
-import os
 
-
-'''
-JSON file path of predefined subclasses
-including: 
-Configuration
-Metrics
-(Workflow) Types
-'''
-DEFAULT_SUBCLASS_PATH = '../../'
 
 DEFAULT_VERSION = 1.0
-DEFAULT_SUBCLASS = 'DefaultSubclass'
-DEFAULT_FIELD = 'DefaultField'
 BASE_URI = 'http://www.w3.org/ns/provio#'
 PREFIX = 'provio:'
 PROV_FORMAT = ['turtle','xml']
-
-
-class Extensible():
-	"""
-	PROV-IO Extensible Class
-	"""
-	def __init__(self, arg = None, **args):
-
-		self._subclass = DEFAULT_SUBCLASS
-		self._field = DEFAULT_FIELD
-		self._subclass_path = DEFAULT_SUBCLASS_PATH
-		self._subclass_dict = {}
-
-		if 'SubclassPath' in args:
-			self._subclass_path = args['SubclassPath']
-
-		for subclass_file in os.listdir(self._subclass_path):
-			subclass_name = os.fsdecode(subclass_file)
-			if subclass_name.endswith(".json"):
-				with open(subclass_name) as subclass_json:
-					subclass = json.load(subclass_json)
-					self._subclass_dict[subclass_name.split('.')[0]] = subclass
-
-		for files in os.listdir(directory)
-
-
-		if arg:
-			self._field = arg
-
-		if 'Subclass' in args:
-			self._subclass = args['Subclass']
-
-
-	def _set_field():
-		if field not in fields:
-			this.field = field
-
-	def _display_fields(arg):
-		for field in this.arg:
-			print(field)
 
 class Provenance():
 
@@ -85,7 +32,7 @@ class Provenance():
 				raise Exception("new RDF.Storage failed")
 
 			else:
-				self._model = RDF.Model(self.storage):
+				self._model = RDF.Model(self.storage)
 				if model is None:
 					raise Exception("new RDF.model with storage failed")
 		else:
@@ -109,13 +56,14 @@ class Provenance():
 			raise Exception('please provide the subject of triple')
 
 
-		
+		# Need to implement periodically serialization
+		if 'Periodical' in args:
+			if args['Serializer'] == True:
+				pass
 
+		# if 'Enable_ID' in args:
 
-
-		if 'Enable_ID' in args:
-
-		if 'Enable_ID' in args:
+		# if 'Enable_ID' in args:
 
 
 		if 'Enable_ID' in args:
@@ -126,7 +74,8 @@ class Provenance():
 			self._id = uuid.uuid4().__str__()
 
 		if 'Subclass' in args:
-			if args['Subclass'] in 
+			# if args['Subclass'] in 
+			pass
 
 	def new_triple():
 		return RDF.Statement(RDF.Uri("http://www.dajobe.org/"),
@@ -163,13 +112,11 @@ class Provenance():
 			print('WARNING: version information not provided.')
 			return 1
 
+	def set_identifier:
+		pass
+
 	def add_subclass(new_class):
 		return 0
-
-
-
-
-
 
 
 
