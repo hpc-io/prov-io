@@ -10,7 +10,7 @@ Configuration
 Metrics
 (Workflow) Types
 """
-DEFAULT_SUBCLASS_PATH = '../extensible_class/' # Replace with your path
+DEFAULT_SUBCLASS_PATH = '/home/runzhou/PROV-IO/python/extensible_class/' # Replace with your path
 DEFAULT_SUBCLASS = 'DefaultSubclass'
 DEFAULT_FIELD = 'DefaultField'
 
@@ -63,9 +63,13 @@ class subclass():
 			try:
 				self._subclass = self._subclass_dict[arg]
 			except Exception:
-				pass
+				print('warning: %s does not belong to any existing subclasses' % arg)
 		else:
 			print('warning: blank provenance node')
+
+	@abstractmethod
+	def get_subclass(self):
+		raise NotImplementedError
 
 	@abstractmethod
 	def display_subclass_fields(self, subclass):
@@ -76,6 +80,6 @@ class subclass():
 		raise NotImplementedError
 
 	@abstractmethod
-	def add_subclass(self, subclass, fields):
+	def add_subclass(self, path, subclass, fields):
 		raise NotImplementedError
 		

@@ -51,10 +51,10 @@ def main():
 	print('\n++ Add new a subclass and fields: start')
 	print('-------------------------------------------')
 	extensible.display_subclass_fields('test_subclass')
-	extensible.add_subclass('test_subclass', 'test_field_0')
+	extensible.add_subclass('test_class','test_subclass', 'test_field_0')
 	test_fields = ['test_field_1', 'test_field_2']
-	extensible.add_subclass('test_subclass', test_fields)
-	extensible.add_subclass('test_subclass', test_fields)
+	extensible.add_subclass('test_class', 'test_subclass', test_fields)
+	extensible.add_subclass('test_class', 'test_subclass', test_fields)
 	extensible.display_subclass_fields('test_subclass')
 	print('-------------------------------------------')
 	print('++ Add new a subclass and fields: done\n')
@@ -62,7 +62,7 @@ def main():
 	'''
 	Clean up test class
 	'''
-	cleanup(extensible._subclass_path + 'test_subclass' + '.json')
+	cleanup(extensible._subclass_path + 'test_class' + '.json')
 	print('\n++ Clean up test class: done\n')
 
 if __name__ == '__main__':
