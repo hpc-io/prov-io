@@ -1,0 +1,81 @@
+<!-- ##### SECTION Title ##### -->
+Service
+
+<!-- ##### SECTION Short_Description ##### -->
+Execute queries remotely via a SPARQL HTTP Protocol service.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+The SPARQL Protocol defines an HTTP binding that enables remote
+queries to be executed over specified default and named graphs.
+This class allows that to be constructed and executed, returning
+a Rasqal query results #rasqal_query_results that may be used,
+for example, with a formatter to generate output.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### TYPEDEF rasqal_service ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION rasqal_new_service ##### -->
+<para>
+
+</para>
+
+@world: 
+@service_uri: 
+@query_string: 
+@data_graphs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION rasqal_free_service ##### -->
+<para>
+
+</para>
+
+@svc: 
+
+
+<!-- ##### FUNCTION rasqal_service_execute ##### -->
+<para>
+
+</para>
+
+@svc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION rasqal_service_set_format ##### -->
+<para>
+
+</para>
+
+@svc: 
+@format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION rasqal_service_set_www ##### -->
+<para>
+
+</para>
+
+@svc: 
+@www: 
+@Returns: 
+
+

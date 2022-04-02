@@ -1,0 +1,522 @@
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<chapter id="rasqal-changes">
+<title>API Changes</title>
+
+<para>This chapter describes the API changes for Rasqal.
+</para>
+<section id="rasqal-changes-intro">
+<title>Introduction</title>
+
+<para>
+The following sections describe the changes in the API between
+versions including additions, deletions, renames (retaining the same
+number of parameters, types and return value type) and more complex
+changes to functions, types and enums.
+</para>
+
+</section>
+<section id="rasqal-changes-0-9-21-to-0-9-22">
+<title>Changes between Rasqal 0.9.21 and 0.9.22</title>
+
+<section id="rasqal-changes-new-0-9-21-to-0-9-22">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>void <link linkend="rasqal-free-xsd-datetime"><function>rasqal_free_xsd_datetime</function></link>(rasqal_xsd_datetime* dt) </para></listitem>
+    <listitem><para>const unsigned char* <link linkend="rasqal-literal-as-counted-string"><function>rasqal_literal_as_counted_string</function></link>(rasqal_literal* l, size_t *len_p, int flags, int *error) </para></listitem>
+    <listitem><para>rasqal_literal* <link linkend="rasqal-new-datetime-literal-from-datetime"><function>rasqal_new_datetime_literal_from_datetime</function></link>(rasqal_world* world, rasqal_xsd_datetime* dt) </para></listitem>
+    <listitem><para>rasqal_xsd_datetime* <link linkend="rasqal-new-xsd-datetime"><function>rasqal_new_xsd_datetime</function></link>(rasqal_world* world, const char *datetime_string) </para></listitem>
+    <listitem><para>rasqal_xsd_datetime* <link linkend="rasqal-new-xsd-datetime-from-timeval"><function>rasqal_new_xsd_datetime_from_timeval</function></link>(rasqal_world* world, struct timeval *tv) </para></listitem>
+    <listitem><para>rasqal_xsd_datetime* <link linkend="rasqal-new-xsd-datetime-from-unixtime"><function>rasqal_new_xsd_datetime_from_unixtime</function></link>(rasqal_world* world, time_t secs) </para></listitem>
+    <listitem><para>rasqal_query_results_type <link linkend="rasqal-query-get-result-type"><function>rasqal_query_get_result_type</function></link>(rasqal_query* query) </para></listitem>
+    <listitem><para>rasqal_row* <link linkend="rasqal-query-results-get-row-by-offset"><function>rasqal_query_results_get_row_by_offset</function></link>(rasqal_query_results* query_results, int result_offset) </para></listitem>
+    <listitem><para>rasqal_query_results_type <link linkend="rasqal-query-results-get-type"><function>rasqal_query_results_get_type</function></link>(rasqal_query_results* query_results) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-query-results-rewind"><function>rasqal_query_results_rewind</function></link>(rasqal_query_results* query_results) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-query-set-store-results"><function>rasqal_query_set_store_results</function></link>(rasqal_query* query, int store_results) </para></listitem>
+    <listitem><para>const char* <link linkend="rasqal-world-guess-query-results-format-name"><function>rasqal_world_guess_query_results_format_name</function></link>(rasqal_world* world, raptor_uri *uri, const char *mime_type, const unsigned char *buffer, size_t len, const unsigned char *identifier) </para></listitem>
+    <listitem><para>void <link linkend="rasqal-world-set-log-handler"><function>rasqal_world_set_log_handler</function></link>(rasqal_world* world, void *user_data, raptor_log_handler handler) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-datetime-compare"><function>rasqal_xsd_datetime_compare</function></link>(const rasqal_xsd_datetime *dt1, const rasqal_xsd_datetime *dt2) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-datetime-equals"><function>rasqal_xsd_datetime_equals</function></link>(const rasqal_xsd_datetime *dt1, const rasqal_xsd_datetime *dt2) </para></listitem>
+    <listitem><para>struct timeval* <link linkend="rasqal-xsd-datetime-get-as-timeval"><function>rasqal_xsd_datetime_get_as_timeval</function></link>(rasqal_xsd_datetime *dt) </para></listitem>
+    <listitem><para>time_t <link linkend="rasqal-xsd-datetime-get-as-unixtime"><function>rasqal_xsd_datetime_get_as_unixtime</function></link>(rasqal_xsd_datetime* dt) </para></listitem>
+    <listitem><para>rasqal_xsd_decimal* <link linkend="rasqal-xsd-datetime-get-seconds-as-decimal"><function>rasqal_xsd_datetime_get_seconds_as_decimal</function></link>(rasqal_world* world, rasqal_xsd_datetime* dt) </para></listitem>
+    <listitem><para>char* <link linkend="rasqal-xsd-datetime-get-timezone-as-counted-string"><function>rasqal_xsd_datetime_get_timezone_as_counted_string</function></link>(rasqal_xsd_datetime *dt, size_t *len_p) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-datetime-set-from-timeval"><function>rasqal_xsd_datetime_set_from_timeval</function></link>(rasqal_xsd_datetime *dt, struct timeval *tv) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-datetime-set-from-unixtime"><function>rasqal_xsd_datetime_set_from_unixtime</function></link>(rasqal_xsd_datetime* dt, time_t clock) </para></listitem>
+    <listitem><para>char* <link linkend="rasqal-xsd-datetime-to-counted-string"><function>rasqal_xsd_datetime_to_counted_string</function></link>(const rasqal_xsd_datetime *dt, size_t *len_p) </para></listitem>
+    <listitem><para>char* <link linkend="rasqal-xsd-datetime-to-string"><function>rasqal_xsd_datetime_to_string</function></link>(const rasqal_xsd_datetime *dt) </para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Types</title>
+    <listitem><para><link linkend="rasqal-xsd-datetime"><type>rasqal_xsd_datetime</type></link> </para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Enums</title>
+    <listitem><para><link linkend="RASQAL-EXPR-CONCAT:CAPS"><literal>RASQAL_EXPR_CONCAT</literal></link> - Expression for SPARQL 1.1 CONCAT(strings)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-CONTAINS:CAPS"><literal>RASQAL_EXPR_CONTAINS</literal></link> - Expression for SPARQL 1.1 CONTAINS(str, str)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-CURRENT-DATETIME:CAPS"><literal>RASQAL_EXPR_CURRENT_DATETIME</literal></link> - Expression for LAQRS CURRENT_DATETIME( void )</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-DAY:CAPS"><literal>RASQAL_EXPR_DAY</literal></link> - Expression for SPARQL 1.1 DAY(datetime)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-ENCODE-FOR-URI:CAPS"><literal>RASQAL_EXPR_ENCODE_FOR_URI</literal></link> - Expression for SPARQL 1.1 ENCODE_FOR_URI(str)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-FROM-UNIXTIME:CAPS"><literal>RASQAL_EXPR_FROM_UNIXTIME</literal></link> - Expression for LAQRS FROM_UNIXTIME(int)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-HOURS:CAPS"><literal>RASQAL_EXPR_HOURS</literal></link> - Expression for SPARQL 1.1 HOURS(datetime)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-LCASE:CAPS"><literal>RASQAL_EXPR_LCASE</literal></link> - Expression for SPARQL 1.1 LCASE(str)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-MINUTES:CAPS"><literal>RASQAL_EXPR_MINUTES</literal></link> - Expression for SPARQL 1.1 MINUTES(datetime)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-MONTH:CAPS"><literal>RASQAL_EXPR_MONTH</literal></link> - Expression for SPARQL 1.1 MONTH(datetime)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-NOW:CAPS"><literal>RASQAL_EXPR_NOW</literal></link> - Expression for LAQRS NOW( void )</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-SECONDS:CAPS"><literal>RASQAL_EXPR_SECONDS</literal></link> - Expression for SPARQL 1.1 SECONDS(datetime)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-STRENDS:CAPS"><literal>RASQAL_EXPR_STRENDS</literal></link> - Expression for SPARQL 1.1 STRENDS(str, str)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-STRLEN:CAPS"><literal>RASQAL_EXPR_STRLEN</literal></link> - Expression for SPARQL 1.1 STRLEN(str)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-STRSTARTS:CAPS"><literal>RASQAL_EXPR_STRSTARTS</literal></link> - Expression for SPARQL 1.1 STRSTARTS(str, str)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-SUBSTR:CAPS"><literal>RASQAL_EXPR_SUBSTR</literal></link> - Expression for SPARQL 1.1 SUBSTR(str, start[,offset])</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-TIMEZONE:CAPS"><literal>RASQAL_EXPR_TIMEZONE</literal></link> - Expression for SPARQL 1.1 TIMEZONE(datetime)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-TO-UNIXTIME:CAPS"><literal>RASQAL_EXPR_TO_UNIXTIME</literal></link> - Expression for LAQRS TO_UNIXTIME(datetime)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-UCASE:CAPS"><literal>RASQAL_EXPR_UCASE</literal></link> - Expression for SPARQL 1.1 UCASE(str)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-YEAR:CAPS"><literal>RASQAL_EXPR_YEAR</literal></link> - Expression for SPARQL 1.1 YEAR(datetime)</para></listitem>
+    <listitem><para><link linkend="RASQAL-QUERY-RESULTS-FORMAT-FLAG-READER:CAPS"><literal>RASQAL_QUERY_RESULTS_FORMAT_FLAG_READER</literal></link> - Bitflag for <link linkend="rasqal-query-results-formats-check"><function>rasqal_query_results_formats_check</function></link>() to request formats that can be read.</para></listitem>
+    <listitem><para><link linkend="RASQAL-QUERY-RESULTS-FORMAT-FLAG-WRITER:CAPS"><literal>RASQAL_QUERY_RESULTS_FORMAT_FLAG_WRITER</literal></link> - Bitflag for <link linkend="rasqal-query-results-formats-check"><function>rasqal_query_results_formats_check</function></link>() to request formats that can be written.</para></listitem>
+    <listitem><para><link linkend="RASQAL-QUERY-RESULTS-UNKNOWN:CAPS"><literal>RASQAL_QUERY_RESULTS_UNKNOWN</literal></link> - Unknown result format type</para></listitem>
+    <listitem><para><link linkend="RASQAL-XSD-DATETIME-NO-TZ:CAPS"><literal>RASQAL_XSD_DATETIME_NO_TZ</literal></link> - Sentinel XSD Decimal timezone value indicating no timezone is present.</para></listitem>
+  </itemizedlist>
+
+</section>
+<section id="rasqal-changes-deleted-0-9-21-to-0-9-22">
+<title>Deleted functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>rasqal_new_variable - Replaced by <link linkend="rasqal-variables-table-add2"><function>rasqal_variables_table_add2</function></link>()</para></listitem>
+    <listitem><para>rasqal_new_variable_typed - Replaced by <link linkend="rasqal-variables-table-add2"><function>rasqal_variables_table_add2</function></link>()</para></listitem>
+    <listitem><para>rasqal_query_results_formatter_get_mime_type - Use <link linkend="rasqal-world-get-query-results-format-description"><function>rasqal_world_get_query_results_format_description</function></link>() to get list of mime types.</para></listitem>
+    <listitem><para>rasqal_query_set_error_handler - Replaced by <link linkend="rasqal-world-set-log-handler"><function>rasqal_world_set_log_handler</function></link>()</para></listitem>
+    <listitem><para>rasqal_query_set_fatal_error_handler - Replaced by <link linkend="rasqal-world-set-log-handler"><function>rasqal_world_set_log_handler</function></link>()</para></listitem>
+    <listitem><para>rasqal_query_set_warning_handler - Replaced by <link linkend="rasqal-world-set-log-handler"><function>rasqal_world_set_log_handler</function></link>()</para></listitem>
+  </itemizedlist>
+
+</section>
+<section id="rasqal-changes-renamed-0-9-21-to-0-9-22">
+<title>Renamed function and enums</title>
+
+<table border='1'>
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.9.21 function</th>
+      <th>0.9.22 function</th>
+      <th>Notes</th>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_new_function_expression2</td> <td><link linkend="rasqal-new-function-expression"><function>rasqal_new_function_expression</function></link></td> <td>&#160;</td>
+   </tr>
+    <tr valign='top'>
+      <td>rasqal_query_add_data_graph2</td> <td><link linkend="rasqal-query-add-data-graph"><function>rasqal_query_add_data_graph</function></link></td> <td>&#160;</td>
+   </tr>
+    <tr valign='top'>
+      <td>rasqal_query_results_read2</td> <td><link linkend="rasqal-query-results-read"><function>rasqal_query_results_read</function></link></td> <td>&#160;</td>
+   </tr>
+    <tr valign='top'>
+      <td>rasqal_query_results_write2</td> <td><link linkend="rasqal-query-results-write"><function>rasqal_query_results_write</function></link></td> <td>&#160;</td>
+   </tr>
+  </tbody>
+</table>
+
+</section>
+<section id="rasqal-changes-changed-0-9-21-to-0-9-22">
+<title>Changed functions and types</title>
+
+<table border='1'>
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.9.21 function</th>
+      <th>0.9.22 function</th>
+      <th>Notes</th>
+    </tr>
+    <tr valign='top'>
+      <td>int rasqal_world_set_generate_bnodeid_handler(rasqal_world* world, void *user_data, rasqal_generate_bnodeid_handler2 handler)</td> <td>int <link linkend="rasqal-world-set-generate-bnodeid-handler"><function>rasqal_world_set_generate_bnodeid_handler</function></link>(rasqal_world* world, void *user_data, rasqal_generate_bnodeid_handler handler)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>int rasqal_query_results_formats_enumerate(rasqal_world* world, unsigned int counter, const char **name, const char **label, const unsigned char **uri_string, const char **mime_type, int* flags)</td> <td>const raptor_syntax_description* <link linkend="rasqal-world-get-query-results-format-description"><function>rasqal_world_get_query_results_format_description</function></link>(rasqal_world* world, unsigned int counter)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>void rasqal_query_set_default_generate_bnodeid_parameters(rasqal_query* rdf_query, char *prefix, int base)</td> <td>int <link linkend="rasqal-world-set-default-generate-bnodeid-parameters"><function>rasqal_world_set_default_generate_bnodeid_parameters</function></link>(rasqal_world* world, char *prefix, int base)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>void rasqal_query_set_generate_bnodeid_handler(rasqal_query* query, void *user_data, rasqal_generate_bnodeid_handler handler)</td> <td>int <link linkend="rasqal-world-set-generate-bnodeid-handler"><function>rasqal_world_set_generate_bnodeid_handler</function></link>(rasqal_world* world, void *user_data, rasqal_generate_bnodeid_handler handler)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>int rasqal_query_add_data_graph(rasqal_query* query, raptor_uri* uri, raptor_uri* name_uri, int flags)</td> <td>int <link linkend="rasqal-query-add-data-graph"><function>rasqal_query_add_data_graph</function></link>(rasqal_query* query, rasqal_data_graph* data_graph)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>int rasqal_query_results_write(raptor_iostream *iostr, rasqal_query_results *results, raptor_uri *format_uri, raptor_uri *base_uri)</td> <td>int <link linkend="rasqal-query-results-write"><function>rasqal_query_results_write</function></link>(raptor_iostream *iostr, rasqal_query_results *results, const char* name, const char* mime_type, raptor_uri *format_uri, raptor_uri *base_uri)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>int rasqal_query_results_read(raptor_iostream *iostr, rasqal_query_results *results, raptor_uri *format_uri, raptor_uri *base_uri)</td> <td>int <link linkend="rasqal-query-results-read"><function>rasqal_query_results_read</function></link>(raptor_iostream *iostr, rasqal_query_results *results, const char* name, const char* mime_type, raptor_uri *format_uri, raptor_uri *base_uri)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>int rasqal_query_results_formats_check(rasqal_world* world, const char *name, raptor_uri* uri, const char *mime_type, int flags)</td> <td>int <link linkend="rasqal-query-results-formats-check"><function>rasqal_query_results_formats_check</function></link>(rasqal_world* world, const char *name, raptor_uri* uri, const char *mime_type)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>int rasqal_query_results_formats_check2(rasqal_world* world, const char *name, raptor_uri* uri, const char *mime_type, int flags)</td> <td>int <link linkend="rasqal-query-results-formats-check"><function>rasqal_query_results_formats_check</function></link>(rasqal_world* world, const char *name, raptor_uri* uri, const char *mime_type)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_query_results_formatter* rasqal_new_query_results_formatter(rasqal_world* world, const char *name, const char *mime_type, raptor_uri* format_uri)</td> <td>rasqal_query_results_formatter* <link linkend="rasqal-new-query-results-formatter"><function>rasqal_new_query_results_formatter</function></link>(rasqal_world* world, const char *name, raptor_uri* format_uri)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_query_results_formatter* rasqal_new_query_results_formatter2(rasqal_world* world, const char *name, const char *mime_type, raptor_uri* format_uri)</td> <td>rasqal_query_results_formatter* <link linkend="rasqal-new-query-results-formatter"><function>rasqal_new_query_results_formatter</function></link>(rasqal_world* world, const char *name, raptor_uri* format_uri)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_query_results_formatter* rasqal_new_query_results_formatter_by_mime_type(rasqal_world* world, const char *mime_type)</td> <td>rasqal_query_results_formatter* <link linkend="rasqal-new-query-results-formatter-for-content"><function>rasqal_new_query_results_formatter_for_content</function></link>(rasqal_world* world, raptor_uri *uri, const char *mime_type, const unsigned char *buffer, size_t len, const unsigned char *identifier)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_data_graph* rasqal_new_data_graph(rasqal_world* world, raptor_uri* uri, raptor_uri* name_uri, int flags)</td> <td>rasqal_data_graph* <link linkend="rasqal-new-data-graph-from-uri"><function>rasqal_new_data_graph_from_uri</function></link>(rasqal_world* world, raptor_uri* uri, raptor_uri* name_uri, int flags, const char* format_type, const char* format_name, raptor_uri* format_uri)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_expression* rasqal_new_function_expression(rasqal_world* world, raptor_uri* name, raptor_sequence* args)</td> <td>rasqal_expression* <link linkend="rasqal-new-function-expression"><function>rasqal_new_function_expression</function></link>(rasqal_world* world, raptor_uri* name, raptor_sequence* args, raptor_sequence* params, unsigned int flags)</td> <td>&#160;</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_expression* rasqal_new_coalesce_expression(rasqal_world* world, raptor_sequence* args)</td> <td>rasqal_expression* <link linkend="rasqal-new-expr-seq-expression"><function>rasqal_new_expr_seq_expression</function></link>(rasqal_world* world, rasqal_op op, raptor_sequence* args)</td> <td>Call it with op <link linkend="RASQAL-EXPR-COALESCE:CAPS"><literal>RASQAL_EXPR_COALESCE</literal></link></td>
+    </tr>
+  </tbody>
+</table>
+<table border='1'>
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.9.21 type</th>
+      <th>0.9.22 type</th>
+      <th>Notes</th>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_data_graph</td> <td><link linkend="rasqal-data-graph"><type>rasqal_data_graph</type></link></td> <td>Added const for format_type and format_name fields.</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_generate_bnodeid_handler2</td> <td><link linkend="rasqal-generate-bnodeid-handler"><type>rasqal_generate_bnodeid_handler</type></link></td> <td>Handler now takes a pointer to the <link linkend="rasqal-world"><type>rasqal_world</type></link> object not <link linkend="rasqal-query"><type>rasqal_query</type></link>.</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_literal</td> <td><link linkend="rasqal-literal"><type>rasqal_literal</type></link></td> <td>Added datetime to value union.</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-22-to-0-9-23">
+<title>Changes between Rasqal 0.9.22 and 0.9.23</title>
+
+<section id="rasqal-changes-new-0-9-22-to-0-9-23">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>raptor_sequence* <link linkend="rasqal-graph-pattern-get-flattened-triples"><function>rasqal_graph_pattern_get_flattened_triples</function></link>(rasqal_query* query, rasqal_graph_pattern* graph_pattern) </para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-23-to-0-9-24">
+<title>Changes between Rasqal 0.9.23 and 0.9.24</title>
+
+<section id="rasqal-changes-new-0-9-23-to-0-9-24">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>raptor_sequence* <link linkend="rasqal-graph-pattern-get-flattened-triples"><function>rasqal_graph_pattern_get_flattened_triples</function></link>(rasqal_query* query, rasqal_graph_pattern* graph_pattern) </para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Types</title>
+    <listitem><para><link linkend="rasqal-update-graph-applies"><type>rasqal_update_graph_applies</type></link> - Specifies scope that a <link linkend="rasqal-update"><type>rasqal_update</type></link> applies to</para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Enums</title>
+    <listitem><para><link linkend="RASQAL-UPDATE-TYPE-ADD:CAPS"><literal>RASQAL_UPDATE_TYPE_ADD</literal></link> - SPARQL 1.1 Update ADD operation</para></listitem>
+    <listitem><para><link linkend="RASQAL-UPDATE-TYPE-COPY:CAPS"><literal>RASQAL_UPDATE_TYPE_COPY</literal></link> - SPARQL 1.1 Update COPY operation</para></listitem>
+    <listitem><para><link linkend="RASQAL-UPDATE-TYPE-MOVE:CAPS"><literal>RASQAL_UPDATE_TYPE_MOVE</literal></link> - SPARQL 1.1 Update MOVE operation</para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-24-to-0-9-25">
+<title>Changes between Rasqal 0.9.24 and 0.9.25</title>
+
+<section id="rasqal-changes-new-0-9-24-to-0-9-25">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>int <link linkend="rasqal-evaluation-context-set-base-uri"><function>rasqal_evaluation_context_set_base_uri</function></link>(rasqal_evaluation_context* eval_context, raptor_uri *base_uri) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-evaluation-context-set-rand-seed"><function>rasqal_evaluation_context_set_rand_seed</function></link>(rasqal_evaluation_context* eval_context, unsigned int seed) </para></listitem>
+    <listitem><para>rasqal_literal* <link linkend="rasqal-expression-evaluate2"><function>rasqal_expression_evaluate2</function></link>(rasqal_expression *e, rasqal_evaluation_context* eval_context, int *error_p) </para></listitem>
+    <listitem><para>void <link linkend="rasqal-free-evaluation-context"><function>rasqal_free_evaluation_context</function></link>(rasqal_evaluation_context* eval_context) </para></listitem>
+    <listitem><para>rasqal_evaluation_context* <link linkend="rasqal-new-evaluation-context"><function>rasqal_new_evaluation_context</function></link>(rasqal_world* world, raptor_locator* locator, int flags) </para></listitem>
+    <listitem><para>const raptor_syntax_description* <link linkend="rasqal-world-get-query-language-description"><function>rasqal_world_get_query_language_description</function></link>(rasqal_world* world, unsigned int counter) </para></listitem>
+    <listitem><para>char* <link linkend="rasqal-xsd-datetime-get-tz-as-counted-string"><function>rasqal_xsd_datetime_get_tz_as_counted_string</function></link>(rasqal_xsd_datetime* dt, size_t *len_p) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-decimal-abs"><function>rasqal_xsd_decimal_abs</function></link>(rasqal_xsd_decimal* result, rasqal_xsd_decimal* a) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-decimal-ceil"><function>rasqal_xsd_decimal_ceil</function></link>(rasqal_xsd_decimal* result, rasqal_xsd_decimal* a) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-decimal-floor"><function>rasqal_xsd_decimal_floor</function></link>(rasqal_xsd_decimal* result, rasqal_xsd_decimal* a) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-decimal-round"><function>rasqal_xsd_decimal_round</function></link>(rasqal_xsd_decimal* result, rasqal_xsd_decimal* a) </para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Types</title>
+    <listitem><para><link linkend="rasqal-evaluation-context"><type>rasqal_evaluation_context</type></link> - Evaluation context for <link linkend="rasqal-expression-evaluate2"><function>rasqal_expression_evaluate2</function></link>()</para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Enums</title>
+    <listitem><para><link linkend="RASQAL-EXPR-ABS:CAPS"><literal>RASQAL_EXPR_ABS</literal></link> - Expression for SPARQL 1.1 ABS(numeric)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-CEIL:CAPS"><literal>RASQAL_EXPR_CEIL</literal></link> - Expression for SPARQL 1.1 CEIL(numeric)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-FLOOR:CAPS"><literal>RASQAL_EXPR_FLOOR</literal></link> - Expression for SPARQL 1.1 FLOOR(numeric)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-RAND:CAPS"><literal>RASQAL_EXPR_RAND</literal></link> - Expression for SPARQL 1.1 RAND()</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-ROUND:CAPS"><literal>RASQAL_EXPR_ROUND</literal></link> - Expression for SPARQL 1.1 ROUND(numeric)</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-TZ:CAPS"><literal>RASQAL_EXPR_TZ</literal></link> - Expression for SPARQL 1.1 TZ(datetime) timezone accessor</para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-25-to-0-9-26">
+<title>Changes between Rasqal 0.9.25 and 0.9.26</title>
+
+<section id="rasqal-changes-new-0-9-25-to-0-9-26">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>int <link linkend="rasqal-world-set-warning-level"><function>rasqal_world_set_warning_level</function></link>(rasqal_world* world, unsigned int warning_level) </para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Enums</title>
+    <listitem><para><link linkend="RASQAL-EXPR-MD5:CAPS"><literal>RASQAL_EXPR_MD5</literal></link> - Expression for SPARQL 1.1 MD5(literal) message digest</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-SHA1:CAPS"><literal>RASQAL_EXPR_SHA1</literal></link> - Expression for SPARQL 1.1 SHA1(literal) message digest</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-SHA224:CAPS"><literal>RASQAL_EXPR_SHA224</literal></link> - Expression for SPARQL 1.1 SHA224(literal) message digest</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-SHA256:CAPS"><literal>RASQAL_EXPR_SHA256</literal></link> - Expression for SPARQL 1.1 SHA256(literal) message digest</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-SHA384:CAPS"><literal>RASQAL_EXPR_SHA384</literal></link> - Expression for SPARQL 1.1 SHA384(literal) message digest</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-SHA512:CAPS"><literal>RASQAL_EXPR_SHA512</literal></link> - Expression for SPARQL 1.1 SHA512(literal) message digest</para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-26-to-0-9-27">
+<title>Changes between Rasqal 0.9.26 and 0.9.27</title>
+
+<section id="rasqal-changes-new-0-9-26-to-0-9-27">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>rasqal_literal* <link linkend="rasqal-new-numeric-literal-from-long"><function>rasqal_new_numeric_literal_from_long</function></link>(rasqal_world* world, rasqal_literal_type type, long value) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-query-has-variable2"><function>rasqal_query_has_variable2</function></link>(rasqal_query* query, rasqal_variable_type type, const unsigned char *name) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-query-set-variable2"><function>rasqal_query_set_variable2</function></link>(rasqal_query* query, rasqal_variable_type type, const unsigned char *name, rasqal_literal* value) </para></listitem>
+    <listitem><para>void <link linkend="rasqal-query-set-wildcard"><function>rasqal_query_set_wildcard</function></link>(rasqal_query* query, int wildcard) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-variables-table-add-variable"><function>rasqal_variables_table_add_variable</function></link>(rasqal_variables_table* vt, rasqal_variable* variable) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-variables-table-contains"><function>rasqal_variables_table_contains</function></link>(rasqal_variables_table* vt, rasqal_variable_type type, const unsigned char *name) </para></listitem>
+    <listitem><para>rasqal_variable* <link linkend="rasqal-variables-table-get-by-name"><function>rasqal_variables_table_get_by_name</function></link>(rasqal_variables_table* vt, rasqal_variable_type type, const unsigned char *name) </para></listitem>
+    <listitem><para>long <link linkend="rasqal-xsd-decimal-get-long"><function>rasqal_xsd_decimal_get_long</function></link>(rasqal_xsd_decimal* dec, int* error_p) </para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-27-to-0-9-28">
+<title>Changes between Rasqal 0.9.27 and 0.9.28</title>
+
+<section id="rasqal-changes-new-0-9-27-to-0-9-28">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>rasqal_expression* <link linkend="rasqal-new-4op-expression"><function>rasqal_new_4op_expression</function></link>(rasqal_world* world, rasqal_op op, rasqal_expression* arg1, rasqal_expression* arg2, rasqal_expression* arg3, rasqal_expression* arg4) </para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-28-to-0-9-29">
+<title>Changes between Rasqal 0.9.28 and 0.9.29</title>
+
+<section id="rasqal-changes-new-0-9-28-to-0-9-29">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>void <link linkend="rasqal-free-xsd-date"><function>rasqal_free_xsd_date</function></link>(rasqal_xsd_date* d) </para></listitem>
+    <listitem><para>rasqal_xsd_date* <link linkend="rasqal-new-xsd-date"><function>rasqal_new_xsd_date</function></link>(rasqal_world* world, const char *date_string) </para></listitem>
+    <listitem><para>rasqal_xsd_datetime* <link linkend="rasqal-new-xsd-datetime-from-xsd-date"><function>rasqal_new_xsd_datetime_from_xsd_date</function></link>(rasqal_world* world, rasqal_xsd_date *date) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-query-graph-pattern-visit2"><function>rasqal_query_graph_pattern_visit2</function></link>(rasqal_query* query, rasqal_graph_pattern_visit_fn visit_fn, void* data) </para></listitem>
+    <listitem><para>char* <link linkend="rasqal-regex-replace"><function>rasqal_regex_replace</function></link>(rasqal_world* world, raptor_locator* locator, const char* pattern, const char* regex_flags, const char* subject, size_t subject_len, const char* replace, size_t replace_len, size_t* result_len_p) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-date-compare"><function>rasqal_xsd_date_compare</function></link>(const rasqal_xsd_date *d1, const rasqal_xsd_date *d2, int *incomparible_p) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-date-equals"><function>rasqal_xsd_date_equals</function></link>(const rasqal_xsd_date *d1, const rasqal_xsd_date *d2, int *incomparible_p) </para></listitem>
+    <listitem><para>char* <link linkend="rasqal-xsd-date-to-counted-string"><function>rasqal_xsd_date_to_counted_string</function></link>(const rasqal_xsd_date *d, size_t *len_p) </para></listitem>
+    <listitem><para>char* <link linkend="rasqal-xsd-date-to-string"><function>rasqal_xsd_date_to_string</function></link>(const rasqal_xsd_date *d) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-datetime-compare2"><function>rasqal_xsd_datetime_compare2</function></link>(const rasqal_xsd_datetime *dt1, const rasqal_xsd_datetime *dt2, int *incomparible_p) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-xsd-datetime-equals2"><function>rasqal_xsd_datetime_equals2</function></link>(const rasqal_xsd_datetime *dt1, const rasqal_xsd_datetime *dt2, int *incomparible_p) </para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Types</title>
+    <listitem><para><link linkend="rasqal-xsd-date"><type>rasqal_xsd_date</type></link> </para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Enums</title>
+    <listitem><para><link linkend="RASQAL-EXPR-STRUUID:CAPS"><literal>RASQAL_EXPR_STRUUID</literal></link> - Expression for STRUUID() string UUID</para></listitem>
+    <listitem><para><link linkend="RASQAL-EXPR-UUID:CAPS"><literal>RASQAL_EXPR_UUID</literal></link> - Expression for UUID() UUID</para></listitem>
+    <listitem><para><link linkend="RASQAL-LITERAL-DATE:CAPS"><literal>RASQAL_LITERAL_DATE</literal></link> - Date literal type</para></listitem>
+  </itemizedlist>
+
+</section>
+<section id="rasqal-changes-changed-0-9-28-to-0-9-29">
+<title>Changed functions and types</title>
+
+<table border='1'>
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.9.28 type</th>
+      <th>0.9.29 type</th>
+      <th>Notes</th>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_literal</td> <td><link linkend="rasqal-literal"><type>rasqal_literal</type></link></td> <td>Added date to value union.</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_xsd_datetime</td> <td><link linkend="rasqal-xsd-datetime"><type>rasqal_xsd_datetime</type></link></td> <td>Added time_on_timeline and have_tz fields.</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-29-to-0-9-30">
+<title>Changes between Rasqal 0.9.29 and 0.9.30</title>
+
+<section id="rasqal-changes-new-0-9-29-to-0-9-30">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>rasqal_literal* <link linkend="rasqal-new-floating-literal"><function>rasqal_new_floating_literal</function></link>(rasqal_world *world, rasqal_literal_type type, double d) </para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-30-to-0-9-31">
+<title>Changes between Rasqal 0.9.30 and 0.9.31</title>
+
+<section id="rasqal-changes-new-0-9-30-to-0-9-31">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>const char* <link linkend="rasqal-query-results-type-label"><function>rasqal_query_results_type_label</function></link>(rasqal_query_results_type type) </para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-32-to-0-9-33">
+<title>Changes between Rasqal 0.9.32 and 0.9.33</title>
+
+<section id="rasqal-changes-new-0-9-32-to-0-9-33">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Functions</title>
+    <listitem><para>raptor_sequence* <link linkend="rasqal-graph-pattern-get-triples"><function>rasqal_graph_pattern_get_triples</function></link>(rasqal_query* query, rasqal_graph_pattern* graph_pattern) </para></listitem>
+    <listitem><para>char* <link linkend="rasqal-literal-get-language"><function>rasqal_literal_get_language</function></link>(rasqal_literal* l) </para></listitem>
+    <listitem><para>rasqal_literal_type <link linkend="rasqal-literal-get-type"><function>rasqal_literal_get_type</function></link>(rasqal_literal* l) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-literal-is-rdf-literal"><function>rasqal_literal_is_rdf_literal</function></link>(rasqal_literal* l) </para></listitem>
+    <listitem><para>rasqal_query_results* <link linkend="rasqal-new-query-results-from-string"><function>rasqal_new_query_results_from_string</function></link>(rasqal_world* world, rasqal_query_results_type type, raptor_uri* base_uri, const char* string, size_t string_len) </para></listitem>
+    <listitem><para>int <link linkend="rasqal-variables-table-add2"><function>rasqal_variables_table_add2</function></link>(rasqal_variables_table* vt, rasqal_variable_type type, const unsigned char *name, size_t name_len, rasqal_literal *value) - Deprecates <link linkend="rasqal-variables-table-add"><function>rasqal_variables_table_add</function></link>()</para></listitem>
+  </itemizedlist>
+  <itemizedlist>
+    <title>Types</title>
+    <listitem><para><link linkend="rasqal-triples-error-handler2"><type>rasqal_triples_error_handler2</type></link> - Added for <link linkend="rasqal-variables-table-add2"><function>rasqal_variables_table_add2</function></link>()</para></listitem>
+  </itemizedlist>
+
+</section>
+<section id="rasqal-changes-renamed-0-9-32-to-0-9-33">
+<title>Renamed function and enums</title>
+
+<table border='1'>
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.9.32 function</th>
+      <th>0.9.33 function</th>
+      <th>Notes</th>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_query_results_formats_check</td> <td><link linkend="rasqal-query-results-formats-check2"><function>rasqal_query_results_formats_check2</function></link></td> <td>Correctly implements return value: non-0 if exists.</td>
+   </tr>
+  </tbody>
+</table>
+
+</section>
+<section id="rasqal-changes-changed-0-9-32-to-0-9-33">
+<title>Changed functions and types</title>
+
+<table border='1'>
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.9.32 function</th>
+      <th>0.9.33 function</th>
+      <th>Notes</th>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_query_results* rasqal_new_query_results(rasqal_world* world, rasqal_query* query, rasqal_query_results_type type, rasqal_variables_table* vars_table)</td> <td>rasqal_query_results* <link linkend="rasqal-new-query-results2"><function>rasqal_new_query_results2</function></link>(rasqal_world* world, rasqal_query* query, rasqal_query_results_type type)</td> <td>Deprecates <link linkend="rasqal-new-query-results"><function>rasqal_new_query_results</function></link>()</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_data_graph* rasqal_new_data_graph_from_uri(rasqal_world* world, raptor_uri* uri, raptor_uri* name_uri, int flags, const char* format_type, const char* format_name, raptor_uri* format_uri)</td> <td>rasqal_data_graph* <link linkend="rasqal-new-data-graph-from-uri"><function>rasqal_new_data_graph_from_uri</function></link>(rasqal_world* world, raptor_uri* uri, raptor_uri* name_uri, unsigned int flags, const char* format_type, const char* format_name, raptor_uri* format_uri)</td> <td>Made flags argument unsigned</td>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_expression* rasqal_new_group_concat_expression(rasqal_world* world, int flags, raptor_sequence* args, rasqal_literal* separator)</td> <td>rasqal_expression* <link linkend="rasqal-new-group-concat-expression"><function>rasqal_new_group_concat_expression</function></link>(rasqal_world* world, unsigned int flags, raptor_sequence* args, rasqal_literal* separator)</td> <td>Made flags argument unsigned</td>
+    </tr>
+  </tbody>
+</table>
+<table border='1'>
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.9.32 type</th>
+      <th>0.9.33 type</th>
+      <th>Notes</th>
+    </tr>
+    <tr valign='top'>
+      <td>rasqal_triples_source_factory</td> <td><link linkend="rasqal-triples-source-factory"><type>rasqal_triples_source_factory</type></link></td> <td>API v3: Added init_triples_source2 handler field using <link linkend="rasqal-triples-error-handler2"><type>rasqal_triples_error_handler2</type></link></td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+</section>
+<section id="rasqal-changes-0-9-30-to-0-9-30">
+<title>Changes between Rasqal 0.9.30 and 0.9.30</title>
+
+<section id="rasqal-changes-new-0-9-30-to-0-9-30">
+<title>New functions, types and enums</title>
+
+  <itemizedlist>
+    <title>Enums</title>
+    <listitem><para><link linkend="RASQAL-GRAPH-PATTERN-OPERATOR-VALUES:CAPS"><literal>RASQAL_GRAPH_PATTERN_OPERATOR_VALUES</literal></link> - Graph pattern for VALUES()</para></listitem>
+  </itemizedlist>
+
+</section>
+
+</section>
+
+</chapter>

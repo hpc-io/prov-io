@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Redland RDF Application Framework - Perl RDF::Redland::LiteralNode Class</title>
+</head>
+<body>
+
+<h1 style="text-align:center">Redland RDF Application Framework - Perl RDF::Redland::LiteralNode Class</h1>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+        <li><a href="#name">NAME</a></li>
+        <li><a href="#synopsis">SYNOPSIS</a></li>
+        <li><a href="#description">DESCRIPTION</a></li>
+        <li><a href="#constructor">CONSTRUCTOR</a></li>
+        <li><a href="#see_also">SEE ALSO</a></li>
+        <li><a href="#author">AUTHOR</a></li>
+</ul>
+
+--></div>
+<!-- INDEX END -->
+
+<h2><a name="name">NAME</a></h2>
+<p>RDF::Redland::LiteralNode - Redland RDF Literal Node Class</p>
+
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<pre>
+  use RDF::Redland;
+  my $node1=new RDF::Redland::LiteralNode("Hello, World!");
+  my $node2=new RDF::Redland::LiteralNode("Bonjour monde!", undef, "fr");
+</pre>
+
+<h2><a name="description">DESCRIPTION</a></h2>
+<p>This class represents RDF literal and Typed Literals in the RDF graph. See <a href="Node.html">the RDF::Redland::Node manpage</a> for the methods on this object.</p>
+
+<h2><a name="constructor">CONSTRUCTOR</a></h2>
+<dl>
+<dt><strong><a name="new_string_datatype_xml_language" class="item">new STRING [DATATYPE [XML_LANGUAGE]]</a></strong></dt>
+<dd>
+<p>Create a new literal node for a literal value <em>STRING</em>. Optional datatype URI <em>DATATYPE</em> (RDF::Redland::URI, perl URI or string) and language (xml:lang attribute) <em>XML_LANGUAGE</em> may also be given.</p>
+</dd>
+</dl>
+
+<h2><a name="see_also">SEE ALSO</a></h2>
+<p><a href="Node.html">the RDF::Redland::Node manpage</a></p>
+
+<h2><a name="author">AUTHOR</a></h2>
+<p>Dave Beckett - <a href="http://www.dajobe.org/">http://www.dajobe.org/</a></p>
+<hr />
+
+<p>(C) Copyright 2000-2011 <a href="http://www.dajobe.org/">Dave Beckett</a>, (C) Copyright 2000-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

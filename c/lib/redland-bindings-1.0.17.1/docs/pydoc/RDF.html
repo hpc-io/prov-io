@@ -1,0 +1,1898 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Redland RDF Application Framework - Python API Reference</title>
+</head>
+<body>
+
+<h1 style="text-align:center">Redland RDF Application Framework - Python API Reference</h1>
+
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="heading">
+<tr bgcolor="#7799EE">
+<td valign="bottom">&nbsp;<br />
+<font color="#FFFFFF" face="helvetica, arial">&nbsp;<br />
+<big><big><strong>RDF</strong></big></big> (version 1.1, $Date$)</font></td>
+<td align="right" valign="bottom"><font color="#FFFFFF" face="helvetica, arial"><a href=".">index</a><br />
+</font></td>
+</tr>
+</table>
+<!-- LICENSE HEADING -->
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#AA55CC">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#FFFFFF" face="helvetica, arial"><big><strong>Modules</strong></big></font></td>
+</tr>
+<tr>
+<td bgcolor="#AA55CC"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td>&nbsp;</td>
+<td width="100%">
+<table width="100%" summary="list">
+<tr>
+<td width="25%" valign="top">Redland<br /></td>
+<td width="25%" valign="top">string<br /></td>
+<td width="25%" valign="top">sys<br /></td>
+<td width="25%" valign="top"></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#EE77AA">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#FFFFFF" face="helvetica, arial"><big><strong>Classes</strong></big></font></td>
+</tr>
+<tr>
+<td bgcolor="#EE77AA"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt><font face="helvetica, arial">__builtin__.object</font></dt>
+<dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="#Iterator">Iterator</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#Model">Model</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#NS">NS</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#Node">Node</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#Parser">Parser</a></font></dt>
+<dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="#NTriplesParser">NTriplesParser</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#TurtleParser">TurtleParser</a></font></dt>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="#Query">Query</a></font></dt>
+<dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="#RDQLQuery">RDQLQuery</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#SPARQLQuery">SPARQLQuery</a></font></dt>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="#Serializer">Serializer</a></font></dt>
+<dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="#NTriplesSerializer">NTriplesSerializer</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#RDFXMLSerializer">RDFXMLSerializer</a></font></dt>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="#Statement">Statement</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#Storage">Storage</a></font></dt>
+<dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="#HashStorage">HashStorage</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#MemoryStorage">MemoryStorage</a></font></dt>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="#Stream">Stream</a></font></dt>
+<dt><font face="helvetica, arial"><a href="#Uri">Uri</a></font></dt>
+</dl>
+</dd>
+</dl>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="HashStorage" id="HashStorage">class <strong>HashStorage</strong></a>(<a href="#Storage">Storage</a>)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;Hashed&nbsp;<a href="#Storage">Storage</a>&nbsp;class<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;import&nbsp;RDF<br />
+&nbsp;&nbsp;&nbsp;h1=RDF.<a href="#HashStorage">HashStorage</a>("abc",&nbsp;options="hash-type='memory'")<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;#&nbsp;Creating&nbsp;a&nbsp;storage&nbsp;with&nbsp;contexts&nbsp;enabled<br />
+&nbsp;&nbsp;&nbsp;s=RDF.<a href="#HashStorage">HashStorage</a>("def",&nbsp;options="contexts='yes'")<br />
+&nbsp;<br />
+Class&nbsp;of&nbsp;hashed&nbsp;<a href="#Storage">Storage</a>&nbsp;for&nbsp;a&nbsp;particular&nbsp;type&nbsp;of&nbsp;hash&nbsp;(typically<br />
+hash-type&nbsp;is&nbsp;"memory"&nbsp;or&nbsp;"bdb")&nbsp;and&nbsp;any&nbsp;other&nbsp;options.<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt>Method resolution order:</dt>
+<dd><a href="#HashStorage">HashStorage</a></dd>
+<dd><a href="#Storage">Storage</a></dd>
+<dd>__builtin__.object</dd>
+</dl>
+<hr />
+Methods defined here:<br />
+<dl>
+<dt><a name="HashStorage-__init__" id="HashStorage-__init__"><strong>__init__</strong></a>(self, hash_name, options<font color="#909090">=''</font>)</dt>
+</dl>
+<hr />
+Methods inherited from <a href="#Storage">Storage</a>:<br />
+<dl>
+<dt><a name="HashStorage-__del__" id="HashStorage-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<hr />
+Data descriptors inherited from <a href="#Storage">Storage</a>:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Iterator" id="Iterator">class <strong>Iterator</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;<a href="#Node">Node</a>&nbsp;<a href="#Iterator">Iterator</a>&nbsp;class<br />
+&nbsp;<br />
+A&nbsp;class&nbsp;for&nbsp;iterating&nbsp;over&nbsp;a&nbsp;sequence&nbsp;of&nbsp;<a href="#Node">Node</a>&nbsp;s&nbsp;such&nbsp;as<br />
+those&nbsp;returned&nbsp;from&nbsp;a&nbsp;<a href="#Model">Model</a>&nbsp;query.&nbsp;&nbsp;Some&nbsp;methods&nbsp;return<br />
+<a href="#Iterator">Iterator</a>&nbsp;s&nbsp;or&nbsp;Python&nbsp;sequences.&nbsp;&nbsp;If&nbsp;this&nbsp;is&nbsp;used,&nbsp;it&nbsp;works<br />
+as&nbsp;follows:<br />
+&nbsp;<br />
+&nbsp;&nbsp;iterator=model.get_targets_iterator(source,&nbsp;arc)<br />
+&nbsp;&nbsp;while&nbsp;not&nbsp;iterator.<a href="#Iterator-end">end</a>():<br />
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;get&nbsp;the&nbsp;current&nbsp;<a href="#Node">Node</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;node=iterator.<a href="#Iterator-current">current</a>()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;do&nbsp;something&nbsp;with&nbsp;it<br />
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;(it&nbsp;is&nbsp;shared;&nbsp;you&nbsp;must&nbsp;copy&nbsp;it&nbsp;you&nbsp;want&nbsp;to&nbsp;keep&nbsp;it)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+&nbsp;&nbsp;&nbsp;&nbsp;iterator.<a href="#Iterator-next">next</a>()<br />
+&nbsp;&nbsp;iterator=None<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Iterator-__del__" id="Iterator-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Iterator-__init__" id="Iterator-__init__"><strong>__init__</strong></a>(self, object, creator1<font color="#909090">=None</font>, creator2<font color="#909090">=None</font>, creator3<font color="#909090">=None</font>)</dt>
+<dd><tt>Create&nbsp;an&nbsp;RDF&nbsp;<a href="#Iterator">Iterator</a>&nbsp;(constructor).</tt></dd>
+</dl>
+<dl>
+<dt><a name="Iterator-__iter__" id="Iterator-__iter__"><strong>__iter__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Iterator-__next__" id="Iterator-__next__"><strong>__next__</strong></a>(self)</dt>
+<dd><tt>Move&nbsp;to&nbsp;the&nbsp;next&nbsp;object&nbsp;on&nbsp;the&nbsp;<a href="#Iterator">Iterator</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Iterator-context" id="Iterator-context"><strong>context</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;the&nbsp;context&nbsp;<a href="#Node">Node</a>&nbsp;of&nbsp;the&nbsp;current&nbsp;object&nbsp;on&nbsp;the&nbsp;<a href="#Iterator">Iterator</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Iterator-current" id="Iterator-current"><strong>current</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;the&nbsp;current&nbsp;object&nbsp;on&nbsp;the&nbsp;<a href="#Iterator">Iterator</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Iterator-end" id="Iterator-end"><strong>end</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;true&nbsp;if&nbsp;the&nbsp;iterator&nbsp;is&nbsp;exhausted</tt></dd>
+</dl>
+<dl>
+<dt><a name="Iterator-have_elements" id="Iterator-have_elements"><strong>have_elements</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Iterator-next" id="Iterator-next"><strong>next</strong></a> = <a href="#Iterator-__next__">__next__</a>(self)</dt>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="MemoryStorage" id="MemoryStorage">class <strong>MemoryStorage</strong></a>(<a href="#Storage">Storage</a>)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;memory&nbsp;<a href="#Storage">Storage</a>&nbsp;class<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;import&nbsp;RDF<br />
+&nbsp;&nbsp;&nbsp;h1=RDF.<a href="#MemoryStorage">MemoryStorage</a>()<br />
+&nbsp;&nbsp;&nbsp;h1=RDF.<a href="#MemoryStorage">MemoryStorage</a>("abc")<br />
+&nbsp;&nbsp;&nbsp;h2=RDF.<a href="#MemoryStorage">MemoryStorage</a>("abc",&nbsp;"write='no'")<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;#&nbsp;Creating&nbsp;a&nbsp;storage&nbsp;with&nbsp;contexts&nbsp;enabled<br />
+&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;RDF.<a href="#MemoryStorage">MemoryStorage</a>(options_string="contexts='yes'")<br />
+&nbsp;<br />
+Class&nbsp;of&nbsp;memory&nbsp;<a href="#Storage">Storage</a>&nbsp;with&nbsp;optional&nbsp;name,&nbsp;additional&nbsp;options.<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt>Method resolution order:</dt>
+<dd><a href="#MemoryStorage">MemoryStorage</a></dd>
+<dd><a href="#Storage">Storage</a></dd>
+<dd>__builtin__.object</dd>
+</dl>
+<hr />
+Methods defined here:<br />
+<dl>
+<dt><a name="MemoryStorage-__init__" id="MemoryStorage-__init__"><strong>__init__</strong></a>(self, mem_name<font color="#909090">=''</font>, options_string<font color="#909090">=''</font>)</dt>
+</dl>
+<hr />
+Methods inherited from <a href="#Storage">Storage</a>:<br />
+<dl>
+<dt><a name="MemoryStorage-__del__" id="MemoryStorage-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<hr />
+Data descriptors inherited from <a href="#Storage">Storage</a>:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Model" id="Model">class <strong>Model</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;Graph&nbsp;class<br />
+&nbsp;<br />
+&nbsp;&nbsp;import&nbsp;RDF<br />
+&nbsp;&nbsp;model&nbsp;=&nbsp;RDF.<a href="#Model">Model</a>(storage)<br />
+&nbsp;<br />
+The&nbsp;main&nbsp;interface&nbsp;to&nbsp;the&nbsp;Redland&nbsp;RDF&nbsp;graph&nbsp;(formed&nbsp;from&nbsp;triples,&nbsp;or<br />
+RDF&nbsp;statements).&nbsp;&nbsp;There&nbsp;are&nbsp;many&nbsp;methods&nbsp;for&nbsp;adding,&nbsp;removing,&nbsp;querying<br />
+statements&nbsp;and&nbsp;serializing&nbsp;them&nbsp;to/from&nbsp;syntaxes&nbsp;using&nbsp;the&nbsp;<a href="#Serializer">Serializer</a><br />
+or&nbsp;<a href="#Parser">Parser</a>&nbsp;classes.<br />
+&nbsp;<br />
+Models&nbsp;can&nbsp;also&nbsp;be&nbsp;used&nbsp;as&nbsp;Python&nbsp;sequences&nbsp;to&nbsp;give&nbsp;every&nbsp;triple&nbsp;in&nbsp;the<br />
+model:<br />
+&nbsp;<br />
+&nbsp;&nbsp;for&nbsp;statement&nbsp;in&nbsp;model:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;statement<br />
+&nbsp;<br />
+Models&nbsp;have&nbsp;other&nbsp;aspects&nbsp;of&nbsp;sequence&nbsp;types.&nbsp;&nbsp;The&nbsp;following&nbsp;also&nbsp;works:<br />
+&nbsp;<br />
+&nbsp;&nbsp;if&nbsp;statement&nbsp;in&nbsp;model:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;do&nbsp;whatever<br />
+&nbsp;&nbsp;if&nbsp;(statement,&nbsp;context)&nbsp;in&nbsp;model:&nbsp;#&nbsp;do&nbsp;whatever<br />
+&nbsp;<br />
+&nbsp;&nbsp;del&nbsp;model[statement]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;remove&nbsp;statement&nbsp;from&nbsp;model<br />
+&nbsp;&nbsp;del&nbsp;model[statement,&nbsp;context]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;ditto&nbsp;for&nbsp;context-aware&nbsp;model<br />
+&nbsp;<br />
+&nbsp;&nbsp;model.<a href="#Model-append">append</a>(statement)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;append&nbsp;a&nbsp;statement<br />
+&nbsp;&nbsp;model.<a href="#Model-append">append</a>(statement,&nbsp;context)&nbsp;&nbsp;#&nbsp;append&nbsp;statement&nbsp;with&nbsp;context<br />
+&nbsp;<br />
+&nbsp;&nbsp;num_items&nbsp;=&nbsp;len(model)&nbsp;#&nbsp;get&nbsp;number&nbsp;of&nbsp;statements&nbsp;in&nbsp;the&nbsp;model<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;works&nbsp;only&nbsp;with&nbsp;countable&nbsp;storages<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Model-__contains__" id="Model-__contains__"><strong>__contains__</strong></a>(self, arg)</dt>
+</dl>
+<dl>
+<dt><a name="Model-__del__" id="Model-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Model-__delitem__" id="Model-__delitem__"><strong>__delitem__</strong></a>(self, arg)</dt>
+</dl>
+<dl>
+<dt><a name="Model-__init__" id="Model-__init__"><strong>__init__</strong></a>(self, storage<font color="#909090">=None</font>, **args)</dt>
+<dd><tt>Create&nbsp;an&nbsp;RDF&nbsp;<a href="#Model">Model</a>&nbsp;(constructor).<br />
+&nbsp;<br />
+Create&nbsp;a&nbsp;<a href="#Model">Model</a>&nbsp;from&nbsp;an&nbsp;existing&nbsp;<a href="#Storage">Storage</a>&nbsp;(most&nbsp;common&nbsp;use).&nbsp;&nbsp;<br />
+&nbsp;<br />
+Optional&nbsp;parameters:<br />
+&nbsp;<br />
+&nbsp;&nbsp;options_string&nbsp;-&nbsp;A&nbsp;string&nbsp;of&nbsp;options&nbsp;for&nbsp;the&nbsp;<a href="#Model">Model</a><br />
+&nbsp;&nbsp;options_hash&nbsp;&nbsp;&nbsp;-&nbsp;A&nbsp;Hash&nbsp;of&nbsp;options&nbsp;for&nbsp;the&nbsp;<a href="#Model">Model</a><br />
+&nbsp;<br />
+&nbsp;&nbsp;m1&nbsp;=&nbsp;RDF.<a href="#Model">Model</a>(s1)<br />
+&nbsp;&nbsp;m1&nbsp;=&nbsp;RDF.<a href="#Model">Model</a>(storage&nbsp;=&nbsp;s1)<br />
+&nbsp;<br />
+Copy&nbsp;an&nbsp;existing&nbsp;model&nbsp;m1,&nbsp;copying&nbsp;the&nbsp;underlying&nbsp;<a href="#Storage">Storage</a>&nbsp;of&nbsp;m1<br />
+&nbsp;<br />
+&nbsp;&nbsp;m2&nbsp;=&nbsp;RDF.<a href="#Model">Model</a>(model&nbsp;=&nbsp;m1)<br />
+&nbsp;<br />
+Create&nbsp;a&nbsp;model&nbsp;using&nbsp;an&nbsp;in-memory&nbsp;storage.<br />
+&nbsp;<br />
+&nbsp;&nbsp;m3&nbsp;=&nbsp;RDF.<a href="#Model">Model</a>()</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-__iter__" id="Model-__iter__"><strong>__iter__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Model-__len__" id="Model-__len__"><strong>__len__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Model-__str__" id="Model-__str__"><strong>__str__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Model-__unicode__" id="Model-__unicode__"><strong>__unicode__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Model-add" id="Model-add"><strong>add</strong></a>(self, subject, predicate, object)</dt>
+<dd><tt>Add&nbsp;the&nbsp;statement&nbsp;(subject,predicate,object)&nbsp;to&nbsp;the&nbsp;model.<br />
+DEPRECATED.&nbsp;Use&nbsp;<a href="#Model">Model</a>.<a href="#Model-append">append</a>(<a href="#Statement">Statement</a>(s,p,o))&nbsp;instead.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-add_statement" id="Model-add_statement"><strong>add_statement</strong></a>(self, statement, context<font color="#909090">=None</font>)</dt>
+<dd><tt>Add&nbsp;the&nbsp;<a href="#Statement">Statement</a>&nbsp;to&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;with&nbsp;optional&nbsp;context&nbsp;<a href="#Node">Node</a>.<br />
+For&nbsp;Python&nbsp;idiom&nbsp;you&nbsp;should&nbsp;use&nbsp;<a href="#Model">Model</a>.<a href="#Model-append">append</a>()&nbsp;instead,&nbsp;which&nbsp;does<br />
+the&nbsp;same&nbsp;thing.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-add_statements" id="Model-add_statements"><strong>add_statements</strong></a>(self, statement_stream, context<font color="#909090">=None</font>)</dt>
+<dd><tt>Add&nbsp;the&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;to&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;with&nbsp;the&nbsp;optional<br />
+context&nbsp;<a href="#Node">Node</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-add_typed_literal_statement" id="Model-add_typed_literal_statement"><strong>add_typed_literal_statement</strong></a>(self, subject, predicate, string, xml_language<font color="#909090">=None</font>, datatype<font color="#909090">=None</font>)</dt>
+<dd><tt>Add&nbsp;the&nbsp;<a href="#Statement">Statement</a>&nbsp;(subject,predicate,&nbsp;typed&nbsp;literal)&nbsp;to&nbsp;the&nbsp;<a href="#Model">Model</a><br />
+where&nbsp;the&nbsp;typed&nbsp;literal&nbsp;is&nbsp;constructed&nbsp;from&nbsp;the<br />
+literal&nbsp;string,&nbsp;optional&nbsp;XML&nbsp;language&nbsp;and&nbsp;optional&nbsp;datatype&nbsp;URI.<br />
+DEPRECATED.&nbsp;Use&nbsp;<a href="#Model">Model</a>.<a href="#Model-append">append</a>(<a href="#Statement">Statement</a>(s,p,o))&nbsp;instead.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-append" id="Model-append"><strong>append</strong></a>(self, statement, context<font color="#909090">=None</font>)</dt>
+<dd><tt>Append&nbsp;a&nbsp;<a href="#Statement">Statement</a>&nbsp;to&nbsp;the&nbsp;<a href="#Model">Model</a>,&nbsp;with&nbsp;optional&nbsp;context&nbsp;<a href="#Node">Node</a>.<br />
+&nbsp;<br />
+model.<a href="#Model-append">append</a>(<a href="#Statement">Statement</a>(s,&nbsp;p,&nbsp;o)</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-arcs" id="Model-arcs"><strong>arcs</strong></a> = <a href="#Model-get_predicates">get_predicates</a>(self, source, target)</dt>
+</dl>
+<dl>
+<dt><a name="Model-as_stream" id="Model-as_stream"><strong>as_stream</strong></a>(self, context<font color="#909090">=None</font>)</dt>
+<dd><tt>Return&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;as&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements.&nbsp;&nbsp;No&nbsp;need&nbsp;to&nbsp;use<br />
+this&nbsp;explicitly,&nbsp;instead&nbsp;do:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;statement&nbsp;in&nbsp;model:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;process&nbsp;statement</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-as_stream_context" id="Model-as_stream_context"><strong>as_stream_context</strong></a>(self, context<font color="#909090">=None</font>)</dt>
+<dd><tt>Return&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;as&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;(statement,&nbsp;context)&nbsp;tuples.<br />
+&nbsp;<br />
+&nbsp;for&nbsp;(s,&nbsp;c)&nbsp;in&nbsp;model.<a href="#Model-as_stream_context">as_stream_context</a>():<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;do&nbsp;whatever<br />
+&nbsp;<br />
+Specify&nbsp;the&nbsp;optional&nbsp;argument&nbsp;context&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;hardwire<br />
+the&nbsp;stream's&nbsp;context.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-contains_statement" id="Model-contains_statement"><strong>contains_statement</strong></a>(self, statement)</dt>
+<dd><tt>Return&nbsp;true&nbsp;if&nbsp;the&nbsp;<a href="#Statement">Statement</a>&nbsp;is&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-contains_statement_context" id="Model-contains_statement_context"><strong>contains_statement_context</strong></a>(self, statement, context)</dt>
+<dd><tt>Return&nbsp;true&nbsp;if&nbsp;the&nbsp;<a href="#Statement">Statement</a>&nbsp;is&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;with&nbsp;the&nbsp;specified<br />
+context.&nbsp;&nbsp;Note&nbsp;that&nbsp;the&nbsp;implementation&nbsp;is&nbsp;pretty&nbsp;inefficient.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-context_remove_statements" id="Model-context_remove_statements"><strong>context_remove_statements</strong></a> = <a href="#Model-remove_statements_with_context">remove_statements_with_context</a>(self, context)</dt>
+</dl>
+<dl>
+<dt><a name="Model-execute" id="Model-execute"><strong>execute</strong></a>(self, query)</dt>
+</dl>
+<dl>
+<dt><a name="Model-find_statements" id="Model-find_statements"><strong>find_statements</strong></a>(self, statement, context<font color="#909090">=None</font>)</dt>
+<dd><tt>Return&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;matching&nbsp;the&nbsp;given&nbsp;<a href="#Statement">Statement</a>&nbsp;--<br />
+any&nbsp;nodes&nbsp;with&nbsp;value&nbsp;None&nbsp;of&nbsp;the&nbsp;statement&nbsp;match&nbsp;any&nbsp;<a href="#Node">Node</a>&nbsp;in<br />
+the&nbsp;<a href="#Model">Model</a>.<br />
+&nbsp;<br />
+Specify&nbsp;the&nbsp;optional&nbsp;argument&nbsp;context&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;search<br />
+only&nbsp;in&nbsp;one&nbsp;context.<br />
+&nbsp;<br />
+qs&nbsp;=&nbsp;RDF.<a href="#Statement">Statement</a>(subject&nbsp;=&nbsp;None,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;predicate&nbsp;=&nbsp;RDF.<a href="#Node">Node</a>(uri_string&nbsp;=&nbsp;"http://example.com/pred"),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;object&nbsp;=&nbsp;None)<br />
+for&nbsp;statement&nbsp;in&nbsp;model.<a href="#Model-find_statements">find_statements</a>(qs):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;do&nbsp;whatever</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-find_statements_context" id="Model-find_statements_context"><strong>find_statements_context</strong></a>(self, statement)</dt>
+<dd><tt>Return&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;with&nbsp;context,&nbsp;matching&nbsp;the&nbsp;given<br />
+<a href="#Statement">Statement</a>&nbsp;--&nbsp;any&nbsp;nodes&nbsp;with&nbsp;value&nbsp;None&nbsp;of&nbsp;the&nbsp;statement&nbsp;match<br />
+any&nbsp;<a href="#Node">Node</a>&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>.<br />
+&nbsp;<br />
+qs&nbsp;=&nbsp;RDF.<a href="#Statement">Statement</a>(subject&nbsp;=&nbsp;None,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;predicate&nbsp;=&nbsp;RDF.<a href="#Node">Node</a>(uri_string&nbsp;=&nbsp;"http://example.com/pred"),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;object&nbsp;=&nbsp;None)<br />
+for&nbsp;(statement,&nbsp;context)&nbsp;in&nbsp;model.<a href="#Model-find_statements_context">find_statements_context</a>(qs):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;do&nbsp;whatever</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_arc" id="Model-get_arc"><strong>get_arc</strong></a> = <a href="#Model-get_predicate">get_predicate</a>(self, source, target)</dt>
+</dl>
+<dl>
+<dt><a name="Model-get_arcs" id="Model-get_arcs"><strong>get_arcs</strong></a> = <a href="#Model-get_predicates">get_predicates</a>(self, source, target)</dt>
+</dl>
+<dl>
+<dt><a name="Model-get_contexts" id="Model-get_contexts"><strong>get_contexts</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;a&nbsp;sequence&nbsp;of&nbsp;context&nbsp;Nodes&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_feature" id="Model-get_feature"><strong>get_feature</strong></a>(self, uri)</dt>
+<dd><tt>Return&nbsp;the&nbsp;<a href="#Node">Node</a>&nbsp;value&nbsp;of&nbsp;<a href="#Model">Model</a>&nbsp;feature&nbsp;URI&nbsp;uri</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_predicate" id="Model-get_predicate"><strong>get_predicate</strong></a>(self, source, target)</dt>
+<dd><tt>Return&nbsp;one&nbsp;<a href="#Node">Node</a>&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;matching&nbsp;(source,&nbsp;?,&nbsp;target).<br />
+The&nbsp;source&nbsp;can&nbsp;be&nbsp;a&nbsp;<a href="#Node">Node</a>&nbsp;or&nbsp;<a href="#Uri">Uri</a>,&nbsp;the&nbsp;target&nbsp;a&nbsp;<a href="#Node">Node</a>,&nbsp;<a href="#Uri">Uri</a>&nbsp;or&nbsp;string.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_predicates" id="Model-get_predicates"><strong>get_predicates</strong></a>(self, source, target)</dt>
+<dd><tt>Return&nbsp;a&nbsp;sequence&nbsp;of&nbsp;Nodes&nbsp;that&nbsp;are&nbsp;the&nbsp;predicates<br />
+of&nbsp;Statements&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;matching&nbsp;(source,&nbsp;?,&nbsp;target).<br />
+&nbsp;<br />
+Instead&nbsp;of&nbsp;specifying&nbsp;a&nbsp;<a href="#Node">Node</a>&nbsp;for&nbsp;source,&nbsp;you&nbsp;can&nbsp;shortcut&nbsp;with<br />
+a&nbsp;<a href="#Uri">Uri</a>,&nbsp;and&nbsp;with&nbsp;a&nbsp;<a href="#Uri">Uri</a>&nbsp;or&nbsp;string&nbsp;for&nbsp;target.<br />
+&nbsp;<br />
+e.g.<br />
+&nbsp;&nbsp;model.<a href="#Model-get_predicates">get_predicates</a>(<a href="#Uri">Uri</a>("http://example.com/me"),&nbsp;"Fred")</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_predicates_context" id="Model-get_predicates_context"><strong>get_predicates_context</strong></a>(self, source, target)</dt>
+<dd><tt>As&nbsp;for&nbsp;<a href="#Model">Model</a>.get_predicates&nbsp;but&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;<br />
+(statement,&nbsp;context)&nbsp;tuples.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_source" id="Model-get_source"><strong>get_source</strong></a>(self, predicate, target)</dt>
+<dd><tt>Return&nbsp;one&nbsp;<a href="#Node">Node</a>&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;matching&nbsp;(?,&nbsp;predicate,&nbsp;target).<br />
+The&nbsp;predicate&nbsp;can&nbsp;be&nbsp;a&nbsp;<a href="#Node">Node</a>&nbsp;or&nbsp;<a href="#Uri">Uri</a>,&nbsp;the&nbsp;target&nbsp;a&nbsp;<a href="#Node">Node</a>,&nbsp;<a href="#Uri">Uri</a>&nbsp;or&nbsp;string.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_sources" id="Model-get_sources"><strong>get_sources</strong></a>(self, predicate, target)</dt>
+<dd><tt>Return&nbsp;a&nbsp;sequence&nbsp;of&nbsp;<a href="#Node">Node</a>&nbsp;s&nbsp;that&nbsp;are&nbsp;the&nbsp;source<br />
+of&nbsp;Statements&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;matching&nbsp;(?,&nbsp;predicate,&nbsp;target).<br />
+&nbsp;<br />
+Instead&nbsp;of&nbsp;specifying&nbsp;a&nbsp;<a href="#Node">Node</a>&nbsp;for&nbsp;predicate,&nbsp;you&nbsp;can&nbsp;shortcut&nbsp;with<br />
+a&nbsp;<a href="#Uri">Uri</a>,&nbsp;and&nbsp;with&nbsp;a&nbsp;<a href="#Uri">Uri</a>&nbsp;or&nbsp;string&nbsp;for&nbsp;target.<br />
+&nbsp;<br />
+e.g.<br />
+&nbsp;&nbsp;model.<a href="#Model-get_sources">get_sources</a>(<a href="#Uri">Uri</a>("http://example.com/name"),&nbsp;"Fred")</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_sources_context" id="Model-get_sources_context"><strong>get_sources_context</strong></a>(self, predicate, target)</dt>
+<dd><tt>As&nbsp;for&nbsp;<a href="#Model">Model</a>.get_sources&nbsp;but&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;<br />
+(statement,&nbsp;context)&nbsp;tuples.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_target" id="Model-get_target"><strong>get_target</strong></a>(self, source, predicate)</dt>
+<dd><tt>Return&nbsp;one&nbsp;<a href="#Node">Node</a>&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;matching&nbsp;(source,&nbsp;predicate,&nbsp;?).<br />
+The&nbsp;source&nbsp;and&nbsp;predicate&nbsp;can&nbsp;be&nbsp;a&nbsp;<a href="#Node">Node</a>&nbsp;or&nbsp;<a href="#Uri">Uri</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_targets" id="Model-get_targets"><strong>get_targets</strong></a>(self, source, predicate)</dt>
+<dd><tt>Return&nbsp;a&nbsp;sequence&nbsp;of&nbsp;Nodes&nbsp;that&nbsp;are&nbsp;the&nbsp;targets<br />
+of&nbsp;Statements&nbsp;in&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;matching&nbsp;(source,&nbsp;predicate,&nbsp;?).<br />
+&nbsp;<br />
+Instead&nbsp;of&nbsp;specifying&nbsp;a&nbsp;<a href="#Node">Node</a>&nbsp;for&nbsp;source&nbsp;or&nbsp;predicate,&nbsp;you<br />
+can&nbsp;shortcut&nbsp;with&nbsp;a&nbsp;<a href="#Uri">Uri</a>.<br />
+&nbsp;<br />
+e.g.<br />
+&nbsp;<br />
+&nbsp;&nbsp;model.<a href="#Model-get_targets">get_targets</a>(<a href="#Uri">Uri</a>("http://example.com/me"),&nbsp;prednode)</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-get_targets_context" id="Model-get_targets_context"><strong>get_targets_context</strong></a>(self, source, predicate)</dt>
+<dd><tt>As&nbsp;for&nbsp;<a href="#Model">Model</a>.get_targets&nbsp;but&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;<br />
+(statement,&nbsp;context)&nbsp;tuples.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-load" id="Model-load"><strong>load</strong></a>(self, uri, name<font color="#909090">=''</font>, mime_type<font color="#909090">=''</font>, type_uri<font color="#909090">=None</font>, handler<font color="#909090">=None</font>)</dt>
+<dd><tt>Load&nbsp;triples&nbsp;into&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;from&nbsp;a&nbsp;URI&nbsp;in&nbsp;a&nbsp;syntax.<br />
+Returns&nbsp;a&nbsp;boolean&nbsp;success&nbsp;or&nbsp;failure.<br />
+&nbsp;<br />
+If&nbsp;no&nbsp;parser&nbsp;name&nbsp;is&nbsp;given,&nbsp;the&nbsp;parser&nbsp;to&nbsp;use&nbsp;is&nbsp;guessed.<br />
+&nbsp;<br />
+If&nbsp;handler&nbsp;is&nbsp;given,&nbsp;an&nbsp;error&nbsp;handler&nbsp;with&nbsp;the&nbsp;signature<br />
+&nbsp;&nbsp;def&nbsp;handler(code,&nbsp;level,&nbsp;facility,&nbsp;message,&nbsp;line,&nbsp;column,&nbsp;byte,&nbsp;file,&nbsp;uri)<br />
+is&nbsp;called.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-predicates" id="Model-predicates"><strong>predicates</strong></a> = <a href="#Model-get_predicates">get_predicates</a>(self, source, target)</dt>
+</dl>
+<dl>
+<dt><a name="Model-remove_statement" id="Model-remove_statement"><strong>remove_statement</strong></a>(self, statement, context<font color="#909090">=None</font>)</dt>
+<dd><tt>Remove&nbsp;the&nbsp;<a href="#Statement">Statement</a>&nbsp;from&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;with&nbsp;the&nbsp;optional&nbsp;context&nbsp;<a href="#Node">Node</a>.<br />
+This&nbsp;is&nbsp;used&nbsp;by&nbsp;the&nbsp;__delitem__&nbsp;method.&nbsp;&nbsp;Preferred&nbsp;way&nbsp;of&nbsp;removing&nbsp;a<br />
+<a href="#Statement">Statement</a>&nbsp;is:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;del&nbsp;model[statement]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;del&nbsp;model[statement,&nbsp;context]</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-remove_statements_with_context" id="Model-remove_statements_with_context"><strong>remove_statements_with_context</strong></a>(self, context)</dt>
+<dd><tt>Remove&nbsp;all&nbsp;Statements&nbsp;from&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;with&nbsp;the&nbsp;given&nbsp;context&nbsp;<a href="#Node">Node</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-run_as_statements" id="Model-run_as_statements"><strong>run_as_statements</strong></a>(self, query)</dt>
+</dl>
+<dl>
+<dt><a name="Model-serialise" id="Model-serialise"><strong>serialise</strong></a> = <a href="#Model-as_stream">as_stream</a>(self, context<font color="#909090">=None</font>)</dt>
+</dl>
+<dl>
+<dt><a name="Model-set_feature" id="Model-set_feature"><strong>set_feature</strong></a>(self, uri, value)</dt>
+<dd><tt>Set&nbsp;the&nbsp;<a href="#Node">Node</a>&nbsp;value&nbsp;of&nbsp;<a href="#Model">Model</a>&nbsp;feature&nbsp;URI&nbsp;uri.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-size" id="Model-size"><strong>size</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;in&nbsp;number&nbsp;of&nbsp;statements.<br />
+Returns&nbsp;a&nbsp;value&nbsp;&lt;&nbsp;0&nbsp;if&nbsp;number&nbsp;of&nbsp;statements&nbsp;not&nbsp;countable.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-sources" id="Model-sources"><strong>sources</strong></a> = <a href="#Model-get_sources">get_sources</a>(self, predicate, target)</dt>
+</dl>
+<dl>
+<dt><a name="Model-sync" id="Model-sync"><strong>sync</strong></a>(self)</dt>
+<dd><tt>Synchronise&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;with&nbsp;the&nbsp;underlying&nbsp;<a href="#Storage">Storage</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Model-targets" id="Model-targets"><strong>targets</strong></a> = <a href="#Model-get_targets">get_targets</a>(self, source, predicate)</dt>
+</dl>
+<dl>
+<dt><a name="Model-to_string" id="Model-to_string"><strong>to_string</strong></a>(self, base_uri<font color="#909090">=None</font>, name<font color="#909090">=''</font>, mime_type<font color="#909090">=''</font>, type_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;to&nbsp;a&nbsp;syntax.<br />
+&nbsp;<br />
+print&nbsp;model.<a href="#Model-to_string">to_string</a>(base_uri="http://example.org/base")<br />
+&nbsp;<br />
+If&nbsp;no&nbsp;serializer&nbsp;name&nbsp;is&nbsp;given,&nbsp;the&nbsp;default&nbsp;serializer&nbsp;RDF/XML&nbsp;is&nbsp;used.</tt></dd>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="NS" id="NS">class <strong>NS</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;Namespace&nbsp;Utility&nbsp;Class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+nspace&nbsp;=&nbsp;RDF.<a href="#NS">NS</a>("http://example.com/foo#")<br />
+&nbsp;<br />
+#&nbsp;creates&nbsp;an&nbsp;RDF&nbsp;<a href="#Node">Node</a>&nbsp;for&nbsp;http://example.com/foo#blah&nbsp;&nbsp;&nbsp;<br />
+node1&nbsp;=&nbsp;nspace.blah<br />
+&nbsp;<br />
+#&nbsp;creates&nbsp;an&nbsp;RDF&nbsp;<a href="#Node">Node</a>&nbsp;for&nbsp;http://example.com/foo#blah&nbsp;&nbsp;&nbsp;<br />
+node2&nbsp;=&nbsp;nspace['blah']<br />
+&nbsp;<br />
+A&nbsp;class&nbsp;for&nbsp;generating&nbsp;RDF&nbsp;Nodes&nbsp;with&nbsp;URIs&nbsp;from&nbsp;the&nbsp;same&nbsp;vocabulary<br />
+(such&nbsp;as&nbsp;XML&nbsp;Namespace)&nbsp;varying&nbsp;only&nbsp;in&nbsp;the&nbsp;appended&nbsp;name&nbsp;in<br />
+the&nbsp;vocabulary.&nbsp;&nbsp;Each&nbsp;node&nbsp;returned&nbsp;is&nbsp;a&nbsp;pointer&nbsp;to&nbsp;a&nbsp;shared&nbsp;copy.<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="NS-__getattr__" id="NS-__getattr__"><strong>__getattr__</strong></a>(self, localName)</dt>
+</dl>
+<dl>
+<dt><a name="NS-__getitem__" id="NS-__getitem__"><strong>__getitem__</strong></a>(self, localName)</dt>
+</dl>
+<dl>
+<dt><a name="NS-__init__" id="NS-__init__"><strong>__init__</strong></a>(self, prefix)</dt>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="NTriplesParser" id="NTriplesParser">class <strong>NTriplesParser</strong></a>(<a href="#Parser">Parser</a>)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;N-Triples&nbsp;<a href="#Parser">Parser</a>&nbsp;class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+parser=RDF.<a href="#NTriplesParser">NTriplesParser</a>()<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt>Method resolution order:</dt>
+<dd><a href="#NTriplesParser">NTriplesParser</a></dd>
+<dd><a href="#Parser">Parser</a></dd>
+<dd>__builtin__.object</dd>
+</dl>
+<hr />
+Methods defined here:<br />
+<dl>
+<dt><a name="NTriplesParser-__init__" id="NTriplesParser-__init__"><strong>__init__</strong></a>(self)</dt>
+</dl>
+<hr />
+Methods inherited from <a href="#Parser">Parser</a>:<br />
+<dl>
+<dt><a name="NTriplesParser-__del__" id="NTriplesParser-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="NTriplesParser-get_feature" id="NTriplesParser-get_feature"><strong>get_feature</strong></a>(self, uri)</dt>
+<dd><tt>Return&nbsp;the&nbsp;<a href="#Node">Node</a>&nbsp;value&nbsp;of&nbsp;<a href="#Parser">Parser</a>&nbsp;feature&nbsp;URI&nbsp;uri</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesParser-namespaces_seen" id="NTriplesParser-namespaces_seen"><strong>namespaces_seen</strong></a>(self)</dt>
+<dd><tt>Get&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;prefix/URI&nbsp;pairs&nbsp;for&nbsp;namespaces&nbsp;seen&nbsp;during&nbsp;parsing.</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesParser-parse_as_stream" id="NTriplesParser-parse_as_stream"><strong>parse_as_stream</strong></a>(self, uri, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Return&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;from&nbsp;parsing&nbsp;the&nbsp;content&nbsp;at<br />
+a&nbsp;URI&nbsp;for&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;parsing&nbsp;fails.<br />
+&nbsp;<br />
+(This&nbsp;depends&nbsp;on&nbsp;what&nbsp;URI&nbsp;support&nbsp;raptor&nbsp;provides&nbsp;to&nbsp;redland)<br />
+&nbsp;<br />
+&nbsp;&nbsp;for&nbsp;statement&nbsp;in&nbsp;parser.<a href="#NTriplesParser-parse_as_stream">parse_as_stream</a>(""):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;statement</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesParser-parse_into_model" id="NTriplesParser-parse_into_model"><strong>parse_into_model</strong></a>(self, model, uri, base_uri<font color="#909090">=None</font>, handler<font color="#909090">=None</font>)</dt>
+<dd><tt>Parse&nbsp;into&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;from&nbsp;the&nbsp;content&nbsp;at&nbsp;the&nbsp;URI,&nbsp;for<br />
+the&nbsp;optional&nbsp;base&nbsp;URI.&nbsp;&nbsp;Returns&nbsp;a&nbsp;boolean&nbsp;success&nbsp;or&nbsp;failure.<br />
+&nbsp;<br />
+If&nbsp;handler&nbsp;is&nbsp;given,&nbsp;an&nbsp;error&nbsp;handler&nbsp;with&nbsp;the&nbsp;signature<br />
+&nbsp;&nbsp;def&nbsp;handler(code,&nbsp;level,&nbsp;facility,&nbsp;message,&nbsp;line,&nbsp;column,&nbsp;byte,&nbsp;file,&nbsp;uri)<br />
+is&nbsp;called.<br />
+&nbsp;<br />
+parser.<a href="#NTriplesParser-parse_into_model">parse_into_model</a>(model,&nbsp;"file:./foo.rdf",<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://example.com/foo.rdf")</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesParser-parse_string_as_stream" id="NTriplesParser-parse_string_as_stream"><strong>parse_string_as_stream</strong></a>(self, string, base_uri)</dt>
+<dd><tt>Return&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;from&nbsp;parsing&nbsp;the&nbsp;content&nbsp;in<br />
+string&nbsp;with&nbsp;the&nbsp;required&nbsp;base&nbsp;URI&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;parsing&nbsp;fails.<br />
+&nbsp;<br />
+&nbsp;&nbsp;for&nbsp;statement&nbsp;in&nbsp;parser.<a href="#NTriplesParser-parse_string_as_stream">parse_string_as_stream</a>(rdfstring,&nbsp;base_uri):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;statement</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesParser-parse_string_into_model" id="NTriplesParser-parse_string_into_model"><strong>parse_string_into_model</strong></a>(self, model, string, base_uri, handler<font color="#909090">=None</font>)</dt>
+<dd><tt>Parse&nbsp;into&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;from&nbsp;the&nbsp;content&nbsp;string<br />
+&nbsp;with&nbsp;the&nbsp;required&nbsp;base&nbsp;URI.&nbsp;&nbsp;Returns&nbsp;a&nbsp;boolean&nbsp;success&nbsp;or&nbsp;failure.<br />
+&nbsp;<br />
+If&nbsp;handler&nbsp;is&nbsp;given,&nbsp;an&nbsp;error&nbsp;handler&nbsp;with&nbsp;the&nbsp;signature<br />
+&nbsp;&nbsp;def&nbsp;handler(code,&nbsp;level,&nbsp;facility,&nbsp;message,&nbsp;line,&nbsp;column,&nbsp;byte,&nbsp;file,&nbsp;uri)<br />
+is&nbsp;called.</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesParser-set_feature" id="NTriplesParser-set_feature"><strong>set_feature</strong></a>(self, uri, value)</dt>
+<dd><tt>Set&nbsp;the&nbsp;<a href="#Node">Node</a>&nbsp;value&nbsp;of&nbsp;<a href="#Parser">Parser</a>&nbsp;feature&nbsp;URI&nbsp;uri.</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesParser-set_uri_filter" id="NTriplesParser-set_uri_filter"><strong>set_uri_filter</strong></a>(self, filter)</dt>
+<dd><tt>Set&nbsp;a&nbsp;function&nbsp;for&nbsp;rejecting&nbsp;retrieval&nbsp;of&nbsp;URIs&nbsp;seen&nbsp;during&nbsp;parsing.<br />
+&nbsp;<br />
+Return&nbsp;False&nbsp;or&nbsp;0&nbsp;to&nbsp;not&nbsp;reject&nbsp;the&nbsp;URI<br />
+&nbsp;<br />
+def&nbsp;reject(uri):<br />
+&nbsp;&nbsp;if&nbsp;"bad"&nbsp;==&nbsp;uri:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True<br />
+&nbsp;&nbsp;return&nbsp;False<br />
+&nbsp;<br />
+parser.<a href="#NTriplesParser-set_uri_filter">set_uri_filter</a>(reject)</tt></dd>
+</dl>
+<hr />
+Data descriptors inherited from <a href="#Parser">Parser</a>:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="NTriplesSerializer" id="NTriplesSerializer">class <strong>NTriplesSerializer</strong></a>(<a href="#Serializer">Serializer</a>)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;N-Triples&nbsp;<a href="#Serializer">Serializer</a>&nbsp;class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+ser=RDF.<a href="#NTriplesSerializer">NTriplesSerializer</a>()<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt>Method resolution order:</dt>
+<dd><a href="#NTriplesSerializer">NTriplesSerializer</a></dd>
+<dd><a href="#Serializer">Serializer</a></dd>
+<dd>__builtin__.object</dd>
+</dl>
+<hr />
+Methods defined here:<br />
+<dl>
+<dt><a name="NTriplesSerializer-__init__" id="NTriplesSerializer-__init__"><strong>__init__</strong></a>(self)</dt>
+</dl>
+<hr />
+Methods inherited from <a href="#Serializer">Serializer</a>:<br />
+<dl>
+<dt><a name="NTriplesSerializer-__del__" id="NTriplesSerializer-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="NTriplesSerializer-get_feature" id="NTriplesSerializer-get_feature"><strong>get_feature</strong></a>(self, uri)</dt>
+<dd><tt>Return&nbsp;the&nbsp;value&nbsp;of&nbsp;<a href="#Serializer">Serializer</a>&nbsp;feature&nbsp;URI&nbsp;uri</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesSerializer-serialize_model_to_file" id="NTriplesSerializer-serialize_model_to_file"><strong>serialize_model_to_file</strong></a>(self, name, model, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;to&nbsp;filename&nbsp;name&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;using&nbsp;the<br />
+optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesSerializer-serialize_model_to_string" id="NTriplesSerializer-serialize_model_to_string"><strong>serialize_model_to_string</strong></a>(self, model, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;to&nbsp;a&nbsp;string&nbsp;using&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesSerializer-serialize_stream_to_string" id="NTriplesSerializer-serialize_stream_to_string"><strong>serialize_stream_to_string</strong></a>(self, stream, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;a&nbsp;stream&nbsp;to&nbsp;a&nbsp;string&nbsp;using&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesSerializer-set_feature" id="NTriplesSerializer-set_feature"><strong>set_feature</strong></a>(self, uri, value)</dt>
+<dd><tt>Set&nbsp;the&nbsp;value&nbsp;of&nbsp;<a href="#Serializer">Serializer</a>&nbsp;feature&nbsp;URI&nbsp;uri.</tt></dd>
+</dl>
+<dl>
+<dt><a name="NTriplesSerializer-set_namespace" id="NTriplesSerializer-set_namespace"><strong>set_namespace</strong></a>(self, prefix, uri)</dt>
+<dd><tt>Set&nbsp;a&nbsp;namespace&nbsp;prefix&nbsp;and&nbsp;URI&nbsp;for&nbsp;the&nbsp;<a href="#Serializer">Serializer</a>&nbsp;to&nbsp;use.</tt></dd>
+</dl>
+<hr />
+Data descriptors inherited from <a href="#Serializer">Serializer</a>:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Node" id="Node">class <strong>Node</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;<a href="#Node">Node</a>&nbsp;(RDF&nbsp;Resource,&nbsp;Property,&nbsp;Literal)&nbsp;Class<br />
+&nbsp;<br />
+&nbsp;&nbsp;import&nbsp;RDF<br />
+&nbsp;<br />
+&nbsp;&nbsp;node1=RDF.<a href="#Node">Node</a>()<br />
+&nbsp;<br />
+&nbsp;&nbsp;node2=RDF.<a href="#Node">Node</a>(RDF.<a href="#Uri">Uri</a>("http://example.com/"))<br />
+&nbsp;&nbsp;node3=RDF.<a href="#Node">Node</a>("Hello,&nbsp;World!")<br />
+&nbsp;<br />
+&nbsp;&nbsp;node4=RDF.<a href="#Node">Node</a>(uri_string="http://example.com/")<br />
+&nbsp;&nbsp;node5=RDF.<a href="#Node">Node</a>(literal="&lt;tag&gt;content&lt;/tag&gt;",&nbsp;is_wf_xml=1)<br />
+&nbsp;&nbsp;node6=RDF.<a href="#Node">Node</a>(blank="abc")<br />
+&nbsp;&nbsp;node7=RDF.<a href="#Node">Node</a>(node5)<br />
+...<br />
+&nbsp;<br />
+&nbsp;&nbsp;print&nbsp;node2<br />
+&nbsp;&nbsp;if&nbsp;node7.<a href="#Node-is_resource">is_resource</a>():<br />
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Resource&nbsp;with&nbsp;URI",&nbsp;node7.uri<br />
+&nbsp;<br />
+&nbsp;&nbsp;if&nbsp;node5.<a href="#Node-is_blank">is_blank</a>():<br />
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Resource&nbsp;with&nbsp;blank&nbsp;node&nbsp;name&nbsp;",&nbsp;node5.blank_identifier<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Node-__del__" id="Node-__del__"><strong>__del__</strong></a>(self)</dt>
+<dd><tt>Free&nbsp;an&nbsp;RDF&nbsp;<a href="#Node">Node</a>&nbsp;(destructor).</tt></dd>
+</dl>
+<dl>
+<dt><a name="Node-__eq__" id="Node-__eq__"><strong>__eq__</strong></a>(self, other)</dt>
+<dd><tt>Equality&nbsp;of&nbsp;an&nbsp;RDF&nbsp;<a href="#Node">Node</a>&nbsp;compared&nbsp;to&nbsp;another&nbsp;RDF&nbsp;<a href="#Node">Node</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Node-__hash__" id="Node-__hash__"><strong>__hash__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Node-__init__" id="Node-__init__"><strong>__init__</strong></a>(self, arg<font color="#909090">=None</font>, **args)</dt>
+<dd><tt>Create&nbsp;an&nbsp;RDF&nbsp;<a href="#Node">Node</a>&nbsp;(constructor).<br />
+&nbsp;<br />
+Resource&nbsp;or&nbsp;Property&nbsp;node&nbsp;creation:<br />
+&nbsp;<br />
+&nbsp;&nbsp;n1&nbsp;=&nbsp;<a href="#Node">Node</a>(<a href="#Uri">Uri</a>("http://example.com/foo"))<br />
+&nbsp;<br />
+String&nbsp;literal&nbsp;node&nbsp;creation&nbsp;(see&nbsp;below&nbsp;for&nbsp;more&nbsp;complex<br />
+ways&nbsp;of&nbsp;building&nbsp;literals.)<br />
+&nbsp;<br />
+&nbsp;&nbsp;n2&nbsp;=&nbsp;<a href="#Node">Node</a>("foo")<br />
+&nbsp;<br />
+<a href="#Node">Node</a>&nbsp;copying:<br />
+&nbsp;<br />
+&nbsp;&nbsp;n3&nbsp;=&nbsp;<a href="#Node">Node</a>(n1)<br />
+&nbsp;<br />
+Or&nbsp;create&nbsp;a&nbsp;new&nbsp;RDF&nbsp;<a href="#Node">Node</a>&nbsp;using&nbsp;the&nbsp;following&nbsp;named&nbsp;parameters:<br />
+&nbsp;<br />
+&nbsp;&nbsp;uri_string&nbsp;&nbsp;-&nbsp;create&nbsp;a&nbsp;resource&nbsp;node&nbsp;from&nbsp;a&nbsp;string&nbsp;URI<br />
+&nbsp;&nbsp;uri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;create&nbsp;a&nbsp;resource&nbsp;node&nbsp;from&nbsp;a&nbsp;URI&nbsp;object<br />
+&nbsp;&nbsp;literal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;create&nbsp;a&nbsp;literal&nbsp;node&nbsp;from&nbsp;a&nbsp;literal&nbsp;string&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;datatype&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;datatype&nbsp;URI<br />
+&nbsp;&nbsp;&nbsp;&nbsp;is_wf_xml&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;literal&nbsp;is&nbsp;XML&nbsp;(alternative&nbsp;to&nbsp;datatype)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;literal&nbsp;XML&nbsp;language<br />
+&nbsp;&nbsp;blank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;create&nbsp;a&nbsp;resource&nbsp;node&nbsp;from&nbsp;with&nbsp;a&nbsp;blank&nbsp;node&nbsp;identiifer<br />
+&nbsp;&nbsp;node&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;copy&nbsp;a&nbsp;node</tt></dd>
+</dl>
+<dl>
+<dt><a name="Node-__ne__" id="Node-__ne__"><strong>__ne__</strong></a>(self, other)</dt>
+<dd><tt>Inequality&nbsp;of&nbsp;an&nbsp;RDF&nbsp;<a href="#Node">Node</a>&nbsp;compared&nbsp;to&nbsp;another&nbsp;RDF&nbsp;<a href="#Node">Node</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Node-__str__" id="Node-__str__"><strong>__str__</strong></a>(self)</dt>
+<dd><tt>Get&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;an&nbsp;RDF&nbsp;<a href="#Node">Node</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Node-__unicode__" id="Node-__unicode__"><strong>__unicode__</strong></a>(self)</dt>
+<dd><tt>Get&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;representation&nbsp;of&nbsp;an&nbsp;RDF&nbsp;<a href="#Node">Node</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Node-is_blank" id="Node-is_blank"><strong>is_blank</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;true&nbsp;if&nbsp;node&nbsp;is&nbsp;a&nbsp;blank&nbsp;node</tt></dd>
+</dl>
+<dl>
+<dt><a name="Node-is_literal" id="Node-is_literal"><strong>is_literal</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;true&nbsp;if&nbsp;node&nbsp;is&nbsp;a&nbsp;literal</tt></dd>
+</dl>
+<dl>
+<dt><a name="Node-is_resource" id="Node-is_resource"><strong>is_resource</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;true&nbsp;if&nbsp;node&nbsp;is&nbsp;a&nbsp;resource&nbsp;&nbsp;with&nbsp;a&nbsp;URI</tt></dd>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>blank</strong></dt>
+<dd><tt>The&nbsp;blank&nbsp;node&nbsp;identifier</tt></dd>
+</dl>
+<dl>
+<dt><strong>blank_identifier</strong></dt>
+<dd><tt>The&nbsp;node&nbsp;identifier&nbsp;of&nbsp;a&nbsp;blank&nbsp;node</tt></dd>
+</dl>
+<dl>
+<dt><strong>literal</strong></dt>
+<dd><tt>A&nbsp;tuple&nbsp;of&nbsp;the&nbsp;string,&nbsp;language&nbsp;and&nbsp;datatype&nbsp;values&nbsp;of&nbsp;the&nbsp;node</tt></dd>
+</dl>
+<dl>
+<dt><strong>literal_value</strong></dt>
+<dd><tt>A&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;node&nbsp;literal&nbsp;with&nbsp;keys&nbsp;string,&nbsp;language&nbsp;and&nbsp;datatype</tt></dd>
+</dl>
+<dl>
+<dt><strong>type</strong></dt>
+<dd><tt>The&nbsp;node&nbsp;type,&nbsp;an&nbsp;integer</tt></dd>
+</dl>
+<dl>
+<dt><strong>uri</strong></dt>
+<dd><tt>The&nbsp;URI&nbsp;of&nbsp;a&nbsp;resource&nbsp;node</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Parser" id="Parser">class <strong>Parser</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;Syntax&nbsp;<a href="#Parser">Parser</a>&nbsp;Class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+parser1=RDF.<a href="#Parser">Parser</a>()<br />
+parser2=RDF.<a href="#Parser">Parser</a>(name="rdfxml")<br />
+parser3=RDF.<a href="#Parser">Parser</a>(mime_type="application/rdf+xml")<br />
+&nbsp;<br />
+stream=parser2.<a href="#Parser-parse_as_stream">parse_as_stream</a>("file://dir/file.rdf")<br />
+parser3.<a href="#Parser-parse_into_model">parse_into_model</a>(model,&nbsp;"file://dir/file.rdf",&nbsp;"http://example.org/")<br />
+&nbsp;<br />
+The&nbsp;default&nbsp;parser&nbsp;type&nbsp;if&nbsp;not&nbsp;given&nbsp;explicitly&nbsp;is&nbsp;raptor,<br />
+for&nbsp;the&nbsp;RDF/XML&nbsp;syntax.<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Parser-__del__" id="Parser-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Parser-__init__" id="Parser-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, mime_type<font color="#909090">=None</font>, uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Create&nbsp;an&nbsp;RDF&nbsp;<a href="#Parser">Parser</a>&nbsp;(constructor).<br />
+&nbsp;<br />
+Create&nbsp;a&nbsp;new&nbsp;RDF&nbsp;<a href="#Parser">Parser</a>&nbsp;for&nbsp;a&nbsp;particular&nbsp;syntax.&nbsp;&nbsp;The&nbsp;parser&nbsp;is<br />
+chosen&nbsp;by&nbsp;the&nbsp;fields&nbsp;given&nbsp;to&nbsp;the&nbsp;constructor,&nbsp;all&nbsp;of&nbsp;which&nbsp;are<br />
+optional.&nbsp;&nbsp;When&nbsp;any&nbsp;are&nbsp;given,&nbsp;they&nbsp;must&nbsp;all&nbsp;match.&nbsp;&nbsp;The&nbsp;default<br />
+parser&nbsp;is&nbsp;chosen&nbsp;if&nbsp;none&nbsp;are&nbsp;given,&nbsp;which&nbsp;is&nbsp;RDF/XML&nbsp;in&nbsp;the<br />
+standard&nbsp;configuration&nbsp;of&nbsp;Raptor.<br />
+&nbsp;<br />
+&nbsp;&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;parser&nbsp;syntax&nbsp;name<br />
+&nbsp;&nbsp;mime_type&nbsp;-&nbsp;syntax&nbsp;mime&nbsp;type<br />
+&nbsp;&nbsp;uri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;URI&nbsp;identifying&nbsp;the&nbsp;syntax</tt></dd>
+</dl>
+<dl>
+<dt><a name="Parser-get_feature" id="Parser-get_feature"><strong>get_feature</strong></a>(self, uri)</dt>
+<dd><tt>Return&nbsp;the&nbsp;<a href="#Node">Node</a>&nbsp;value&nbsp;of&nbsp;<a href="#Parser">Parser</a>&nbsp;feature&nbsp;URI&nbsp;uri</tt></dd>
+</dl>
+<dl>
+<dt><a name="Parser-namespaces_seen" id="Parser-namespaces_seen"><strong>namespaces_seen</strong></a>(self)</dt>
+<dd><tt>Get&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;prefix/URI&nbsp;pairs&nbsp;for&nbsp;namespaces&nbsp;seen&nbsp;during&nbsp;parsing.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Parser-parse_as_stream" id="Parser-parse_as_stream"><strong>parse_as_stream</strong></a>(self, uri, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Return&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;from&nbsp;parsing&nbsp;the&nbsp;content&nbsp;at<br />
+a&nbsp;URI&nbsp;for&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;parsing&nbsp;fails.<br />
+&nbsp;<br />
+(This&nbsp;depends&nbsp;on&nbsp;what&nbsp;URI&nbsp;support&nbsp;raptor&nbsp;provides&nbsp;to&nbsp;redland)<br />
+&nbsp;<br />
+&nbsp;&nbsp;for&nbsp;statement&nbsp;in&nbsp;parser.<a href="#Parser-parse_as_stream">parse_as_stream</a>(""):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;statement</tt></dd>
+</dl>
+<dl>
+<dt><a name="Parser-parse_into_model" id="Parser-parse_into_model"><strong>parse_into_model</strong></a>(self, model, uri, base_uri<font color="#909090">=None</font>, handler<font color="#909090">=None</font>)</dt>
+<dd><tt>Parse&nbsp;into&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;from&nbsp;the&nbsp;content&nbsp;at&nbsp;the&nbsp;URI,&nbsp;for<br />
+the&nbsp;optional&nbsp;base&nbsp;URI.&nbsp;&nbsp;Returns&nbsp;a&nbsp;boolean&nbsp;success&nbsp;or&nbsp;failure.<br />
+&nbsp;<br />
+If&nbsp;handler&nbsp;is&nbsp;given,&nbsp;an&nbsp;error&nbsp;handler&nbsp;with&nbsp;the&nbsp;signature<br />
+&nbsp;&nbsp;def&nbsp;handler(code,&nbsp;level,&nbsp;facility,&nbsp;message,&nbsp;line,&nbsp;column,&nbsp;byte,&nbsp;file,&nbsp;uri)<br />
+is&nbsp;called.<br />
+&nbsp;<br />
+parser.<a href="#Parser-parse_into_model">parse_into_model</a>(model,&nbsp;"file:./foo.rdf",<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://example.com/foo.rdf")</tt></dd>
+</dl>
+<dl>
+<dt><a name="Parser-parse_string_as_stream" id="Parser-parse_string_as_stream"><strong>parse_string_as_stream</strong></a>(self, string, base_uri)</dt>
+<dd><tt>Return&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;from&nbsp;parsing&nbsp;the&nbsp;content&nbsp;in<br />
+string&nbsp;with&nbsp;the&nbsp;required&nbsp;base&nbsp;URI&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;parsing&nbsp;fails.<br />
+&nbsp;<br />
+&nbsp;&nbsp;for&nbsp;statement&nbsp;in&nbsp;parser.<a href="#Parser-parse_string_as_stream">parse_string_as_stream</a>(rdfstring,&nbsp;base_uri):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;statement</tt></dd>
+</dl>
+<dl>
+<dt><a name="Parser-parse_string_into_model" id="Parser-parse_string_into_model"><strong>parse_string_into_model</strong></a>(self, model, string, base_uri, handler<font color="#909090">=None</font>)</dt>
+<dd><tt>Parse&nbsp;into&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;from&nbsp;the&nbsp;content&nbsp;string<br />
+&nbsp;with&nbsp;the&nbsp;required&nbsp;base&nbsp;URI.&nbsp;&nbsp;Returns&nbsp;a&nbsp;boolean&nbsp;success&nbsp;or&nbsp;failure.<br />
+&nbsp;<br />
+If&nbsp;handler&nbsp;is&nbsp;given,&nbsp;an&nbsp;error&nbsp;handler&nbsp;with&nbsp;the&nbsp;signature<br />
+&nbsp;&nbsp;def&nbsp;handler(code,&nbsp;level,&nbsp;facility,&nbsp;message,&nbsp;line,&nbsp;column,&nbsp;byte,&nbsp;file,&nbsp;uri)<br />
+is&nbsp;called.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Parser-set_feature" id="Parser-set_feature"><strong>set_feature</strong></a>(self, uri, value)</dt>
+<dd><tt>Set&nbsp;the&nbsp;<a href="#Node">Node</a>&nbsp;value&nbsp;of&nbsp;<a href="#Parser">Parser</a>&nbsp;feature&nbsp;URI&nbsp;uri.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Parser-set_uri_filter" id="Parser-set_uri_filter"><strong>set_uri_filter</strong></a>(self, filter)</dt>
+<dd><tt>Set&nbsp;a&nbsp;function&nbsp;for&nbsp;rejecting&nbsp;retrieval&nbsp;of&nbsp;URIs&nbsp;seen&nbsp;during&nbsp;parsing.<br />
+&nbsp;<br />
+Return&nbsp;False&nbsp;or&nbsp;0&nbsp;to&nbsp;not&nbsp;reject&nbsp;the&nbsp;URI<br />
+&nbsp;<br />
+def&nbsp;reject(uri):<br />
+&nbsp;&nbsp;if&nbsp;"bad"&nbsp;==&nbsp;uri:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True<br />
+&nbsp;&nbsp;return&nbsp;False<br />
+&nbsp;<br />
+parser.<a href="#Parser-set_uri_filter">set_uri_filter</a>(reject)</tt></dd>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Query" id="Query">class <strong>Query</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;<a href="#Query">Query</a>&nbsp;interface&nbsp;class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+&nbsp;<br />
+q1&nbsp;=&nbsp;RDF.<a href="#Query">Query</a>("SELECT&nbsp;?a&nbsp;?c&nbsp;WHERE&nbsp;(?a&nbsp;dc:title&nbsp;?c)&nbsp;USING&nbsp;dc&nbsp;FOR&nbsp;&lt;<a href="http://purl.org/dc/elements/1.1/">http://purl.org/dc/elements/1.1/</a>&gt;")<br />
+q2&nbsp;=&nbsp;RDF.<a href="#Query">Query</a>("-&nbsp;-&nbsp;-",&nbsp;query_language="triples")<br />
+q3&nbsp;=&nbsp;RDF.<a href="#Query">Query</a>("select&nbsp;$a&nbsp;where&nbsp;...",&nbsp;query_language="sparql")<br />
+&nbsp;<br />
+results=q1.<a href="#Query-execute">execute</a>(model)<br />
+for&nbsp;result&nbsp;in&nbsp;results:<br />
+&nbsp;&nbsp;print&nbsp;result['a']<br />
+&nbsp;&nbsp;print&nbsp;result['c']<br />
+&nbsp;<br />
+for&nbsp;statement&nbsp;in&nbsp;q2.<a href="#Query-execute">execute</a>().as_stream(model):<br />
+&nbsp;&nbsp;print&nbsp;statement<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Query-__del__" id="Query-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Query-__init__" id="Query-__init__"><strong>__init__</strong></a>(self, querystring, base_uri<font color="#909090">=None</font>, query_language<font color="#909090">='sparql'</font>, query_uri<font color="#909090">=None</font>)</dt>
+</dl>
+<dl>
+<dt><a name="Query-execute" id="Query-execute"><strong>execute</strong></a>(self, model)</dt>
+</dl>
+<dl>
+<dt><a name="Query-get_limit" id="Query-get_limit"><strong>get_limit</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Query-get_offset" id="Query-get_offset"><strong>get_offset</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Query-set_limit" id="Query-set_limit"><strong>set_limit</strong></a>(self, limit)</dt>
+</dl>
+<dl>
+<dt><a name="Query-set_offset" id="Query-set_offset"><strong>set_offset</strong></a>(self, offset)</dt>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="RDFXMLSerializer" id="RDFXMLSerializer">class <strong>RDFXMLSerializer</strong></a>(<a href="#Serializer">Serializer</a>)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;RDF/XML&nbsp;<a href="#Serializer">Serializer</a>&nbsp;class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+ser=RDF.<a href="#RDFXMLSerializer">RDFXMLSerializer</a>()<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt>Method resolution order:</dt>
+<dd><a href="#RDFXMLSerializer">RDFXMLSerializer</a></dd>
+<dd><a href="#Serializer">Serializer</a></dd>
+<dd>__builtin__.object</dd>
+</dl>
+<hr />
+Methods defined here:<br />
+<dl>
+<dt><a name="RDFXMLSerializer-__init__" id="RDFXMLSerializer-__init__"><strong>__init__</strong></a>(self)</dt>
+</dl>
+<hr />
+Methods inherited from <a href="#Serializer">Serializer</a>:<br />
+<dl>
+<dt><a name="RDFXMLSerializer-__del__" id="RDFXMLSerializer-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="RDFXMLSerializer-get_feature" id="RDFXMLSerializer-get_feature"><strong>get_feature</strong></a>(self, uri)</dt>
+<dd><tt>Return&nbsp;the&nbsp;value&nbsp;of&nbsp;<a href="#Serializer">Serializer</a>&nbsp;feature&nbsp;URI&nbsp;uri</tt></dd>
+</dl>
+<dl>
+<dt><a name="RDFXMLSerializer-serialize_model_to_file" id="RDFXMLSerializer-serialize_model_to_file"><strong>serialize_model_to_file</strong></a>(self, name, model, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;to&nbsp;filename&nbsp;name&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;using&nbsp;the<br />
+optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="RDFXMLSerializer-serialize_model_to_string" id="RDFXMLSerializer-serialize_model_to_string"><strong>serialize_model_to_string</strong></a>(self, model, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;to&nbsp;a&nbsp;string&nbsp;using&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="RDFXMLSerializer-serialize_stream_to_string" id="RDFXMLSerializer-serialize_stream_to_string"><strong>serialize_stream_to_string</strong></a>(self, stream, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;a&nbsp;stream&nbsp;to&nbsp;a&nbsp;string&nbsp;using&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="RDFXMLSerializer-set_feature" id="RDFXMLSerializer-set_feature"><strong>set_feature</strong></a>(self, uri, value)</dt>
+<dd><tt>Set&nbsp;the&nbsp;value&nbsp;of&nbsp;<a href="#Serializer">Serializer</a>&nbsp;feature&nbsp;URI&nbsp;uri.</tt></dd>
+</dl>
+<dl>
+<dt><a name="RDFXMLSerializer-set_namespace" id="RDFXMLSerializer-set_namespace"><strong>set_namespace</strong></a>(self, prefix, uri)</dt>
+<dd><tt>Set&nbsp;a&nbsp;namespace&nbsp;prefix&nbsp;and&nbsp;URI&nbsp;for&nbsp;the&nbsp;<a href="#Serializer">Serializer</a>&nbsp;to&nbsp;use.</tt></dd>
+</dl>
+<hr />
+Data descriptors inherited from <a href="#Serializer">Serializer</a>:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="RDQLQuery" id="RDQLQuery">class <strong>RDQLQuery</strong></a>(<a href="#Query">Query</a>)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;RDQL&nbsp;<a href="#Query">Query</a>&nbsp;class<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt>Method resolution order:</dt>
+<dd><a href="#RDQLQuery">RDQLQuery</a></dd>
+<dd><a href="#Query">Query</a></dd>
+<dd>__builtin__.object</dd>
+</dl>
+<hr />
+Methods defined here:<br />
+<dl>
+<dt><a name="RDQLQuery-__init__" id="RDQLQuery-__init__"><strong>__init__</strong></a>(self, querystring, base_uri<font color="#909090">=None</font>)</dt>
+</dl>
+<hr />
+Methods inherited from <a href="#Query">Query</a>:<br />
+<dl>
+<dt><a name="RDQLQuery-__del__" id="RDQLQuery-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="RDQLQuery-execute" id="RDQLQuery-execute"><strong>execute</strong></a>(self, model)</dt>
+</dl>
+<dl>
+<dt><a name="RDQLQuery-get_limit" id="RDQLQuery-get_limit"><strong>get_limit</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="RDQLQuery-get_offset" id="RDQLQuery-get_offset"><strong>get_offset</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="RDQLQuery-set_limit" id="RDQLQuery-set_limit"><strong>set_limit</strong></a>(self, limit)</dt>
+</dl>
+<dl>
+<dt><a name="RDQLQuery-set_offset" id="RDQLQuery-set_offset"><strong>set_offset</strong></a>(self, offset)</dt>
+</dl>
+<hr />
+Data descriptors inherited from <a href="#Query">Query</a>:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="SPARQLQuery" id="SPARQLQuery">class <strong>SPARQLQuery</strong></a>(<a href="#Query">Query</a>)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;SPARQL&nbsp;<a href="#Query">Query</a>&nbsp;class<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt>Method resolution order:</dt>
+<dd><a href="#SPARQLQuery">SPARQLQuery</a></dd>
+<dd><a href="#Query">Query</a></dd>
+<dd>__builtin__.object</dd>
+</dl>
+<hr />
+Methods defined here:<br />
+<dl>
+<dt><a name="SPARQLQuery-__init__" id="SPARQLQuery-__init__"><strong>__init__</strong></a>(self, querystring, base_uri<font color="#909090">=None</font>)</dt>
+</dl>
+<hr />
+Methods inherited from <a href="#Query">Query</a>:<br />
+<dl>
+<dt><a name="SPARQLQuery-__del__" id="SPARQLQuery-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="SPARQLQuery-execute" id="SPARQLQuery-execute"><strong>execute</strong></a>(self, model)</dt>
+</dl>
+<dl>
+<dt><a name="SPARQLQuery-get_limit" id="SPARQLQuery-get_limit"><strong>get_limit</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="SPARQLQuery-get_offset" id="SPARQLQuery-get_offset"><strong>get_offset</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="SPARQLQuery-set_limit" id="SPARQLQuery-set_limit"><strong>set_limit</strong></a>(self, limit)</dt>
+</dl>
+<dl>
+<dt><a name="SPARQLQuery-set_offset" id="SPARQLQuery-set_offset"><strong>set_offset</strong></a>(self, offset)</dt>
+</dl>
+<hr />
+Data descriptors inherited from <a href="#Query">Query</a>:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Serializer" id="Serializer">class <strong>Serializer</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;Syntax&nbsp;<a href="#Serializer">Serializer</a>&nbsp;Class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+ser1=RDF.<a href="#Serializer">Serializer</a>()<br />
+&nbsp;<br />
+ser2=RDF.<a href="#Serializer">Serializer</a>(mime_type="application/rdf+xml")<br />
+&nbsp;<br />
+ser3=RDF.<a href="#Serializer">Serializer</a>(name="ntriples")<br />
+&nbsp;<br />
+A&nbsp;class&nbsp;for&nbsp;turning&nbsp;a&nbsp;<a href="#Model">Model</a>&nbsp;into&nbsp;a&nbsp;syntax&nbsp;serialization&nbsp;(at&nbsp;present<br />
+only&nbsp;to&nbsp;local&nbsp;files).<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Serializer-__del__" id="Serializer-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Serializer-__init__" id="Serializer-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, mime_type<font color="#909090">=None</font>, uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Create&nbsp;an&nbsp;RDF&nbsp;<a href="#Serializer">Serializer</a>&nbsp;(constructor).<br />
+&nbsp;<br />
+The&nbsp;arguments&nbsp;name,&nbsp;mime_type&nbsp;and&nbsp;uri&nbsp;are&nbsp;all&nbsp;optional&nbsp;and<br />
+when&nbsp;omitted&nbsp;the&nbsp;default&nbsp;serialization&nbsp;syntax&nbsp;is&nbsp;used.&nbsp;&nbsp;If<br />
+any&nbsp;arguments&nbsp;are&nbsp;given,&nbsp;they&nbsp;must&nbsp;all&nbsp;match&nbsp;for&nbsp;an&nbsp;appropriate<br />
+syntax&nbsp;to&nbsp;be&nbsp;chosen.&nbsp;&nbsp;For&nbsp;example,&nbsp;RDF/XML&nbsp;has&nbsp;a&nbsp;MIME&nbsp;type&nbsp;of<br />
+'application/rdf+xml'&nbsp;so&nbsp;this&nbsp;can&nbsp;be&nbsp;given&nbsp;with&nbsp;the&nbsp;mime_type<br />
+argument,&nbsp;however&nbsp;the&nbsp;N-Triples&nbsp;has&nbsp;none,&nbsp;so&nbsp;the&nbsp;'ntriples'&nbsp;name<br />
+must&nbsp;be&nbsp;used.&nbsp;&nbsp;Most&nbsp;syntaxes&nbsp;have&nbsp;URIs.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Serializer-get_feature" id="Serializer-get_feature"><strong>get_feature</strong></a>(self, uri)</dt>
+<dd><tt>Return&nbsp;the&nbsp;value&nbsp;of&nbsp;<a href="#Serializer">Serializer</a>&nbsp;feature&nbsp;URI&nbsp;uri</tt></dd>
+</dl>
+<dl>
+<dt><a name="Serializer-serialize_model_to_file" id="Serializer-serialize_model_to_file"><strong>serialize_model_to_file</strong></a>(self, name, model, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;to&nbsp;filename&nbsp;name&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;using&nbsp;the<br />
+optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Serializer-serialize_model_to_string" id="Serializer-serialize_model_to_string"><strong>serialize_model_to_string</strong></a>(self, model, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;to&nbsp;a&nbsp;string&nbsp;using&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Serializer-serialize_stream_to_string" id="Serializer-serialize_stream_to_string"><strong>serialize_stream_to_string</strong></a>(self, stream, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Serialize&nbsp;a&nbsp;stream&nbsp;to&nbsp;a&nbsp;string&nbsp;using&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Serializer-set_feature" id="Serializer-set_feature"><strong>set_feature</strong></a>(self, uri, value)</dt>
+<dd><tt>Set&nbsp;the&nbsp;value&nbsp;of&nbsp;<a href="#Serializer">Serializer</a>&nbsp;feature&nbsp;URI&nbsp;uri.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Serializer-set_namespace" id="Serializer-set_namespace"><strong>set_namespace</strong></a>(self, prefix, uri)</dt>
+<dd><tt>Set&nbsp;a&nbsp;namespace&nbsp;prefix&nbsp;and&nbsp;URI&nbsp;for&nbsp;the&nbsp;<a href="#Serializer">Serializer</a>&nbsp;to&nbsp;use.</tt></dd>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Statement" id="Statement">class <strong>Statement</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;<a href="#Statement">Statement</a>&nbsp;(triple)&nbsp;class.&nbsp;&nbsp;The&nbsp;main&nbsp;means&nbsp;of&nbsp;manipulating<br />
+statements&nbsp;is&nbsp;by&nbsp;the&nbsp;subject,&nbsp;predicate&nbsp;and&nbsp;object&nbsp;properties.<br />
+&nbsp;<br />
+&nbsp;&nbsp;import&nbsp;RDF<br />
+&nbsp;&nbsp;statement1&nbsp;=&nbsp;RDF.<a href="#Statement">Statement</a>(node1,&nbsp;node2,&nbsp;node3)<br />
+&nbsp;&nbsp;statement2&nbsp;=&nbsp;RDF.<a href="#Statement">Statement</a>(statement&nbsp;=&nbsp;statement1)<br />
+&nbsp;<br />
+&nbsp;&nbsp;if&nbsp;statement2.subject.is_resource():<br />
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"statement2&nbsp;subject&nbsp;is&nbsp;URI&nbsp;",statement2.subject.uri<br />
+&nbsp;<br />
+&nbsp;&nbsp;statement.object&nbsp;=&nbsp;<a href="#Node">Node</a>("hello,&nbsp;world")<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Statement-__del__" id="Statement-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Statement-__eq__" id="Statement-__eq__"><strong>__eq__</strong></a>(self, other)</dt>
+<dd><tt>Equality&nbsp;of&nbsp;an&nbsp;RDF&nbsp;<a href="#Statement">Statement</a>&nbsp;compared&nbsp;to&nbsp;another&nbsp;RDF&nbsp;<a href="#Statement">Statement</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Statement-__init__" id="Statement-__init__"><strong>__init__</strong></a>(self, subject<font color="#909090">=None</font>, predicate<font color="#909090">=None</font>, object<font color="#909090">=None</font>, **args)</dt>
+<dd><tt>Constructor&nbsp;for&nbsp;<a href="#Statement">Statement</a>.<br />
+&nbsp;<br />
+Create&nbsp;a&nbsp;<a href="#Statement">Statement</a>&nbsp;from&nbsp;three&nbsp;<a href="#Node">Node</a>&nbsp;objects.<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;s1&nbsp;=&nbsp;RDF.<a href="#Statement">Statement</a>(subjnode,&nbsp;prednode,&nbsp;objnode)<br />
+&nbsp;<br />
+A&nbsp;<a href="#Node">Node</a>&nbsp;argument&nbsp;can&nbsp;be&nbsp;replaced&nbsp;with&nbsp;<a href="#Uri">Uri</a>&nbsp;or&nbsp;string&nbsp;to<br />
+shortcut&nbsp;<a href="#Node">Node</a>&nbsp;creation.<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;s2&nbsp;=&nbsp;RDF.<a href="#Statement">Statement</a>(<a href="#Uri">Uri</a>(""),&nbsp;<a href="#Uri">Uri</a>(""),&nbsp;"baz")<br />
+&nbsp;<br />
+Copy&nbsp;an&nbsp;existing&nbsp;<a href="#Statement">Statement</a>&nbsp;s1.<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;s3&nbsp;=&nbsp;RDF.<a href="#Statement">Statement</a>(statement=s1)</tt></dd>
+</dl>
+<dl>
+<dt><a name="Statement-__ne__" id="Statement-__ne__"><strong>__ne__</strong></a>(self, other)</dt>
+<dd><tt>Inequality&nbsp;of&nbsp;an&nbsp;RDF&nbsp;<a href="#Statement">Statement</a>&nbsp;compared&nbsp;to&nbsp;another&nbsp;RDF&nbsp;<a href="#Statement">Statement</a>.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Statement-__str__" id="Statement-__str__"><strong>__str__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Statement-__unicode__" id="Statement-__unicode__"><strong>__unicode__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Statement-matches" id="Statement-matches"><strong>matches</strong></a>(self, other)</dt>
+<dd><tt>Comparison&nbsp;of&nbsp;this&nbsp;potentially&nbsp;incomplete&nbsp;RDF&nbsp;<a href="#Statement">Statement</a>&nbsp;compared&nbsp;to&nbsp;another&nbsp;RDF&nbsp;<a href="#Statement">Statement</a>.</tt></dd>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>object</strong></dt>
+<dd><tt>The&nbsp;object&nbsp;node&nbsp;of&nbsp;the&nbsp;statement.</tt></dd>
+</dl>
+<dl>
+<dt><strong>predicate</strong></dt>
+<dd><tt>The&nbsp;predicate&nbsp;node&nbsp;of&nbsp;the&nbsp;statement.</tt></dd>
+</dl>
+<dl>
+<dt><strong>subject</strong></dt>
+<dd><tt>The&nbsp;subject&nbsp;node&nbsp;of&nbsp;the&nbsp;statement.</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Storage" id="Storage">class <strong>Storage</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;<a href="#Statement">Statement</a>&nbsp;<a href="#Storage">Storage</a>&nbsp;class<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;import&nbsp;RDF<br />
+&nbsp;&nbsp;&nbsp;storage=RDF.<a href="#Storage">Storage</a>(storage_name="memory")<br />
+&nbsp;<br />
+The&nbsp;Redland&nbsp;abstraction&nbsp;for&nbsp;storing&nbsp;RDF&nbsp;graphs&nbsp;as&nbsp;Statements.<br />
+&nbsp;<br />
+There&nbsp;are&nbsp;no&nbsp;user&nbsp;methods&nbsp;(can&nbsp;only&nbsp;be&nbsp;constructed).<br />
+&nbsp;<br />
+You&nbsp;should&nbsp;normally&nbsp;use&nbsp;a&nbsp;specialized&nbsp;class&nbsp;such&nbsp;as&nbsp;<a href="#MemoryStorage">MemoryStorage</a>&nbsp;or<br />
+<a href="#HashStorage">HashStorage</a>&nbsp;in&nbsp;preference&nbsp;to&nbsp;this&nbsp;class.<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Storage-__del__" id="Storage-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Storage-__init__" id="Storage-__init__"><strong>__init__</strong></a>(self, **args)</dt>
+<dd><tt>Create&nbsp;an&nbsp;RDF&nbsp;<a href="#Storage">Storage</a>&nbsp;(constructor).<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;a&nbsp;new&nbsp;RDF&nbsp;<a href="#Storage">Storage</a>&nbsp;using&nbsp;any&nbsp;of&nbsp;these&nbsp;forms<br />
+&nbsp;<br />
+&nbsp;&nbsp;s1=RDF.<a href="#Storage">Storage</a>(storage_name="name",options_string="")<br />
+&nbsp;<br />
+Create&nbsp;a&nbsp;<a href="#Storage">Storage</a>&nbsp;of&nbsp;the&nbsp;given&nbsp;type.&nbsp;&nbsp;Currently&nbsp;the&nbsp;built&nbsp;in&nbsp;storage<br />
+names&nbsp;that&nbsp;are&nbsp;always&nbsp;present&nbsp;are&nbsp;'memory',&nbsp;'hashes',&nbsp;'file'&nbsp;and<br />
+'uri'.&nbsp;&nbsp;'bdb'&nbsp;is&nbsp;available&nbsp;when&nbsp;Sleepycat&nbsp;/&nbsp;BerkeleyDB&nbsp;is&nbsp;compiled<br />
+in,&nbsp;'mysql'&nbsp;when&nbsp;MySQL&nbsp;is&nbsp;compiled&nbsp;in,&nbsp;and&nbsp;'sqlite'&nbsp;when&nbsp;SQLite&nbsp;is<br />
+compiled&nbsp;in.&nbsp;&nbsp;If&nbsp;storage_name&nbsp;is&nbsp;omitted,&nbsp;it&nbsp;defaults&nbsp;to&nbsp;'memory'.<br />
+&nbsp;<br />
+The&nbsp;argument&nbsp;'name'&nbsp;can&nbsp;be&nbsp;used&nbsp;when&nbsp;the&nbsp;storage&nbsp;needs&nbsp;a&nbsp;name<br />
+to&nbsp;operate,&nbsp;such&nbsp;as&nbsp;used&nbsp;for&nbsp;a&nbsp;filename&nbsp;or&nbsp;URI:<br />
+&nbsp;<br />
+&nbsp;&nbsp;s1=RDF.<a href="#Storage">Storage</a>(storage_name="file",&nbsp;name='/filename',options_string="")<br />
+&nbsp;<br />
+&nbsp;&nbsp;s2=RDF.<a href="#Storage">Storage</a>(storage_name="uri",&nbsp;name='<a href="http://rdf.example.org/',options_string">http://rdf.example.org/',options_string</a>="")<br />
+&nbsp;<br />
+&nbsp;<br />
+The&nbsp;required&nbsp;argument&nbsp;options_string&nbsp;allows&nbsp;additional&nbsp;store-specific<br />
+options&nbsp;to&nbsp;be&nbsp;given,&nbsp;some&nbsp;of&nbsp;which&nbsp;are&nbsp;required&nbsp;by&nbsp;certain&nbsp;stores.<br />
+This&nbsp;uses&nbsp;the&nbsp;following&nbsp;form:<br />
+&nbsp;<br />
+&nbsp;&nbsp;s3=RDF.<a href="#Storage">Storage</a>(storage_name="name",&nbsp;name='abc',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options_string="key1='value1',&nbsp;key2='value2',&nbsp;...")<br />
+&nbsp;<br />
+for&nbsp;multiple&nbsp;key/value&nbsp;option&nbsp;pairs,&nbsp;option&nbsp;values&nbsp;are&nbsp;always<br />
+surrounded&nbsp;by&nbsp;single&nbsp;quotes.<br />
+&nbsp;<br />
+The&nbsp;common&nbsp;options&nbsp;are:<br />
+&nbsp;&nbsp;new&nbsp;-&nbsp;optional&nbsp;and&nbsp;takes&nbsp;a&nbsp;boolean&nbsp;value&nbsp;(default&nbsp;false)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;true,&nbsp;it&nbsp;deletes&nbsp;any&nbsp;existing&nbsp;store&nbsp;and&nbsp;creates&nbsp;a&nbsp;new&nbsp;one<br />
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise&nbsp;if&nbsp;false&nbsp;(default)&nbsp;open&nbsp;an&nbsp;existing&nbsp;store.<br />
+&nbsp;<br />
+&nbsp;&nbsp;write&nbsp;-&nbsp;optional&nbsp;and&nbsp;takes&nbsp;a&nbsp;boolean&nbsp;value&nbsp;(default&nbsp;true)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;true&nbsp;(default)&nbsp;the&nbsp;<a href="#Storage">Storage</a>&nbsp;is&nbsp;opened&nbsp;read-write&nbsp;otherwise<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;false&nbsp;the&nbsp;storage&nbsp;is&nbsp;opened&nbsp;read-only&nbsp;and&nbsp;for&nbsp;file-based<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Storages&nbsp;or&nbsp;those&nbsp;with&nbsp;locks,&nbsp;may&nbsp;be&nbsp;opened&nbsp;with&nbsp;shared-readers.<br />
+&nbsp;<br />
+Some&nbsp;storage&nbsp;types&nbsp;have&nbsp;additional&nbsp;options:<br />
+&nbsp;<br />
+storage_name&nbsp;'hashes'&nbsp;has&nbsp;options:<br />
+&nbsp;&nbsp;hash-type&nbsp;-&nbsp;&nbsp;the&nbsp;name&nbsp;of&nbsp;any&nbsp;hash&nbsp;type&nbsp;supported.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;'memory'&nbsp;(default),&nbsp;'file'&nbsp;hash&nbsp;types&nbsp;are&nbsp;always&nbsp;present.&nbsp;'bdb'&nbsp;is<br />
+&nbsp;&nbsp;&nbsp;&nbsp;available&nbsp;when&nbsp;BerkeleyDB&nbsp;is&nbsp;compiled&nbsp;in,<br />
+&nbsp;&nbsp;dir&nbsp;-&nbsp;the&nbsp;directory&nbsp;name&nbsp;to&nbsp;create&nbsp;the&nbsp;files&nbsp;in&nbsp;(default&nbsp;'.')<br />
+&nbsp;&nbsp;mode&nbsp;-&nbsp;the&nbsp;file&nbsp;creation&nbsp;mode&nbsp;(default&nbsp;0644&nbsp;octal)<br />
+&nbsp;<br />
+storage_name&nbsp;'mysql'&nbsp;has&nbsp;options:<br />
+&nbsp;&nbsp;host&nbsp;-&nbsp;required&nbsp;MySQL&nbsp;database&nbsp;hostname<br />
+&nbsp;&nbsp;port&nbsp;-&nbsp;optional&nbsp;MySQL&nbsp;database&nbsp;port&nbsp;(defaults&nbsp;to&nbsp;3306)<br />
+&nbsp;&nbsp;database&nbsp;-&nbsp;required&nbsp;MySQL&nbsp;database&nbsp;name<br />
+&nbsp;&nbsp;user&nbsp;-&nbsp;required&nbsp;MySQL&nbsp;database&nbsp;user<br />
+&nbsp;&nbsp;password&nbsp;-&nbsp;required&nbsp;MySQL&nbsp;database&nbsp;password<br />
+&nbsp;<br />
+stoage&nbsp;name&nbsp;'sqlite'&nbsp;has&nbsp;options:<br />
+&nbsp;&nbsp;synchronous&nbsp;-&nbsp;optional&nbsp;value&nbsp;off,&nbsp;normal&nbsp;or&nbsp;full<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+The&nbsp;other&nbsp;form&nbsp;is:<br />
+&nbsp;&nbsp;s4=RDF.<a href="#Storage">Storage</a>(storage=s1)<br />
+Copy&nbsp;an&nbsp;existing&nbsp;<a href="#Storage">Storage</a>&nbsp;s1.<br />
+&nbsp;<br />
+&nbsp;<br />
+Note:&nbsp;there&nbsp;are&nbsp;convience&nbsp;classes&nbsp;to&nbsp;create&nbsp;a&nbsp;memory&nbsp;storage<br />
+&nbsp;&nbsp;s5=RDF.<a href="#MemoryStorage">MemoryStorage</a>()<br />
+&nbsp;<br />
+and&nbsp;Hash&nbsp;storage:<br />
+&nbsp;&nbsp;#&nbsp;memory&nbsp;hash<br />
+&nbsp;&nbsp;s6=RDF.<a href="#HashStorage">HashStorage</a>('abc')<br />
+&nbsp;<br />
+&nbsp;&nbsp;#&nbsp;specified&nbsp;bdb&nbsp;hash&nbsp;stored&nbsp;in&nbsp;files&nbsp;named&nbsp;'def'*<br />
+&nbsp;&nbsp;s7=RDF.<a href="#HashStorage">HashStorage</a>('def',&nbsp;options="hash-type='bdb'")</tt></dd>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Stream" id="Stream">class <strong>Stream</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;<a href="#Statement">Statement</a>&nbsp;<a href="#Stream">Stream</a>&nbsp;class<br />
+&nbsp;<br />
+A&nbsp;class&nbsp;encapsulating&nbsp;a&nbsp;sequence&nbsp;of&nbsp;Statements,&nbsp;such&nbsp;as<br />
+those&nbsp;returned&nbsp;from&nbsp;a&nbsp;<a href="#Model">Model</a>&nbsp;query.&nbsp;&nbsp;Can&nbsp;be&nbsp;used&nbsp;as&nbsp;a&nbsp;Python<br />
+sequence.<br />
+&nbsp;<br />
+stream&nbsp;=&nbsp;model.find_statements(query_statement)<br />
+for&nbsp;statement&nbsp;in&nbsp;stream:<br />
+&nbsp;&nbsp;&nbsp;#&nbsp;do&nbsp;whatever&nbsp;with&nbsp;'statement'<br />
+&nbsp;&nbsp;&nbsp;#&nbsp;note&nbsp;it&nbsp;is&nbsp;shared&nbsp;and&nbsp;will&nbsp;go&nbsp;out&nbsp;of&nbsp;scope,&nbsp;so&nbsp;you&nbsp;must<br />
+&nbsp;&nbsp;&nbsp;#&nbsp;copy&nbsp;it&nbsp;if&nbsp;you&nbsp;want&nbsp;it&nbsp;to&nbsp;stay&nbsp;around<br />
+&nbsp;<br />
+You&nbsp;should&nbsp;not&nbsp;normally&nbsp;find&nbsp;yourself&nbsp;needing&nbsp;to&nbsp;use&nbsp;this<br />
+class&nbsp;explicitly.<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Stream-__del__" id="Stream-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Stream-__init__" id="Stream-__init__"><strong>__init__</strong></a>(self, object, creator)</dt>
+<dd><tt>Create&nbsp;an&nbsp;RDF&nbsp;<a href="#Stream">Stream</a>&nbsp;(constructor).</tt></dd>
+</dl>
+<dl>
+<dt><a name="Stream-__iter__" id="Stream-__iter__"><strong>__iter__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Stream-__next__" id="Stream-__next__"><strong>__next__</strong></a>(self)</dt>
+<dd><tt>Move&nbsp;to&nbsp;the&nbsp;next&nbsp;<a href="#Statement">Statement</a>&nbsp;on&nbsp;the&nbsp;<a href="#Stream">Stream</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Stream-context" id="Stream-context"><strong>context</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;the&nbsp;context&nbsp;<a href="#Node">Node</a>&nbsp;of&nbsp;the&nbsp;current&nbsp;object&nbsp;on&nbsp;the&nbsp;<a href="#Stream">Stream</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Stream-context_iter" id="Stream-context_iter"><strong>context_iter</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;an&nbsp;iterator&nbsp;over&nbsp;this&nbsp;stream&nbsp;that<br />
+returns&nbsp;(stream,&nbsp;context)&nbsp;tuples&nbsp;each&nbsp;time&nbsp;it&nbsp;is&nbsp;iterated.<br />
+DEPRECATED.&nbsp;&nbsp;Instead&nbsp;use&nbsp;the&nbsp;context-aware&nbsp;method&nbsp;appropriate,<br />
+e.g.&nbsp;&nbsp;<a href="#Model">Model</a>.find_statements_context()&nbsp;or&nbsp;<a href="#Model">Model</a>.as_stream_context()</tt></dd>
+</dl>
+<dl>
+<dt><a name="Stream-current" id="Stream-current"><strong>current</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;the&nbsp;current&nbsp;<a href="#Statement">Statement</a>&nbsp;on&nbsp;the&nbsp;<a href="#Stream">Stream</a></tt></dd>
+</dl>
+<dl>
+<dt><a name="Stream-end" id="Stream-end"><strong>end</strong></a>(self)</dt>
+<dd><tt>Return&nbsp;true&nbsp;if&nbsp;the&nbsp;stream&nbsp;is&nbsp;exhausted</tt></dd>
+</dl>
+<dl>
+<dt><a name="Stream-next" id="Stream-next"><strong>next</strong></a> = <a href="#Stream-__next__">__next__</a>(self)</dt>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="TurtleParser" id="TurtleParser">class <strong>TurtleParser</strong></a>(<a href="#Parser">Parser</a>)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;Turtle&nbsp;<a href="#Parser">Parser</a>&nbsp;class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+parser=RDF.<a href="#TurtleParser">TurtleParser</a>()<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt>Method resolution order:</dt>
+<dd><a href="#TurtleParser">TurtleParser</a></dd>
+<dd><a href="#Parser">Parser</a></dd>
+<dd>__builtin__.object</dd>
+</dl>
+<hr />
+Methods defined here:<br />
+<dl>
+<dt><a name="TurtleParser-__init__" id="TurtleParser-__init__"><strong>__init__</strong></a>(self)</dt>
+</dl>
+<hr />
+Methods inherited from <a href="#Parser">Parser</a>:<br />
+<dl>
+<dt><a name="TurtleParser-__del__" id="TurtleParser-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="TurtleParser-get_feature" id="TurtleParser-get_feature"><strong>get_feature</strong></a>(self, uri)</dt>
+<dd><tt>Return&nbsp;the&nbsp;<a href="#Node">Node</a>&nbsp;value&nbsp;of&nbsp;<a href="#Parser">Parser</a>&nbsp;feature&nbsp;URI&nbsp;uri</tt></dd>
+</dl>
+<dl>
+<dt><a name="TurtleParser-namespaces_seen" id="TurtleParser-namespaces_seen"><strong>namespaces_seen</strong></a>(self)</dt>
+<dd><tt>Get&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;prefix/URI&nbsp;pairs&nbsp;for&nbsp;namespaces&nbsp;seen&nbsp;during&nbsp;parsing.</tt></dd>
+</dl>
+<dl>
+<dt><a name="TurtleParser-parse_as_stream" id="TurtleParser-parse_as_stream"><strong>parse_as_stream</strong></a>(self, uri, base_uri<font color="#909090">=None</font>)</dt>
+<dd><tt>Return&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;from&nbsp;parsing&nbsp;the&nbsp;content&nbsp;at<br />
+a&nbsp;URI&nbsp;for&nbsp;the&nbsp;optional&nbsp;base&nbsp;URI&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;parsing&nbsp;fails.<br />
+&nbsp;<br />
+(This&nbsp;depends&nbsp;on&nbsp;what&nbsp;URI&nbsp;support&nbsp;raptor&nbsp;provides&nbsp;to&nbsp;redland)<br />
+&nbsp;<br />
+&nbsp;&nbsp;for&nbsp;statement&nbsp;in&nbsp;parser.<a href="#TurtleParser-parse_as_stream">parse_as_stream</a>(""):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;statement</tt></dd>
+</dl>
+<dl>
+<dt><a name="TurtleParser-parse_into_model" id="TurtleParser-parse_into_model"><strong>parse_into_model</strong></a>(self, model, uri, base_uri<font color="#909090">=None</font>, handler<font color="#909090">=None</font>)</dt>
+<dd><tt>Parse&nbsp;into&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;from&nbsp;the&nbsp;content&nbsp;at&nbsp;the&nbsp;URI,&nbsp;for<br />
+the&nbsp;optional&nbsp;base&nbsp;URI.&nbsp;&nbsp;Returns&nbsp;a&nbsp;boolean&nbsp;success&nbsp;or&nbsp;failure.<br />
+&nbsp;<br />
+If&nbsp;handler&nbsp;is&nbsp;given,&nbsp;an&nbsp;error&nbsp;handler&nbsp;with&nbsp;the&nbsp;signature<br />
+&nbsp;&nbsp;def&nbsp;handler(code,&nbsp;level,&nbsp;facility,&nbsp;message,&nbsp;line,&nbsp;column,&nbsp;byte,&nbsp;file,&nbsp;uri)<br />
+is&nbsp;called.<br />
+&nbsp;<br />
+parser.<a href="#TurtleParser-parse_into_model">parse_into_model</a>(model,&nbsp;"file:./foo.rdf",<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://example.com/foo.rdf")</tt></dd>
+</dl>
+<dl>
+<dt><a name="TurtleParser-parse_string_as_stream" id="TurtleParser-parse_string_as_stream"><strong>parse_string_as_stream</strong></a>(self, string, base_uri)</dt>
+<dd><tt>Return&nbsp;a&nbsp;<a href="#Stream">Stream</a>&nbsp;of&nbsp;Statements&nbsp;from&nbsp;parsing&nbsp;the&nbsp;content&nbsp;in<br />
+string&nbsp;with&nbsp;the&nbsp;required&nbsp;base&nbsp;URI&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;parsing&nbsp;fails.<br />
+&nbsp;<br />
+&nbsp;&nbsp;for&nbsp;statement&nbsp;in&nbsp;parser.<a href="#TurtleParser-parse_string_as_stream">parse_string_as_stream</a>(rdfstring,&nbsp;base_uri):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;statement</tt></dd>
+</dl>
+<dl>
+<dt><a name="TurtleParser-parse_string_into_model" id="TurtleParser-parse_string_into_model"><strong>parse_string_into_model</strong></a>(self, model, string, base_uri, handler<font color="#909090">=None</font>)</dt>
+<dd><tt>Parse&nbsp;into&nbsp;the&nbsp;<a href="#Model">Model</a>&nbsp;model&nbsp;from&nbsp;the&nbsp;content&nbsp;string<br />
+&nbsp;with&nbsp;the&nbsp;required&nbsp;base&nbsp;URI.&nbsp;&nbsp;Returns&nbsp;a&nbsp;boolean&nbsp;success&nbsp;or&nbsp;failure.<br />
+&nbsp;<br />
+If&nbsp;handler&nbsp;is&nbsp;given,&nbsp;an&nbsp;error&nbsp;handler&nbsp;with&nbsp;the&nbsp;signature<br />
+&nbsp;&nbsp;def&nbsp;handler(code,&nbsp;level,&nbsp;facility,&nbsp;message,&nbsp;line,&nbsp;column,&nbsp;byte,&nbsp;file,&nbsp;uri)<br />
+is&nbsp;called.</tt></dd>
+</dl>
+<dl>
+<dt><a name="TurtleParser-set_feature" id="TurtleParser-set_feature"><strong>set_feature</strong></a>(self, uri, value)</dt>
+<dd><tt>Set&nbsp;the&nbsp;<a href="#Node">Node</a>&nbsp;value&nbsp;of&nbsp;<a href="#Parser">Parser</a>&nbsp;feature&nbsp;URI&nbsp;uri.</tt></dd>
+</dl>
+<dl>
+<dt><a name="TurtleParser-set_uri_filter" id="TurtleParser-set_uri_filter"><strong>set_uri_filter</strong></a>(self, filter)</dt>
+<dd><tt>Set&nbsp;a&nbsp;function&nbsp;for&nbsp;rejecting&nbsp;retrieval&nbsp;of&nbsp;URIs&nbsp;seen&nbsp;during&nbsp;parsing.<br />
+&nbsp;<br />
+Return&nbsp;False&nbsp;or&nbsp;0&nbsp;to&nbsp;not&nbsp;reject&nbsp;the&nbsp;URI<br />
+&nbsp;<br />
+def&nbsp;reject(uri):<br />
+&nbsp;&nbsp;if&nbsp;"bad"&nbsp;==&nbsp;uri:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True<br />
+&nbsp;&nbsp;return&nbsp;False<br />
+&nbsp;<br />
+parser.<a href="#TurtleParser-set_uri_filter">set_uri_filter</a>(reject)</tt></dd>
+</dl>
+<hr />
+Data descriptors inherited from <a href="#Parser">Parser</a>:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#FFC8D8">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#000000" face="helvetica, arial"><a name="Uri" id="Uri">class <strong>Uri</strong></a>(__builtin__.object)</font></td>
+</tr>
+<tr bgcolor="#FFC8D8">
+<td rowspan="2"><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan="2"><tt>Redland&nbsp;URI&nbsp;Class<br />
+&nbsp;<br />
+import&nbsp;RDF<br />
+uri1&nbsp;=&nbsp;RDF.<a href="#Uri">Uri</a>("http://example.com/")<br />
+uri2&nbsp;=&nbsp;RDF.<a href="#Uri">Uri</a>(uri1)<br />
+&nbsp;</tt></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td width="100%">Methods defined here:<br />
+<dl>
+<dt><a name="Uri-__del__" id="Uri-__del__"><strong>__del__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Uri-__eq__" id="Uri-__eq__"><strong>__eq__</strong></a>(self, other)</dt>
+<dd><tt>Equality&nbsp;of&nbsp;RDF&nbsp;URI&nbsp;to&nbsp;another&nbsp;RDF&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Uri-__hash__" id="Uri-__hash__"><strong>__hash__</strong></a>(self)</dt>
+</dl>
+<dl>
+<dt><a name="Uri-__init__" id="Uri-__init__"><strong>__init__</strong></a>(self, arg<font color="#909090">=None</font>, **args)</dt>
+<dd><tt>Create&nbsp;an&nbsp;RDF&nbsp;URI&nbsp;(constructor).<br />
+&nbsp;<br />
+Creates&nbsp;a&nbsp;new&nbsp;RDF&nbsp;URI&nbsp;from&nbsp;either&nbsp;of&nbsp;the&nbsp;following&nbsp;forms:<br />
+&nbsp;<br />
+&nbsp;&nbsp;uri1&nbsp;=&nbsp;RDF.<a href="#Uri">Uri</a>("http://example.com/")<br />
+&nbsp;&nbsp;<br />
+Create&nbsp;a&nbsp;URI&nbsp;from&nbsp;the&nbsp;given&nbsp;string.<br />
+&nbsp;<br />
+&nbsp;&nbsp;uri2&nbsp;=&nbsp;RDF.<a href="#Uri">Uri</a>(uri1)<br />
+&nbsp;<br />
+Copy&nbsp;an&nbsp;existing&nbsp;URI&nbsp;uri1.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Uri-__ne__" id="Uri-__ne__"><strong>__ne__</strong></a>(self, other)</dt>
+<dd><tt>Inequality&nbsp;of&nbsp;RDF&nbsp;URI&nbsp;to&nbsp;another&nbsp;RDF&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Uri-__str__" id="Uri-__str__"><strong>__str__</strong></a>(self)</dt>
+<dd><tt>Get&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;an&nbsp;RDF&nbsp;URI.</tt></dd>
+</dl>
+<dl>
+<dt><a name="Uri-__unicode__" id="Uri-__unicode__"><strong>__unicode__</strong></a>(self)</dt>
+<dd><tt>Get&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;representation&nbsp;of&nbsp;an&nbsp;RDF&nbsp;URI.</tt></dd>
+</dl>
+<hr />
+Data descriptors defined here:<br />
+<dl>
+<dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl>
+<dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#EEAA77">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#FFFFFF" face="helvetica, arial"><big><strong>Functions</strong></big></font></td>
+</tr>
+<tr>
+<td bgcolor="#EEAA77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td>&nbsp;</td>
+<td width="100%">
+<dl>
+<dt><a id="debug" name="debug"><strong>debug</strong></a>(value<font color="#909090">=None</font>)</dt>
+<dd><tt>Get/set&nbsp;Redland&nbsp;debugging&nbsp;output&nbsp;status.<br />
+&nbsp;<br />
+RDF.debug&nbsp;(1)&nbsp;&nbsp;&nbsp;#&nbsp;enable&nbsp;debugging<br />
+if&nbsp;RDF.debug():&nbsp;#&nbsp;test&nbsp;for&nbsp;debug&nbsp;mode</tt></dd>
+</dl>
+</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#55AA55">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#FFFFFF" face="helvetica, arial"><big><strong>Data</strong></big></font></td>
+</tr>
+<tr>
+<td bgcolor="#55AA55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['Node', 'Statement', 'Model', 'Iterator', 'Serializer', 'NTriplesSerializer', 'RDFXMLSerializer', 'Stream', 'Storage', 'MemoryStorage', 'HashStorage', 'Uri', 'Parser', 'TurtleParser', 'NTriplesParser', 'NS', 'Query', 'RDQLQuery', 'SPARQLQuery', 'debug']<br />
+<strong>__author__</strong> = 'Dave Beckett - http://www.dajobe.org/, Edd Dumbi...sefulinc.com&gt; and Matt Biddulph &lt;mb@picdiary.com&gt;'<br />
+<strong>__date__</strong> = '$Date$'<br />
+<strong>__version__</strong> = '1.1'</td>
+</tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+<tr bgcolor="#7799EE">
+<td colspan="3" valign="bottom">&nbsp;<br />
+<font color="#FFFFFF" face="helvetica, arial"><big><strong>Author</strong></big></font></td>
+</tr>
+<tr>
+<td bgcolor="#7799EE"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td>&nbsp;</td>
+<td width="100%">Dave&nbsp;Beckett&nbsp;-&nbsp;<a href="http://www.dajobe.org/">http://www.dajobe.org/</a>,&nbsp;Edd&nbsp;Dumbill&nbsp;&lt;edd@usefulinc.com&gt;&nbsp;and&nbsp;Matt&nbsp;Biddulph&nbsp;&lt;mb@picdiary.com&gt;</td>
+</tr>
+</table>
+<hr />
+
+<p>(C) Copyright 2000-2014 <a href="http://www.dajobe.org/">Dave Beckett</a>, Copyright 2000-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

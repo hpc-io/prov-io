@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Redland RDF Language Bindings - Ruby RDoc - Class: Redland::Node</title>
+<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+<script src="../js/jquery.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/quicksearch.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/darkfish.js" type="text/javascript" charset="utf-8">
+</script>
+</head>
+<body id="top" class="class">
+<div id="metadata">
+<div id="home-metadata">
+<div id="home-section" class="section">
+<h3 class="section-header"><a href="../index.html">Home</a> <a href="../index.html#classes">Classes</a> <a href="../index.html#methods">Methods</a></h3>
+</div>
+</div>
+<div id="file-metadata">
+<div id="file-list-section" class="section">
+<h3 class="section-header">In Files</h3>
+<div class="section-body">
+<ul>
+<li><a href="../rdf/redland/node_rb.html?TB_iframe=true&amp;height=550&amp;width=785" class="thickbox" title="rdf/redland/node.rb">rdf/redland/node.rb</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="class-metadata"><!-- Parent Class -->
+<div id="parent-class-section" class="section">
+<h3 class="section-header">Parent</h3>
+<p class="link">Object</p>
+</div>
+<!-- Method Quickref -->
+<div id="method-list-section" class="section">
+<h3 class="section-header">Methods</h3>
+<ul class="link-list">
+<li><a href="#method-c-anon">::anon</a></li>
+<li><a href="#method-c-create_finalizer">::create_finalizer</a></li>
+<li><a href="#method-c-ensure">::ensure</a></li>
+<li><a href="#method-c-new">::new</a></li>
+<li><a href="#method-i-3D-3D">#==</a></li>
+<li><a href="#method-i-blank-3F">#blank?</a></li>
+<li><a href="#method-i-blank_identifier">#blank_identifier</a></li>
+<li><a href="#method-i-bnode">#bnode</a></li>
+<li><a href="#method-i-literal">#literal</a></li>
+<li><a href="#method-i-literal-3F">#literal?</a></li>
+<li><a href="#method-i-node_from_hash">#node_from_hash</a></li>
+<li><a href="#method-i-node_from_literal">#node_from_literal</a></li>
+<li><a href="#method-i-node_type">#node_type</a></li>
+<li><a href="#method-i-resource-3F">#resource?</a></li>
+<li><a href="#method-i-to_s">#to_s</a></li>
+<li><a href="#method-i-uri">#uri</a></li>
+</ul>
+</div>
+</div>
+<div id="project-metadata">
+<div id="fileindex-section" class="section project-section">
+<h3 class="section-header">Files</h3>
+<ul>
+<li class="file"><a href="../Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/redland/Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/redland/schemas/Makefile.html">Makefile</a></li>
+</ul>
+</div>
+<div id="classindex-section" class="section project-section">
+<h3 class="section-header">Class/Module Index <span class="search-toggle"><img src="../images/find.png" height="16" width="16" alt="[+]" title="show/hide quicksearch" /></span></h3>
+<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+<fieldset><legend>Quicksearch</legend> <input type="text" name="quicksearch" value="" class="quicksearch-field" /></fieldset>
+</form>
+<ul class="link-list">
+<li><a href="../Redland.html">Redland</a></li>
+<li><a href="../Redland/BNode.html">Redland::BNode</a></li>
+<li><a href="../Redland/ContextParser.html">Redland::ContextParser</a></li>
+<li><a href="../Redland/FileStore.html">Redland::FileStore</a></li>
+<li><a href="../Redland/HashOpen.html">Redland::HashOpen</a></li>
+<li><a href="../Redland/HashStore.html">Redland::HashStore</a></li>
+<li><a href="../Redland/Literal.html">Redland::Literal</a></li>
+<li><a href="../Redland/MemoryStore.html">Redland::MemoryStore</a></li>
+<li><a href="../Redland/MergedModel.html">Redland::MergedModel</a></li>
+<li><a href="../Redland/Model.html">Redland::Model</a></li>
+<li><a href="../Redland/Namespace.html">Redland::Namespace</a></li>
+<li><a href="../Redland/Node.html">Redland::Node</a></li>
+<li><a href="../Redland/NodeIterator.html">Redland::NodeIterator</a></li>
+<li><a href="../Redland/NodeTypeError.html">Redland::NodeTypeError</a></li>
+<li><a href="../Redland/OWL.html">Redland::OWL</a></li>
+<li><a href="../Redland/Parser.html">Redland::Parser</a></li>
+<li><a href="../Redland/Query.html">Redland::Query</a></li>
+<li><a href="../Redland/QueryResults.html">Redland::QueryResults</a></li>
+<li><a href="../Redland/RDFS.html">Redland::RDFS</a></li>
+<li><a href="../Redland/RedlandError.html">Redland::RedlandError</a></li>
+<li><a href="../Redland/Resource.html">Redland::Resource</a></li>
+<li><a href="../Redland/Serializer.html">Redland::Serializer</a></li>
+<li><a href="../Redland/Statement.html">Redland::Statement</a></li>
+<li><a href="../Redland/Stream.html">Redland::Stream</a></li>
+<li><a href="../Redland/TripleStore.html">Redland::TripleStore</a></li>
+<li><a href="../Redland/Uri.html">Redland::Uri</a></li>
+<li><a href="../Redland/Util.html">Redland::Util</a></li>
+<li><a href="../Redland/World.html">Redland::World</a></li>
+<li><a href="../DC.html">DC</a></li>
+<li><a href="../FOAF.html">FOAF</a></li>
+</ul>
+<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+</div>
+</div>
+</div>
+<div id="documentation">
+<h1 class="class">Redland::Node</h1>
+<div id="description" class="description"></div>
+<!-- description -->
+<div id="5Buntitled-5D" class="documentation-section"><!-- Attributes -->
+<div id="attribute-method-details" class="method-section section">
+<h3 class="section-header">Attributes</h3>
+<div id="node-attribute-method" class="method-detail"><a name="node" id="node"></a>
+<div class="method-heading attribute-method-heading"><span class="method-name">node</span><span class="attribute-access-type">[R]</span></div>
+<div class="method-description"></div>
+</div>
+</div>
+<!-- attribute-method-details -->
+<!-- Methods -->
+<div id="public-class-method-details" class="method-section section">
+<h3 class="section-header">Public Class Methods</h3>
+<div id="anon-method" class="method-detail"><a name="method-c-anon" id="method-c-anon"></a>
+<div class="method-heading"><span class="method-name">anon</span><span class="method-args">(id)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Creates a new blank node with the specified ID (?? confirm)</p>
+<div class="method-source-code" id="anon-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Node</span>.<span class="ruby-identifier">anon</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">n</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">''</span>)
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">bnode</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">n</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- anon-source --></div>
+</div>
+<!-- anon-method -->
+<div id="create_finalizer-method" class="method-detail"><a name="method-c-create_finalizer" id="method-c-create_finalizer"></a>
+<div class="method-heading"><span class="method-name">create_finalizer</span><span class="method-args">(node)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>You shouldn't use this. Used internally for cleanup.</p>
+<div class="method-source-code" id="create_finalizer-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Node</span>.<span class="ruby-identifier">create_finalizer</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span> <span class="ruby-constant">Redland</span><span class="ruby-operator">::</span><span class="ruby-identifier">librdf_free_node</span>(<span class="ruby-identifier">node</span>) }
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- create_finalizer-source --></div>
+</div>
+<!-- create_finalizer-method -->
+<div id="ensure-method" class="method-detail"><a name="method-c-ensure" id="method-c-ensure"></a>
+<div class="method-heading"><span class="method-name">ensure</span><span class="method-args">(node)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Ensures that the argument is a node by constructing one or returning nil (?? confirm)</p>
+<div class="method-source-code" id="ensure-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Node</span>.<span class="ruby-keyword">ensure</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">node</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Node</span>
+    <span class="ruby-identifier">my_node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">node</span>.<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">SWIG</span><span class="ruby-operator">::</span><span class="ruby-constant">TYPE_p_librdf_node_s</span>
+    <span class="ruby-identifier">my_node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Uri</span>
+    <span class="ruby-identifier">my_node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_uri</span>(<span class="ruby-identifier">$world</span>.<span class="ruby-identifier">world</span>,<span class="ruby-identifier">node</span>.<span class="ruby-identifier">uri</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">URI</span>
+    <span class="ruby-identifier">my_node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_uri_string</span>(<span class="ruby-identifier">$world</span>.<span class="ruby-identifier">world</span>,<span class="ruby-identifier">node</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">my_node</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">my_node</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- ensure-source --></div>
+</div>
+<!-- ensure-method -->
+<div id="new-method" class="method-detail"><a name="method-c-new" id="method-c-new"></a>
+<div class="method-heading"><span class="method-name">new</span><span class="method-args">(arg=nil)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Create an RDF <a href="Node.html">Node</a></p>
+<p><a href="Resource.html">Resource</a> or property node creation</p>
+<pre>
+n1 = Node.new(Uri.new("http://example.com/foo"))
+</pre>
+<p>String literal node creation</p>
+<pre>
+n2 = Node.new("foo")
+</pre>
+<div class="method-source-code" id="new-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">arg</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">temp</span> = <span class="ruby-identifier">arg</span>
+    <span class="ruby-identifier">arg</span> = {}
+    <span class="ruby-identifier">arg</span>[<span class="ruby-value">:literal</span>]= <span class="ruby-identifier">temp</span>
+    <span class="ruby-ivar">@node</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">node_from_hash</span>(<span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-ivar">@node</span> = <span class="ruby-identifier">node_from_hash</span>(<span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@node</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">ensure</span>(<span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">RedlandError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">"Node construction failed"</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@node</span>
+  <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">define_finalizer</span>(<span class="ruby-keyword">self</span>,<span class="ruby-constant">Node</span>.<span class="ruby-identifier">create_finalizer</span>(<span class="ruby-ivar">@node</span>))
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- new-source --></div>
+</div>
+<!-- new-method --></div>
+<!-- public-class-method-details -->
+<div id="public-instance-method-details" class="method-section section">
+<h3 class="section-header">Public Instance Methods</h3>
+<div id="3D-3D-method" class="method-detail"><a name="method-i-3D-3D" id="method-i-3D-3D"></a>
+<div class="method-heading"><span class="method-name">==</span><span class="method-args">(other)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Equivalency. Only works for comparing two Nodes</p>
+<div class="method-source-code" id="3D-3D-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_equals</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>,<span class="ruby-identifier">other</span>.<span class="ruby-identifier">node</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- 3D-3D-source --></div>
+</div>
+<!-- 3D-3D-method -->
+<div id="blank-3F-method" class="method-detail"><a name="method-i-blank-3F" id="method-i-blank-3F"></a>
+<div class="method-heading"><span class="method-name">blank?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Return true if node is a blank node</p>
+<div class="method-source-code" id="blank-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">blank?</span>
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_is_blank</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>) <span class="ruby-operator">!=</span><span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- blank-3F-source --></div>
+</div>
+<!-- blank-3F-method -->
+<div id="blank_identifier-method" class="method-detail"><a name="method-i-blank_identifier" id="method-i-blank_identifier"></a>
+<div class="method-heading"><span class="method-name">blank_identifier</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>returns the blank identifier for this node if the internal model is a blank node</p>
+<div class="method-source-code" id="blank_identifier-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">blank_identifier</span>()
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NodeTypeError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">"Can't get blank identifier for node type %s"</span> <span class="ruby-operator">%</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">node_type</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_get_blank_identifier</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- blank_identifier-source --></div>
+</div>
+<!-- blank_identifier-method -->
+<div id="bnode-method" class="method-detail"><a name="method-i-bnode" id="method-i-bnode"></a>
+<div class="method-heading"><span class="method-name">bnode</span><span class="method-args">(id=nil)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Sets this node's value to a blank node with the specified ID (?? confirm)</p>
+<div class="method-source-code" id="bnode-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bnode</span>(<span class="ruby-identifier">id</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_blank_identifier</span>(<span class="ruby-identifier">$world</span>.<span class="ruby-identifier">world</span>,<span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- bnode-source --></div>
+</div>
+<!-- bnode-method -->
+<div id="literal-method" class="method-detail"><a name="method-i-literal" id="method-i-literal"></a>
+<div class="method-heading"><span class="method-name">literal</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>returns a <a href="Literal.html">Literal</a> if the node is a literal type</p>
+<div class="method-source-code" id="literal-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">literal</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">literal?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NodeTypeError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">"Can't get literal value for node type %s"</span> <span class="ruby-operator">%</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">node_type</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Literal</span>.<span class="ruby-identifier">from_node</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- literal-source --></div>
+</div>
+<!-- literal-method -->
+<div id="literal-3F-method" class="method-detail"><a name="method-i-literal-3F" id="method-i-literal-3F"></a>
+<div class="method-heading"><span class="method-name">literal?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Return true if node is a literal</p>
+<div class="method-source-code" id="literal-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">literal?</span>
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_is_literal</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>) <span class="ruby-operator">!=</span><span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- literal-3F-source --></div>
+</div>
+<!-- literal-3F-method -->
+<div id="node_from_hash-method" class="method-detail"><a name="method-i-node_from_hash" id="method-i-node_from_hash"></a>
+<div class="method-heading"><span class="method-name">node_from_hash</span><span class="method-args">(hash)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>sets this node's value using a blank or URI extracted from a Hash (?? confirm)</p>
+<div class="method-source-code" id="node_from_hash-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">node_from_hash</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:blank</span>)
+    <span class="ruby-identifier">node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_blank_identifier</span>(<span class="ruby-identifier">$world</span>.<span class="ruby-identifier">world</span>,<span class="ruby-identifier">hash</span>[<span class="ruby-value">:blank</span>])
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:from_object</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:do_not_copy</span>)
+      <span class="ruby-identifier">node</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:from_object</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-value">:from_object</span>])
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:uri_string</span>)
+    <span class="ruby-identifier">node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_uri_string</span>(<span class="ruby-identifier">$world</span>.<span class="ruby-identifier">world</span>,<span class="ruby-identifier">hash</span>[<span class="ruby-value">:uri_string</span>])
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:literal</span>)
+    <span class="ruby-identifier">node</span> = <span class="ruby-identifier">node_from_literal</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">node</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- node_from_hash-source --></div>
+</div>
+<!-- node_from_hash-method -->
+<div id="node_from_literal-method" class="method-detail"><a name="method-i-node_from_literal" id="method-i-node_from_literal"></a>
+<div class="method-heading"><span class="method-name">node_from_literal</span><span class="method-args">(hash)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>sets this node's value using a literal value extracted from a Hash (?? confirm)</p>
+<div class="method-source-code" id="node_from_literal-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">node_from_literal</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-identifier">xml_language</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:xml_language</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">hash</span>[<span class="ruby-value">:xml_language</span>] <span class="ruby-operator">:</span> <span class="ruby-string">""</span>
+  <span class="ruby-identifier">wf_xml</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:wf_xml?</span>) <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:datatype</span>)
+    <span class="ruby-identifier">datatype</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:datatype</span>]
+    <span class="ruby-identifier">node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_typed_literal</span>(<span class="ruby-identifier">$world</span>.<span class="ruby-identifier">world</span>,<span class="ruby-identifier">hash</span>[<span class="ruby-value">:literal</span>],<span class="ruby-identifier">xml_language</span>,<span class="ruby-identifier">datatype</span>.<span class="ruby-identifier">uri</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_literal</span>(<span class="ruby-identifier">$world</span>.<span class="ruby-identifier">world</span>,<span class="ruby-identifier">hash</span>[<span class="ruby-value">:literal</span>],<span class="ruby-identifier">xml_language</span>,<span class="ruby-identifier">wf_xml</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">node</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- node_from_literal-source --></div>
+</div>
+<!-- node_from_literal-method -->
+<div id="node_type-method" class="method-detail"><a name="method-i-node_type" id="method-i-node_type"></a>
+<div class="method-heading"><span class="method-name">node_type</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get the type of this node as a string (Node.node_types)</p>
+<div class="method-source-code" id="node_type-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">node_type</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">@@node_types</span>[<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_get_type</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>)]
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- node_type-source --></div>
+</div>
+<!-- node_type-method -->
+<div id="resource-3F-method" class="method-detail"><a name="method-i-resource-3F" id="method-i-resource-3F"></a>
+<div class="method-heading"><span class="method-name">resource?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Return true if node is a resource with a URI</p>
+<div class="method-source-code" id="resource-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resource?</span>
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_is_resource</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>) <span class="ruby-operator">!=</span><span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- resource-3F-source --></div>
+</div>
+<!-- resource-3F-method -->
+<div id="to_s-method" class="method-detail"><a name="method-i-to_s" id="method-i-to_s"></a>
+<div class="method-heading"><span class="method-name">to_s</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Convert this to a string</p>
+<div class="method-source-code" id="to_s-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">literal?</span>
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_get_literal_value</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_get_blank_identifier</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resource?</span>
+    <span class="ruby-identifier">uri</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_get_uri</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>)
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_uri_to_string</span>(<span class="ruby-identifier">uri</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- to_s-source --></div>
+</div>
+<!-- to_s-method -->
+<div id="uri-method" class="method-detail"><a name="method-i-uri" id="method-i-uri"></a>
+<div class="method-heading"><span class="method-name">uri</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>return a copy of the internal uri</p>
+<div class="method-source-code" id="uri-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/node.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">uri</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resource?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Uri</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_node_get_uri</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">node</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NodeTypeError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">"Can't get URI for node type %s"</span> <span class="ruby-operator">%</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">node_type</span>() )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- uri-source --></div>
+</div>
+<!-- uri-method --></div>
+<!-- public-instance-method-details --></div>
+<!-- 5Buntitled-5D --></div>
+<!-- documentation -->
+<hr />
+
+<div class="outerHeader">
+Go to <a href="/" target="_parent">Redland Home</a> - 
+<a href="/bindings/" target="_parent">Language Bindings Home</a> - 
+<a href="/docs/ruby.html" target="_parent">Ruby API Home</a>
+</div>
+
+<p>(C) Copyright 2004-2013 <a href="http://www.dajobe.org/" target="_parent">Dave Beckett</a>, (C) Copyright 2004-2005 <a href="http://www.bristol.ac.uk/" target="_parent">University of Bristol</a></p>
+
+</div> <!-- end outerBlock -->
+
+</body>
+</html>

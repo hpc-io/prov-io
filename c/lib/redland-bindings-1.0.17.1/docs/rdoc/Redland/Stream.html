@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Redland RDF Language Bindings - Ruby RDoc - Class: Redland::Stream</title>
+<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+<script src="../js/jquery.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/quicksearch.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/darkfish.js" type="text/javascript" charset="utf-8">
+</script>
+</head>
+<body id="top" class="class">
+<div id="metadata">
+<div id="home-metadata">
+<div id="home-section" class="section">
+<h3 class="section-header"><a href="../index.html">Home</a> <a href="../index.html#classes">Classes</a> <a href="../index.html#methods">Methods</a></h3>
+</div>
+</div>
+<div id="file-metadata">
+<div id="file-list-section" class="section">
+<h3 class="section-header">In Files</h3>
+<div class="section-body">
+<ul>
+<li><a href="../rdf/redland/stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785" class="thickbox" title="rdf/redland/stream.rb">rdf/redland/stream.rb</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="class-metadata"><!-- Parent Class -->
+<div id="parent-class-section" class="section">
+<h3 class="section-header">Parent</h3>
+<p class="link">Object</p>
+</div>
+<!-- Method Quickref -->
+<div id="method-list-section" class="section">
+<h3 class="section-header">Methods</h3>
+<ul class="link-list">
+<li><a href="#method-c-create_finalizer">::create_finalizer</a></li>
+<li><a href="#method-c-new">::new</a></li>
+<li><a href="#method-i-context">#context</a></li>
+<li><a href="#method-i-current">#current</a></li>
+<li><a href="#method-i-end-3F">#end?</a></li>
+<li><a href="#method-i-next">#next</a></li>
+</ul>
+</div>
+<!-- Included Modules -->
+<div id="includes-section" class="section">
+<h3 class="section-header">Included Modules</h3>
+<ul class="link-list">
+<li><a class="include" href="Util.html">Redland::Util</a></li>
+</ul>
+</div>
+</div>
+<div id="project-metadata">
+<div id="fileindex-section" class="section project-section">
+<h3 class="section-header">Files</h3>
+<ul>
+<li class="file"><a href="../Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/redland/Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/redland/schemas/Makefile.html">Makefile</a></li>
+</ul>
+</div>
+<div id="classindex-section" class="section project-section">
+<h3 class="section-header">Class/Module Index <span class="search-toggle"><img src="../images/find.png" height="16" width="16" alt="[+]" title="show/hide quicksearch" /></span></h3>
+<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+<fieldset><legend>Quicksearch</legend> <input type="text" name="quicksearch" value="" class="quicksearch-field" /></fieldset>
+</form>
+<ul class="link-list">
+<li><a href="../Redland.html">Redland</a></li>
+<li><a href="../Redland/BNode.html">Redland::BNode</a></li>
+<li><a href="../Redland/ContextParser.html">Redland::ContextParser</a></li>
+<li><a href="../Redland/FileStore.html">Redland::FileStore</a></li>
+<li><a href="../Redland/HashOpen.html">Redland::HashOpen</a></li>
+<li><a href="../Redland/HashStore.html">Redland::HashStore</a></li>
+<li><a href="../Redland/Literal.html">Redland::Literal</a></li>
+<li><a href="../Redland/MemoryStore.html">Redland::MemoryStore</a></li>
+<li><a href="../Redland/MergedModel.html">Redland::MergedModel</a></li>
+<li><a href="../Redland/Model.html">Redland::Model</a></li>
+<li><a href="../Redland/Namespace.html">Redland::Namespace</a></li>
+<li><a href="../Redland/Node.html">Redland::Node</a></li>
+<li><a href="../Redland/NodeIterator.html">Redland::NodeIterator</a></li>
+<li><a href="../Redland/NodeTypeError.html">Redland::NodeTypeError</a></li>
+<li><a href="../Redland/OWL.html">Redland::OWL</a></li>
+<li><a href="../Redland/Parser.html">Redland::Parser</a></li>
+<li><a href="../Redland/Query.html">Redland::Query</a></li>
+<li><a href="../Redland/QueryResults.html">Redland::QueryResults</a></li>
+<li><a href="../Redland/RDFS.html">Redland::RDFS</a></li>
+<li><a href="../Redland/RedlandError.html">Redland::RedlandError</a></li>
+<li><a href="../Redland/Resource.html">Redland::Resource</a></li>
+<li><a href="../Redland/Serializer.html">Redland::Serializer</a></li>
+<li><a href="../Redland/Statement.html">Redland::Statement</a></li>
+<li><a href="../Redland/Stream.html">Redland::Stream</a></li>
+<li><a href="../Redland/TripleStore.html">Redland::TripleStore</a></li>
+<li><a href="../Redland/Uri.html">Redland::Uri</a></li>
+<li><a href="../Redland/Util.html">Redland::Util</a></li>
+<li><a href="../Redland/World.html">Redland::World</a></li>
+<li><a href="../DC.html">DC</a></li>
+<li><a href="../FOAF.html">FOAF</a></li>
+</ul>
+<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+</div>
+</div>
+</div>
+<div id="documentation">
+<h1 class="class">Redland::Stream</h1>
+<div id="description" class="description">
+<p>This module provides a method to generate a stream of statements, suitable for outputing from RDF/XML parsers, returning as the results of queries and serialising models in order to manipulate them or transform into another syntax.</p>
+</div>
+<!-- description -->
+<div id="5Buntitled-5D" class="documentation-section"><!-- Attributes -->
+<div id="attribute-method-details" class="method-section section">
+<h3 class="section-header">Attributes</h3>
+<div id="stream-attribute-method" class="method-detail"><a name="stream" id="stream"></a> <a name="stream="></a>
+<div class="method-heading attribute-method-heading"><span class="method-name">stream</span><span class="attribute-access-type">[RW]</span></div>
+<div class="method-description"></div>
+</div>
+</div>
+<!-- attribute-method-details -->
+<!-- Methods -->
+<div id="public-class-method-details" class="method-section section">
+<h3 class="section-header">Public Class Methods</h3>
+<div id="create_finalizer-method" class="method-detail"><a name="method-c-create_finalizer" id="method-c-create_finalizer"></a>
+<div class="method-heading"><span class="method-name">create_finalizer</span><span class="method-args">(stream)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>You shouldn't use this. Used internally for cleanup.</p>
+<div class="method-source-code" id="create_finalizer-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/stream.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Stream</span>.<span class="ruby-identifier">create_finalizer</span>(<span class="ruby-identifier">stream</span>)
+  <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span> <span class="ruby-comment"># "Finalizer on #{id}"</span>
+    <span class="ruby-comment">#puts "closing stream"</span>
+    <span class="ruby-constant">Redland</span><span class="ruby-operator">::</span><span class="ruby-identifier">librdf_free_stream</span>(<span class="ruby-identifier">stream</span>)
+  }
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- create_finalizer-source --></div>
+</div>
+<!-- create_finalizer-method -->
+<div id="new-method" class="method-detail"><a name="method-c-new" id="method-c-new"></a>
+<div class="method-heading"><span class="method-name">new</span><span class="method-args">(object,model)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Create a wrapper for a librdf_stream object (?? confirm)</p>
+<div class="method-source-code" id="new-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/stream.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">object</span>,<span class="ruby-identifier">model</span>)
+  <span class="ruby-ivar">@stream</span> = <span class="ruby-identifier">object</span>
+  <span class="ruby-ivar">@model</span> = <span class="ruby-identifier">model</span>
+  <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">define_finalizer</span>(<span class="ruby-keyword">self</span>,<span class="ruby-constant">Stream</span>.<span class="ruby-identifier">create_finalizer</span>(<span class="ruby-ivar">@stream</span>))
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- new-source --></div>
+</div>
+<!-- new-method --></div>
+<!-- public-class-method-details -->
+<div id="public-instance-method-details" class="method-section section">
+<h3 class="section-header">Public Instance Methods</h3>
+<div id="context-method" class="method-detail"><a name="method-i-context" id="method-i-context"></a>
+<div class="method-heading"><span class="method-name">context</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get the context of the current <a href="Statement.html">Statement</a> in the stream</p>
+<div class="method-source-code" id="context-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/stream.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">context</span>()
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">stream</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">my_node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_stream_get_context</span>(<span class="ruby-ivar">@stream</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">my_node</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:from_object=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">my_node</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- context-source --></div>
+</div>
+<!-- context-method -->
+<div id="current-method" class="method-detail"><a name="method-i-current" id="method-i-current"></a>
+<div class="method-heading"><span class="method-name">current</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get the current <a href="Statement.html">Statement</a> in the stram</p>
+<div class="method-source-code" id="current-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/stream.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">current</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">stream</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">my_statement</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_stream_get_object</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">stream</span>)
+  
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">my_statement</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Statement</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:from_object=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">my_statement</span>,<span class="ruby-value">:model=</span><span class="ruby-operator">&gt;</span><span class="ruby-ivar">@model</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- current-source --></div>
+</div>
+<!-- current-method -->
+<div id="end-3F-method" class="method-detail"><a name="method-i-end-3F" id="method-i-end-3F"></a>
+<div class="method-heading"><span class="method-name">end?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Test if the stream has ended</p>
+<div class="method-source-code" id="end-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/stream.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">end?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@stream</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_stream_end</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">stream</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- end-3F-source --></div>
+</div>
+<!-- end-3F-method -->
+<div id="next-method" class="method-detail"><a name="method-i-next" id="method-i-next"></a>
+<div class="method-heading"><span class="method-name">next</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Move to the next <a href="Statement.html">Statement</a> in the stream</p>
+<div class="method-source-code" id="next-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/stream.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>()
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">stream</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_stream_next</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">stream</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- next-source --></div>
+</div>
+<!-- next-method --></div>
+<!-- public-instance-method-details --></div>
+<!-- 5Buntitled-5D --></div>
+<!-- documentation -->
+<hr />
+
+<div class="outerHeader">
+Go to <a href="/" target="_parent">Redland Home</a> - 
+<a href="/bindings/" target="_parent">Language Bindings Home</a> - 
+<a href="/docs/ruby.html" target="_parent">Ruby API Home</a>
+</div>
+
+<p>(C) Copyright 2004-2013 <a href="http://www.dajobe.org/" target="_parent">Dave Beckett</a>, (C) Copyright 2004-2005 <a href="http://www.bristol.ac.uk/" target="_parent">University of Bristol</a></p>
+
+</div> <!-- end outerBlock -->
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+_:r1qbnodeid1 <http://xmlns.com/foaf/0.1/name> "Alice" .
+_:r2qbnodeid1 <http://xmlns.com/foaf/0.1/name> "Eve" .
+_:r3qbnodeid1 <http://xmlns.com/foaf/0.1/name> "Bob" .

@@ -1,0 +1,10 @@
+# Test GROUP with HAVING condition
+PREFIX ex: <http://example.org/>
+SELECT ?state
+WHERE
+{
+  ?person ex:name ?name .
+  ?person ex:livesIn ?state
+}
+GROUP BY ?state
+HAVING ( ?state != 'California' ) ( ?state != 'Florida')

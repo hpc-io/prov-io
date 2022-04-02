@@ -1,0 +1,16 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/rasqal
+
+have_raptor2_api=1
+
+Name: Rasqal RDF Query Library
+Description: Rasqal RDF Query parsing and execution library
+Requires: raptor2 >= 2.0.7
+Requires.private: 
+Version: 0.9.33
+Libs: -L${libdir} -lrasqal
+Libs.private:   -L/home/runzhou/anaconda3/lib -lpcre -luuid  -L/usr/local/lib -lraptor2 -L/home/runzhou/anaconda3/lib -lpcre -luuid -lm  -lgmp
+Cflags: -I${includedir}
+

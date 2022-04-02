@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Redland RDF Language Bindings - Ruby RDoc - Class: Redland::QueryResults</title>
+<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+<script src="../js/jquery.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/quicksearch.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/darkfish.js" type="text/javascript" charset="utf-8">
+</script>
+</head>
+<body id="top" class="class">
+<div id="metadata">
+<div id="home-metadata">
+<div id="home-section" class="section">
+<h3 class="section-header"><a href="../index.html">Home</a> <a href="../index.html#classes">Classes</a> <a href="../index.html#methods">Methods</a></h3>
+</div>
+</div>
+<div id="file-metadata">
+<div id="file-list-section" class="section">
+<h3 class="section-header">In Files</h3>
+<div class="section-body">
+<ul>
+<li><a href="../rdf/redland/queryresults_rb.html?TB_iframe=true&amp;height=550&amp;width=785" class="thickbox" title="rdf/redland/queryresults.rb">rdf/redland/queryresults.rb</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="class-metadata"><!-- Parent Class -->
+<div id="parent-class-section" class="section">
+<h3 class="section-header">Parent</h3>
+<p class="link">Object</p>
+</div>
+<!-- Method Quickref -->
+<div id="method-list-section" class="section">
+<h3 class="section-header">Methods</h3>
+<ul class="link-list">
+<li><a href="#method-c-create_finalizer">::create_finalizer</a></li>
+<li><a href="#method-c-new">::new</a></li>
+<li><a href="#method-i-as_stream">#as_stream</a></li>
+<li><a href="#method-i-binding_name">#binding_name</a></li>
+<li><a href="#method-i-binding_names">#binding_names</a></li>
+<li><a href="#method-i-binding_value">#binding_value</a></li>
+<li><a href="#method-i-binding_value_by_name">#binding_value_by_name</a></li>
+<li><a href="#method-i-binding_values">#binding_values</a></li>
+<li><a href="#method-i-bindings">#bindings</a></li>
+<li><a href="#method-i-bindings_count">#bindings_count</a></li>
+<li><a href="#method-i-count">#count</a></li>
+<li><a href="#method-i-finished-3F">#finished?</a></li>
+<li><a href="#method-i-get_boolean-3F">#get_boolean?</a></li>
+<li><a href="#method-i-is_bindings-3F">#is_bindings?</a></li>
+<li><a href="#method-i-is_boolean-3F">#is_boolean?</a></li>
+<li><a href="#method-i-is_graph-3F">#is_graph?</a></li>
+<li><a href="#method-i-next">#next</a></li>
+<li><a href="#method-i-size">#size</a></li>
+<li><a href="#method-i-to_string">#to_string</a></li>
+</ul>
+</div>
+</div>
+<div id="project-metadata">
+<div id="fileindex-section" class="section project-section">
+<h3 class="section-header">Files</h3>
+<ul>
+<li class="file"><a href="../Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/redland/Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/redland/schemas/Makefile.html">Makefile</a></li>
+</ul>
+</div>
+<div id="classindex-section" class="section project-section">
+<h3 class="section-header">Class/Module Index <span class="search-toggle"><img src="../images/find.png" height="16" width="16" alt="[+]" title="show/hide quicksearch" /></span></h3>
+<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+<fieldset><legend>Quicksearch</legend> <input type="text" name="quicksearch" value="" class="quicksearch-field" /></fieldset>
+</form>
+<ul class="link-list">
+<li><a href="../Redland.html">Redland</a></li>
+<li><a href="../Redland/BNode.html">Redland::BNode</a></li>
+<li><a href="../Redland/ContextParser.html">Redland::ContextParser</a></li>
+<li><a href="../Redland/FileStore.html">Redland::FileStore</a></li>
+<li><a href="../Redland/HashOpen.html">Redland::HashOpen</a></li>
+<li><a href="../Redland/HashStore.html">Redland::HashStore</a></li>
+<li><a href="../Redland/Literal.html">Redland::Literal</a></li>
+<li><a href="../Redland/MemoryStore.html">Redland::MemoryStore</a></li>
+<li><a href="../Redland/MergedModel.html">Redland::MergedModel</a></li>
+<li><a href="../Redland/Model.html">Redland::Model</a></li>
+<li><a href="../Redland/Namespace.html">Redland::Namespace</a></li>
+<li><a href="../Redland/Node.html">Redland::Node</a></li>
+<li><a href="../Redland/NodeIterator.html">Redland::NodeIterator</a></li>
+<li><a href="../Redland/NodeTypeError.html">Redland::NodeTypeError</a></li>
+<li><a href="../Redland/OWL.html">Redland::OWL</a></li>
+<li><a href="../Redland/Parser.html">Redland::Parser</a></li>
+<li><a href="../Redland/Query.html">Redland::Query</a></li>
+<li><a href="../Redland/QueryResults.html">Redland::QueryResults</a></li>
+<li><a href="../Redland/RDFS.html">Redland::RDFS</a></li>
+<li><a href="../Redland/RedlandError.html">Redland::RedlandError</a></li>
+<li><a href="../Redland/Resource.html">Redland::Resource</a></li>
+<li><a href="../Redland/Serializer.html">Redland::Serializer</a></li>
+<li><a href="../Redland/Statement.html">Redland::Statement</a></li>
+<li><a href="../Redland/Stream.html">Redland::Stream</a></li>
+<li><a href="../Redland/TripleStore.html">Redland::TripleStore</a></li>
+<li><a href="../Redland/Uri.html">Redland::Uri</a></li>
+<li><a href="../Redland/Util.html">Redland::Util</a></li>
+<li><a href="../Redland/World.html">Redland::World</a></li>
+<li><a href="../DC.html">DC</a></li>
+<li><a href="../FOAF.html">FOAF</a></li>
+</ul>
+<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+</div>
+</div>
+</div>
+<div id="documentation">
+<h1 class="class">Redland::QueryResults</h1>
+<div id="description" class="description">
+<p>This class provides query language results support</p>
+</div>
+<!-- description -->
+<div id="5Buntitled-5D" class="documentation-section"><!-- Attributes -->
+<div id="attribute-method-details" class="method-section section">
+<h3 class="section-header">Attributes</h3>
+<div id="results-attribute-method" class="method-detail"><a name="results" id="results"></a>
+<div class="method-heading attribute-method-heading"><span class="method-name">results</span><span class="attribute-access-type">[R]</span></div>
+<div class="method-description"></div>
+</div>
+</div>
+<!-- attribute-method-details -->
+<!-- Methods -->
+<div id="public-class-method-details" class="method-section section">
+<h3 class="section-header">Public Class Methods</h3>
+<div id="create_finalizer-method" class="method-detail"><a name="method-c-create_finalizer" id="method-c-create_finalizer"></a>
+<div class="method-heading"><span class="method-name">create_finalizer</span><span class="method-args">(results)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>You shouldn't use this. Used internally for cleanup.</p>
+<div class="method-source-code" id="create_finalizer-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">QueryResults</span>.<span class="ruby-identifier">create_finalizer</span>(<span class="ruby-identifier">results</span>)
+  <span class="ruby-identifier">proc</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span> <span class="ruby-comment"># "Finalizer on #{id}"</span>
+    <span class="ruby-comment">#$log_final.info "closing results"</span>
+    <span class="ruby-constant">Redland</span><span class="ruby-operator">::</span><span class="ruby-identifier">librdf_free_query_results</span>(<span class="ruby-identifier">results</span>)
+  }
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- create_finalizer-source --></div>
+</div>
+<!-- create_finalizer-method -->
+<div id="new-method" class="method-detail"><a name="method-c-new" id="method-c-new"></a>
+<div class="method-heading"><span class="method-name">new</span><span class="method-args">(object)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>this is not a public constructor</p>
+<div class="method-source-code" id="new-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">object</span>)
+  <span class="ruby-ivar">@results</span> = <span class="ruby-identifier">object</span>
+  <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">define_finalizer</span>(<span class="ruby-keyword">self</span>,<span class="ruby-constant">QueryResults</span>.<span class="ruby-identifier">create_finalizer</span>(<span class="ruby-ivar">@results</span>))
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- new-source --></div>
+</div>
+<!-- new-method --></div>
+<!-- public-class-method-details -->
+<div id="public-instance-method-details" class="method-section section">
+<h3 class="section-header">Public Instance Methods</h3>
+<div id="as_stream-method" class="method-detail"><a name="method-i-as_stream" id="method-i-as_stream"></a>
+<div class="method-heading"><span class="method-name">as_stream</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get a new <a href="Stream.html">Stream</a> object representing the query results as an RDF Graph.</p>
+<div class="method-source-code" id="as_stream-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">as_stream</span>
+  <span class="ruby-identifier">my_stream</span>=<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_as_stream</span>(<span class="ruby-ivar">@results</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Stream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">my_stream</span>, <span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- as_stream-source --></div>
+</div>
+<!-- as_stream-method -->
+<div id="binding_name-method" class="method-detail"><a name="method-i-binding_name" id="method-i-binding_name"></a>
+<div class="method-heading"><span class="method-name">binding_name</span><span class="method-args">(index)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get binding name for the current result</p>
+<div class="method-source-code" id="binding_name-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">binding_name</span>(<span class="ruby-identifier">index</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_binding_name</span>(<span class="ruby-ivar">@results</span>,<span class="ruby-identifier">index</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- binding_name-source --></div>
+</div>
+<!-- binding_name-method -->
+<div id="binding_names-method" class="method-detail"><a name="method-i-binding_names" id="method-i-binding_names"></a>
+<div class="method-heading"><span class="method-name">binding_names</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get the names all of the variable bindings as an array</p>
+<div class="method-source-code" id="binding_names-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">binding_names</span>
+  <span class="ruby-identifier">count</span>=<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_bindings_count</span>(<span class="ruby-ivar">@results</span>)
+  <span class="ruby-identifier">names</span>=[]
+  <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">count</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+    <span class="ruby-identifier">names</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">binding_name</span>(<span class="ruby-identifier">i</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">names</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- binding_names-source --></div>
+</div>
+<!-- binding_names-method -->
+<div id="binding_value-method" class="method-detail"><a name="method-i-binding_value" id="method-i-binding_value"></a>
+<div class="method-heading"><span class="method-name">binding_value</span><span class="method-args">(index)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get one binding value for the current result</p>
+<div class="method-source-code" id="binding_value-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">binding_value</span>(<span class="ruby-identifier">index</span>)
+  <span class="ruby-identifier">node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_binding_value</span>(<span class="ruby-ivar">@results</span>,<span class="ruby-identifier">index</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- binding_value-source --></div>
+</div>
+<!-- binding_value-method -->
+<div id="binding_value_by_name-method" class="method-detail"><a name="method-i-binding_value_by_name" id="method-i-binding_value_by_name"></a>
+<div class="method-heading"><span class="method-name">binding_value_by_name</span><span class="method-args">(name)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get the value of the variable binding name in the current query result.</p>
+<div class="method-source-code" id="binding_value_by_name-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">binding_value_by_name</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">node</span>=<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_binding_value_by_name</span>(<span class="ruby-ivar">@results</span>,<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- binding_value_by_name-source --></div>
+</div>
+<!-- binding_value_by_name-method -->
+<div id="binding_values-method" class="method-detail"><a name="method-i-binding_values" id="method-i-binding_values"></a>
+<div class="method-heading"><span class="method-name">binding_values</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get an array of all the values of all of the variable bindings in the current query result.</p>
+<div class="method-source-code" id="binding_values-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">binding_values</span>
+  <span class="ruby-identifier">count</span>=<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_bindings_count</span>(<span class="ruby-ivar">@results</span>)
+  <span class="ruby-identifier">values</span>=[]
+  <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">count</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+    <span class="ruby-identifier">values</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">binding_value</span>(<span class="ruby-identifier">i</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">values</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- binding_values-source --></div>
+</div>
+<!-- binding_values-method -->
+<div id="bindings-method" class="method-detail"><a name="method-i-bindings" id="method-i-bindings"></a>
+<div class="method-heading"><span class="method-name">bindings</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get an array of binding values</p>
+<div class="method-source-code" id="bindings-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bindings</span>
+  (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">size</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">binding_value</span>( <span class="ruby-identifier">i</span> ) }
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- bindings-source --></div>
+</div>
+<!-- bindings-method -->
+<div id="bindings_count-method" class="method-detail"><a name="method-i-bindings_count" id="method-i-bindings_count"></a>
+<div class="method-heading"><span class="method-name">bindings_count</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get number of binding variables</p>
+<div class="method-source-code" id="bindings_count-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bindings_count</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_bindings_count</span>(<span class="ruby-ivar">@results</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- bindings_count-source --></div>
+</div>
+<!-- bindings_count-method -->
+<div id="count-method" class="method-detail"><a name="method-i-count" id="method-i-count"></a>
+<div class="method-heading"><span class="method-name">count</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get the number of results so far</p>
+<div class="method-source-code" id="count-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_count</span>(<span class="ruby-ivar">@results</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- count-source --></div>
+</div>
+<!-- count-method -->
+<div id="finished-3F-method" class="method-detail"><a name="method-i-finished-3F" id="method-i-finished-3F"></a>
+<div class="method-heading"><span class="method-name">finished?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Test if the results are finished</p>
+<div class="method-source-code" id="finished-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">finished?</span>
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_finished</span>(<span class="ruby-ivar">@results</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- finished-3F-source --></div>
+</div>
+<!-- finished-3F-method -->
+<div id="get_boolean-3F-method" class="method-detail"><a name="method-i-get_boolean-3F" id="method-i-get_boolean-3F"></a>
+<div class="method-heading"><span class="method-name">get_boolean?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get the boolean query result</p>
+<div class="method-source-code" id="get_boolean-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_boolean?</span>()
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_boolean</span>(<span class="ruby-ivar">@results</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- get_boolean-3F-source --></div>
+</div>
+<!-- get_boolean-3F-method -->
+<div id="is_bindings-3F-method" class="method-detail"><a name="method-i-is_bindings-3F" id="method-i-is_bindings-3F"></a>
+<div class="method-heading"><span class="method-name">is_bindings?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Test if is variable bindings result</p>
+<div class="method-source-code" id="is_bindings-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_bindings?</span>()
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_is_bindings</span>(<span class="ruby-ivar">@results</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- is_bindings-3F-source --></div>
+</div>
+<!-- is_bindings-3F-method -->
+<div id="is_boolean-3F-method" class="method-detail"><a name="method-i-is_boolean-3F" id="method-i-is_boolean-3F"></a>
+<div class="method-heading"><span class="method-name">is_boolean?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Test if is a boolean result</p>
+<div class="method-source-code" id="is_boolean-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_boolean?</span>()
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_is_boolean</span>(<span class="ruby-ivar">@results</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- is_boolean-3F-source --></div>
+</div>
+<!-- is_boolean-3F-method -->
+<div id="is_graph-3F-method" class="method-detail"><a name="method-i-is_graph-3F" id="method-i-is_graph-3F"></a>
+<div class="method-heading"><span class="method-name">is_graph?</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Test if is an RDF graph result</p>
+<div class="method-source-code" id="is_graph-3F-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_graph?</span>()
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_is_graph</span>(<span class="ruby-ivar">@results</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- is_graph-3F-source --></div>
+</div>
+<!-- is_graph-3F-method -->
+<div id="next-method" class="method-detail"><a name="method-i-next" id="method-i-next"></a>
+<div class="method-heading"><span class="method-name">next</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Move to the next query result</p>
+<div class="method-source-code" id="next-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>
+  <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_next</span>(<span class="ruby-ivar">@results</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- next-source --></div>
+</div>
+<!-- next-method -->
+<div id="size-method" class="method-detail"><a name="method-i-size" id="method-i-size"></a>
+<div class="method-heading"><span class="method-name">size</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Get the number of results so far</p>
+<div class="method-source-code" id="size-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_get_count</span>(<span class="ruby-ivar">@results</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- size-source --></div>
+</div>
+<!-- size-method -->
+<div id="to_string-method" class="method-detail"><a name="method-i-to_string" id="method-i-to_string"></a>
+<div class="method-heading"><span class="method-name">to_string</span><span class="method-args">(format_uri = nil, base_uri = nil)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Serialize to a string syntax in format_uri using the optional base_uri. The default format when none is given is determined by librdf_query_results_to_string</p>
+<div class="method-source-code" id="to_string-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/queryresults.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_string</span>(<span class="ruby-identifier">format_uri</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">base_uri</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">is_graph?</span>()
+    <span class="ruby-identifier">tmpmodel</span>=<span class="ruby-constant">Model</span>.<span class="ruby-identifier">new</span>()
+    <span class="ruby-identifier">tmpmodel</span>.<span class="ruby-identifier">add_statements</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">as_stream</span>())
+    <span class="ruby-identifier">serializer</span>=<span class="ruby-constant">Serializer</span>.<span class="ruby-identifier">new</span>()
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">serializer</span>.<span class="ruby-identifier">model_to_string</span>(<span class="ruby-identifier">base_uri</span>, <span class="ruby-identifier">tmpmodel</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">is_boolean?</span>() <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">is_bindings?</span>()
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RedlandError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">"Unknown query result format cannot be written as a string"</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">format_uri</span>
+    <span class="ruby-identifier">format_uri</span> = <span class="ruby-identifier">format_uri</span>.<span class="ruby-identifier">uri</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">base_uri</span>
+    <span class="ruby-identifier">base_uri</span> = <span class="ruby-identifier">base_uri</span>.<span class="ruby-identifier">uri</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_query_results_to_string</span>(<span class="ruby-ivar">@results</span>, <span class="ruby-identifier">format_uri</span>, <span class="ruby-identifier">base_uri</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- to_string-source --></div>
+</div>
+<!-- to_string-method --></div>
+<!-- public-instance-method-details --></div>
+<!-- 5Buntitled-5D --></div>
+<!-- documentation -->
+<hr />
+
+<div class="outerHeader">
+Go to <a href="/" target="_parent">Redland Home</a> - 
+<a href="/bindings/" target="_parent">Language Bindings Home</a> - 
+<a href="/docs/ruby.html" target="_parent">Ruby API Home</a>
+</div>
+
+<p>(C) Copyright 2004-2013 <a href="http://www.dajobe.org/" target="_parent">Dave Beckett</a>, (C) Copyright 2004-2005 <a href="http://www.bristol.ac.uk/" target="_parent">University of Bristol</a></p>
+
+</div> <!-- end outerBlock -->
+
+</body>
+</html>

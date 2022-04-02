@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Redland RDF Application Framework - Perl RDF::Redland::Serializer Class</title>
+</head>
+<body>
+
+<h1 style="text-align:center">Redland RDF Application Framework - Perl RDF::Redland::Serializer Class</h1>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+        <li><a href="#name">NAME</a></li>
+        <li><a href="#synopsis">SYNOPSIS</a></li>
+        <li><a href="#description">DESCRIPTION</a></li>
+        <li><a href="#constructors">CONSTRUCTORS</a></li>
+        <li><a href="#methods">METHODS</a></li>
+        <li><a href="#see_also">SEE ALSO</a></li>
+        <li><a href="#author">AUTHOR</a></li>
+</ul>
+
+--></div>
+<!-- INDEX END -->
+
+<h2><a name="name">NAME</a></h2>
+<p>RDF::Redland::Serializer - Redland RDF Serializing to Syntax Class</p>
+
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<pre>
+  use RDF::Redland;
+</pre>
+<pre>
+  ...
+  my $serializer=new RDF::Redland::Serializer("ntriples");
+</pre>
+<pre>
+  $serializer-&gt;serialize_model_to_file("foo.rdf", $base_uri, $model);
+</pre>
+
+<h2><a name="description">DESCRIPTION</a></h2>
+<p>This class represents serializers that turn RDF graphs into various syntaxes. from an RDF::Redland::Model object.</p>
+
+<h2><a name="constructors">CONSTRUCTORS</a></h2>
+<dl>
+<dt><strong><a name="new_name_mime_type_uri" class="item">new [NAME [MIME_TYPE [URI]]]</a></strong></dt>
+<dd>
+<p>Create a new RDF::Redland::Serializer object for a syntax serializer named <em>NAME</em>, with MIME Type <em>MIME_TYPE</em> and/or URI <em>URI</em>. Any field can be undef or omitted; if all are omitted, the default serializer is used, currently 'ntriples'.</p>
+</dd>
+</dl>
+
+<h2><a name="methods">METHODS</a></h2>
+<dl>
+<dt><strong><a name="serialize_model_to_file_filename_base_uri_model" class="item">serialize_model_to_file FILENAME BASE_URI MODEL</a></strong></dt>
+<dd>
+<p>Serialize the RDF Graph <em>MODEL</em> as syntax with the base RDF::Redland::URI <em>BASE_URI</em> to file <em>FILENAME</em>.</p>
+</dd>
+<dt><strong><a name="serialize_model_to_string_base_uri_model" class="item">serialize_model_to_string BASE-URI MODEL</a></strong></dt>
+<dd>
+<p>Serialize the RDF Graph <em>MODEL</em> to a syntax. If no serializer name is given, the default serializer RDF/XML is used.</p>
+</dd>
+<dt><strong><a name="set_namespace" class="item">set_namespace PREFIX URI</a></strong></dt>
+<dd>
+<p>Define a namespace <em>URI</em> with the supplied <em>PREFIX</em> for use in serializing an RDF Graph.</p>
+</dd>
+<dt><strong><a name="feature_uri_value" class="item">feature URI [VALUE]</a></strong></dt>
+<dd>
+<p>Get/set a serializer feature. The feature is named via RDF::Redland::URI <em>URI</em> and the value is a string. If <em>VALUE</em> is given, the feature is set to that value, otherwise the current value is returned.</p>
+</dd>
+</dl>
+
+<h2><a name="see_also">SEE ALSO</a></h2>
+<p><a href="Parser.html">the RDF::Redland::Parser manpage</a>, <a href="URI.html">the RDF::Redland::URI manpage</a></p>
+
+<h2><a name="author">AUTHOR</a></h2>
+<p>Dave Beckett - <a href="http://www.dajobe.org/">http://www.dajobe.org/</a></p>
+<hr />
+
+<p>(C) Copyright 2000-2011 <a href="http://www.dajobe.org/">Dave Beckett</a>, (C) Copyright 2000-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

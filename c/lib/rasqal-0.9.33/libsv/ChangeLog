@@ -1,0 +1,316 @@
+2014-01-19  Dave Beckett  <dave@dajobe.org>
+
+	* Update dist rules to package svtest and autostuff
+
+	* Do not build example by default
+
+	* (sv_parse_line): Fix double quoted quotes
+	Use a lookahead for doubling quotes
+
+	* Fix quote tests 12, 13 and 14
+
+	* svtest: Add optional test index arg to run just one
+	(svtest_run_test): Pulled out of main
+
+	* GNU configureize
+
+2014-01-17  Dave Beckett  <dave@dajobe.org>
+
+	* (sv_set_option_vararg): sv_line_callback cast for C++
+
+2014-01-15  Dave Beckett  <dave@dajobe.org>
+
+	* test missing final newlines on header line, data lines
+
+	* Call sv_parse_chunk() a second time for final line processing
+
+	* (sv_parse_chunk_line): handle being called with/without final NL
+
+	* Call sv_parse_chunk at end of input for final line
+
+	* (sv_parse_chunk): Parse final line only if buffer is not empty.
+
+	* (sv_parse_chunk): Given NULL buffer or 0 length, handle final line
+
+	* Move fields_count from sv_parse_chunk_line arg
+	(sv_parse_chunk_line): Lose fields_count_p arg; make it a local.
+
+	(sv_parse_chunk): Lose var and remove it from call
+
+	* (sv_parse_chunk_line): Added pulled out of sv_parse_chunk
+
+	* Give all the structs and vars svtest_ prefix names
+
+	* remove junk in test data
+
+	* Use line callback to emit lines seen before parsing
+
+	* Move line_callback to sv_parse_chunk so it is done once.
+
+	* fix
+
+	* Update GNUMakefile for newer code
+
+2014-01-12  Dave Beckett  <dave@dajobe.org>
+
+	* Clean EXTRA_PROGRAMS
+
+	* Add sv2c to convert data to C (approx)
+
+	* Add tests from test1.csv
+
+	* Use my_sv_line_callback() to save line for better error messages
+
+	* Add SV_OPTION_LINE_CALLBACK to set a callback per line
+
+	* less debug
+
+	* script
+
+	* Fix make
+
+	* Travis CI
+
+2014-01-11  Dave Beckett  <dave@dajobe.org>
+
+	* (sv_init_fields): malloc corect size array [clang]
+
+	* Add SV_OPTION_QUOTE_CHAR
+
+	* Add SV_OPTION_QUOTE_CHAR to set quote char (default is ")
+
+	* Add SV_OPTION_STRIP_WHITESPACE whitespace removal test
+
+	* Terminate after whitespace removal.
+
+	* cast
+
+	* debug
+
+	* Add check target
+
+	* Add test suite
+
+	* Add SV_OPTION_STRIP_WHITESPACE to strip whitespace around fields
+
+2013-12-03  Dave Beckett  <dave@dajobe.org>
+
+	* README into markdown
+
+2013-12-01  Dave Beckett  <dave@dajobe.org>
+
+	* Now libsv repo
+
+2013-11-29  Dave Beckett  <dave@dajobe.org>
+
+	* Add option to control quoting fields between separators
+	sv_option_t gains SV_OPTION_QUOTED_FIELDS
+
+	(sv_init): Set quoted fields default on.
+
+	(sv_set_option_vararg): Parse SV_OPTION_QUOTED_FIELDS into internal
+	flag.
+
+	(sv_parse_line): Add conditions around doing quoting
+
+2013-11-27  Dave Beckett  <dave.beckett@rackspace.com>
+
+	* Make all status returns be sv_status_t
+	(sv_set_option): Returns sv_status_t
+
+	(sv_init_fields, sv_ensure_fields_buffer_size, sv_set_option_vararg):
+	Internal functions return sv_status_t
+
+2013-11-26  Dave Beckett  <dave@dajobe.org>
+
+	* Support \n, \r, \r\n
+
+	* Switch init flags to a call to sv_set_option
+	sv_option_t: Added
+
+	(sv_set_option): Added.
+
+	* tests
+
+	* \
+
+	* add test1.csv
+
+	* Tidy status and returns
+
+	* code style
+
+	* Return sv_status_t from calls and use SV_STATUS_LINE_FIELDS
+
+	* Add SV_STATUS_LINE_FIELDS
+
+	* Guess sep
+
+	* sv_parse_line label
+
+	* Handle quoting more robustly.
+	Tidy debug messages
+	Error lines are now not fatal unless flag SV_FLAGS_BAD_DATA_ERROR
+	is set.
+	Rename skip -> skip_line
+
+	* Add bad records count
+
+	* Add flag SV_FLAGS_BAD_DATA_ERROR
+
+2013-11-25  Dave Beckett  <dave@dajobe.org>
+
+	* (sv_dump_buffer): Added for debugging
+
+	* Start line numbers at 1
+
+	* Print filename
+
+	* Fix empty line support and line numbers
+
+	* debug output
+
+	* header is not a record
+
+	* zero.tsv with no data
+
+	* Use and report headers seen
+
+	* Improve header decoding
+	Add header fields callback.
+	Set header widths
+
+	(sv_init): Gains header_callback arg
+
+	* Add one.tsv
+
+2013-11-24  Dave Beckett  <dave@dajobe.org>
+
+	* (sv_init) check
+
+	* Add field_sep arg to sv_init
+
+	* sv
+
+	* Add example
+
+	* libsv
+
+	* Cleanups
+
+	* Use #if defined
+
+	* No test yet
+
+	* Remove Makefile from repo
+
+	* Ignore more
+
+	* GNUMakefile for old makefile
+
+	* automake pieces
+
+2013-07-31  Dave Beckett  <dave@dajobe.org>
+
+	* More tests
+
+2009-05-29  Dave Beckett  <dave@dajobe.org>
+
+	* Add more quote test cases and make some corner cases work better
+
+	* Ignore tarballs
+
+	* Ignore stuff
+
+2009-05-28  Dave Beckett  <dave@dajobe.org>
+
+	* Added readme
+
+	* Added makefile
+
+	* Added package bits and pieces - copyright docs and header. Added
+	example with test file
+
+2009-05-26  Dave Beckett  <dave@dajobe.org>
+
+	* h
+
+	* *** empty log message ***
+
+	* Update for TSV status
+
+	* Added tsv_status for error results
+
+	* casts for C++
+
+	* Use pointinpoly.h
+
+	* Use pointinpoly.h
+
+	* Added pointinpoly.h
+
+	* Added header
+
+	* unsigned/signed stuff
+
+2009-05-24  Dave Beckett  <dave@dajobe.org>
+
+	* fix warnings
+
+	* Add lots of warnings
+
+	* abort callback
+
+	* end lines on error
+
+	* (tsv_parse_chunk): Return 1 on failure from callback
+
+	* style
+
+	* print tags shorter
+
+	* Use flickcurl_photo_as_page_uri
+
+2009-05-23  Dave Beckett  <dave@dajobe.org>
+
+	* Uses flickcurl API to search for photos by WOEID of countries
+	seen and get at most 1 photo, print the tags
+
+2009-05-22  Dave Beckett  <dave@dajobe.org>
+
+	* Update to new init and use headers when verbose.
+
+	* Added flags arg to tsv_init to allow saving of header. Added
+	const char* tsv_get_header(tsv *t, unsigned int i, size_t
+	*width_p); to return them.
+
+	* use memmove for overlap copy
+
+	* code depends on tsv
+
+	* adjust tsv_init call
+
+	* remove unused FH
+
+	* remove unused FH
+
+	* save a memcpy
+
+	* Move fields_buffer to tsv structure and grow only when needed
+
+	* Count records
+
+	* Allocate fields, fields_widths for first line only, save lots of
+	per-line malloc/frees
+
+	* Add verbose flag
+
+	* Added tsv parsing module and use with file
+
+	* internal header
+
+	* use internal.h
+
+	* srcs
+
+	* Initial import

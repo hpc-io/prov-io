@@ -1,0 +1,111 @@
+.\"
+.\" librasqal.3 - Rasqal library manual page
+.\"
+.\" $Id$
+.\"
+.\" Copyright (C) 2004-2011 David Beckett - http://www.dajobe.org/
+.\" Copyright (C) 2004-2005 University of Bristol - http://www.bristol.ac.uk/
+.\"
+.TH librasqal 3 "2011-01-12"
+.\" Please adjust this date whenever revising the manpage.
+.SH NAME
+librasqal \- Rasqal RDF query library
+.SH SYNOPSIS
+.nf
+.B #include <rasqal.h>
+.br
+\ 
+.br
+.BI rasqal_world* world =rasqal_new_world();
+.br
+.BI "rasqal_query_results *" results ;
+.br
+.BI "raptor_uri *" base_uri =raptor_new_uri( "\(dqhttp://example.org/foo\(dq" );
+.br
+.BI "rasqal_query *" rq =rasqal_new_query(world, "\(dqrdql\(dq" , NULL );
+.br
+.BI "const char *" query_string "=\(dqselect * from <http://example.org/data.rdf>\(dq;"
+.br
+\ 
+.br
+.BI rasqal_query_prepare( rq , query_string , base_uri );
+.br
+.BI "" results =rasqal_query_execute( rq );
+.br
+.BI "while(!rasqal_query_results_finished(" results "))\ {"
+.br
+.BI "\ for(" i "=0;" i "<rasqal_query_results_get_bindings_count(" results ");" i "++) {"
+.br
+.BI "\ \ const char *" name "=rasqal_query_results_get_binding_name(" results , i );
+.br
+.BI "\ \ rasqal_literal *" value "=rasqal_query_results_get_binding_value(" results, i);
+.br
+.BI "\ \ /* ... */"
+.br
+.BI "\ }"
+.br
+.BI "\ rasqal_query_results_next(" results );
+.br
+.BI }
+.br
+.BI rasqal_free_query_results( results );
+.br
+.BI rasqal_free_query( rq );
+.br
+.BI raptor_free_uri( base_uri );
+.br
+.BI rasqal_free_world( world );
+.br
+
+.B cc prog.c -o prog `pkg-config rasqal --cflags` `pkg-config rasqal --libs`
+.br
+.fi
+.SH DESCRIPTION
+The \fIRasqal\fR library provides a high-level interface to RDF query
+parsing, query construction, query execution over an RDF graph and
+query results manipulation and formatting.  The library provides APIs
+to each of the steps in the process and provides support for handling
+multiple query language syntaxes.  At present Rasqal supports most of the 
+W3C SPARQL 1.0 Query language, some of SPARQL 1.1 draft and
+fully supports RDQL. 
+.LP
+Rasqal uses the libraptor(3) library for providing URI handling,
+WWW content retrieval and other support functions.
+.SH "API REFERENCE"
+See the HTML API docs that may be installed system wide at
+/usr/share/gtk-doc/html/rasqal/
+or on the web at
+.UR http://librdf.org/rasqal/docs/api/
+http://librdf.org/rasqal/docs/api/
+.UE
+.SH API CHANGES
+See the Raptor API docs changes section at
+.UR http://librdf.org/rasqal/docs/api/rasqal-changes.html
+http://librdf.org/rasqal/docs/api/rasqal-changes.html 
+.UE
+.SH "CONFORMING TO"
+\fISPARQL Query Language for RDF\fR, 
+Eric Prud'hommeaux and Andy Seaborne (eds), W3C Recommendation, 15 January 2008
+.UR http://www.w3.org/TR/2008/REC-rdf-sparql-query-20080115/
+http://www.w3.org/TR/2008/REC-rdf-sparql-query-20080115/
+.UE
+.LP
+\fISPARQL Query Results XML Format\fR, 
+Jeen Broekstra and Dave Beckett (eds), W3C Recommendation, 15 January 2008.
+.UR http://www.w3.org/TR/2008/REC-rdf-sparql-XMLres-20080115/
+http://www.w3.org/TR/2008/REC-rdf-sparql-XMLres-20080115/
+.UE
+.LP
+\fIRDQL - A Query Language for RDF\fR, Andy Seaborne,
+W3C Member Submission 9 January 2004
+.UR http://www.w3.org/Submission/2004/SUBM-RDQL-20040109/
+http://www.w3.org/Submission/2004/SUBM-RDQL-20040109/
+.UE
+.SH SEE ALSO
+.BR roqet (1), libraptor(3)
+.SH AUTHOR
+Dave Beckett - 
+.UR http://purl.org/net/dajobe/
+http://purl.org/net/dajobe/
+.UE
+.br

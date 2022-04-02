@@ -1,0 +1,147 @@
+   #DOAP
+
+                            Rasqal RDF Query Library
+
+Dave Beckett
+
+Overview
+
+   Rasqal is a free software / Open Source C library that handles Resource
+   Description Framework (RDF) query language syntaxes, query construction
+   and execution of queries returning results as bindings, boolean, RDF
+   graphs/triples or syntaxes. The supported query languages are SPARQL
+   Query 1.0, SPARQL Query 1.1, SPARQL Update 1.1 (no executing) and the
+   Experimental SPARQL extensions (LAQRS). Rasqal can write binding query
+   results in the SPARQL XML, SPARQL JSON, CSV, TSV, HTML, ASCII tables,
+   RDF/XML and Turtle / N3 and read them in SPARQL XML, CSV, TSV, RDF/XML
+   and Turtle / N3.
+
+   Rasqal was designed to work closely with the Redland RDF library and
+   the Raptor RDF Syntax Library but is entirely separate from both.
+
+   This is a beta quality library - the code is mature, the API is mostly
+   stable but changing slowly. Rasqal supports all of SPARQL 1.0 query and
+   most of SPARQL 1.1 query. It is a portable library and has been tested
+   on multiple POSIX systems and architectures. Rasqal has no known memory
+   leaks.
+
+   A summary of the changes can be found in the NEWS file and detailed API
+   changes in the release notes.
+
+   Rasqal provides:
+     * An RDF query construction and access API.
+     * Query language support for SPARQL 1.0 Query.
+     * Query language support for most of SPARQL 1.1 Query.
+     * A query execution engine executing sub-queries, aggregate
+       expressions and grouping.
+     * The complete SPARQL 1.1 (draft) built-in function and operator
+       library
+     * A query result binding API.
+     * Query result bindings formatting into SPARQL XML, SPARQL JSON, CSV,
+       TSV, HTML, ASCII tables, RDF/XML, Turtle / N3 and from SPARQL XML,
+       RDF/XML and Turtle / N3.
+     * Triple store querying APIs to support running over external RDF
+       graphs.
+     * No memory leaks.
+     * roqet standalone command line RDF query utility program
+
+   Known bugs and issues are recorded in the Redland issue tracker.
+
+   Rasqal does not provide an RDF API or triple store, but relies on
+   external libraries implementing the triple store API providing matched
+   RDF data originally from a specified content URI. Rasqal ships with a
+   triple store implementation using the output of an RDF parser from
+   Raptor. This can be called using the standalone command line roqet
+   query utility giving a query language identifier (default sparql), the
+   query string and optionally the data to use unless it is declared in
+   the query string.
+
+   Rasqal is used inside Redland to provide support for query languages, a
+   query API and a result bindings API over graphs stored in indexed
+   Redland triple stores. Since this can index the triples it will be
+   faster than the default rasqal triple store of reading the triples from
+   Raptor into memory when the queries are complex.
+
+Supported Query Languages
+
+  SPARQL Query Language for RDF
+
+   Rasqal provides complete support for the W3C SPARQL Query Language 1.0
+   developed by the W3C RDF Data Access Working Group, as defined in
+   SPARQL Query Language for RDF (1.0), W3C Recommendation 15 January
+   2008.
+
+   Rasqal implements most of the SPARQL 1.1 Query Language and SPARQL 1.1
+   Update W3C Recommendations 21 March 2013 including aggregates,
+   subqueries, expression in SELECT, assignment, short form for CONSTRUCT
+   and all the new set of builtin functions and operators.
+
+   Unimplemented parts of SPARQL 1.1:
+     * BIND scope
+     * VALUES: part of federated query
+     * Decimal and double canonical format details
+     * EXISTS / NOT EXISTS
+     * JSON result format reading
+     * MINUS
+     * Property Paths: These are likely never be supported since it is a
+       lot of work (estimate: 3 months full time) and might need multiple
+       new APIs to talk to the storage layer.
+     * SERVICE: Part of federated query
+
+   Out of scope parts of SPARQL 1.1:
+     * Entailment and inference: Rasqal is not an inference engine
+     * SPARQL Federated Query
+     * SPARQL Update (also called SPARQL Protocol): The Update syntax is
+       parsed with parser name 'sparql-update' but nothing is executed
+       inside Rasqal. Supporting SPARQL Update requires a protocol server
+       that responds to requests to perform operations on a graph store.
+       Rasqal is a query library and does not have an event loop or triple
+       store. Redstore is a system supporting SPARQL Update and Service
+       Description built with Rasqal by using Redland librdf for graph
+       storage and query.
+
+   The details on the Rasqal support for SPARQL 1.1 can be found at the
+   rasqal testing SPARQL 1.1 page which shows the SPARQL 1.1 tests that
+   fail and any diagnosis.
+
+  LAQRS Adds to Querying RDF in SPARQL (LAQRS)
+
+   LAQRS is an experimental set of syntax extensions for SPARQL. The
+   syntax and features may change at any time. At present Rasqal provides
+   parsing and API support for alternate update syntaxes, the EXPLAIN
+   keyword, plus executing a few experimental extension functions: NOW() /
+   CURRENT_DATETIME(), FROM_UNIXTIME() and TO_UNIXTIME().
+
+Installation and Documentation
+
+   The public API is described in the API reference. It is demonstrated in
+   the roqet utility program which shows how to call the query engine and
+   operate over the query results. When Rasqal is used inside Redland, the
+   Redland documentation explains how to call the query engine and
+   contains several example programs.
+
+   To build and install Rasqal from sources see the Installation document.
+
+Sources
+
+   The packaged sources are available from
+   http://download.librdf.org/source/. The development GIT sources can
+   also be browsed on GitHub or checked out at
+   git://github.com/dajobe/rasqal.git
+
+   Rasqal requires Raptor 2.0.7 or newer to build and run, which can be
+   downloaded from the same area as the Rasqal source and binaries.
+
+License
+
+   This library is free software / open source software released under the
+   LGPL (GPL) or Apache 2.0 licenses. See LICENSE.html for full details.
+
+Mailing Lists
+
+   The Redland mailing lists discusses the development and use of Rasqal
+   and Redland as well as future plans and announcement of releases.
+     __________________________________________________________________
+
+   Copyright (C) 2003-2014 Dave Beckett
+   Copyright (C) 2003-2005 University of Bristol

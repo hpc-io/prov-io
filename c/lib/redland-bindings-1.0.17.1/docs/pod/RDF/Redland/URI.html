@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Redland RDF Application Framework - Perl RDF::Redland::URI Class</title>
+</head>
+<body>
+
+<h1 style="text-align:center">Redland RDF Application Framework - Perl RDF::Redland::URI Class</h1>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+        <li><a href="#name">NAME</a></li>
+        <li><a href="#synopsis">SYNOPSIS</a></li>
+        <li><a href="#description">DESCRIPTION</a></li>
+        <li><a href="#constructors">CONSTRUCTORS</a></li>
+        <li><a href="#methods">METHODS</a></li>
+        <li><a href="#old_methods">OLD METHODS</a></li>
+        <li><a href="#see_also">SEE ALSO</a></li>
+        <li><a href="#author">AUTHOR</a></li>
+</ul>
+
+--></div>
+<!-- INDEX END -->
+
+<h2><a name="name">NAME</a></h2>
+<p>RDF::Redland::URI - Redland RDF URI Class</p>
+
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<pre>
+  use RDF::Redland;
+</pre>
+<pre>
+  my $uri=new RDF::Redland::URI("<a href="http://example.com/&quot;">http://example.com/"</a>;);
+</pre>
+<pre>
+  my $uri2=RDF::Redland::URI-&gt;new_from_uri($uri);
+</pre>
+<pre>
+  print $uri2-&gt;as_string,"\n";
+</pre>
+
+<h2><a name="description">DESCRIPTION</a></h2>
+<p>Represents a URI as a mostly-opaque object for identifying things in the RDF world. The URIs are also used for identifying features for the RDF::Redland::Parser and RDF::Redland::Serializer classes.</p>
+
+<h2><a name="constructors">CONSTRUCTORS</a></h2>
+<dl>
+<dt><strong><a name="new" class="item">new STRING</a></strong></dt>
+<dd>
+<p>Create a new RDF::Redland::URI object from a URI string.</p>
+</dd>
+<dt><strong><a name="clone" class="item">clone URI</a></strong></dt>
+<dd>
+<p>Copy a RDF::Redland::URI</p>
+</dd>
+</dl>
+
+<h2><a name="methods">METHODS</a></h2>
+<dl>
+<dt><strong><a name="as_string" class="item">as_string</a></strong></dt>
+<dd>
+<p>Return the statement formatted as a string (UTF-8 encoded).</p>
+</dd>
+<dt><strong><a name="equals" class="item">equals URI</a></strong></dt>
+<dd>
+<p>Return non zero if this uri is equal to URI</p>
+</dd>
+</dl>
+
+<h2><a name="old_methods">OLD METHODS</a></h2>
+<dl>
+<dt><strong><a name="new_from_uri" class="item">new_from_uri URI</a></strong></dt>
+<dd>
+<p>Create a new RDF::Redland::URI object from RDF::Redland::URI <em>URI</em> (copy constructor). Instead use:</p>
+<pre>
+  $u=$uri-&gt;clone
+</pre></dd>
+</dl>
+
+<h2><a name="see_also">SEE ALSO</a></h2>
+<p><a href="Parser.html">the RDF::Redland::Parser manpage</a></p>
+
+<h2><a name="author">AUTHOR</a></h2>
+<p>Dave Beckett - <a href="http://www.dajobe.org/">http://www.dajobe.org/</a></p>
+<hr />
+
+<p>(C) Copyright 2000-2011 <a href="http://www.dajobe.org/">Dave Beckett</a>, (C) Copyright 2000-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

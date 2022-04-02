@@ -1,0 +1,5190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>Rasqal RDF Query Library - Release Notes</title>
+</head>
+<body>
+
+  <h1>Rasqal RDF Query Library - Release Notes</h1>
+
+<h2 id="rel0_9_33"><a name="rel0_9_33">Rasqal 0.9.33 changes</a></h2>
+
+<p>Issues Fixed:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=546">0000546</a>: Can't take query from URI when using -p</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=568">0000568</a>: Filter expression with division does not work</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=583">0000583</a>: CONSTRUCT halts at a template triple with unbound variable</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=588">0000588</a>: roqet: select from SERVICE returns all NULLs</li>
+</ul>
+
+<h3>SPARQL changes</h3>
+
+<p>Fixed <code>BASE</code> to override any API base URI.</p>
+
+
+<h3>Datetime class changes</h3>
+
+<p>Fixed storing timezone minutes correctly.</p>
+
+
+<h3>Graph pattern class changes</h3>
+
+<p>Added new getter functions
+<code>rasqal_graph_pattern_get_triples()</code>,
+<code>rasqal_literal_get_type()</code>
+and <code>rasqal_literal_get_language()</code>
+from <a href="https://github.com/dajobe/rasqal/pull/1">Pull Request #1</a>
+by Cosmin Basca.  Thanks.
+</p>
+
+
+<h3>Query engine changes</h3>
+
+<p>Fixed the aggregation total evaluation of <code>AVG</code>.</p>
+
+<p>Fixed <code>STRBEFORE</code> and <code>STRAFTER</code> evaluation
+to match languages if present and add the needle language to the
+result.</p>
+
+<p>Fixed <code>CONCAT()</code> evaluation to return the correct types
+and languages.</p>
+
+<p>Sorting now uses sort utility function
+<code>raptor_sort_r()</code> with context args provided by Raptor
+2.0.15+ or an internal simple (not so performant) replacement, if too
+old.</p>
+
+
+<h3>Query result class changes</h3>
+Can write variable bindings query results in <a href="http://contextknowledgesystems.org/CKS.html">mKR relation</a> CSV format.<br />
+
+<h3>Query result class changes</h3>
+
+<p>Made internal changes to support reading and writing boolean
+result formats.  That means
+<code>rasqal_query_results_formatter_read()</code> may now return
+boolean results if the formatter supports it, such as SPARQL XML.
+</p>
+
+<p>Added <code>rasqal_new_query_results_from_string()</code> to make
+a query results from a string (with optional length).  The results
+format is guessed from the input data - base_uri and string content
+using <code>rasqal_world_guess_query_results_format_name()</code>.
+</p>
+
+<p>Added <code>rasqal_query_results_formats_check2()</code>
+deprecating <code>rasqal_query_results_formats_check()</code>.
+The API change is due to the return value; the result is now
+non-0 if the format exists.
+</p>
+
+<p>Added <code>rasqal_new_query_results2()</code> deprecating
+<code>rasqal_new_query_results()</code> removing the now
+ignored <code>vars_table</code> parameter.  A query result
+now manages it's own variables table.</p>
+
+<h3>Results class changes</h3>
+
+<p>Fixed returning the correct variables count for reading SPARQL XML
+results sets.  This caused some queries to fail if the projected
+variables count did not match the count in the result set.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=588">Issue #0000588</a>
+</p>
+
+<h3>Variables table class changes</h3>
+
+<p>Added <code>rasqal_variables_table_add2()</code> deprecating
+<code>rasqal_variables_table_add()</code>.  This takes a more
+sensible argument style with copying the input parameters name and
+value, and allowing name length to be optionally given.  This results
+in smaller calling code and better ownership semantics.
+</p>
+
+<h3>Utility changes</h3>
+
+<p><code>roqet(1)</code> now supports using a URI or local file to
+send to a SPARQL protocol service URI.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=546">Issue #0000546</a>
+</p>
+
+<h3>Other changes</h3>
+
+<p>Fixes to make Rasqal build in Travis CI, testing against newest
+and oldest raptors.</p>
+
+<p>Use <code>__FUNCTION__</code> (c99) replacing
+<code>__func__</code> (c90) in debug macros.</p>
+
+<p>Fixes in
+<a href="https://github.com/dajobe/rasqal/pull/3">Pull Request #3</a>
+for building with icc from Sebastian Freundt. Thanks.</p>
+
+<p>Many code quality fixes from clang and coverity primarily in error
+path cleanups (out of memory cases) and dead code.</p>
+
+<p>Updated the fix-flex and fix-bison scripts to remove dead
+code that clang and coverity complain about.</p>
+
+<p>Added new C testrunner utility to run the tests to eventually
+replace the (perl) improve and check-sparql scripts.
+</p>
+
+<p>Fixed some API changelog mistakes.</p>
+
+<p>Updated gcc / clang warning args used (-Wxxxx) and made multiple
+minor code fixes such as replacing %d with %u in debug messages or
+adding missing default: to switches even when all cases were
+covered.</p>
+
+<p>Added many more internal casts to make -Wconversion happier when
+enabled.</p>
+
+
+<h2 id="rel0_9_32"><a name="rel0_9_32">Rasqal 0.9.32 changes</a></h2>
+
+<p>Issues Fixed:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=558">0000558</a>: sparql11-update causes fallback to sparql10</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=560">0000560</a>: &quot;--with-pcre-config&quot; documented but not supported</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=561">0000561</a>: 'make check' fails; possibly because raptor2 built in separate directory</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=564">0000564</a>: Rasqal fails with linker error for armv7 cross-compilation: duplicate symbol _main</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=567">0000567</a>: Segfault based on documentation recommendation</li>
+</ul>
+
+<h3>SPARQL changes</h3>
+
+<p>Fixed the SPARQL 1.0 and SPARQL 1.1 syntax feature checking so
+that language <code>sparql11-update</code> allows all SPARQL 1.1
+syntax features to be used.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=558">Issue #0000558</a>
+</p>
+
+<p>Updated the SPARQL parser to use and require Bison 3.0 (for
+maintainer, building from GIT sources).
+</p>
+
+<p>Updated the SPARQL lexer for Bison 3.0.
+</p>
+
+
+<h3>API changes</h3>
+
+<p>Made <code>rasqal_new_query()</code> match the documentation in
+accepting a <code>NULL</code> name.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=567">Issue #0000567</a>
+</p>
+
+
+<h3>Configuration changes</h3>
+
+<p>Make ossp work as a UUID library option.
+<code>--with-uuid-library=ossp</code> and automatic discovery of ossp
+UUID now work.  Fixed the inclusion of OSSP's uuid.h header.</p>
+
+<p>Fix the searching for the pcre-config and libgcrypt-config
+configuration utilities.  This probably never worked unless the
+envariables form (<code>PCRE_CONFIG</code> and
+<code>LIBGCRYPT_CONFIG</code>) were set.
+</p>
+
+<p>Added a new internal <code>to-ntriples</code> utility to remove all
+use of <code>rapper(1)</code> so that the raptor utilities do not
+need to be available for running tests with 'make check'.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=561">Issue #0000561</a>
+</p>
+
+<p>Make <code>--with-libgcrypt-config</code> work.
+</p>
+
+<p>Make <code>--with-pcre-config</code> work.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=560">Issue# 0000560</a>
+</p>
+
+<p>Fix noisy mhash_dir addition error; it was always added the cflags
+and includes even when mhash_dir was blank.</p>
+
+<p>Improve raptor missing / too old error message.</p>
+
+<h3>Other changes</h3>
+
+<p>Mention libmtwist near <code>--with-random-approach.</code>
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=561">Issue #0000561</a>
+</p>
+
+<h3>Internal changes</h3>
+
+<p>Add more STANDALONE if/ifndef STANDALONE blocks around internal
+code or functions used in tests.</p>
+
+<p>Make <code>rasqal_xsd_check_double_format()</code> an internal
+non-static symbol.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=564">Issue #0000564</a>
+</p>
+
+
+<h2 id="rel0_9_31"><a name="rel0_9_31">Rasqal 0.9.31 changes</a></h2>
+
+<p>Issues Fixed:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=527">0000527</a>: segmentation fault in roqet when making a SPARQL SERVICE query that returns an HTTP error</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=536">0000536</a>: configure accepts bogus values for --with-xml2-config</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=537">0000537</a>: configure pkg-config checks not overridable</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=538">0000538</a>: work around MSVC 2008's inexcusable lack of stdint.h header</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=539">0000539</a>: win32_rasqal_config.h doesn't work on MSVC2008</li>
+</ul>
+
+
+<h3><code>roqet(1)</code> utility changes</h3>
+
+<p><code>roqet(1)</code> gains a new operating mode: reading query
+result files in a given format and generating them in different
+format.  This means it can be used to convert result formats.
+Use this mode with the <code>-t RESULT-FILE</code> major option
+and <code>-R INPUT-RESULT-FORMAT</code> to set the input format.
+<code>-r OUTPUT-RESULT-FORMAT</code> can be used to set the output
+format.</p>
+<pre>
+  # Convert a SPARQL TSV result to XML
+  $ roqet -t result.tsv -R tsv -r xml
+
+  # Convert a SPARQL XML result (default input format) to TSV
+  $ roqet -t result.srx -r tsv
+</pre>
+
+<p>Tidied and improved the help and error messages.</p>
+
+<p>The utility now supports <code>-r simple</code> / <code>--results
+simple</code> as it says in the documentation.</p>
+
+<p>The debug result format now prints 'row:' when writing. (This
+format has always promised it may change).</p>
+
+
+<h3>Query result changes</h3>
+
+<p>Added support for reading the
+<a href="http://www.w3.org/TR/2013/REC-sparql11-results-csv-tsv-20130321/">SPARQL 1.1 Query Results CSV and TSV Formats</a>
+W3C Recommendation, 21 March 2013.  Writing support already existed.
+This is a modular addition so the APIs that handle reading results
+automatically get this support.</p>
+
+<p>Added <code>rasqal_query_results_type_label()</code> to get a
+string label for a <code>rasqal_query_results_type</code>.</p>
+
+
+<h3>Query engine changes</h3>
+
+<p>Internal work to support executing the SERVICE graph pattern.</p>
+
+<p>Query engine can execute the new <code>VALUES</code> graph
+pattern.</p>
+
+<p>SPARQL lexer and parser handles <code>VALUES</code> replacing the
+old <code>BINDINGS</code> syntax.</p>
+
+<p>Fixed crash when a SERVICE returns no rowsource.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=527">Issue #0000527</a>
+</p>
+
+<p>Added proper validation of xsd:double and xsd:float literal format.</p>
+
+<p>Correctly handle <code>GROUP BY</code> over no data - returning
+one row with all bindings missing.</p>
+
+<p>Literal languages are now normalized to lowercase (RDF Concepts)</p>
+
+
+<h3>API changes</h3>
+
+<p><code>rasqal_prefix_id()</code> now uses a q rather than _ to help
+raptor N-Triples 2008 conformance.</p>
+
+<p>Improved SPARQL 1.1 query formatter to handle <code>VALUES</code>
+forms and to print in a prettier form with better indenting.</p>
+
+<p><code>rasqal_graph_pattern_op</code> gains
+<code>RASQAL_GRAPH_PATTERN_OPERATOR_VALUES</code></p>
+
+<p><code>rasqal_new_rowsource_from_handler()</code> now allows a NULL
+query so that rowsources can be fully independent of a query, such as
+when building from a syntax string or other independent object.</p>
+
+<p><code>rasqal_new_rowsequence_rowsource()</code> now allows an empty
+sequence of rows.</p>
+
+
+<h3>Portability changes</h3>
+
+<p>Win32 build fix patches from Michael Stahl:
+Fixes Issues
+<a href="http://bugs.librdf.org/mantis/view.php?id=539">#0000539</a>
+and
+<a href="http://bugs.librdf.org/mantis/view.php?id=538">#0000538</a>
+</p>
+
+
+<h3>Configuration and build changes</h3>
+
+<p>Added new internal convienience library
+<a href="https://github.com/dajobe/libsv">libsv</a>
+providing support for reading CSV and TSV files (and others
+potentially).  Required for the updated support for reading SPARQL
+CSV and TSV result formats.
+</p>
+
+<p>Added new librasqalcmdline convienience library to share code
+between <code>roqet(1)</code> and <code>check-query</code> (under
+development, not installed).</p>
+
+<p>Build internal libmtwist, libgetopt (new) as libtool convienience
+libraries to stop automake moans about subdir-objects.</p>
+
+<p><code>configure</code> was fixed to correctly find and use OSSP
+libuuid even in the presence of half installed / broken UUID systems
+like on OSX where just the headers are present.</p>
+
+<p>Fixes for building with parallel make such as <code>make -jN</code></p>
+
+<p>Fixed alignments and error paths found via clang.</p>
+
+<p><code>configure</code> now uses PKG_CHECK_MODULES() to enable
+overriding discovery of pkg-config if needed.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=537">Issue #0000537</a>
+</p>
+
+<p>Fix crash if <code>xml2-config(1)</code> when pointed at a non
+executable file. Patch from Michael Stahl
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=536">Issue #0000536</a>
+</p>
+
+<p><code>configure</code> ensures CPPFLAGS can be passed through
+without destruction.  This helps
+<a href="https://wiki.debian.org/Hardening">Debian hardening</a>
+</p>
+
+<p>Removed the need for Perl XML::DOM to be installed in order for
+'make test' to run via <code>check-sparql</code>.  This requires
+the <code>roqet(1)</code> new '-'t mode.
+</p>
+
+<p>Add a <code>configure</code> check for the debugging
+<code>__func__</code> so that on systems where it does not exist the
+debug macros work.  It may or may not be a macro, so it cannot be
+tested with #ifdef in the CPP.</p>
+
+<p>Improved the <code>configure</code> check for Flex to allow it to
+be missing for non-maintainer mode.</p>
+
+
+<h3>Other changes</h3>
+
+<p>Flex code generation updates - now recommend flex 2.5.36.</p>
+
+<p>Fixes in tests data for N-Triples conformance that is checked by
+newer Raptor.</p>
+
+
+
+<h2 id="rel0_9_30"><a name="rel0_9_30">Rasqal 0.9.30 changes</a></h2>
+
+<p>Removed RDQL support as promised.  So long and thanks for all the
+queries.  Use SPARQL instead.
+</p>
+
+<p>Issues Fixed:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=506">0000506</a>: configure.ac has bash -specific (non-POSIX) == syntax</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=511">0000511</a>: Add support for OSSP UUID library</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=517">0000517</a>: Autoconf errors when checking for several headers and cross-compiling</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=523">0000523</a>: mpfr dependency</li>
+</ul>
+
+
+<h3>Decimal class changes</h3>
+
+<p><code>rasqal_xsd_decimal_is_zero()</code> now uses <code>fabs()</code>
+and an epsilon approach for C99 decimal mode.</p>
+
+<p>Make <code>rasqal_xsd_decimal_compare()</code> work for C99
+decimal mode.</p>
+
+<p><code>rasqal_xsd_decimal_compare()</code> and
+<code>rasqal_xsd_decimal_equals()</code> use Knuth's approximate
+equality as decribed below.
+</p>
+
+
+<h3>Literal class changes</h3>
+
+<p>Return rdf term type string from
+<code>rasqal_literal_get_rdf_term_type()</code> for integer subtypes
+(<code>RASQAL_LITERAL_INTEGER_SUBTYPE</code>).
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=519">Issue #0000519</a>
+ (Redland librdf)</p>
+
+<p><code>rasqal_literal_to_result_term()</code> now returns NULL on
+an alloc failure.</p>
+
+<p><code>rasqal_new_floating_literal()</code> added, deprecating
+<code>rasqal_new_float_literal()</code> and takes the float type
+as an argument.
+</p>
+
+
+<h3>Query engine changes</h3>
+
+<p>Fix some wrong data size allocs found by clang in Project
+rowsource.</p>
+
+<p>Take more care in promoting literals to float and exceeding the
+range; turn them into doubles if that happens.</p>
+
+<p>Floating and double comparisons and equality use a proper epsilon
+check using Knuth's approximate comparison approach, rather than =.
+Affects
+<code>rasqal_literal_as_boolean()</code>,
+<code>rasqal_literal_equals()</code>,
+<code>rasqal_xsd_decimal_compare()</code>,
+<code>rasqal_xsd_decimal_equals()</code>
+and other internal methods.
+</p>
+
+
+<h3>Query language changes</h3>
+
+<p>Updated the SPARQL syntax to support <code>integer^^uri-ref</code>.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=519">Issue #0000519</a> (Redland librdf)
+</p>
+
+<p>Removed RDQL support as promised.  So long and thanks for all the queries.
+Use SPARQL instead.
+</p>
+
+
+<h3>Portability changes</h3>
+
+<p>Test for <code>mpfr_snprintf()</code> specifically which appeared
+in MPFR 2.4.0.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=523">Issue #0000523</a>
+</p>
+
+<p>The Bison minimum version is now 2.0 (from 2004-12-25) until we
+hear otherwise.</p>
+
+<p>Use <code>RASQAL_DISABLE_DEPRECATED</code> to flag out deprecated
+implementation code.  Call gtkdoc-scan with the deprecated guard.
+</p>
+
+<p>Use <code>#if defined(RASQAL_DEBUG)</code> to help
+portability when it's not defined.</p>
+
+<p>Added good and bad cast macros for checking of type truncation.
+Helped remove compiler warnings.</p>
+
+
+<h3>Configuration changes</h3>
+
+<p>Make <code>configure</code> handle Apple
+<code>/usr/bin/flex</code> which adds an extra field so awk
+<code>$NF</code> did not work.</p>
+
+<p><code>configure</code> now supports finding UUID support inside
+libc for OSX.
+</p>
+
+<p>Fix some <code>configure</code> portability with non-POSIX bash
+syntax and adding some -W flags to autotool calls.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=506">Issue #0000506</a>
+</p>
+
+<p>Updated <code>autogen.sh</code> to abort run if a configuring
+program fails, generate NEWS with old timestamp if missing so
+automake can run and some small doc and message updates.</p>
+
+
+
+<h2 id="rel0_9_29"><a name="rel0_9_29">Rasqal 0.9.29 changes</a></h2>
+
+<p>Rasqal fully supports SPARQL 1.0 from this release. All the
+approved tests pass.</p>
+
+<p>Requires <a href="http://librdf.org/raptor/">Raptor</a> 2.0.7 or newer.</p>
+
+<p>RDQL query language support will be removed in the next
+release. SPARQL has been available for 4 years and is fully
+supported.</p>
+
+<p>Add support for SPARQL 1.1 draft <code>UUID()</code> and
+<code>STRUUID()</code>.</p>
+
+<p>Issues Fixed:</p>
+<ul>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=493">0000493</a>: Offset in sub-select results in no rows at all.</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=494">0000494</a>: Temp buffer to small.</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=504">0000504</a>: rasqal_regex_replace() is not public</li>
+</ul>
+
+
+<h3>Datatype changes</h3>
+
+<p>Added a new datatype
+<code>rasqal_xsd_date</code> class for XSD with literal enum
+<code>RASQAL_LITERAL_DATE</code>, constructor
+<code>rasqal_new_xsd_date()</code>, destructor
+<code>rasqal_free_xsd_datetime()</code> and core methods
+<code>rasqal_xsd_date_to_counted_string()</code>,
+<code>rasqal_xsd_date_to_string()</code>
+<code>rasqal_xsd_date_equals()</code> (returning incomparible) and
+<code>rasqal_xsd_date_compare()</code>.
+</p>
+
+<p>The <code>rasqal_xsd_datetime</code> and new date class above both
+get the same new fields for comparing datetimes and dates:
+<code>time_on_timeline</code> and <code>have_tz</code> to record the
+three timezone possibilities: none ('N'), zulu ('Z') or numeric
+('Y').  A "time on timeline" value is calculated on construction
+and the field values are not normalized.
+</p>
+
+<p>Added <code>rasqal_xsd_datetime_equals2</code> deprecating
+<code>rasqal_xsd_datetime_equals</code> and returning and
+incomparible flag to caller.
+</p>
+
+<p>Added <code>rasqal_xsd_datetime_compare2()</code> deprecating
+<code>rasqal_xsd_datetime_compare()</code> and returning the
+incomparible state between datetimes.  The new
+<code>rasqal_xsd_date_compare()</code> uses this signature.
+</p>
+
+<p>Added new <code>rasqal_new_xsd_datetime_from_xsd_date()</code>
+datetime constructor to build a datetime from a date.</p>
+
+<p>Correct the buffer size in
+<code>rasqal_xsd_datetime_get_seconds_as_decimal()</code>
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=494">Issue #0000494</a>
+</p>
+
+
+<h3>Graph pattern class changes</h3>
+
+<p>Added <code>rasqal_query_graph_pattern_visit2()</code> deprecating
+<code>rasqal_query_graph_pattern_visit()</code>
+</p>
+
+
+<h3>Literal class changes</h3>
+
+<p>Enum <code>rasqal_op</code> gains new tokens
+<code>RASQAL_EXPR_UUID</code> and <code>RASQAL_EXPR_STRUUID</code>
+for the new SPARQL 1.1 draft <code>UUID()</code> and
+<code>STRUUID</code> built-in functions.</p>
+
+<p><code>rasqal_literal_divide()</code> result is now a decimal if
+both args are integer - rule from XPath F&amp;O;
+</p>
+
+<p>Added support for the XSD:Date datatype with a new
+<code>rasqal_literal_type</code> enum value
+<code>RASQAL_LITERAL_DATE</code>.  Updated the literal code including
+the constructor <code>rasqal_new_numeric_literal()</code> to
+auto-convert to the internal format as well as the core literal
+methods.
+</p>
+
+
+<h3>Query engine changes</h3>
+
+<p>The rules for in-scope variables for <code>FILTER</code> were
+corrected to match the SPARQL 1.0 semantics.  This fixed the last
+remaining failure Rasqal had for the SPARQL 1.0 approved test cases.
+</p>
+
+<p><code>DISTINCT</code> now
+compares using RDF term comparison not value comparison so now "" is
+distinct from ""^^xsd:string.  This has a consquence of making RDQL
+test B-01 as failing but this is no loss.  Relatedly, RDQL support
+will be removed in the next release.
+</p>
+
+<p>Handle errors found in aggregation expressions following SPARQL
+standard.</p>
+
+<p>Fix blank node generation when made in a <code>CONSTRUCT</code> to
+match SPARQL standard.
+</p>
+
+<p>Make limit and offset check work properly in a subquery.
+Fixes
+<a href="http://bugs.librdf.org/mantis/view.php?id=493">Issue #0000493</a>
+</p>
+
+<p>Added support for executing SPARQL 1.1 draft <code>UUID()</code>
+and <code>STRUUID</code> using either libuuid or internal random API
+that backs executing <code>RAND()</code>.
+</p>
+
+<h3>Resilience changes</h3>
+
+<p>Ran entire SPARQL 1.0 and 1.1 test suite through Rasqal and
+valgrind to check for reference loss and memory leaks.  Fixed several
+issues in newer code.</p>
+
+<p>Fixed several code issues with unused values found by clang. Or
+changed code that was correct to make clang moan less.</p>
+
+<p>Add code marking of good and bad type casts using macros
+<code>RASQAL_GOOD_CAST</code> and <code>RASQAL_BAD_CAST</code>
+macros.</p>
+
+<h3>Other changes</h3>
+
+<p>The <code>configure</code> test for libgcrypt as a digest backend
+now works; it really didn't before now.  Added option
+<code>--with-libgcrypt-config=PATH</code> to allow selecting the path
+to the <code>libgcrypt-config</code>.  mhash remains the preferred
+hash digest library as it provides more digests and is more commonly
+available.
+</p>
+
+<p><code>configure</code> now looks for libuuid with
+<code>pkg-config</code> to back the SPARQL 1.1 UUID generation
+support.  The UUID backend can be selected with new configure
+option <code>--uuid-library=NAME</code></p>
+
+<p>Made <code>rasqal_regex_replace()</code> public with same
+signature as the internal API.
+Fixes
+<a href="http://bugs.librdf.org/mantis/view.php?id=504">Issue #0000504</a>
+</p>
+
+<p>The <code>tests/sparql/check-sparql</code> test runner was updated
+to understand more of the manifest vocabulary.
+</p>
+
+<p>Building from GIT now requires automake 1.11.2+ for the
+<code>-Wextra-portability</code> option.
+</p>
+
+<p>Added <code>-d none</code> to <code>roqet(1)</code> arguments so
+it is possible disable debug output on the command line (default).
+</p>
+
+
+<h2 id="rel0_9_28"><a name="rel0_9_28">Rasqal 0.9.28 changes</a></h2>
+
+<p>Issues Fixed:</p>
+<ul>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=466">0000466</a>: zero size calloc does not return object (src/rasqal_row.c)</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=467">0000467</a>: Tests fail because diff doesn't accept -u flag</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=470">0000470</a>: snprintf portability issues</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=471">0000471</a>: Compile error when RASQAL_DEBUG set to &gt; 1</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=474">0000474</a>: roqet flags listed in help, but not recognised</li>
+</ul>
+
+
+<h3>SPARQL changes</h3>
+
+<p>The language name '<code>sparql</code>' is now SPARQL 1.1
+</p>
+
+<p>Added support for SPARQL 1.1 draft string functions
+<code>STRBEFORE()</code>, <code>STRAFTER()</code>
+and <code>REPLACE()</code>.
+</p>
+
+
+<h3>Query engine changes</h3>
+
+<p>Add parsing and evaluation support for SPARQL 1.1 draft STRBEFORE
+(2 args), STRAFTER (2 args) and REPLACE (3 or 4 args).  The
+evaluation of REPLACE currently fully works for PCRE regex with
+Unicode and works for POSIX regex without Unicode.</p>
+
+<p>Clear <code>errno</code> before calling <code>strtol()</code> and
+checking the result.  This caused issues when used in threaded
+applications, even though Rasqal is not thread-safe.
+</p>
+
+<p>The (psuedo) random number generation now can use a variety of
+library random routines, defaulting to a new internal
+<a href="https://github.com/dajobe/libmtwist">Mersenne Twister implementation - libmtwist</a>.
+The choice of PRNG can be made with
+<code>configure --with-random-approach=ALGO</code> to pick from
+<code>mtwist</code> (the default), <code>gmp</code> (when GMP is
+available and used for decimals), <code>random_r()</code>,
+<code>rand_r()</code> then the portable but not so safe:
+<code>random()</code> and <code>rand()</code>.
+</p>
+
+
+<h3>Expression class changes</h3>
+
+<p>Enum <code>rasqal_op</code> gains new tokens
+<code>RASQAL_EXPR_STRBEFORE</code>,
+<code>RASQAL_EXPR_STRAFTER</code> and
+<code>RASQAL_EXPR_REPLACE</code> for the new SPARQL 1.1 string expressions.
+<code>STRBEFORE()</code>, <code>STRAFTER()</code>
+and <code>REPLACE()</code> respectively.
+</p>
+
+<p>Added <code>rasqal_new_4op_expression()</code> to construct 3/4-arg
+expressions.
+</p>
+
+
+<h3>Query format and query result format changes</h3>
+
+<p>Added the
+<a href="http://www.w3.org/ns/formats/">W3C Format URIs</a>
+to the JSON, XML, CSV and TSV SPARQL result formats.  (Nicholas J Humfrey)
+</p>
+
+<p>Corrected the SPARQL query output for LIMIT and OFFSET</p>
+
+<p>Handle <code>&lt;literal&gt;&lt;/literal&gt;</code> as
+empty literal when reading in XML query results.</p>
+
+<h3>Other changes</h3>
+
+<p>Use a more comprehensive <code>configure</code> build and run test
+for <code>ceil()</code>, <code>floor()</code> and
+<code>round()</code> to prevent GCC optimizing it away and getting
+the wrong answer when checking whether to link with -lm
+</p>
+
+<p>Removed the obsolete -w option from the <code>roqet --help</code>
+message which was removed from code some time ago.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=474">Issue 0000474</a>.
+</p>
+
+<p>Prevent a gcc 4K stack size warning in a few tests.
+</p>
+
+<p>Reorganized the regex code to a new regex module, adding the new
+function <code>rasqal_regex_replace()</code> for regex search and
+replace (all) backing SPARQL 1.1 <code>REPLACE()</code></p>
+
+<p>Several internal fixes for compiling with RASQAL_DEBUG &gt; 1
+(Lauri Aalto)
+Fixes
+<a href="http://bugs.librdf.org/mantis/view.php?id=471">Issue #0000471</a>
+</p>
+
+
+<p>Remove several internal uses of <code>snprintf()</code> for simple
+integer formatting.
+</p>
+
+<p>The check-sparql utility used during 'make check' now sets the
+DIFF envariable for check tests to allow use off GNU Diff.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=467">Issue #0000467</a>
+(Peter O'Gorman / pogma)
+</p>
+
+<p>Code style changes for calling <code>calloc()</code>.</p>
+
+<p>Do not <code>calloc()</code> with 0 count for a result row - not portable.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=466">Issue #0000466</a>
+(Peter O'Gorman / pogma)
+</p>
+
+<p>The <code>check_query</code> utility (which is still not complete)
+can now handle comparing query results when sorting is involved.
+</p>
+
+
+
+<h2 id="rel0_9_27"><a name="rel0_9_27">Rasqal 0.9.27 changes</a></h2>
+
+<p>Issues Fixed:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=127">0000127</a>: <code>UNION</code> graph pattern support in query engine</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=423">0000423</a>: SPARQL <code>UNION</code> with shared variables fails</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=434">0000434</a>: <code>OPTIONAL</code> and named graphs don't mix</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=454">0000454</a>: xsd:nonNegativeInteger is parsed as <code>RASQAL_LITERAL_QNAME</code> instead of <code>RASQAL_LITERAL_[INTEGER|UDT|INTEGER_SUBTYPE]</code></li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=459">0000459</a>: Making a query that binds to a variable with the same name as a bnode fails</li>
+</ul>
+
+
+<h3>SPARQL changes</h3>
+
+<p>The parser now supports the optional <code>SILENT</code> keyword
+for <code>SERVICE</code>.</p>
+
+<p>The parser now supports the <code>CONSTRUCT WHERE</code>
+abbreviation, expanding the WHERE triples into a triple template
+with the same triples.
+</p>
+
+
+<h3>Query engine changes</h3>
+
+<p>sub-<code>SELECT</code>s are now supported including those that
+contain sorting, grouping, limiting and offset as well as projection.
+</p>
+
+<p><code>CONSTRUCT</code> works when working over a query with
+optionals. It previously stopped returning results at the first unbound
+variable value.</p>
+
+<p><code>OPTIONAL</code>, sub-graph pattern groups
+and <code>UNION</code> fully execute correctly. Fixes were made to
+the variable scoping and join operations.</p>
+
+<p>A lot of refactoring was done to provide the structure to enable
+sub-<code>SELECT</code> to be turned into a query algebra structure
+and executed.
+</p>
+
+<p>An entirely new variable scoping algorithm was implemented to
+properly compute where a variable is assigned; the assumption was
+removed that a variable with a given name can only be bound in one
+place.
+</p>
+
+<p>Several bugs were fixed in the join implementation which affected
+the sub-graph pattern grouping (natural join) and optional (left
+join).
+</p>
+
+<p>Pulled new internal function
+<code>rasqal_query_results_formatter_get_read_rowsource()</code> out
+of <code>rasqal_service_execute()</code> to provide the structure for
+executing <code>SERVICE</code> queries in the query engine.
+</p>
+
+
+<h3>Literal class changes</h3>
+
+<p><code>rasqal_new_numeric_literal_from_long()</code> added to make an
+integer or decimal literal depending if it fits in range.
+</p>
+
+<p><code>rasqal_xsd_decimal_get_long()</code> added to convert an
+arbitrary precision decimal to a C long with an overflow error flag.
+</p>
+
+<p>xsd:integer subtypes are stored and printed correctly.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=454">Issue #0000454</a>.
+</p>
+
+
+<h3>Query class changes</h3>
+
+<p><code>rasqal_query_get_distinct()</code> added to get the distinct
+flag from <code>SELECT DISTINCT ...</code> queries.
+</p>
+
+<p><code>rasqal_query_set_wildcard()</code> added to set the '*' flag
+for <code>SELECT *</code> queries
+</p>
+
+<p><code>rasqal_query_has_variable2()</code> added with variable type
+arg deprecating <code>rasqal_query_has_variable()</code>. Note the
+warning about using <code>RASQAL_VARIABLE_TYPE_UNKNOWN</code> is
+ambiguous.
+</p>
+
+<p>Deprecated <code>rasqal_query_has_variable()</code> for the
+above. Lookup by any type.</p>
+
+<p><code>rasqal_query_set_variable2()</code> added with type arg
+deprecating <code>rasqal_query_set_variable()</code>. Note the
+warning about using <code>RASQAL_VARIABLE_TYPE_UNKNOWN</code> is
+ambiguous.
+</p>
+
+<p>Deprecated <code>rasqal_query_set_variable()</code> for above.
+Lookup by any type.</p>
+
+
+<h3>Query result format changes</h3>
+
+<p>The CSV and TSV query result formats (names <code>csv</code>
+and <code>tsv</code> respectively) were altered  to match the editor's draft
+<a href="http://www.w3.org/2009/sparql/docs/csv-tsv-results/results-csv-tsv.html">SPARQL 1.1 Query Results CSV and TSV Formats</a>
+which includes no header line, no result number and implementing
+the specified quoting and end of lines in the specification.
+</p>
+
+
+<h3>Variable class changes</h3>
+
+<p><code>rasqal_variables_table_add_variable()</code> added to add an
+existing variable to a variables table.
+</p>
+
+<p><code>rasqal_variables_table_get_by_name()</code> added with
+variable type arg.</p>
+
+<p><code>rasqal_variables_table_contains()</code> added to check
+if a variable with the given type and name is in the variables table.
+</p>
+
+<h3><code>roqet(1)</code> utility changes</h3>
+
+<p>Correctly order the help so the <code>-d/--dump-query</code> value
+list appears after the option description.
+</p>
+
+
+<h3>Porting changes</h3>
+
+<p>Several patches were made to aid compiling on MS Windows were
+applied based on those made by the
+<a href="http://techbase.kde.org/Getting_Started/Build/Windows/emerge">KDE Emerge scripts to build KDE on windows</a>.
+This includes a native replacement for the missing gettimeofday()
+and timegm() functions.  MS Windows remains an unsupported target.
+</p>
+
+<h3>Other changes</h3>
+
+<p>The minimum Raptor version needed is now 2.0.4
+for the <code>raptor_bnodeid_ntriples_write()</code> function.
+</p>
+
+<p>The test runner was fixed to fail the suite when there are
+failures as well as expected failures.
+</p>
+
+<p>Code style change and cleanup for alloc/free macros. New code style:</p>
+<ol>
+  <li><code>var = RASQAL_CALLOC(type, nmem, size)</code><br />
+  Prefering:<br />
+  <code>var = RASQAL_CALLOC(type, 1, sizeof(*var))</code><br />
+  when nmem = 1</li>
+  <li><code>var = RASQAL_CALLOC(type, size)</code></li>
+  <li><code>RASQAL_FREE(type, var)</code></li>
+</ol>
+<p>The consequence here is allocs that mostly fit into 1 line without
+so much boilerplate and duplication of types.  The
+<code>RASQAL_MALLOC</code> and <code>RASQAL_CALLOC</code> macros now
+do the cast to the return type.  <code>RASQAL_FREE</code> takes the
+object type too but always casts arg to void This
+</p>
+
+<p>Code style change for allocating strings:</p>
+<ol>
+  <li><code>len = strlen(); malloc(..., len + 1)</code></li>
+  <li>and <code>memcmp(..., len + 1)</code></li>
+</ol>
+
+<p>Expanded GCC warnings to take advantage of newer analysis which
+found several issues:</p>
+<ul>
+  <li>Use of int for storing string and buffer lengths: replaced many
+    internal uses with the correct size_t for length computations.</li>
+  <li>Use of int for storing time: replaced with time_t that may be
+    larger</li>
+  <li>Use of <code>void*</code> for pointer differences: replaced
+    with <code>ptrdiff_t</code> where necessary.</li>
+  <li>Precision truncation between int and long, size_t.</li>
+  <li>Precision truncation between float and double.</li>
+</ul>
+
+<p>Made several internal functions to improve the above.  There
+remain some int / size_t errors in the public API that will need new
+API functions to properly fix for 64-bit machines dealing with
+strings more than &gt;32bits in length; which should be rare.
+</p>
+
+<p>Reduced Rasqal's call stack size by ensuring all I/O buffers are
+dynamically allocated.
+</p>
+
+<p><code>configure</code> now always checks for where <code>ceil()</code>,
+<code>floor()</code> and <code>round()</code> can be found: in libc
+or libm.
+</p>
+
+<p>The <code>configure</code> default
+for <code>--enable-maintainer-mode</code> no longer enables the
+debugging symbols.  These can be added
+with <code>--enable-debug</code>
+</p>
+
+<p>The <code>configure</code> gains an option
+<code>--with-gmp=</code><em>PATH</em> to set the installation path
+of the
+<a href="http://gmplib.org/">GNU Multiple Precision Arithmetic Library (GMP)</a>
+if it is not in the standard lib/include prefix.
+</p>
+
+
+<h2 id="rel0_9_26"><a name="rel0_9_26">Rasqal 0.9.26 changes</a></h2>
+
+<p>Issues Fixed:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=430">Issue #0000430</a>: Incorrect HTML generated with unknown literal types</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=431">Issue #0000431</a>: Only a limited number of literal datatypes are displayable in a HTML format.</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=436">Issue #0000436</a>: queries involving calculations with large numbers return incorrect results unless scientific notation is used</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=438">Issue #0000438</a>: timegm not available on solaris</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=439">Issue #0000439</a>: warning when variable is not selected makes 4store tests to fail</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=446">Issue #0000446</a>: rasqal may require -lm for floor, ceil, round on some systems and architectures</li>
+</ul>
+
+<h3>SPARQL 1.1 Query draft language changes</h3>
+
+<p>Added support for SPARQL 1.1 message digest functions
+<code>MD5()</code>, <code>SHA1()</code>, <code>SHA224()</code>,
+<code>SHA256()</code>, <code>SHA384()</code> and <code>SHA512()</code></p>
+
+<h3>Query engine changes</h3>
+
+<p>Many internal query engine changes to more accuractly compute
+variable scope, use and binding to better support more complex
+queries with scopes such as <code>UNION</code> (now mostly working)
+and sub-<code>SELECT</code> (execution is not yet supported).
+</p>
+
+<p>Added <code>rasqal_world_set_warning_level()</code> to set the
+query warning level in the 0...100 range where 0 is no warnings, 50
+is the default and 100 is all warnings.
+</p>
+
+<p>Query errors now fail with regular errors not fatal errors that
+<code>abort()</code>.  Query parsing errors are not work killing the
+process.  Also adjusted some error paths to prevent reporting 2
+errors at once.
+</p>
+
+<p><code>rasqal_op</code> enumeration gains values
+<code>RASQAL_EXPR_MD5</code>, <code>RASQAL_EXPR_SHA1</code>,
+<code>RASQAL_EXPR_SHA224</code>, <code>RASQAL_EXPR_SHA256</code>,
+<code>RASQAL_EXPR_SHA384</code> and <code>RASQAL_EXPR_SHA512</code>
+for message digest expressions corresponding to SPARQL 1.1 message
+digest functions.
+</p>
+
+<p>Added message digest support either built with internal MD5 and
+SHA1 which are always available, or with libmhash which provides the
+full list of message digests that SPARQL 1.1 requires (and is
+optimized).
+</p>
+
+<p>Make <code>ROUND()</code> work with XSD Decimal when compiled
+against <a href="http://gmplib.org/">GNU MP</a>.
+</p>
+
+<p>Check for overflow when converting a string to int and if
+resulting long won't fit in an int, turn it into a decimal.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=436">Issue #0000436</a>.
+</p>
+
+<p>Removed Query Engine V1 that was long disabled.
+<code>configure</code> loses
+the <code>--with-query-engine-version</code> option.
+</p>
+
+
+<h3>Query results formatter class changes</h3>
+
+<p>Fixed HTML query results generating invalid HTML.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=430">Issue #0000430</a>
+</p>
+
+<p>Support writing additional literal types in HTML query results.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=431">Issue #0000431</a>
+</p>
+
+<p>The JSON query result format now accepts the
+<code>application/sparql-results+json</code> mime type, as specified
+in the
+<a href="http://www.w3.org/TR/rdf-sparql-json-res/">Serializing SPARQL Query Results in JSON</a>
+W3C WG Note.
+</p>
+
+
+<h3><code>roqet(1)</code> utility changes</h3>
+
+<p>Added options <code>-W</code>
+/ <code>--warnings</code> <em>level</em> (default 50) to set the
+warning level and <code>-E</code> to ignore errors.
+</p>
+
+
+<h3>Other changes</h3>
+
+<p><code>configure</code> gains a <code>--enable-debug</code> option
+to enable or disable the debugging messages.  Useful for when
+building using <code>autogen.sh</code> from GIT.
+</p>
+
+<p>Removed internal test/debug 'redland' triples store that has not
+worked for some time.  Removed the <code>--with-triples-source</code>
+and <code>--with-redland-config</code> options from <code>configure</code>.
+</p>
+
+<p>Add a portable version of <code>timegm()</code> when it is not
+present in the system (such as Solaris).
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=438">Issue #0000438</a>.
+</p>
+
+<p>Added <code>configure</code> tests
+for <code>ceil()</code>, <code>floor()</code>
+and <code>round()</code> that look for them in libc or libm.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=446">Issue #0000446</a>.
+</p>
+
+<p>Fixed up several code paths with problems found
+by <a href="http://clang.llvm.org/">clang</a>, mostly unused
+variables, unnecessary calculations but a couple of bad accesses.
+</p>
+
+
+<h2 id="rel0_9_25"><a name="rel0_9_25">Rasqal 0.9.25 changes</a></h2>
+
+<p>Issues Fixed:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=421">Issue #0000421</a>: Use raptor_syntax_description_validate() to validate Query Results formats</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=427">Issue #0000427</a>: INSERT/DELETE with &quot;&quot;&quot; quoting doesn't quite work</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=428">Issue #0000428</a>: @lang doesn't work with &quot;&quot;&quot;:</li>
+</ul>
+
+
+<h3>SPARQL 1.1 Query draft language changes</h3>
+
+<p>Added support for SPARQL 1.1 numeric functions <code>ABS()</code>,
+<code>ROUND()</code>, <code>CEIL()</code> and <code>FLOOR()</code>.
+</p>
+
+<p>Added support for SPARQL 1.1 <code>BIND(expr as ?var)</code>
+using existing <code>RASQAL_GRAPH_PATTERN_OPERATOR_LET</code>.
+</p>
+
+<p>Added support for SPARQL 1.1 <code>CLEAR</code> and
+<code>DROP</code> to use optional <code>SILENT</code> keyword.
+</p>
+
+<p>Added support for SPARQL 1.1 <code>RAND()</code> along with a
+query API feature for user setting of the random seed.</p>
+
+<p>Added support for SPARQL 1.1 TZ()</p>
+
+<p>Fixed SPARQL 1.1 <code>ENCODE_FOR_URI()</code> to not preserve
+language and datatype of input.
+</p>
+
+<p>Fixed support for SPARQL 1.1 <code>BNODE()</code> to work with no
+argument given.
+</p>
+
+<p>Fixed SPARQL 1.1 <code>GROUP BY</code> to allow an optional
+<code>AS ?var</code>.
+</p>
+
+<p>Fixed support for """-quoted and '''-quoted strings not over-quoting
+and adding support for optional language.
+Fixes
+<a href="http://bugs.librdf.org/mantis/view.php?id=427">Issue #0000427</a>
+and
+<a href="http://bugs.librdf.org/mantis/view.php?id=428">Issue #0000428</a>.
+</p>
+
+
+<h3>DateTime class changes</h3>
+
+<p>Added <code>rasqal_xsd_datetime_get_tz_as_counted_string()</code>
+to get back the timezone string component of a datetime.
+</p>
+
+
+<h3>Datatype class changes</h3>
+
+<p><code>rasqal_xsd_format_double()</code> now correctly formats
+numbers that have no trailing 0s.
+</p>
+
+
+<h3>Decimal class changes</h3>
+
+<p>Added <code>rasqal_xsd_decimal_abs()</code>,
+<code>rasqal_xsd_decimal_round()</code>,
+<code>rasqal_xsd_decimal_ceil()</code> and
+<code>rasqal_xsd_decimal_floor()</code> to support the ABS(),
+ROUND(), CEIL() and FLOOR() functions for decimals.
+</p>
+
+
+<h3>Expression class changes</h3>
+
+<p>rasqal_op gains
+<code>RASQAL_EXPR_ABS</code>,
+<code>RASQAL_EXPR_ROUND</code>,
+<code>RASQAL_EXPR_CEIL</code> and
+<code>RASQAL_EXPR_FLOOR</code> for numeric operations,
+<code>RASQAL_EXPR_RAND</code> for SPARQL 1.1 <code>RAND()</code>
+and <code>RASQAL_EXPR_TZ</code> for SPARQL 1.1 TZ() timezone accessor.
+</p>
+
+<p>Added an evaluation context structure
+<code>rasqal_evaluation_context</code> for the information needed to
+evaluate any <code>rasqal_expression</code> tree.  This makes
+expression evaluation independent of a query, but still tied to a
+rasqal world and (via variables) a variables table.  Added constructor
+<code>rasqal_new_evaluation_context()</code> to set the locator and
+flags, destructor <code>rasqal_free_evaluation_context()</code>,
+method <code>rasqal_evaluation_context_set_base_uri()</code> to
+set/reset the shared reference to the context base URI
+and method <code>rasqal_evaluation_context_set_rand_seed()</code>
+to set the random seed for the evaluation.
+</p>
+
+<p>Added <code>rasqal_expression_evaluate2()</code> taking just an
+expression and an evaluation context.
+</p>
+
+<p><code>rasqal_expression_evaluate()</code> is deprecated for the
+above.
+</p>
+
+<p>Added new method
+<code>rasqal_xsd_datetime_get_tz_as_counted_string()</code> for
+executing <code>RASQAL_EXPR_TZ</code> for SPARQL 1.1 TZ().
+</p>
+
+
+<h3>Query Engine changes</h3>
+
+<p>Initialise seed for RAND() from either a mixture of system sources
+or from a value set by user.  The user value can be set with new
+query feature <code>RASQAL_FEATURE_RAND_SEED</code>.  Uses
+<code>rasqal_evaluation_context_set_rand_seed()</code> on the query's
+internal evaluation context.
+</p>
+
+<p>Enable <code>rasqal_query_set_store_results()</code> to actually
+work after a query prepare.
+</p>
+
+<p>Handle evaluation of <code>FILTER</code> over an empty inner graph
+pattern such as in a query like <code>ASK WHERE { FILTER ( TRUE ) }</code>
+</p>
+
+<p>Ignore errors in executing SPARQL 1.1 project expression
+<code>AS</code> variables.
+</p>
+
+<p>Update <code>rasqal_literal_as_boolean()</code>,
+<code>rasqal_literal_as_integer</code> and
+<code>rasqal_literal_as_floating</code> when evaluating NULL to
+return a type error not an assertion failure or abort (in debug
+mode).
+</p>
+
+<p>Change internal error handling to separate a NULL return from an
+error return when evaluating expressions.  Updated lots of callers of
+expression evaluation to handle a NULL expression response.  Needed
+since now NULL is a valid expression evalution in some cases; like
+STRLANG() on non-simple literals.
+</p>
+
+<p>Updated to use <code>rasqal_evaluation_context</code> for
+expression evaluation.
+</p>
+
+<p>Handle support executing empty graph patterns such as in queries
+like <code>SELECT (expr AS ?var) WHERE {}</code> which just evaluates
+<code>expr</code> and returns a single row with a single result.
+</p>
+
+
+<h3>Query Result Formatter class changes</h3>
+
+<p>Handle NULL values for RDF and Tables results.
+</p>
+
+
+<h3>Other changes</h3>
+
+<p>Added <code>rasqal_world_get_query_language_description()</code>
+to get a description of a query language replacing and deprecating
+<code>rasqal_languages_enumerate()</code>.
+</p>
+
+<p>More fixes to check-query test script.
+</p>
+
+<p>Make GPL V2 or newer explicit in LICENSE.html.
+</p>
+
+
+
+<h2 id="rel0_9_24"><a name="rel0_9_24">Rasqal 0.9.24 Changes</a></h2>
+
+
+<h3>SPARQL 1.1 Update draft Language changes</h3>
+
+<p>Added support for <code>CLEAR</code> and <code>DROP</code>
+applying to more than one graph.  The options are now: just default
+graph with <code>DEFAULT</code>, all named graphs with
+<code>NAMED</code> and all graphs with <code>ALL</code>.
+</p>
+
+<p>Added support for optional <code>SILENT</code> flag before most
+update operations.
+</p>
+
+<p>Added support for <code>ADD</code>, <code>MOVE</code> and
+<code>COPY</code> operations which both operate between two graphs -
+either named or default.  The source graph is stored in the update
+structure <code>graph_uri</code> field and the destination graph in
+the <code>document_uri</code> field; the names have no meaning here
+since both are graphs and a NULL value signifies the default graph.
+</p>
+
+<p>Added support for <code>DELETE WHERE {}</code> writing the triple
+results into the <code>delete_templates</code> field of the update
+structure.
+</p>
+
+<p>Added support for multiple update operations in one 'query'
+separated by ';'.
+</p>
+
+<p><code>GROUP_CONCAT()</code> now sets the
+<code>RASQAL_EXPR_FLAG_AGGREGATE</code> rasqal_expression flag 
+like the other builtin aggregate expressions.
+</p>
+
+
+<h3>Query Engine changes</h3>
+
+<p>Fixed a few memory leaks in aggregate operation with
+<code>GROUP</code> and with <code>HAVING</code>.
+</p>
+
+
+<h3>Literal API changes</h3>
+
+<p>Fixed a memory leak with datetime literals.
+</p>
+
+
+<h3>Update API changes</h3>
+
+<p><code>rasqal_update_type</code> gains new enum values
+<code>RASQAL_UPDATE_TYPE_ADD</code>,
+<code>RASQAL_UPDATE_TYPE_MOVE</code> and
+<code>RASQAL_UPDATE_TYPE_COPY</code> for the SPARQL 1.1 Update ADD,
+MOVE and COPY operations respectively.
+</p>
+
+<p>Added enum <code>rasqal_update_graph_applies</code> to specify
+scope that update applies to beyond one graph to either just the
+default graph, to all named graphs or to all graphs.  Applies to
+CLEAR and DROP operations only
+</p>
+
+
+<h3>Other changes</h3>
+
+<p>Make all object destructors simply return on a NULL object
+pointer.  This was already done but with different code styles.
+</p>
+
+
+<h2 id="rel0_9_23"><a name="rel0_9_23">Rasqal 0.9.23 Changes</a></h2>
+
+<p>Fixed Issues:</p>
+<ul>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=407">0000407</a>: ORDER BY does not appear to handle undefined values correctly</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=414">0000414</a>: Type of operation->insert_templates depends on Update syntax</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=415">0000415</a>: Graph pattern operator not correctly filled out in SPARQL 1.1 Updates</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=417">0000417</a>: SELECT DISTINCT sometimes returns duplicates</li>
+</ul>
+
+
+<h3>Graph pattern class changes</h3>
+
+<p>Added <code>rasqal_graph_pattern_get_flattened_triples()</code> to
+flatten a recursive basic/graph graph pattern
+to a sequence of triples or triple patterns (have variables).
+</p>
+
+<h3>SPARQL Query Language changes</h3>
+
+<p>Fix the parsing of SPARQL 1.1 Update draft INSERT and DELETE to
+return sequences of triples in the insert_templates and
+delete_templates fields as documented.  It would previously sometimes
+return that but mostly return a sequence of recursive graph patterns.
+</p>
+
+<p>When a syntax error happens due to use of a language feature, do
+proper error handling (no aborting) and clean up parsing resources.
+</p>
+
+
+
+<h2 id="rel0_9_22"><a name="rel0_9_22">Rasqal 0.9.22 Changes</a></h2>
+
+<blockquote>
+<p><b>WARNING: ABI AND API CHANGED IN THIS RELEASE.</b></p>
+
+<p>This means: functions, enums and types were added, removed and changed.</p>
+
+<p>Consequently the shared library major soname version has changed from 2 to 3.</p> 
+
+</blockquote>
+
+<p>The main changes in this release were to add more draft SPARQL 1.1
+features and to use Raptor V2.</p>
+
+<p>Rasqal now depends on Raptor V2. Raptor V1 is not supported. The
+minimum Raptor2 version is 2.0.0.
+</p>
+
+<p>Given the the large dependency change above that requires
+recompiling with some breakage, this release makes an ABI and API
+break.  All deprecated functions, types and other deprecated
+functionality have been removed.  The libtool library version
+was bumped to 3.0.0.  The detailed API changes are described in the
+Changes section of the
+<a href="http://librdf.org/rasqal/docs/api/">Rasqal reference manual</a>.
+</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Query engine initialises start of execution datetime to enable a
+<code>NOW()</code> function to provide a stable value during a single
+execution.
+</p>
+
+
+<h3>Query Language Changes</h3>
+
+<p>Split query language support into more languages with aliases:
+</p>
+<ul>
+  <li><code>sparql</code> (and alias <code>sparql10</code>): SPARQL 1.0 query with no 1.1 features.</li>
+  <li><code>sparql11-query:</code> SPARQL 1.1 query.</li>
+  <li><code>sparql11-update:</code> SPARQL 1.1 update.</li>
+  <li><code>sparql11:</code> SPARQL 1.1 with both query and update.</li>
+  <li><code>laqrs:</code> LAQRS experimental language with all of above plus experiments.</li>
+</ul>
+
+
+<h3>LAQRS Query Language changes</h3>
+
+<p>Added experimental datetime builtin methods:</p>
+<ul>
+  <li><code>NOW()</code> / <code>CURRENT_DATETIME()</code>: Synonyms
+  to return an XSD datetime for the current wall clock date and time.
+  At the first execution / preparation of the query, the value is set
+  as a constant throughout the life of the query execution.
+  </li>
+  <li><code>FROM_UNIXTIME()</code>: turns an integer value into an XSD DateTime.
+  </li>
+  <li><code>TO_UNIXTIME()</code>: turns an XSD DateTime into an integer value.
+  </li>
+</ul>
+<p>These functions are not opposites and will not roundtrip date
+times since they do not take into consideration leap seconds or
+daylight saving time changes.
+</p>
+
+
+<h3>SPARQL Query Language changes</h3>
+
+<p>Fixed SPARQL 1.1 draft <code>isNUMERIC()</code> which was stored
+wrongly in the parse tree as <code>RASQAL_EXPR_ISLITERAL</code>.
+</p>
+
+<p>Added SPARQL 1.1 draft dateTime accessor builtin functions
+along with expression execution support.</p>
+<ul>
+  <li><code>DAY()</code></li>
+  <li><code>HOURS()</code></li>
+  <li><code>MINUTES()</code></li>
+  <li><code>MONTH()</code></li>
+  <li><code>SECONDS()</code></li>
+  <li><code>TIMEZONE()</code></li>
+  <li><code>YEAR()</code></li>
+</ul>
+
+<p>Added SPARQL 1.1 draft string builtin functions
+along with expression execution support.</p>
+<ul>
+  <li><code>CONCAT()</code></li>
+  <li><code>CONTAINS()</code></li>
+  <li><code>ENCODE_FOR_URI()</code></li>
+  <li><code>LCASE()</code></li>
+  <li><code>STRENDS()</code></li>
+  <li><code>STRLEN()</code></li>
+  <li><code>STRSTARTS()</code></li>
+  <li><code>SUBSTR()</code></li>
+  <li><code>UCASE()</code></li>
+</ul>
+
+
+
+<h3>Data Graph class changes</h3>
+
+<p>Removed deprecated <code>rasqal_new_data_graph()</code>
+constructor replaced by <code>rasqal_new_data_graph_from_uri()</code>
+with additional arguments.
+</p>
+
+
+<h3>Datetime class changes</h3>
+
+<p>Added <code>rasqal_xsd_datetime</code> class to the public API
+implementing the XML Schema datatypes (XSD) dateTime with microsecond
+accuracy (where present) and timezone offsets of minutes accuracy.
+The new class has constructors:</p>
+<ul>
+  <li><code>rasqal_new_xsd_datetime()</code></li>
+  <li><code>rasqal_new_xsd_datetime_from_timeval()</code></li>
+  <li><code>rasqal_new_xsd_datetime_from_unixtime()</code></li>
+</ul>
+<p>destructor:</p>
+<ul>
+  <li><code>rasqal_free_xsd_datetime()</code></li>
+</ul>
+<p>and methods:</p>
+<ul>
+  <li><code>rasqal_xsd_datetime_compare()</code></li>
+  <li><code>rasqal_xsd_datetime_equals()</code></li>
+  <li><code>rasqal_xsd_datetime_get_as_timeval()</code></li>
+  <li><code>rasqal_xsd_datetime_get_as_unixtime()</code></li>
+  <li><code>rasqal_xsd_datetime_get_seconds_as_decimal()</code></li>
+  <li><code>rasqal_xsd_datetime_get_timezone_as_counted_string()</code></li>
+  <li><code>rasqal_xsd_datetime_set_from_timeval()</code></li>
+  <li><code>rasqal_xsd_datetime_set_from_unixtime()</code></li>
+  <li><code>rasqal_xsd_datetime_to_counted_string()</code></li>
+  <li><code>rasqal_xsd_datetime_to_string()</code></li>
+</ul>
+
+
+<h3>Expression class changes</h3>
+
+<p><code>rasqal_expression_evaluate()</code> now evaluates the new
+SPARQL 1.1 draft strings and datetime builtin functions.
+</p>
+
+<p><code>rasqal_op</code> gains new values for SPARQL 1.1 builtin
+functions:</p>
+<ul>
+  <li><code>RASQAL_EXPR_CONCAT</code></li>
+  <li><code>RASQAL_EXPR_DAY</code></li>
+  <li><code>RASQAL_EXPR_HOURS</code></li>
+  <li><code>RASQAL_EXPR_MINUTES</code></li>
+  <li><code>RASQAL_EXPR_MONTH</code></li>
+  <li><code>RASQAL_EXPR_SECONDS</code></li>
+  <li><code>RASQAL_EXPR_TIMEZONE</code></li>
+  <li><code>RASQAL_EXPR_YEAR</code></li>
+</ul>
+
+<p><code>rasqal_op</code> gains new values for LAQRS experimental
+builtin functions:</p>
+<ul>
+  <li><code>RASQAL_EXPR_CURRENT_DATETIME</code></li>
+  <li><code>RASQAL_EXPR_FROM_UNIXTIME</code></li>
+  <li><code>RASQAL_EXPR_NOW</code></li>
+  <li><code>RASQAL_EXPR_TO_UNIXTIME</code></li>
+</ul>
+
+<p><code>rasqal_new_function_expression()</code> constructor gained
+<code>params</code> and <code>flags</code> arguments to handle
+aggregate expressions.  This was renamed from
+<code>rasqal_new_function_expression2()</code>.
+</p>
+
+<p>Removed deprecated <code>rasqal_new_function_expression2()</code>
+replaced by <code>rasqal_new_function_expression()</code> with same
+arguments.
+</p>
+
+<p>Added constructor <code>rasqal_new_expr_seq_expression()</code>
+replacing <code>rasqal_new_coalesce_expression()</code> and taking an
+op argument to use for different expression operations.
+</p>
+
+<p>Removed method <code>rasqal_new_coalesce_expression()</code>
+replaced by <code>rasqal_new_expr_seq_expression()</code> with
+additional op argument.
+</p>
+
+<p><code>rasqal_expression_evaluate()</code> evalutes experimental
+LAQRS datetime builtin methods <code>NOW()</code>,
+<code>CURRENT_DATETIME()</code>, <code>FROM_UNIXTIME()</code> and
+<code>TO_UNIXTIME()</code>.
+</p>
+
+<p>Fixed <code>RASQAL_EXPR_DATATYPE</code> expression execution to
+return the result rather than the function argument.
+</p>
+
+
+<h3>Literal class changes</h3>
+
+<p>Support XSD dateTime literals.  <code>rasqal_literal</code> value
+union gains a datetime field.</p>
+
+<p>Added new constructor
+<code>rasqal_new_datetime_literal_from_datetime()</code> to make a
+datetime literal.</p>
+
+<p><code>rasqal_literal_set_typed_value()</code> turns xsd:dateTime
+literals into <code>rasqal_xsd_datetime</code> objects.
+</p>
+
+<p><code>rasqal_literal_equals_flags()</code> and
+<code>rasqal_literal_compare()</code> now use <code>rasqal_datetime</code>
+equality and comparison methods.
+</p>
+
+<p>Added new accessor <code>rasqal_literal_as_counted_string()</code>
+get the string version of its and its length, letting the caller
+avoid strlen() on the result.
+</p>
+
+
+<h3>Query class changes</h3>
+
+<p>Added method <code>rasqal_query_get_result_type()</code>
+to get the expected result type based on the query structure.
+</p>
+
+<p>Added method <code>rasqal_query_set_store_results</code> to enable
+storing results of an execution.</p>
+
+
+<p>Removed deprecated methods:
+<code>rasqal_query_set_fatal_error_handler()</code>
+<code>rasqal_query_set_error_handler()</code>
+<code>rasqal_query_set_warning_handler()</code>
+replaced by using
+<code>rasqal_world_set_log_handler()</code> calling a
+raptor_log_handler.
+</p>
+
+<p>Removed deprecated methods:
+<code>rasqal_query_set_default_generate_bnodeid_parameters()</code>
+<code>rasqal_query_set_generate_bnodeid_handler()</code>
+that have moved to methods on the rasqal_world object:
+<code>rasqal_world_set_default_generate_bnodeid_parameters()</code> and
+<code>rasqal_world_set_generate_bnodeid_handler()</code> respectively.
+</p>
+
+<p><code>rasqal_query_add_data_graph()</code> was altered to take a
+single <code>rasqal_data_graph</code> argument instead of uri, name
+and flags.  This was renamed from <code>rasqal_query_add_data_graph2()</code>.
+</p>
+
+<p>Removed
+<code>rasqal_query_add_data_graph2()</code> replaced by
+<code>rasqal_query_add_data_graph()</code> with same arguments.
+</p>
+
+
+<h3>Query Results class changes</h3>
+
+<p>Added support for query result rewinding, if the results
+were stored in execution via <code>rasqal_query_set_store_results()</code>,
+new method <code>rasqal_query_results_rewind()</code> may be called
+to reset back to the initial binding result.
+</p>
+
+<p>Added <code>rasqal_query_results_get_row_by_offset()</code> to
+access stored query result rows if storing results was enabled by
+<code>rasqal_query_set_store_results()</code>.
+</p>
+
+<p>Enum <code>rasqal_query_results_type</code> gains value
+<code>RASQAL_QUERY_RESULTS_UNKNOWN</code> for when a query result
+type is unknown or yet to be determined.
+</p>
+
+<p>Added method <code>rasqal_query_results_get_type()</code>
+to get the query result type.
+</p>
+
+<p><code>rasqal_query_results_read()</code> was altered to take a
+name, mime_type, format_uri, base_uri args instead of format_uri,
+base_uri.  This was renamed from <code>rasqal_query_results_read2()</code>.
+</p>
+
+<p>Removed <code>rasqal_query_results_read2()</code>
+replaced by <code>rasqal_query_results_read()</code> with the same arguments.
+</p>
+
+<p><code>rasqal_query_results_write()</code> was altered to take a
+name, mime_type, format_uri, base_uri args instead of format_uri,
+base_uri.  This was renamed from <code>rasqal_query_results_write2()</code>.
+</p>
+
+<p>Removed <code>rasqal_query_results_write2()</code>
+replaced by <code>rasqal_query_results_write()</code> with same arguments.
+</p>
+
+
+<h3>Query Results Formatter class changes</h3>
+
+<p>Added new constructor
+<code>rasqal_new_query_results_formatter_for_content()</code>
+to get a query result formatter based on guessing from format URI, name,
+mime type, some initial content or an identifier using
+<code>rasqal_world_guess_query_results_format_name()</code>.
+</p>
+
+<p>Removed <code>rasqal_new_query_results_formatter2()</code>
+constructor replaced by
+<code>rasqal_new_query_results_formatter()</code> constructor.
+</p>
+
+<p>Removed deprecated
+<code>rasqal_new_query_results_formatter_by_mime_type()</code>
+replaced by
+<code>rasqal_new_query_results_formatter_for_content()</code> with
+additional arguments.
+</p>
+
+<p>Added world method
+<code>rasqal_world_guess_query_results_format_name()</code> to guess
+format based on format URI, mime type, some initial content or an
+identifier.</p>
+
+<p>Added guessing based on identifier/filename suffix for the 'rdf'
+(.rdf), 'turtle' (.ttl, .n3) and 'xml' (.srx) formatters.
+</p>
+
+<p>Added reading support for the existing 'rdfxml' and 'turtle' query
+result formatters to make both of these read/write formatters.
+</p>
+
+<p>Added
+<code>rasqal_world_get_query_results_format_description()</code> to
+get the list of query results format syntaxes using a
+<code>raptor_syntax_description</code> structure.  This replaced and
+deprecates the <code>rasqal_query_results_formats_enumerate()</code>
+and <code>rasqal_query_results_formatter_get_mime_type()</code>
+methods.</p>
+
+<p>This change allows the query result formats to be identified and
+discovered by multiple names (aliases) and URI strings when using the
+<code>rasqal_new_query_results_formatter2()</code> constructor.
+</p>
+
+<p><code>rasqal_new_query_results_formatter()</code> constructor was
+altered to take name, format type, format URI args instead of just
+name, format URI.  This was renamed from
+<code>rasqal_new_query_results_formatter2()</code>.
+</p>
+
+<p><code>rasqal_query_results_formats_check()</code> was altered to
+take name, format URI, mime_type flags instead of name, uri and
+type. This was renamed from <code>rasqal_query_results_formats_check2()</code>.
+</p>
+
+<p>Removed <code>rasqal_query_results_formats_check2()</code>
+replaced by <code>rasqal_query_results_formats_check()</code> with
+the same arguments.
+</p>
+
+<p>Removed <code>rasqal_query_results_formats_enumerate()</code> replaced by
+<code>rasqal_world_get_query_results_format_description()</code>
+using static syntax description approach.
+</p>
+
+<p>Removed <code>rasqal_query_results_formatter_get_mime_type()</code>
+replaced by using fields of <code>raptor_syntax_description</code> structure
+returned by <code>rasqal_world_get_query_results_format_description()</code>.
+</p>
+
+
+<h3>Variable class changes</h3>
+
+<p>Removed deprecated constructors
+<code>rasqal_new_variable_typed()</code>
+<code>rasqal_new_variable()</code> replaced by the
+<code>rasqal_variables_table_add()</code> method on a variables table
+to create and add a variable in a context.
+</p>
+
+
+<h3>Other changes</h3>
+
+<p>Replaced all uses of <code>strcpy()</code> with
+<code>memcpy()</code> and known lengths.
+</p>
+
+<p>Refactored huge <code>rasqal_expression_evaluate()</code> switch
+and case code into sub-methods preparing for possible later change to
+a jump table based on expression operation.
+</p>
+
+<p><code>rasqal_xsd_decimal_as_string()</code>: Fix decimal to string
+xsd lexical form details: rounding precision, format details (such as
+0.0 not 0.0E0) when built with MPFR or GMP instead of the (imprecise)
+<code>double</code> implementation.
+</p>
+
+<p>Fix xsd double lexical form formatting to use capital E.
+</p>
+
+<p>Started creating <code>check-query</code> query test runner utility.
+</p>
+
+
+
+<h2 id="rel0_9_21"><a name="rel0_9_21">Rasqal 0.9.21 Changes</a></h2>
+
+<p>The main changes in this release are to add support for features of
+<a href="http://www.w3.org/TR/2010/WD-sparql11-query-20101014/">SPARQL 1.1 Query</a>
+W3C working draft of 14 October 2010:
+</p>
+<ul>
+<li>Executing grouping of results: <code>GROUP BY</code></li>
+<li>Executing aggregate expressions: <code>AVG</code>, <code>COUNT</code>, <code>GROUP_CONCAT</code>, <code>MAX</code>, <code>MIN</code>, <code>SAMPLE</code>, <code>SUM</code></li>
+<li>Executing filtering of aggregate expressions: <code>HAVING</code></li>
+<li>Parsing of new syntax: <code>BINDINGS</code>, <code>isNUMERIC()</code>, <code>MINUS</code>, sub <code>SELECT</code> and <code>SERVICE</code>.</li>
+</ul>
+
+<p>Fixed Issues:</p>
+<ul>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=388">0000388</a>: Can only write JSON format for variable binding and boolean results</li>
+</ul>
+
+
+<h3>Query Engine changes</h3>
+
+<p>Support executing new SPARQL 1.1 draft function
+<code>isNUMERIC()</code>.</p>
+
+<p>Support executing built-in aggregate expressions:</p>
+<ul>
+  <li><code>AVG(expr)</code></li>
+  <li><code>COUNT(*)</code> and <code>COUNT(expr)</code></li>
+  <li><code>GROUP_CONCAT(expr)</code> with optional <code>;separator = 'string'</code></li>
+  <li><code>MAX(expr)</code></li>
+  <li><code>MIN(expr)</code></li>
+  <li><code>SAMPLE(expr)</code></li>
+  <li><code>SUM(expr)</code></li>
+</ul>
+<p>with and without <code>DISTINCT</code> across the arguments.</p>
+
+<p>Support executing grouping of results with <code>GROUP BY</code>
+(or implicitly if aggregate function was given) and
+<code>HAVING</code> to filter groups.
+</p> 
+
+
+<h3>LAQRS Query Language changes</h3>
+
+<p>Explain more carefully that <code>EXPLAIN</code> and
+<code>COALESCE()</code> are LAQRS only and remain experimental.
+</p>
+
+
+<h3>SPARQL Query Language changes</h3>
+
+<p>Separate SPARQL 1.0 and SPARQL 1.1 draft language names giving query
+languages <em>sparql</em> (with alias <em>sparql10</em> for SPARQL
+1.0), <em>sparql11</em> for SPARQL 1.1 and <em>laqrs</em> for
+experiments.  The <em>sparql</em> name without a version currently
+points to SPARQL 1.0 but over time will advance to be SPARQL 1.1
+</p>
+
+<p>Added support for parsing (not executing) new SPARQL 1.1 draft tokens:
+<code>BINDINGS</code> for variable bindings, <code>UNDEF</code>,
+<code>SERVICE</code> and <code>MINUS</code>.
+</p>
+
+<p>Added support for parsing and executing new SPARQL 1.1 draft
+<code>isNUMERIC()</code> expression.
+</p>
+
+<p>Added support for parsing (not executing) new SPARQL 1.1 draft
+sub-<code>SELECT</code> queries.
+</p>
+
+<p>Support for parsing and executing built-in (not user) aggregate expressions:
+<code>AVG(expr)</code>,
+<code>COUNT(*)</code> and <code>COUNT(expr)</code>,
+<code>GROUP_CONCAT(expr)</code> with optional <code>;separator = 'string'</code>,
+<code>MAX(expr)</code>,
+<code>MIN(expr)</code>,
+<code>SAMPLE(expr)</code>
+and
+<code>SUM(expr)</code>
+with and without <code>DISTINCT</code> across the arguments.
+</p>
+
+<p>Added support for executing grouping of results with <code>GROUP BY</code>
+(or implicitly if aggregate function was given) and <code>HAVING</code>
+to filter groups.
+</p> 
+
+
+<h3>Bindings class changes</h3>
+
+<p>Added a class to support for SPARQL 1.1 draft
+<code>BINDINGS</code> in a query specifying a set of variable
+bindings and a sequence of rows of values to bind to them.  Intended
+for applying to a SPARQL 1.1 draft query <code>SERVICE</code>
+call.</p>
+
+<p>Added bindings class rasqal_bindings with constructor
+<code>rasqal_new_bindings</code>, destructor
+<code>rasqal_free_bindings()</code> and method
+<code>rasqal_bindings_print()</code>
+</p>
+
+<p>Added accessor methods for getting bindings variables and rows
+<code>rasqal_query_get_bindings_variables_sequence()</code>,
+<code>rasqal_query_get_bindings_variable()</code>,
+<code>rasqal_query_get_bindings_rows_sequence()</code> and
+<code>rasqal_query_get_bindings_row()</code>
+</p>
+
+
+<h3>Data Graph class changes</h3>
+
+<p>Turn a data graph into a reference-counted class and add support
+for specifying the format of a data graph for parsing after
+retrieval.</p>
+
+<p>typedef <code>rasqal_data_graph</code> gains new optional
+format_type, format_name and format_uri fields for describing the
+format of the graph an optional uri field for base URI and
+a usage field.
+</p>
+
+<p>Added constructor
+<code>rasqal_new_data_graph_from_uri()</code> with format_type,
+format_name and format_uri args deprecating rasqal_new_data_graph()
+without them, which always guessed the format.
+</p>
+
+<p>Added constructor
+<code>rasqal_new_data_graph_from_iostream()</code> taking a
+raptor_iostream arg to allow getting data graphs from non-URIs which
+could be strings, memory etc.
+</p>
+
+<p>Added copy constructor
+<code>rasqal_new_data_graph_from_data_graph()</code> for data graphs.
+</p>
+
+
+
+<h3>Expression and literal class changes</h3>
+
+<p>Added support for SPARQL 1.1 draft <code>isNUMERIC()</code>
+expressions.  The <code>rasqal_op</code> gains a new
+<code>RASQAL_EXPR_ISNUMERIC</code> value.
+</p>
+
+<p>Added <code>rasqal_expression_op_label()</code> to return
+the label for an expression operation.
+</p>
+
+<p>Added <code>rasqal_expression_compare()</code> to compare
+literals.
+</p>
+
+<p>Added <code>rasqal_expression_is_aggregate()</code> to test if an
+expression is an aggregate one - has an aggregate operation or
+user-defined function.
+</p>
+
+<p>Added <code>rasqal_literal_type_label()</code> to return
+the label for a literal type.
+</p>
+
+
+<h3>Graph pattern class changes</h3>
+
+<p><code>rasqal_graph_pattern_operator</code> enumeration gains
+new values for SPARQL 1.1 draft features:
+<code>RASQAL_GRAPH_PATTERN_OPERATOR_SELECT</code> for sub-SELECT,
+<code>RASQAL_GRAPH_PATTERN_OPERATOR_SERVICE</code> for service binding and
+<code>RASQAL_GRAPH_PATTERN_OPERATOR_MINUS</code> for minus operation
+between graph patterns.
+</p>
+
+<p>Added new constructor <code>rasqal_new_single_graph_pattern()</code>
+for use with service and minus graph patterns.
+</p>
+
+<p>Added <code>rasqal_graph_pattern_get_variable()</code> method to
+get the variable for SPARQL 1.1 draft <code>BIND</code> and LAQRS
+<code>LET</code> graph patterns.
+</p>
+
+<p>Added <code>rasqal_graph_pattern_get_service()</code> method to
+get the service object for SPARQL 1.1 draft <code>SERVICE</code>
+graph pattern.
+</p>
+
+
+<h3>Query class changes</h3>
+
+<p>Added <code>rasqal_query_add_data_graph2()</code> to
+add a previously constructed data graph to a query
+deprecating <code>rasqal_query_add_data_graph()</code> that 
+did construct and add in one go.
+</p>
+
+<p>Added <code>rasqal_query_add_data_graphs()</code> to
+add a sequence of data graphs to a query.
+</p>
+
+<p>Added <code>rasqal_query_add_data_graph_from_iostream()</code>
+using new <code>rasqal_new_data_graph_from_iostream()</code>.
+</p>
+
+<p>Note in the docs for <code>rasqal_query_set_limit()</code> and
+<code>rasqal_query_set_offset()</code> that with the new query engine
+approach, you cannot set the limit or offset until the query is
+prepared which is after parsing.
+</p>
+
+
+<h3>Query results class changes</h3>
+
+<p>Add a formatter to write a variable bindings query results in
+Turtle format with the schema used for the W3C DAWG and SPARQL
+Working group test cases.
+</p>
+
+<p><code>rasqal_query_results_formats_check2()</code> added with new
+flags arg for asking for a format to read or write, deprecating
+<code>rasqal_query_results_formats_check()</code> without it.
+</p>
+
+
+<h3>Row class changes</h3>
+
+<p>The <code>rasqal_row</code> gains a <code>group_id</code> field
+for returning group boundaries.  Change of groups should be detected
+by a change in IDs between rows.
+</p>
+
+
+<h3>Service class changes</h3>
+
+<p>Added a <code>rasqal_service</code> class for executing remote
+queries against a SPARQL HTTP protocol endpoint and getting back a
+query results set.  The data graphs attached get turned into
+<code>default-graph-uri</code> and <code>named-graph-uri</code> URI
+parameters to the request.
+</p>
+
+<p>Added constructor <code>rasqal_new_service()</code>,
+destructor <code>rasqal_free_service()</code> and methods
+<code>rasqal_service_set_www()</code> to set the WWW object
+<code>rasqal_service_set_format()</code> to set the accept
+request header and
+<code>rasqal_service_execute()</code> to execute the query
+returning the results.
+</p>
+
+
+<h3>Triples source class changes</h3>
+
+<p>Add a way for a triples source factory to return meaningful errors
+by adding a new <code>init_triples_source</code> factory method to
+the <code>rasqal_triples_source_factory</code> that takes a
+<code>rasqal_triples_error_handler</code> callback.  The
+<code>RASQAL_TRIPLES_SOURCE_FACTORY_MAX_VERSION</code> is now 2 and
+ranges 1 to 2 are supported.
+</p>
+
+<p>Add a way for a triples source to indicate support for optional
+features by adding a <code>support_feature</code> method toe the
+<code>rasqal_triples_source</code> structure.  The
+<code>RASQAL_TRIPLES_SOURCE_MAX_VERSION</code> is now 2 and
+ranges 1 to 2 are supported.
+</p>
+
+<p>Added enum <code>rasqal_triples_source_feature</code> with
+value <code>RASQAL_TRIPLES_SOURCE_FEATURE_IOSTREAM_DATA_GRAPH</code>
+to indicate a triple source supports reading data graphs from
+a <code>raptor_iostream</code>.
+</p>
+
+
+<h3>Variable class changes</h3>
+
+<p>Now a reference-counted class.</p>
+
+<p>Deprecated <code>rasqal_new_variable()</code> and
+<code>rasqal_new_variable_typed()</code> for
+<code>rasqal_variables_table_add()</code>.
+</p>
+
+
+<h3>Internal changes</h3>
+
+<p>All destructors accept NULL objects and do nothing.
+</p>
+
+<p>Add a Raptor V2-style raptor_syntax_description data model to
+Rasqal and use it to initialise query languages.  It is not currently
+exposed in the API and may not be until Rasqal requires Raptor V2 when
+it can share code.
+</p>
+
+<p>Added an internal <code>rasqal_bindings</code> structure
+for SPARQL 1.1 <code>BINDINGS</code>.
+</p>
+
+<p>Add an internal query results modifiers structure
+rasqsal_solution_modifier class for use in storing group by, having,
+limit, offset information which together SPARQL 1.1 documentationc
+calls modifiers.
+</p>
+
+<p>Added rowsources for grouping, executing aggregated queries across
+groups, having filters per group.  Modified the projection rowsource
+to handle aggregation.
+</p>
+
+
+<h3><code>roqet(1)</code> utility changes</h3>
+
+<p>Added support for serializing to graphs or bindings with the same
+Raptor serializer / Rasqal result formatter name such as for example
+'json'.
+</p>
+
+<p>Added <code>-F NAME</code> option for specifying the data graph
+format; otherwise Raptor uses the guessing mechanism.</p>
+
+<p>Added support for reading a data graph from standard input (stdin)
+when the <code>-D</code> / <code>--data</code> , <code>-G</code> /
+<code>--name</code> or <code>-s</code> / <code>--source</code>
+options are used with value <code>'-'</code>.
+</p>
+
+<p>Added <code>-p</code> / <code>--protocol</code>
+<em>SERVICE-URI</em> option to execute a remote query at a SPARQL
+HTTP protocol URI.  This is used with <code>-e</code> <em>query
+string</em> to specify the query to execute remotely.
+</p>
+
+
+<h3>Configuration and build changes</h3>
+
+<p>Use AC_LANG_SOURCE for gcc flag test.
+</p>
+
+<h3>Other changes</h3>
+
+<p>The srxread and srxwrite example programs now build when Rasqal is
+configured and built with raptor V2.
+</p>
+
+
+<h2 id="rel0_9_20"><a name="rel0_9_20">Rasqal 0.9.20 Changes</a></h2>
+
+<p>The main changes in this release are:</p>
+<ul>
+<li>Support more SPARQL 1.1 Query and Update draft syntax and some
+execution semantics for new built-in expressions.</li>
+<li>Support building with Raptor V2 API as well as Raptor V1 API.  The Raptor V2 API is only used if <code>--enable-raptor2</code> is given to <code>configure</code>.</li>
+</ul>
+
+<p>Fixed Issues:</p>
+<ul>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=352">0000352</a>: CONSTRUCT with a LIMIT doesn't limit query results</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=353">0000353</a>: CONSTRUCT with an ORDER always(?) returns an empty graph</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=354">0000354</a>: Comparing xsd:int and xsd:integer fails in SPARQL</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=360">0000360</a>: [PATCH] HTML Table results format</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=374">0000374</a>: Solaris 10 'make check' failures</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=377">0000377</a>: Cannot format results in roqet</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=378">0000378</a>: Crash when cleaning up after a failed query containing unsupported syntax</li>
+</ul>
+
+
+<h3>Query API changes</h3>
+
+<p>Moved generate blank node ID functionality to world class.
+Deprecated
+<code>rasqal_query_set_default_generate_bnodeid_parameters()</code>
+for
+<code>rasqal_world_set_default_generate_bnodeid_parameters()</code>.
+Deprecated <code>rasqal_query_set_generate_bnodeid_handler()</code>
+for new function (with different handler signature)
+<code>rasqal_world_set_generate_bnodeid_handler()</code>.
+</p>
+
+<p>Added <code>rasqal_query_get_having_conditions_sequence()</code> and
+<code>rasqal_query_get_having_condition()</code> for getting access
+to the HAVING expression list in a query.
+</p>
+
+
+<h3>Expression and literal class changes</h3>
+
+<p>Added new literal type <code>RASQAL_LITERAL_INTEGER_SUBTYPE</code>
+to let subtypes of <code>xsd:integer</code> work in data and
+expression evaluation.
+</p>
+
+<p>Add support for SPARQL 1.1 draft <code>FILTER</code> expression
+operators including execution in the expression evaluation and
+writing the expression as SPARQL:</p>
+<table>
+<tr>
+<th>New <code>rasqal_op</code> enum</th>
+<th>SPARQL 1.1 expression</th>
+</tr>
+<tr>
+<td><code>RASQAL_EXPR_IF</code></td>
+<td>IF(condition expression, expr if true, expr if false)</td>
+</tr>
+<tr>
+<td><code>RASQAL_EXPR_URI</code></td>
+<td>URI(uri string)</td>
+</tr>
+<tr>
+<td><code>RASQAL_EXPR_IRI</code></td>
+<td>IRI(iri string)</td>
+</tr>
+<tr>
+<td><code>RASQAL_EXPR_STRLANG</code></td>
+<td>STRLANG(literal string, language string)</td>
+</tr>
+<tr>
+<td><code>RASQAL_EXPR_STRDT</code></td>
+<td>STRDT(literal string, datatype URI)</td>
+</tr>
+<tr>
+<td><code>RASQAL_EXPR_BNODE</code></td>
+<td>BNODE() and BNODE(string)</td>
+</tr>
+<tr>
+<td><code>RASQAL_EXPR_IN</code></td>
+<td>Expr IN ( list )</td>
+</tr>
+<tr>
+<td><code>RASQAL_EXPR_NOT_IN</code></td>
+<td>Expr NOT IN ( list )</td>
+</tr>
+</table>
+
+<p>Added expression evaluation and expression formatting support for
+the above new (non-aggregate) expression operations in:
+<code>rasqal_expression_clear()</code>,
+<code>rasqal_expression_visit()</code>,
+<code>rasqal_expression_write()</code>,
+<code>rasqal_expression_print()</code>,
+<code>rasqal_expression_is_constant()</code> and
+<code>rasqal_query_write_sparql_expression()</code>.</p>
+
+<p>Added <code>rasqal_op</code> enumeration values for built-in
+aggregate functions <code>RASQAL_EXPR_GROUP_CONCAT</code> and
+<code>RASQAL_EXPR_SAMPLE</code> but no expression execution.
+</p>
+
+<p>Added new bitflags <code>rasqal_expression_flags</code> for
+<code>rasqal_expression</code> flags with initial bitflags
+<code>RASQAL_EXPR_FLAG_DISTINCT</code> for distinct (aggregate functions) and
+<code>RASQAL_EXPR_FLAG_AGGREGATE</code> for aggregate functions.
+</p>
+
+<p>Added <code>rasqal_new_function_expression2()</code> for functions
+with parameters and optional bit flags deprecating
+<code>rasqal_new_function_expression()</code>.  This is not
+capable of adding a user extension aggregate function.
+</p>
+
+<p>Added new <code>rasqal_new_aggregate_function_expression()</code>
+constructor for making a 1-arg built-in aggregate functions.
+This is not capable of adding a user extension aggregate function.
+</p>
+
+<p>The never used <code>RASQAL_EXPR_GROUP_COND_ASC</code> and
+<code>RASQAL_EXPR_GROUP_COND_DESC</code> are marked as obsolete.
+</p>
+
+<p>Updated documentation for <code>rasqal_expression_visit()</code>,
+<code>rasqal_graph_pattern_visit_fn</code> and
+<code>rasqal_expression_visit_fn</code> typedef to match what the code
+actually does.</p>
+
+<p>Added <code>rasqal_new_group_concat_expression()</code> for
+building SPARQL GROUP_CONCAT() expressions with flags, non-empty list
+of expressions and optional literal separator.
+</p>
+
+
+<h3>SPARQL query language changes</h3>
+
+<p>Support latest
+<a href="http://www.w3.org/TR/2010/WD-sparql11-query-20100601/">SPARQL 1.1 Query W3C working draft of 1 June 2010</a>
+syntax such as:</p>
+
+<p>For SPARQL 1.1 Query, allow <code>DISTINCT</code> optionally before extension function
+expressions with new flag <code>RASQAL_EXPR_FLAG_DISTINCT</code>.</p>
+
+<p>Added draft SPARQL 1.1 Query <code>IF()</code>, <code>URI()</code>,
+<code>IRI()</code>, <code>STRLANG()</code>, <code>STRDT()</code> and
+<code>BNODE()</code> (with optional expression arg) built-in
+expressions.</p>
+
+<p>Added draft SPARQL 1.1 Query <code>IN()</code> and <code>NOT IN()</code>
+operators.</p>
+
+<p>Adjust draft SPARQL 1.1 Query select expression syntax to latest
+version: '(' Expr 'AS' Var ')' with required braces.
+</p>
+
+<p>Added draft SPARQL 1.1 Query aggregate functions
+<code>GROUP_CONCAT()</code> and <code>SAMPLE()</code>
+with new expression enum
+<code>RASQAL_EXPR_GROUP_CONCAT</code> and
+<code>RASQAL_EXPR_SAMPLE</code> as well as formatting to SPARQL and
+placeholder expression handling implementation - no aggregate expression
+evaluation.  Supports the optional <code>; SEPARATOR =
+"string"</code> syntax for GROUP_CONCAT().
+</p>
+
+<p>Add support for draft SPARQL 1.1 Query syntax
+<code>GROUP BY</code> a list of select expressions and
+<code>HAVING</code> with a list of expressions.
+</p>
+
+<p>Add partial support for draft SPARQL 1.1 Query extension (aggregate)
+functions with DISTINCT and parameters.
+</p>
+
+<p>Support latest
+<a href="http://www.w3.org/TR/2010/WD-sparql11-update-20100601/">SPARQL 1.1 Update W3C working draft of 1 June 2010</a>
+syntax such as:</p>
+<ul>
+<li><code>CLEAR GRAPH DEFAULT</code></li>
+<li><code>CLEAR GRAPH <em>uri</em></code></li>
+<li><code>DELETE DATA { ... }</code></li>
+<li><code>DELETE DATA { GRAPH <em>uri</em> { ... } } INSERT DATA { GRAPH <em>uri</em> { ... } }</code></li>
+<li><code>DELETE WHERE { ... }</code></li>
+<li><code>DELETE WHERE { GRAPH <em>uri</em> { ... } }</code></li>
+<li><code>DELETE { ... } WHERE { ... }</code></li>
+<li><code>DROP GRAPH <em>uri</em></code></li>
+<li><code>DROP SILENT GRAPH <em>uri</em></code></li>
+<li><code>INSERT DATA { ... }</code></li>
+<li><code>INSERT { GRAPH <em>uri</em> { ... } } WHERE { ... }</code></li>
+<li><code>LOAD <em>uri</em> INTO DEFAULT</code></li>
+<li><code>LOAD <em>uri</em> INTO <em>uri</em></code></li>
+<li><code>LOAD <em>uri</em></code></li>
+<li><code>WITH <em>uri</em> DELETE { ... } INSERT { ... } USING NAMED <em>uri</em> WHERE { ... }</code></li>
+</ul>
+<p>Not all cases may be covered
+yet since the grammar is hard to implement and may be ambiguous.
+</p>
+
+<h3>LAQRS syntax support</h3>
+
+<p>Start giving deprecated messages for LAQRS <code>SELECT ... AS
+varname</code> (bare variable name) instead of the draft SPARQL 1.1
+Query <code>SELECT ... AS ?varname</code> with $ or ? symbol.
+</p>
+
+
+<h3>Query engine changes</h3>
+
+<p>Make query result limit and offset work when no <code>ORDER
+BY</code> is part of the query (yes - this is a well-defined count of
+under-defined actual results) with the original query engine.
+Related to
+<a href="http://bugs.librdf.org/mantis/view.php?id=352">Issue#0000352</a>.
+</p>
+
+<p>Add datatype support for <code>xsd:date</code> for value
+normalization and comparisons.
+</p>
+
+<p>Handle when results are sorted before used to build triples via
+<code>CONSTRUCT</code>, which has no practical use since triples are
+not ordered and is less efficient since you have to read all the
+results into memory.  Anyway, it works now.
+</p>
+
+
+<h3>Query results formatter class changes</h3>
+
+<p>Added an HTML Table results format (name 'table') by Nicholas J Humfrey
+using patch from 
+<a href="http://bugs.librdf.org/mantis/view.php?id=360">Issue#0000360</a>.
+</p>
+
+<p>A NULL base_uri is valid in
+<code>rasqal_query_results_formatter_write()</code></p>
+
+
+<h3>World class changes</h3>
+
+<p>Moved generate blank node ID functionality to
+world class, deprecating the query class methods.
+Added
+<code>rasqal_world_set_default_generate_bnodeid_parameters()</code>,
+<code>rasqal_world_set_generate_bnodeid_handler()</code> with new
+handler typedef <code>rasqal_generate_bnodeid_handler2</code>.
+</p>
+
+
+<h3>Other changes</h3>
+
+<p>Made all rasqal destructors simply return when given a
+<code>NULL</code> object pointer.  They mostly did this already.
+</p>
+
+<p>Updated <code>rasqal.spec.in</code> based on fedora spec (not tested)
+</p>
+
+<p>Replace <code>strncpy()</code> with <code>memcpy()</code> since
+the the <code>strncpy()</code> zero-checking and zero-filling
+semantics are never needed.
+</p>
+
+<p>Minimum raptor version is now 1.4.19 so that the
+<code>raptor_world</code> typedef is always available.
+</p>
+
+
+
+<h2 id="rel0_9_19"><a name="rel0_9_19">Rasqal 0.9.19 Changes</a></h2>
+
+<p>The only change to this release is to fix the pkg-config
+<code>rasqal.pc</code> file to to restore the dependency on raptor
+which was accidently deleted.  Lesson learnt: do not commit code
+after midnight local time.
+</p>
+
+
+<h2 id="rel0_9_18"><a name="rel0_9_18">Rasqal 0.9.18 Changes</a></h2>
+
+<p>The main changes in this release are:</p>
+<ul>
+<li>Add initial draft parsing and API (NOT execution) support for
+<a href="http://www.w3.org/TR/2010/WD-sparql11-update-20100126/">SPARQL 1.1 Update W3C Working Draft of 2010-01-26</a>.</li>
+<li>Add public APIs (row, results, result formatter, variables table) so that query results can be built, read and written without a query.</li>
+<li>Add API resilience checks for invalid NULL pointer arguments.</li>
+</ul>
+
+
+<p>Fixed Issues:</p>
+<ul>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=320">0000320</a>: Add a void* user_data field to rasqal_variable</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=323">0000323</a>: Official MIME Type for JSON isn't text/json</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=343">0000343</a>: Mime type for 'table' results format is text/plan</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=345">0000345</a>: MIME Type and URI for TSV and CSV</li>
+  <li><a href="http://bugs.librdf.org/mantis/view.php?id=347">0000347</a>: rasqal linking fix</li>
+</ul>
+
+
+<h3>Query API Changes</h3>
+
+<p>A user data <code>void* user_data</code> field was added to the
+<code>rasqal_variable</code> structure to allow application code to
+store additional information.</p>
+
+<p>Added a new <code>rasqal_query_verb</code> enum value for SPARQL
+1.1 (draft) Update: <code>RASQAL_QUERY_VERB_UPDATE</code> which
+indicates that a sequence of update operations are available in the
+query structure, rather than a query (SELECT, ASK, DESCRIBE).
+</p>
+
+<p>Added a <code>rasqal_update_operation</code> class for holding
+an updates that adds and/or removes triples from a graph (with
+possible conditional where) or does a graph administration
+operation on a grpah.
+</p>
+
+<p>Added an <code>rasqal_update_type</code> enum for the types of
+graph update - clear, drop, delete, insert and, load.
+</p>
+
+<p>Added <code>rasqal_update_type_label()</code> to get a label for
+a rasqal-update_type.
+</p>
+<pre>
+  const char* rasqal_update_type_label(rasqal_update_type type);
+</pre>
+
+<p>Added an <code>rasqal_update_flags</code> enum for capturing
+update operations flags such as SPARQL 1.1 Update <code>SILENT</code>
+for silent graph administration operations and <code>DATA</code> for
+bulk insert/delete data, rather than graph pattern templates with
+variables.
+</p>
+
+<p>Added <code>rasqal_query_get_update_operations_sequence()</code>
+to get the sequence of updates from a query.  Added
+<code>rasqal_query_get_update_operation()</code> get an individual
+update operation from a query via an index.</p>
+<pre>
+  raptor_sequence* rasqal_query_get_update_operations_sequence(rasqal_query* query);
+
+  rasqal_update_operation* rasqal_query_get_update_operation(rasqal_query* query,
+    int idx);
+</pre>
+
+
+<h3>Query Results Class Changes</h3>
+
+<p><code>rasqal_new_query_results()</code> added to public API to
+construct a standalone query result set without being the result of a
+query execution.  (The destructor is already present).  Added method
+<code>rasqal_query_results_add_row()</code> to add a row to a query
+result set.
+</p>
+<pre>
+  rasqal_query_results* rasqal_new_query_results(rasqal_world* world,
+     rasqal_query* query, rasqal_query_results_type type,
+     rasqal_variables_table* vars_table);
+
+  int rasqal_query_results_add_row(rasqal_query_results* query_results,
+     rasqal_row* row);
+</pre>
+
+<p><code>rasqal_query_results_type</code> enum added to public API
+for use with <code>rasqal_new_query_results()</code>.
+</p>
+
+
+<h3>Query Results Formatter Class Changes</h3>
+
+<p>Registered URIs for the CSV and TSV query result formats and fixed
+the mime types for those as well as the JSON format as reported in issues
+<a href="http://bugs.librdf.org/mantis/view.php?id=345">Issue #0000345</a>
+and
+<a href="http://bugs.librdf.org/mantis/view.php?id=323">Issue #0000323</a>.
+</p>
+
+<p>Added <code>rasqal_new_query_results_formatter2()</code> with
+format name, mime type and URI args deprecating
+<code>rasqal_new_query_results_formatter()</code> and
+<code>rasqal_new_query_results_formatter_by_mime_type()</code>.
+</p>
+<pre>
+  rasqal_query_results_formatter* rasqal_new_query_results_formatter2(rasqal_world* world,
+    const char *name, const char *mime_type, raptor_uri* format_uri);
+</pre>
+
+<p>Added <code>rasqal_query_results_write2()</code> and
+<code>rasqal_query_results_read2()</code> with both name and
+mime_type args deprecating <code>rasqal_query_results_write()</code>
+and <code>rasqal_query_results_read()</code> respectively.
+</p>
+<pre>
+  int rasqal_query_results_write2(raptor_iostream *iostr,
+    rasqal_query_results *results, const char* name, const char* mime_type,
+    raptor_uri *format_uri, raptor_uri *base_uri);
+
+  int rasqal_query_results_read2(raptor_iostream *iostr,
+    rasqal_query_results *results, const char* name, const char* mime_type,
+    raptor_uri *format_uri, raptor_uri *base_uri);
+</pre>
+
+
+<h3>Query Result Row Class</h3>
+
+<p>Export the query result row class to the public API to allow
+creating standalone query results set without a query.
+</p>
+
+<p>Added <code>rasqal_new_row_for_size()</code>,
+<code>rasqal_free_row()</code> to construct and destruct a row and
+<code>rasqal_row_set_value_at()</code> to set row literal values.
+</p>
+
+<pre>
+  rasqal_row* rasqal_new_row_for_size(rasqal_world* world, int size);
+
+  void rasqal_free_row(rasqal_row* row);
+
+  int rasqal_row_set_value_at(rasqal_row* row, int offset,
+    rasqal_literal* value);
+</pre>
+
+
+<h3>Variables Table Class</h3>
+
+<p>Added variables table class <code>rasqal_variables_table</code> to
+the public API to allow use in creating a standalone query results.
+</p>
+
+<p>Added <code>rasqal_new_variables_table()</code> and
+<code>rasqal_free_variables_table()</code> to construct and destroy a
+variables table.  Added method
+<code>rasqal_variables_table_add()</code> to add a variable to the
+variables table.
+</p>
+<pre>
+  rasqal_variables_table* rasqal_new_variables_table(rasqal_world* world);
+
+  void rasqal_free_variables_table(rasqal_variables_table* vt);
+
+  rasqal_variable* rasqal_variables_table_add(rasqal_variables_table* vt,
+    rasqal_variable_type type, const unsigned char *name,
+    rasqal_literal *value);
+</pre>
+
+
+<h3>SPARQL Changes</h3>
+
+<p>Added syntax-only and API support (<strong>no execution</strong>)
+for the
+<a href="http://www.w3.org/TR/2010/WD-sparql11-update-20100126/">SPARQL 1.1 Update W3C Working Draft of 2010-01-26</a>
+syntax.  These are only available when using the 'laqrs' query
+language name, until SPARQL 1.1 is stable.</p>
+
+<p>Added new lexer support for keywords: WITH, CLEAR, CREATE, SILENT,
+DATA, DROP, LOAD</p>
+
+<p>Added <code>CLEAR</code> and <code>CLEAR GRAPH uri</code></p>
+
+<p>Added <code>DROP GRAPH uri</code></p>
+
+<p>Added <code>INSERT DATA { triples }</code></p>
+
+<p>Added <code>DELETE templates</code> to delete multiple subgraphs.</p>
+
+<p>Added <code>DELETE DATA { triples }</code></p>
+
+<p>Added <code>LOAD uri</code> and <code>LOAD uri INTO graph-uri</code></p>
+
+<p>Added <code>WITH uri DELETE { ... } INSERT { ... } WHERE ...</code>
+update form since other combinations are ambiguous.
+</p>
+
+<p><strong>NOTE:</strong> The older LAQRS experimental INSERT and
+DELETE formats are supported but deprecated.</p>
+
+
+<h3>Query Engine changes</h3>
+
+<p>Nobody reported it, but decimal division was totally broken.  Fixed
+it to do division and not add!
+</p>
+
+
+<h3>Other Changes</h3>
+
+<p>Multiple code style updates and code file reorganizing.
+</p>
+
+<p>Link <code>roqet</code> directly with <code>-lraptor</code> to get
+raptor symbols used linked directly, to enable alternate library
+linking approaches to work.  Based on the request in
+<a href="http://bugs.librdf.org/mantis/view.php?id=347">Fixes Issue#0000347</a>
+and
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=564885">Fedora bug 564885</a>.
+</p>
+
+<p>Added checks for the public API methods to ensure NULL pointers
+are not accepted or used.
+</p>
+
+<p>Added example code for constructing a query result set without a query
+</p>
+
+<p>Updated <code>configure</code> and the build system to use silent
+rules for the maintainer (by default), or when
+<code>--enable-silent-rules</code> is passed to
+<code>configure</code>.  This feature requires building with automake
+1.11 which requires autoconf 2.62 or newer when building from GIT.
+</p>
+
+<p><code>autogen.sh</code> script was updated to enforce the
+autotools versions above.</p>
+
+<p>The rasqal.pc file now uses the Requires.private field for raptor;
+it should only be in the link line with<br />
+<code>pkg-config --static ...</code> is used.
+</p>
+
+<p>Enforce that only raptor versions &lt;1.9.0 are supported.  No
+Raptor2 or Raptor2 alpha support yet.
+</p>
+
+
+<h2 id="rel0_9_17"><a name="rel0_9_17">Rasqal 0.9.17 Changes</a></h2>
+
+<blockquote>
+<p><b>WARNING: ABI AND API CHANGED IN THIS RELEASE.</b></p>
+
+<p>This means: functions and structs were removed, modified and added.</p>
+
+<p>Consequently the shared library major soname version has changed from 1 to 2.</p> 
+
+</blockquote>
+
+<p>The main change in this release is to add a
+<a href="#query-engine-0917">new query engine</a>
+and to enable it as the default query engine.  It supports more
+of the SPARQL query algebra such as groups and optionals.  There
+were many other changes and fixes.
+</p>
+
+<p>Fixed Issues: (most of them in query engine 2)</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=077">Issue#0000077</a>: OPTIONAL messes up query results </li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=128">Issue#0000128</a>: GROUP graph pattern support in the query engine</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=168">Issue#0000168</a>: Wrong processing of the function "bound" with "OPTIONAL"</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=258">Issue#0000258</a>: Using FILTER with OPTIONAL in SPARQL queries</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=261">Issue#0000261</a>: Some SPARQL queries with multiple OPTIONAL patterns fail to return results</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=271">Issue#0000271</a>: rasqal library does not compile cleanly when using g++ compiler</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=279">Issue#0000279</a>: JSON query binding serializer is returning illegal JSON - extra double quotes before "ordered" and "distinct"</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=305">Issue#0000305</a>: bound gives incoherent results</li>
+</ul>
+
+
+<h3>Rasqal world API changes</h3>
+
+<p>Added methods for setting of an already-opened raptor library to pass
+into rasqal, rather than it creating one itself.
+<code>rasqal_world_open()</code> can then be called to do the actual
+initialisation:</p>
+<pre>
+  int rasqal_world_open(rasqal_world* world);
+
+  void rasqal_world_set_raptor(rasqal_world* world,
+                               raptor_world* raptor_world_ptr);
+
+  raptor_world *rasqal_world_get_raptor(rasqal_world* world);
+</pre>
+
+<p>Exported new C defines for the library versions:
+<code>RASQAL_VERSION</code> in 6-digit integer MMNNRR format (Major, miNor, Release),
+<code>RASQAL_VERSION_STRING</code> in string "MM.NN.RR" format,
+<code>RASQAL_VERSION_MAJOR</code> for integer major version number,
+<code>RASQAL_VERSION_MINOR</code> for integer minor version number and
+<code>RASQAL_VERSION_RELEASE</code> for integer release number.
+</p>
+
+<p>API CHANGE:
+<code>rasqal_features_enumerate()</code> gains an
+initial rasqal_world argument to become a method of the world class:
+</p>
+<pre>
+  int rasqal_features_enumerate(rasqal_world* world,
+    const rasqal_feature feature, const char **name,
+    raptor_uri **uri, const char **label);
+</pre>
+
+<p>API CHANGE:
+<code>rasqal_feature_from_uri()</code> gains an initial
+rasqal_world argument to become a method of the world class:
+</p>
+<pre>
+  rasqal_feature rasqal_feature_from_uri(rasqal_world* world,
+    raptor_uri *uri);
+</pre>
+
+
+<h3>Data Graph API changes</h3>
+
+<p>API CHANGE: The <code>rasqal_data_graph</code> structure gains a
+new world reference pointer field.
+</p>
+
+
+<p>API CHANGE:
+<code>rasqal_new_data_graph()</code> gains an initial
+rasqal_world argument:
+</p>
+<pre>
+  rasqal_data_graph* rasqal_new_data_graph(rasqal_world* world,
+    raptor_uri* uri, raptor_uri* name_uri, int flags);
+</pre>
+
+
+<h3>Expression API changes</h3>
+
+<p>
+<code>rasqal_op</code> enumeration gains values for LAQRS
+(possible SPARQL 1.1) expression operators:
+<code>RASQAL_EXPR_SUM</code>,
+<code>RASQAL_EXPR_AVG</code>,
+<code>RASQAL_EXPR_MIN</code> and
+<code>RASQAL_EXPR_MAX</code>.
+It also gains <code>RASQAL_EXPR_COALESCE</code> for LAQRS experimental
+coalesce expression <code>COALESCE(<em>expression list</em>)</code>
+</p>
+
+
+<p>API CHANGE:
+The <code>rasqal_expression</code> structure gains a new world reference
+pointer field.
+</p>
+
+<p>API CHANGE:
+All <code>rasqal_expression</code> constructors gain an
+initial rasqal_world argument:
+</p>
+<pre>
+  rasqal_expression* rasqal_new_0op_expression(rasqal_world* world,
+    rasqal_op op);
+  rasqal_expression* rasqal_new_1op_expression(rasqal_world* world,
+    rasqal_op op, rasqal_expression* arg);
+  rasqal_expression* rasqal_new_2op_expression(rasqal_world* world,
+    rasqal_op op, rasqal_expression* arg1, rasqal_expression* arg2);
+  rasqal_expression* rasqal_new_3op_expression(rasqal_world* world,
+    rasqal_op op, rasqal_expression* arg1,  rasqal_expression* arg2,
+    rasqal_expression* arg3);
+  rasqal_expression* rasqal_new_string_op_expression(rasqal_world* world,
+    rasqal_op op, rasqal_expression* arg1, rasqal_literal* literal);
+  rasqal_expression* rasqal_new_literal_expression(rasqal_world* world,
+    rasqal_literal* literal);
+  rasqal_expression* rasqal_new_function_expression(rasqal_world* world,
+    raptor_uri* name, raptor_sequence* args);
+  rasqal_expression* rasqal_new_cast_expression(rasqal_world* world,
+    raptor_uri* name, rasqal_expression *value);
+</pre>
+
+<p>API CHANGE:
+<code>rasqal_expression_evaluate()</code> gains an initial
+rasqal_world argument:
+</p>
+<pre>
+  rasqal_literal* rasqal_expression_evaluate2(rasqal_world *world,
+    raptor_locator *locator, rasqal_expression* e, int flags);
+</pre>
+
+<p>Added <code>rasqal_graph_pattern_get_origin()</code>
+to get the graph from a GRAPH graph pattern:
+</p>
+<pre>
+  rasqal_literal* rasqal_graph_pattern_get_origin(rasqal_graph_pattern* gp);
+</pre>
+
+<p>Added <code>rasqal_graph_pattern_set_filter_expression()</code>
+and <code>rasqal_graph_pattern_get_filter_expression()</code>
+methods to set/get an expression for a filter graph pattern:</p>
+<pre>
+  int rasqal_graph_pattern_set_filter_expression(rasqal_graph_pattern* gp,
+    rasqal_expression* expr);
+
+  rasqal_expression*
+    rasqal_graph_pattern_get_filter_expression(rasqal_graph_pattern* gp);
+</pre>
+
+
+
+<h3>Graph Pattern API changes</h3>
+
+<p><code>rasqal_graph_pattern_operator</code> enumeration gains
+<code>RASQAL_GRAPH_PATTERN_OPERATOR_FILTER</code> for a filter graph pattern
+and <code>RASQAL_GRAPH_PATTERN_OPERATOR_LET</code> for LAQRS experimental
+assignment 'graph pattern'.
+</p>
+
+<p>API CHANGE:
+Removed functions
+<code>rasqal_graph_pattern_add_constraint()</code>,
+<code>rasqal_graph_pattern_get_constraint_sequence()</code> and
+<code>rasqal_graph_pattern_get_constraint()</code>.
+These are replaced by filter graph pattern with expression - functions
+<code>rasqal_graph_pattern_set_filter_expression</code> and
+<code>rasqal_graph_pattern_get_filter_expression()</code>.
+</p>
+
+
+<h3>LAQRS Changes</h3>
+
+<p>LAQRS is now available in the configuration and does not need to
+be explicitly selected with <code>configure</code>.</p>
+
+<p>Add <code>SUM()</code>, <code>AVG()</code>, <code>MIN()</code> and
+<code>MAX()</code> aggregate expressions to LAQRS.  Supported in
+syntax only, not in any of the query engines.
+</p>
+
+<p>Add <code>LET ?var := expression</code> experimental syntax.
+Query engine 2 can execute this.</p>
+
+<p>Add <code>COALESCE(<em>expression list</em>)</code> experimental
+expression to return the first defined expression value in the
+list.  Query engines 1 and 2 can execute this.</p>
+
+
+<h3>Literal API changes</h3>
+
+<p>API CHANGE:
+Reordered <code>rasqal_literal_type</code> enumeration
+to match numeric type promotion order: float is now between integer and double.
+Also added
+<code>RASQAL_LITERAL_XSD_STRING</code> for xsd:string typed literals and
+<code>RASQAL_LITERAL_UDT</code> for unknown data typed literals.
+Both were separated out of <code>RASQAL_LITERAL_STRING</code> which
+is now for RDF plain literals and plain/typed turned into RDF terms only
+</p>
+
+<p>Added <code>rasqal_literal_get_rdf_term_type()</code> method to return
+the RDF term type of a literal as a <code>rasqal_literal_type</code>
+- uri, blank node, literal or cannot be represented (e.g. qname or
+internal literal types).
+</p>
+<pre>
+  rasqal_literal_type rasqal_literal_get_rdf_term_type(rasqal_literal* l);
+</pre>
+
+<p>Added <code>rasqal_literal_same_term()</code> method to perform
+SPARQL sameTerm() comparison.
+</p>
+<pre>
+  int rasqal_literal_same_term(rasqal_literal* l1, rasqal_literal* l2);
+</pre>
+
+<p>Added <code>rasqal_literal_is_rdf_literal()</code> method
+to check if a literal is an RDF literal (not qname or other internal
+types).
+</p>
+<pre>
+  int rasqal_literal_is_rdf_literal(rasqal_literal* l);
+</pre>
+
+
+<h3>Prefix API changes</h3>
+
+<p>API CHANGE:
+The <code>rasqal_prefix</code> structure gain a new world reference
+pointer field.
+</p>
+
+<p>API CHANGE:
+<code>rasqal_new_prefix()</code> gains an initial rasqal_world argument:
+</p>
+<pre>
+  rasqal_prefix* rasqal_new_prefix(rasqal_world* world,
+    const unsigned char* prefix, raptor_uri* uri);
+</pre>
+
+
+<h3>Query API changes</h3>
+
+<p>Added <code>rasqal_query_dataset_contains_named_graph()</code>
+method to check if a named graph is in a dataset:</p>
+<pre>
+  int rasqal_query_dataset_contains_named_graph(rasqal_query* query,
+                                                raptor_uri *graph_uri);
+</pre>
+
+
+<h3>Query Formatter Changes</h3>
+
+<p>SPARQL <code>DESCRIBE</code> no longer writes commas between terms.
+</p>
+
+
+<h3>Query Results API changes</h3>
+
+<p>Added <code>rasqal_query_results_get_query()</code> method to get
+the associated query:</p>
+<pre>
+  rasqal_query*
+    rasqal_query_results_get_query(rasqal_query_results* query_results);
+</pre>
+
+<p>Added <code>rasqal_graph_pattern_variable_bound_in()</code> method
+to check if a graph pattern in a query defines a variable</p>
+<pre>
+  int rasqal_graph_pattern_variable_bound_in(rasqal_graph_pattern *gp,
+    rasqal_variable *v);
+</pre>
+
+
+<h3>Query Results Formatter Changes</h3>
+
+<p>SPARQL/JSON: Do not emit double " for distinct/ordered flags.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=279">Issue #0000279</a>
+</p>
+
+<p>Added comma-separated values (CSV), tab-separated values (TSV) and
+text table output formats with names <code>csv</code>,
+<code>tsv</code> and <code>table</code>.
+</p>
+
+
+<h3>RDQL Changes</h3>
+
+<p>Some updates to handle refactored query list of constraint
+expressions switching to a filter graph pattern. RDQL only
+has 0 or 1 such expressions in a single query.
+</p>
+
+
+<h3>SPARQL Changes</h3>
+
+<p>Ensure <em>GroupOrUnionGraphPattern</em> rule constructs the
+sequence of graph patterns in document order.
+</p>
+
+<p><em>OptionalGraphPattern</em> rule is now a list of 1 group graph
+patterns.
+</p>
+
+<p>Fix support for <code>&lt;&gt;</code> URI literal.
+</p>
+
+<p>Support <code>\b</code>, <code>\f</code>, <code>\'</code> and
+<code>\"</code> escapes in all types of quoted literals.
+</p>
+
+<p>Fixed optional <code>WHERE</code> in parser to match SPARQL
+grammar - optional for <code>DESCRIBE</code>, but required for
+<code>SELECT</code>, <code>CONSTRUCT</code> and <code>ASK</code>
+queries.</p>
+
+
+<h3>Triples Source API changes</h3>
+
+<p>API CHANGE:
+The <code>rasqal_triples_source</code> and
+<code>rasqal_triples_source_factory</code> structures
+gain API version fields that must be set to a known API version.
+</p>
+
+<p>API CHANGE:
+The <code>rasqal_set_triples_source_factory()</code> function for
+registering a triples source factory now take a function with an int
+error return code, and it returns an int now:</p>
+<pre>
+  int rasqal_set_triples_source_factory(rasqal_world* world,
+     rasqal_triples_source_factory_register_fn register_fn,
+     void* user_data);
+</pre>
+
+
+<h3>Variable API changes</h3>
+
+<p>API CHANGE:
+The <code>rasqal_variable</code> structure gains a variables table
+pointer.
+</p>
+
+
+<h3>Other API changes</h3>
+
+<p><code>rasqal_triple_parts</code> adds value
+<code>RASQAL_TRIPLE_NONE</code> for no parts.
+</p>
+
+<p><code>rasqal_compare_flags</code> enumeration gains
+<code>RASQAL_COMPARE_URI</code> - now also provides RDQL string to
+bool comparison.
+</p>
+
+<p>API CHANGE:
+<code>rasqal_new_xsd_decimal()</code> gains an initial rasqal_world argument:
+</p>
+<pre>
+  rasqal_xsd_decimal* rasqal_new_xsd_decimal(rasqal_world* world);
+</pre>
+
+<p>Removed <code>rasqal_triple_flags</code> enumeration with unused
+values: <code>RASQAL_TRIPLE_FLAGS_EXACT</code>,
+<code>RASQAL_TRIPLE_FLAGS_OPTIONAL</code> and
+<code>RASQAL_TRIPLE_FLAGS_LAST</code>
+</p>
+
+
+<h3>Configure and Build Changes</h3>
+
+<p>configure now prefers <code>pkg-config raptor</code> to
+<code>raptor-config</code> but will accept both for now.
+<code>pkg-config</code> will not allow compiling against raptor in
+source tree in future.
+</p>
+
+<p>Added <code>--with-query-engine-version</code> to configure
+to allow selecting default query engine version - values 1 or 2.
+This is allowed for people to switch to old engine if necessary
+for some existing query that the new engine cannot handle.  This
+option will be removed at some point.
+</p>
+
+<p>Add
+<a href="http://git.lespiau.name/cgit/shave/">SHAVE support</a>
+(<code>git clone git://git.lespiau.name/shave</code> )
+to <em>"make autotools output sane"</em> which amounts to much less
+verbose messages when compiling.  It is now enabled for the
+maintainer.
+</p>
+
+<p><code>rasqal-config(1)</code> is now a wrapper around
+<code>pkg-config rasqal</code>.  Consequently <code>--prefix=DIR</code>
+and <code>--libtool-libs</code> are ignored.
+</p>
+
+
+<h3 id="query-engine-0917"><a name="query-engine-0917">Query Engine Changes</a></h3>
+
+<p>An entirely new query execution engine was written. The existing
+query execution engine was refactored out of a mess of
+<code>rasqal_query</code> and <code>rasqal_query_results</code> code
+and data.  It is the default query engine as of Rasqal 0.9.17</p>
+
+<p>The query engine to use can be selected at configure time wiht
+<code>--with-query-engine-version</code> to allow switching to old
+engine if necessary for some existing query that the new engine
+cannot handle.  This option will be removed at some point.
+</p>
+
+<p>The interface between the query API and the query engine is now
+via the <code>rasqal_rowsource</code> abstraction - an evaluation of
+a query returns a rowsource that generates the result rows of
+variable bindings.
+</p>
+
+<p>Rewrote <code>query_results</code> class to be a pure wrapper
+around the rowsource and variables table, handling such things like
+generating triples (CONSTRUCT) from rows, creating a boolean result
+(ASK) by counting at least 1 result rows and generating syntax
+results using a query results formatter.</p>
+
+<p>Added a new <code>rasqal_query_execution_factory</code>
+abstraction to provide the interface that the query execution engines
+implement to return a rowsource to get the results.</p>
+
+<p>Both query engines can potentially be selected at
+runtime from the query API but <strong>ONLY</strong> when rasqal is
+built for development (<code>configure --enable-maintainer-mode</code>).
+</p>
+<ol>
+<li>If the envariable <code>RASQAL_DEBUG_ENGINE</code>
+is set with value 1 or 2, the query execution engine is chosen.
+</li>
+<li>The <code>roqet(1)</code> utility gains a <code>-g</code> /
+<code>--engine</code> argument.
+</li>
+</ol>
+
+<p><strong>Query engine 1 (existing)</strong>:<br />
+Existing lazy evaluated engine that is hard
+to refactor.  Internally, implemented by functions named
+<code>rasqal_query_engine_1_<em>...</em>()</code>.
+Execution factory instance <code>rasqal_query_engine_1</code>
+</p>
+
+<p><strong>Query engine 2 (new)</strong>:<br />
+Based on transforming a tree of SPARQL algebra nodes constructed from
+the query, into a tree of rowsource-generating expressions that when
+evaluated at the top, returns the result rows.  Each algebra node
+type and each rowsource type has it's own set of module unit tests
+built-in.
+Execution factory instance <code>rasqal_query_engine_algebra</code>
+</p>
+
+<p>Removed query engine core legacy support for <code>CONSTRUCT *</code> -
+never in the SPARQL 1.0 language.
+</p>
+
+<p>Pulled out row sorting code from query engine 1 into a
+rasqal_engine_sort module so it can be used by all query engines.
+</p>
+
+<p>Implemented rowsource abstraction <code>rasqal_rowsource</code> for
+the following types of rowsources:</p>
+<ul>
+<li><em>empty rowsource</em>: always returns no rows</li>
+<li><em>filter rowsource</em>: filter an inner rowsource with an expression - used for SPARQL <code>FILTER</code></li>
+<li><em>graph rowsource</em>: apply a graph variable to an inner rowsource - used for SPARQL <code>GRAPH</code> matching</li>
+<li><em>join rowsource</em>: join two inner rowsources on common variables and an expression.  Two types of join supported: left outer join used for SPARQL <code>OPTIONAL</code> and natural join for groups of graph patterns.</li>
+<li><em>project rowsource</em>: pick [project] certain variables from an inner rowsource</li>
+<li><em>query engine execution rowsource</em>: rows generated by a query execution engine</li>
+<li><em>row sequence rowsource</em>: built from a sequence of rows</li>
+<li><em>SPARQL xml rowsource</em>: make rows from SPARQL Results XML syntax</li>
+<li><em>triples rowsource</em>: create a rowsource by binding variables to an RDF graph sort rowsource: sorts the inner rowsource by an order expression - used for SPARQL <code>ORDERBY</code></li>
+<li><em>union rowsource</em>: union/concatenation of two inner rowsources - used for SPARQL <code>UNION</code></li>
+</ul>
+
+<p>Renamed row abstraction from <code>rasqal_query_result_row</code>
+to <code>rasqal_row</code> since it is independent of query results
+and shorter.
+</p>
+
+<p>Use new <code>rasqal_engine_error</code> enumeration for query
+engine/internal errors - OK, FAILED or FINISHED rather than altering
+<code>rasqal_query_results</code> object fields directly.
+</p>
+
+<p>Documented query execution engine internals as autodocs.
+</p>
+
+<p>Added a query algebra abstraction <code>rasqal_algebra</code> with
+node type <code>rasqal_algebra_node_operator</code> based on SPARQL
+algebra operators: BGP, FILTER, JOIN, DIFF, LEFTJOIN, UNION, TOLIST,
+ORDERBY, PROJECT, DISTINCT, REDUCED, SLICE and GRAPH.  Some of these
+are not needed by the query execution engines since they are handled
+by the high level query API - such as SLICE (limit and offset) and
+TOLIST (turning results into user data)
+</p>
+
+<p>Added a variables table abstraction <code>rasqal_variables_table</code>
+pulled out of the internal query results and query structures which now
+point to it.  Constructor <code>rasqal_new_variables_table()</code>,
+destructor <code>rasqal_free_variables_table()</code>
+and methods <code>rasqal_variables_table_add()</code>,
+<code>rasqal_variables_table_get()</code>,
+<code>rasqal_variables_table_has()</code>,
+<code>rasqal_variables_table_set()</code>,
+<code>rasqal_variables_table_get_value()</code>,
+<code>rasqal_variables_table_get_named_variables_count()</code>,
+<code>rasqal_variables_table_get_anonymous_variables_count()</code>,
+<code>rasqal_variables_table_get_total_variables_count()</code>,
+<code>rasqal_variables_table_get_named_variables_sequence()</code> and
+<code>rasqal_variables_table_get_anonymous_variables_sequence()</code>.
+</p>
+
+<p>Allow queries with no graph pattern to be accepted such as SPARQL
+<code>DESCRIBE <em>uri</em></code> (which the query engine does not
+execute at present but now is at least parsed).
+</p>
+
+<p>Do not warn about unbound variables for variables bound in GRAPH and
+SELECT expressions.
+</p>
+
+<p>Renamed query language-specific factory class for creating query
+structure from SPARQL and RDQL syntaxes from <code>struct
+rasqal_query_engine_factory</code> to
+<code>rasqal_query_language_factory</code> since it is about the
+language, not the engine.
+</p>
+
+<p>Query engine known problems:</p>
+<ul>
+<li>Variable binding/use scope is not calculated correctly.</li>
+<li>Consequently no queries with <code>UNION</code> work correctly.</li>
+<li>Also consequently, some <code>OPTIONAL</code> queries execute and return results when they shouldn't due to scoping of variable rules especially in nested optionals.</li>
+<li><code>DISTINCT</code> uses RDF literal equality not RDF sameTerm equality and thus returns results not to spec.</li>
+<li><code>xsd:date</code> comparison is not date-aware, it uses a simple string equality</li>
+<li><code>REDUCED</code> is not implemented.</li>
+</ul>
+
+<p>Summary of the approved
+<a href="http://www.w3.org/2001/sw/DataAccess/tests/data-r2/">DAWG SPARQL 1.0 tests</a>
+as of Rasqal SVN r15841</p>
+<pre>
+Fail:       22 (4.99 %)
+    algebra                        4
+    dataset                        3
+    distinct                       4
+    graph                          2
+    open-world                     3
+    optional                       4
+    reduced                        2
+Pass:      419 (95.01 %)
+</pre>
+
+<p>The above results in EARL:
+<a href="http://librdf.org/2009/12/13-rasqal/rasqal-0917-earl.rdf">RDF/XML</a>
+and
+<a href="http://librdf.org/2009/12/13-rasqal/rasqal-0917-earl.ttl">Turtle</a>
+</p>
+
+
+<h3>Internal Changes</h3>
+
+<p>Added sparql algebra tests based on the examples in the SPARQL 1.0 Query Language  Specification section
+<a href="http://www.w3.org/TR/2008/REC-rdf-sparql-query-20080115/#convertGraphPattern">12.2.1 Converting Graph Patterns</a>
+</p>
+
+<p>
+Optionally support the experimental raptor V2 API.
+</p>
+
+<p>Lots of resiliency fixes in the case of out of memory - Lauri Aalto.
+</p>
+
+<p>Adjusted internal test suite to use a perl <code>improve</code>
+script that generates and uses an RDF-based manifest.  The test
+running is now much more consise when successful.
+</p>
+
+<p>Switch to final DAWG approved testsuite files from
+<a href="http://www.w3.org/2001/sw/DataAccess/tests/r2/">http://www.w3.org/2001/sw/DataAccess/tests/r2/</a>
+at CVS Revision 1.6 1008
+</p>
+
+
+
+<h2 id="rel0_9_16"><a name="rel0_9_16">Rasqal 0.9.16 Changes</a></h2>
+
+<blockquote>
+<p><b>WARNING: ABI AND API CHANGED IN THIS RELEASE.</b></p>
+
+<p>This means: functions were removed, modified and added.</p>
+
+<p>Consequently the shared library major soname version has changed from 0 to 1.</p> 
+
+<p>The header files moved to be installed in
+<em>PREFIX</em>/include/rasqal such as
+<code>/usr/include/rasqal</code> for usual installs.</p>
+</blockquote>
+
+<blockquote>
+<p><strong>NOTE:</strong> In the next release of rasqal, the
+<code>rasqal-config</code> utility that provides the compile and link
+args will be deprecated, generate a warning when run and will turn into a
+wrapper for <code>pkg-config rasqal ...</code>
+It will be removed in a future release.</p>
+</blockquote>
+
+
+<h3>Major Changes (break ABI and API)</h3>
+
+<p>Removed <code>rasqal_init()</code> and <code>rasqal_finish()</code>
+functions.</p>
+
+<p>Added a new <code>rasqal_world</code> object to manage
+library allocations and classes with new library
+constructor/initializing function
+<code>rasqal_world *rasqal_new_world(void)</code>
+and destructor/cleanup function:
+<code>void rasqal_free_world(rasqal_world*)</code>
+</p>
+
+<p>The following functions now take a <code>librdf_world*
+world</code> argument as the first argument:
+<code>rasqal_language_name_check()</code>,
+<code>rasqal_languages_enumerate()</code>,
+<code>rasqal_new_query()</code>,
+<code>rasqal_query_results_formats_check ()</code>,
+<code>rasqal_new_query_results_formatter()</code>,
+<code>rasqal_new_query_results_formatter_by_mime_type()</code>,
+<code>rasqal_new_integer_literal()</code>,
+<code>rasqal_new_typed_literal()</code>,
+<code>rasqal_new_double_literal()</code>,
+<code>rasqal_new_float_literal()</code>,
+<code>rasqal_new_uri_literal()</code>,
+<code>rasqal_new_pattern_literal()</code>,
+<code>rasqal_new_string_literal()</code>,
+<code>rasqal_new_simple_literal()</code>,
+<code>rasqal_new_boolean_literal()</code>,
+<code>rasqal_new_variable_literal()</code>,
+<code>rasqal_new_decimal_literal()</code>,
+<code>rasqal_new_decimal_literal_from_decimal()</code>
+</p>
+
+<p>Removed deprecated
+<code>rasqal_new_floating_literal()</code>,
+<code>rasqal_graph_pattern_get_flags()</code>,
+<code>rasqal_expression_foreach()</code> functions,
+<code>RASQAL_LITERAL_FLOATING</code> macro and
+<code>rasqal_expression_foreach_fn</code> typedef.
+</p>
+
+<p>
+Modified <code>rasqal_triples_match</code> struct to add a
+rasqal_world* world field.
+</p>
+
+<p>There is no more static data such as error pointers, arrays of
+query languages, URI objects; it is all attached to the rasqal_world
+object.</p>
+
+
+<h3>Misc changes</h3>
+
+<p>Fixed memory leaks in lang() expression evaluation. (Lauri Aalto)</p>
+
+<p>Made several low-memory resiliance fixes in query construction and
+execution. (Lauri Aalto)</p>
+
+<p>Library requires raptor 1.4.17 or newer to get the newly public
+raptor SAX2 API for reading SPARQL XML Results format.</p>
+
+<p>Updated mpfr configure check to look for modern functions rather
+than functions that are also in the older gmp-mpfr library too.
+</p>
+
+<p>Only the first error is reported for syntax errors in lex/parse
+of SPARQL and RDQL since the lack of error recovery means that the
+consequent messages are of little use.</p>
+
+<p>Fatal errors in SPARQL and RDQL lexer/parser no longer does an
+abort, but exits via setjmp/longjmp.</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Added internal rowsource class to get rows from an execution
+engine or a syntax (query result formatter).</p>
+
+
+<h3>Graph Pattern Class Changes</h3>
+<p>Modified <code>rasqal_graph_pattern_add_sub_graph_pattern()</code> to
+have an int return value for catching allocation failures.
+</p>
+
+<h3>Query Class Changes</h3>
+<p>Modified <code>rasqal_query_add_variable()</code> and
+<code>rasqal_query_add_prefix()</code> to have int return values for
+catching allocation failures.
+</p>
+
+<h3>Query Results Class Changes</h3>
+
+<p>Updated the internals to allow construction of a query result
+outside the query engine, such as from a syntax.
+</p>
+
+<p>Added <code>rasqal_query_results_read()</code> to read a query
+results from an iostream in some format.
+</p>
+
+<p>Modified <code>rasqal_query_results_formats_enumerate()</code> to add
+a flags argument with
+<code>RASQAL_QUERY_RESULTS_FORMAT_FLAG_READER</code> and
+<code>RASQAL_QUERY_RESULTS_FORMAT_FLAG_WRITER</code> choices to
+choose formats for read or write enumeration.</p>
+
+<p>Removed function
+<code>rasqal_query_results_formats_enumerate_full</code> now handled
+by <code>rasqal_query_results_formats_enumerate()</code>.</p>
+
+<p>Added <code>rasqal_query_results_formatter_read()</code> to read
+query results from a syntax via an iostream.</p>
+
+<h3>Variable Class Changes</h3>
+
+<p>Added <code>rasqal_new_variable_from_variable()</code> copy
+constructor.</p>
+
+
+<h2 id="rel0_9_15"><a name="rel0_9_15">Rasqal 0.9.15 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>Many updates for better SPARQL support.  Rasqal 0.9.15 passes over
+92% of the DAWG SPARQL Test Suite as of 2007-11-13.</p>
+
+<p>Rasqal still does not support either <code>UNION</code> or
+<code>GROUP</code> and <code>OPTIONAL</code> remains buggy.  There
+remain a few other minor areas not yet completely supported such as
+XSD <code>date</code> and XSD <code>dateTime</code> equality and
+comparisons.
+</p>
+
+<blockquote>
+<p><b>WARNING: ABI AND API CHANGE in Rasqal 0.9.16. The next
+release of Rasqal will be incompatible with this one.</b></p>
+
+<p>It will have both ABI and API changes that will require source
+updates.</p>
+
+<p>The shared library major soname will change from 0 to 1.</p> 
+
+<p>The header files will move to be installed in
+<em>PREFIX</em>/include/rasqal such as
+<code>/usr/include/rasqal</code> for usual installs.</p>
+
+<p>The full details of the API change have not been decided but the
+driving change is that using the library will be done via a new
+Rasqal world object,k will now be used to working like a Redland
+<code>librdf_world</code>.  All constructors will take this world
+object as an argument and all static data will be indirected from the
+object.  Handlers such as the uri_handler/data and error handlers
+will also move to be set/get via the world object.
+</p>
+
+<p>There are almost certainly other API changes and cleanups that
+will be done, and some possibly some of the data structures may be
+made internal.</p>
+
+</blockquote>
+
+<p>Fixed issues:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=190">Issue#0000190</a>: Memory leaks in rasqal_literal.c</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=191">Issue#0000191</a>: RAPTOR_API in rasqal.h</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=193">Issue#0000193</a>: SPARQL "ASK" always returns true</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=196">Issue#0000196</a>: Memory leak with RASQAL_REGEX_PCRE</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=197">Issue#0000197</a>: Problem with float comparison in rasqal</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=198">Issue#0000198</a>: rasqal_redland.c compilation errors</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=199">Issue#0000199</a>: SPARQL effective boolean value: empty string literal not false</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=200">Issue#0000200</a>: SPARQL filter scope</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=201">Issue#0000201</a>: SPARQL langMatches patch</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=203">Issue#0000203</a>: API declarations for Symbian portability</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=204">Issue#0000204</a>: SPARQL WHERE is optional</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=219">Issue#0000219</a>: SPARQL BASE makes rasqal query->locator.uri a dangling pointer</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=220">Issue#0000220</a>: Query offset off by one</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=221">Issue#0000221</a>: rasqal_literal_as_integer() with RASQAL_LITERAL_INTEGER literals</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=225">Issue#0000225</a>: SPARQL parser leaks memory on syntax error</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=234">Issue#0000234</a>: autogen.sh $dir quoting</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=235">Issue#0000235</a>: $(EXEEXT) in tests</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=236">Issue#0000236</a>: EOL issues when building svn version on cygwin</li>
+</ul>
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Many updates to support the SPARQL
+<a href="http://www.w3.org/TR/2007/CR-rdf-sparql-query-20070614/">Candidate Recommendation</a> and
+<a href="http://www.w3.org/TR/2007/PR-rdf-sparql-query-20071112/">Proposed Recommendation</a> versions of the language including:</p>
+<ul>
+   <li>Added <code>REDUCED</code> syntax support (no query engine support)</li>
+   <li>Added <code>SAMETERM()</code> support.</li>
+   <li>Allowing numbers at the start of local names.</li>
+   <li>Allowing <code>@</code><em>lang</em> and
+       <code>^^</code><em>datatype</em> after triple-quoted literals.</li>
+   <li>Make unary + and - work</li>
+   <li>Remove <code>CONSTRUCT *</code> that is no longer in the spec</li>
+   <li>Removed hexadecimal literals which were never in the spec</li>
+   <li>Made queries with the <code>ASK</code> verb work again.</li>
+   <li>Made <code>LANG()</code> and <code>DATATYPE()</code> work to
+       spec on typed literals.</li>
+   <li>Remove warning about optional SPARQL <code>WHERE</code>
+       although it is still a dumb idea to have useless keywords.</li>
+</ul>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Many internal changes were made including refactoring the engine
+core and adding of additional internal documentation for the engine
+functions.</p>
+
+<p>Substantial improvements were made to datatypes support:</p>
+<ul>
+  <li>SPARQL / XQuery / XPath numeric type promotion is now supported,
+      including derived types of <code>xsd:integer</code> etc.</li>
+  <li>Added XSD <code>xsd:decimal</code> implementation either using
+      GNU MP, MPFR, C99 <code>_Decimal</code> (but I have yet to find a
+      working implementation) or by default and inaccurately, C
+      doubles.</li>
+  <li>Added XSD <code>xsd:dateTime</code> initial support for validation.</li>
+  <li>Numeric operations such as +, -, *, / and ! as well as comparisons
+      are now done in the appropriate datatype (which may be a promotion).</li>
+</ul>
+
+<p>Improved the way that literal equality and comparisons work
+especially with respect to datatypes.  Triple pattern matching
+(equality) works with RDF terms.  SPARQL <code>FILTER</code> literal
+equality and comparisons follow SPARQL rules with possible numeric
+type promotion, then using RDF Term if the types are different.
+<code>ORDER</code> comparison or <code>DISTINCT</code> equality
+checks use RDF Term.  RDQL execution uses it's own existing "stringy"
+rules.
+</p>
+
+<p>Set the query base URI.</p>
+
+<p>Make queries that bind the origin (SPARQL <code>GRAPH</code>)
+match correctly against the default graph.
+</p>
+
+<p>Memory reduction in stack usage when evaluation expressions
+(such as SPARQL <code>FILTER</code>s).</p>
+
+
+<h3>Public API changes</h3>
+
+<p>Added <code>rasqal_home_url_string</code> static constant.</p>
+
+<p>Added <code>rasqal_xsd_decimal</code> class and API calls
+described below.</p>
+
+<p>Added a <code>decimal</code> part to the rasqal_literal union
+value for <code>RASQAL_LITERAL_DECIMAL</code> types.</p>
+
+<p>Added a <code>parent_type</code> part to the rasqal_literal when
+the type can be promoted.</p>
+
+<p>Added <code>RASQAL_EXPR_SAMETERM</code> expression</p>
+
+<p>Added <code>RASQAL_COMPARE_RDF</code> and
+<code>RASQAL_COMPARE_URI</code> comparison types for RDF Term
+comparsion rules and allowing URI comparison (without
+<code>STR()</code>) respectively.</p>
+
+<p>Added <code>rasqal_new_typed_literal()</code> to make an RDF typed
+literal from a type and string (no language).</p>
+
+<p>Added <code>rasqal_new_float_literal()</code> for wrapping a C
+<code>float</code> as XSD float.</p>
+
+<p>Added new decimal literal constructor
+rasqal_literal* rasqal_new_decimal_literal_from_decimal(const unsigned char *string, rasqal_ xsd_decimal* decimal)
+</p>
+
+<p>Added <code>rasqal_literal_datatype</code> method to get the datatype
+URI of a literal.</p>
+
+<p>Added <code>rasqal_literal_value</code> method to get the literal
+value of a literal, looking up any variables to their value.
+FIXME should this not involve query results?
+</p>
+
+<p>Added addition <code>rasqal_triple_parts</code> enums:
+<code>RASQAL_TRIPLE_GRAPH</code> for just the named graph part
+<code>RASQAL_TRIPLE_SPO</code> for subject, predicate and objects and
+<code>RASQAL_TRIPLE_SPOG</code> for all parts including named grpah.
+</p>
+
+
+<h3>Decimal Class</h3>
+
+<p>A new <code>rasqal_xsd_decimal</code> class was added to handle
+XSD decimals with accurate decimal arithmetic.</p>
+
+<p>Constructor:</p>
+<pre>
+rasqal_xsd_decimal* rasqal_new_xsd_decimal(void);
+</pre>
+
+<p>Destructor:</p>
+<pre>
+void rasqal_free_xsd_decimal(rasqal_xsd_decimal* dec);
+</pre>
+
+<p>Methods:</p>
+<pre>
+double rasqal_xsd_decimal_get_double(rasqal_xsd_decimal* dec);
+int rasqal_xsd_decimal_set_double(rasqal_xsd_decimal* dec, double d);
+iint rasqal_xsd_decimal_set_string(rasqal_xsd_decimal* dec, const char* string);
+int rasqal_xsd_decimal_set_long(rasqal_xsd_decimal* dec, long l);
+int rasqal_xsd_decimal_print(rasqal_xsd_decimal* dec, FILE* stream);
+char* rasqal_xsd_decimal_as_string(rasqal_xsd_decimal* dec);
+char* rasqal_xsd_decimal_as_counted_string(rasqal_xsd_decimal* dec, size_t* len_p);
+</pre>
+
+<p>Numeric methods (writing to the <code>result</code> argument):</p>
+<pre>
+int rasqal_xsd_decimal_add(rasqal_xsd_decimal* result,
+                           rasqal_xsd_decimal* a, rasqal_xsd_decimal* b);
+int rasqal_xsd_decimal_subtract(rasqal_xsd_decimal* result,
+                                rasqal_xsd_decimal* a, rasqal_xsd_decimal* b);
+int rasqal_xsd_decimal_multiply(rasqal_xsd_decimal* result,
+                                rasqal_xsd_decimal* a, rasqal_xsd_decimal* b);
+int rasqal_xsd_decimal_divide(rasqal_xsd_decimal* result,
+                              rasqal_xsd_decimal* a, rasqal_xsd_decimal* b);
+int rasqal_xsd_decimal_negate(rasqal_xsd_decimal* result,
+                              rasqal_xsd_decimal* a);
+</pre>
+
+<p>Comparison methods:</p>
+<pre>
+int rasqal_xsd_decimal_compare(rasqal_xsd_decimal* a, rasqal_xsd_decimal* b);
+int rasqal_xsd_decimal_equals(rasqal_xsd_decimal* a, rasqal_xsd_decimal* b);
+int rasqal_xsd_decimal_is_zero(rasqal_xsd_decimal* d);
+</pre>
+
+
+<h3>Query Results Formatter Class Changes</h3>
+
+<p>Updated to the 4th version of the SPARQL XML Results format by
+removing the <code>ordered</code> and <code>distict</code>
+attributes.  Removed support for all the earlier versions 1 to 3.</p>
+
+
+<h3><code>roqet</code> Utility Changes</h3>
+
+<p>Added <code>-D</code> / <code>--data</code> options for specifying
+data URis for the default graph and <code>-G</code> /
+<code>--named</code> for URIs of named graphs (the existing
+<code>-s</code> is a also a synonym for the latter).
+</p>
+
+
+<h3>Other Changes</h3>
+
+<p>Many internal fixes and cleanups after failures so that memory is
+not lost and/or rasqal does not crash.  These many changes were
+primarily made by Lauri Aalto.</p>
+
+<p>Several portability fixes for helping with low-memory, embedded
+systems and using a compiler that is not gcc.
+</p>
+
+<p>The SPARQL test runner <code>check-sparql</code> was improved to
+read the SPARQL XML Results format (but not via
+<code>XML::Simple</code> because it is insanely complex and
+counterintuitive), handle DAWG test manifests and generate EARL
+reports.  It also has new help and usage messages.
+</p>
+
+
+<h2 id="rel0_9_14"><a name="rel0_9_14">Rasqal 0.9.14 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>Added syntax and API support (but no query engine support)
+for <b>experimental</b> extensions to SPARQL called
+<a href="http://www.dajobe.org/2007/04/laqrs/">LAQRS</a>:
+LAQRS Adds to Querying RDF in SPARQL.
+</p>
+
+<p>Updated the query results formatter to allow better introspection
+of supported formats.</p>
+
+<p>Fixed issues:</p>
+<ul>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=152">Issue#0000152</a>: Allow <code>&lt;_:NAME&gt;</code> to work as <code>_:NAME</code> in SPARQL.</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=156">Issue#0000156</a>: Add LAQRS extensions to SPARQL grammar</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=160">Issue#0000160</a>: rasqal_strcasecmp without prototype</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=167">Issue#0000167</a>: Make CONSTRUCT work with LIMIT</li>
+<li><a href="http://bugs.librdf.org/mantis/view.php?id=182">Issue#0000182</a>: Allow '-' in SPARQL language tags (and RDQL)</li>
+</ul>
+
+
+<h3>LAQRS Adds to Querying RDF in SPARQL (LAQRS)</h3>
+
+<p>LAQRS is <b>experimental</b> and Rasqal provides only syntax and
+API support (but no query engine support) for:</p>
+<ul>
+<li><code>DELETE</code> via query verb <code>RASQAL_QUERY_VERB_DELETE</code></li>
+<li><code>EXPLAIN</code> as a keyword allowed before any query.  Returned by <code>rasqal_query_get_explain()</code></li>
+<li><code>INSERT</code> via query verb <code>RASQAL_QUERY_VERB_INSERT</code></li>
+<li><code>COUNT()</code> and COUNT(*) via new expressions <code>RASQAL_EXPR_COUNT</code> and <code>RASQAL_EXPR_VARSTAR</code></li>
+<li><code>SELECT </code><em>expression</em> <code>AS</code> <em>variable</em> via the new expression field of rasqal_variable</li>
+<li><code>GROUP BY</code> results via rasqal_query_get_group_conditions_sequence() and rasqal_query_get_group_condition() and new expressions <code>RASQAL_EXPR_GROUP_COND_ASC</code> and <code>RASQAL_EXPR_GROUP_COND_DESC</code></li>
+</ul>
+
+<p>Repeating <b>THERE IS NO QUERY ENGINE SUPPORT FOR ANY OF THE ABOVE</b></p>
+
+<p>LAQRS is not enabled by default in Rasqal (unless using
+maintainer mode or building from Subversion).  To enable it,
+configure Rasqal like this:</p>
+<pre>
+$ ./configure '--enable-query-languages=sparql rdql laqrs'
+...
+
+Rasqal build summary:
+  RDF query languages available : rdql sparql
+  RDF query languages enabled   : sparql rdql laqrs
+  Triples source                : raptor 1.4.15
+$
+</pre>
+
+<p>The API changes for LAQRS are as follows:</p>
+
+<p>Added new query verbs <code>RASQAL_QUERY_VERB_DELETE</code> and
+<code>RASQAL_QUERY_VERB_INSERT</code>
+</p>
+
+<p>Added a constructor to create a constant or 0-operand expression
+(for COUNT):</p>
+<pre>
+rasqal_expression* rasqal_new_0op_expression(rasqal_op op);
+</pre>
+
+<p>Added a query method to get the explain flag:</p>
+<pre>
+int rasqal_query_get_explain(rasqal_query* query);
+</pre>
+
+<p>Added a query method to get the 'group by' condition expressions:</p>
+<pre>
+raptor_sequence*
+rasqal_query_get_group_conditions_sequence(rasqal_query* query);
+
+rasqal_expression*
+rasqal_query_get_group_condition(rasqal_query* query, int idx);
+</pre>
+
+<p>Added <code>rasqal_expression</code> expression types:</p>
+<ul>
+<li><code>RASQAL_EXPR_GROUP_COND_ASC</code> for group condition ascending.</li>
+<li><code>RASQAL_EXPR_GROUP_COND_DESC</code> for group condition descending.</li>
+<li><code>RASQAL_EXPR_COUNT</code> for select <code>COUNT()</code></li>
+<li><code>RASQAL_EXPR_VARSTAR</code> for select <code>COUNT(*)</code></li>
+</ul>
+
+<p><code>rasqal_variable</code> now has
+a <code>rasqal_expression*</code> field <code>expression</code>.
+</p>
+
+
+<h3>Configuration and Build Changes</h3>
+
+<p>The pkgconfig rasqal.pc file and the <code>rasqal-config</code>
+script now separates directly linked shared libraries and indirectly
+linked ones.  This prevents unnecessary references to libraries.  The
+regular libraries includes -L plus <code>-lrasqal</code> and the
+dynamic and static libraries are available with:</p>
+<ul>
+<li><code>pkgconfig rasqal --static --libs</code></li>
+<li><code>rasqal-config --libs --private-libs</code></li>
+</ul>
+
+<p>So for example to statically link with rasqal, use either:</p>
+<pre>
+$ cc .. -o foo foo.c `pkgconfig rasqal --static --libs`
+
+$ cc .. -o foo foo.c `rasqal-config --libs --private-libs`
+</pre>
+
+
+<h3>Query Results Formatter Changes</h3>
+
+<p>Made it easier to discover and create of query results in a syntax
+by using a MIME Type.</p>
+
+<p>Added query results formatter constructor by required mime type:</p>
+<pre>
+rasqal_query_results_formatter*
+rasqal_new_query_results_formatter_by_mime_type(const char *mime_type);
+</pre>
+<p>Added a method to return the mime type of a selected formatter:</p>
+<pre>
+const char*
+rasqal_query_results_formatter_get_mime_type(
+  rasqal_query_results_formatter *formatter);
+</pre>
+
+<p>Added another query results formatter static method to enumerate
+possible results formats, their names, labels and (new) mime type.</p>
+<pre>
+int
+rasqal_query_results_formats_enumerate_full(const unsigned int counter,
+  const char **name, const char **label,
+  const unsigned char **uri_string, const char **mime_type);
+</pre>
+
+<p>Added a static method to check for support for a query results
+format.</p>
+<pre>
+int rasqal_query_results_formats_check(const char *name,
+  raptor_uri* uri, const char *mime_type);
+</pre>
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Updated for the
+<a href="http://www.w3.org/TR/2007/WD-rdf-sparql-query-20070326/">SPARQL Query Language for RDF</a>, W3C Working Draft 26 March 2007</p>
+<ul>
+<li>Added <code>REDUCED</code> token.  This entailed changing the
+distinct flag from a boolean to a mode.
+<code>rasqal_query_get_distinct</code> and
+<code>rasqal_query_set_distinct</code> now takes a mode (0, 1
+DISTINCT, 2 REDUCED) rather than the former boolean flag.
+There is no query engine support for REDUCED at present.
+</li>
+</ul>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Added the possibility that a query's native result is a syntax
+(rather than natively bindings, boolean or triples) and added
+a method to check for that:</p>
+<pre>
+int rasqal_query_results_is_syntax(rasqal_query_results* query_results);
+</pre>
+
+<p>Many query engine internal changes, but these remain unsupported:
+OPTIONAL graph pattern (partially working), GROUP graph pattern (no
+support), UNION graph pattern (no support) and new <code>SELECT
+REDUCED</code> (no support).
+</p>
+
+
+<h3><code>roqet</code> Utility Changes</h3>
+
+<p><code>roqet</code> can use -r to generate a chosen result syntax
+for bindings results or triples (using raptor).</p>
+
+<p>roqet now generates namespace declarations for triples when
+serializing output. The result is that they are used when the
+serializer handles them such as generating RDF/XML (Abbreviated)
+or Turtle.
+</p>
+
+
+<h3>Other Changes</h3>
+
+<p><code>rasqal_expression</code> lost the unused
+<code>rasqal_variable*</code> field <code>variable</code>
+</p>
+
+<p>Added exported variables to return the license string
+in <code>rasqal_license_string</code>
+and home page in <code>rasqal_home_url_string</code>
+</p>
+
+
+
+<h2 id="rel0_9_13"><a name="rel0_9_13">Rasqal 0.9.13 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>Added a new <code>rasqal_query_results_formatter</code> class.
+</p>
+
+<p>Many internal query engine changes, mostly to separate query and
+query_results internals so that eventually the run-time execution
+context is entirely separated from the static query structure.
+</p>
+
+<p>Added query features system with one initial feature 
+<code>RASQAL_FEATURE_NO_NET</code>.</p>
+
+
+<h3>Configuration and Build Changes</h3>
+
+<p>Allow shell variable <code>LEX</code> to be set to things that
+aren't exactly <code>flex</code> Recommend flex 2.5.33 and update
+configure to point at the main flex site whichq finally gets 2.5.33
+after 9 years.</p>
+
+<p><code>PKGCONFIG</code> vars not substituted
+correctly in configure.ac.  Remove @LDFLAGS from rasqal.pc.in.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=98">Issue#0000098</a>.
+</p>
+
+<p>Win32 build fixes.Correct win32 static linking of rasqal.
+(Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=100">Issue#0000100</a>)
+and include float.h and <code>#define isnan</code> on win32.
+(Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=111">Issue#0000111</a>).
+</p>
+
+<p>In maintainer mode, add all the supported compiler <code>-W</code>
+warning flags to the CFLAGS.
+</p>
+
+<p>Declare several rasqal functions with GCC printf-formatting
+attributes when using a new enough GCC.</p>
+
+<p>Remove broken debug messages.
+<a href="http://bugs.librdf.org/mantis/view.php?id=131">#0000131</a>.
+</p>
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Added labels to grammar tokens using bison to give better error messages.</p>
+
+<p>Fix looking for EOF in an unsigned variable since it may be negative
+on some systems.</p>
+
+<p>The query engine now implements SPARQL <code>GRAPH</code> matching.
+</p>
+
+
+<h3>RDQL Query Language Changes</h3>
+
+<p>Added labels to grammar tokens using bison to give better error messages.</p>
+
+<p>Fix looking for EOF in an unsigned variable since it may be negative
+on some systems.</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>The query engine now implements SPARQL <code>GRAPH</code> matching.
+</p>
+
+<p>Merge only all adjacent sequences of basic graph pattern triples, not
+anything with triples such as optional BGP triples.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=80">Issue#0000080</a>.
+</p>
+
+<p>When an exact triple match is present, do not execute a query forever.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=94">Issue#0000094</a>.
+</p>
+
+<p> Fail if a variable argument to <code>LANG()</code> has an
+undefined value rather than try to execute a NULL pointer.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=113">Issue#0000113</a>.
+</p>
+
+<p>Add query / query_results link early so reference counting is done right.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=95">Issue#0000095</a>.
+</p>
+
+<p>Report failure as well as query finished when an error occurs
+during making results.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=118">Issue#0000118</a>.
+</p>
+
+<p>Added a hack to check an outer constraint expression.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=129">Issue#0000129</a>.
+</p>
+
+<p>Free origins (<code>GRAPH</code> nodes) in triples to prevent memory leak.
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=133">Issue#0000133</a>.
+</p>
+
+
+
+<h3>Query API Changes</h3>
+
+<p>Added a new <code>rasqal_query_results_formatter</code> class to
+format <code>librdf_query_results</code> into a syntax.  Also added
+a <code>rasqal_query_results_formats_enumerate()</code> function to
+enumerate all the supported formats.  The query results
+method <code>rasqal_query_results_write()</code> was changed to use
+this class internally.
+</p>
+
+<p>Added a new feature system to allow setting parameters on
+the query parser/engine.  Initially have one
+feature <code>RASQAL_FEATURE_NO_NET</code> that prevents
+network requests during a query execution.
+Added functions:
+<code>rasqal_features_enumerate</code>,
+<code>rasqal_get_feature_count</code>,
+<code>rasqal_feature_from_uri</code>,
+<code>rasqal_feature_value_type</code>,
+<code>rasqal_query_set_feature</code>,
+<code>rasqal_query_set_feature_string</code>,
+<code>rasqal_query_get_feature</code>,
+<code>rasqal_query_get_feature_string</code>.
+</p>
+
+<p><code>roqet</code> gained a <code>-f</code>
+/ <code>--feature</code> option to set query features.
+</p>
+
+
+<h2 id="rel0_9_12"><a name="rel0_9_12">Rasqal 0.9.12 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>Added <a href="http://json.org/">JSON</a> as a query results
+format based on the
+<a href="http://www.w3.org/2001/sw/DataAccess/json-sparql/">Serializing SPARQL Query Results in JSON</a>
+draft.
+</p>
+
+<p>Added query writing to a <code>raptor_iostream</code> which allows
+reading in one query language and writing in another.  The only
+useful consequence of this now is that it enables <code>roqet</code>
+to become an RDQL to SPARQL translator.</p>
+
+<p>Rasqal now requires <a href="http://librdf.org/raptor/">raptor</a>
+1.4.9 or newer.
+</p>
+
+
+<h3>Configuration and Build Changes</h3>
+
+<p>Now using subversion.</p>
+
+
+<h3><code>roqet</code> utility Changes</h3>
+
+<p>Altered the <code>-d</code> (<code>--dump-query</code>) option to
+now take an argument of the query format to dump.  The values it can
+take are <code>debug</code>, <code>structure</code> or
+<code>sparql</code>.</p>
+
+<p>To convert a query from RDQL to SPARQL, use:</p>
+<pre>
+roqet -q -i rdql -d sparql -n query.rdql > query.sparql
+</pre>
+
+<p>Added <code>-r json</code> for <a href="http://json.org/">JSON</a>
+query results output based on the draft defined in the
+<a href="http://www.w3.org/2001/sw/DataAccess/json-sparql/">Serializing SPARQL Query Results in JSON</a> draft
+</p>
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Updated to match
+<a href="http://www.w3.org/TR/2006/CR-rdf-sparql-query-20060406/">SPARQL Query Language for RDF, W3C Candidate Recommendation 6 April 2006</a>.
+All DAWG syntax tests now pass.
+The update includes near alignment with SPARQL grammar term names
+except where the flex/bison approach diverged.</p>
+
+<p>Updated SPARQL tests from DAWG CVS</p>
+
+<p>Finally removed long deprecated <code>ASC[]</code> and
+<code>DESC[]</code> syntax.</p>
+
+
+<h3>RDQL Query Language Changes</h3>
+
+<p>Handle empty regex <code>//</code>
+Fixes <a href="http://bugs.librdf.org/mantis/view.php?id=71">Issue#0000071</a>
+</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Some updates to handle latest changes to SPARQL grammar.</p>
+
+<p>Added <code>RASQAL_EXPR_REGEX</code> 3-arg operation to match
+the SPARQL <code>regex()</code> 2/3-arg function.</p>
+
+<p>Many internal changes to move more of the query execution state
+from inside <code>rasqal_query</code> to
+inside <code>rasqal_query_results</code> and related structures.
+This is not yet complete but when done, you will be able to execute
+the same query more than once at the same time.
+</p>
+
+
+<h3>Query API Changes</h3>
+
+<p>Added <code>rasqal_query_write</code> to write a query
+structure into a syntax onto a raptor_iostream.  Implements
+writing SPARQL format with format URI NULL,
+<a href="http://www.w3.org/TR/rdf-sparql-query/">http://www.w3.org/TR/rdf-sparql-query/</a>
+or
+<a href="http://www.w3.org/TR/2006/CR-rdf-sparql-query-20060406/">http://www.w3.org/TR/2006/CR-rdf-sparql-query-20060406/</a>
+</p>
+
+<p>Added a <a href="http://json.org/">JSON</a>
+SPARQL query results format with format URI identifier
+<a href="http://www.w3.org/2001/sw/DataAccess/json-sparql/">http://www.w3.org/2001/sw/DataAccess/json-sparql/</a>
+based on the draft defined in
+<a href="http://www.w3.org/2001/sw/DataAccess/json-sparql/">http://www.w3.org/2001/sw/DataAccess/json-sparql/</a>
+Implemented document with version
+<code>alt-ser-sparql.rst,v 1.3 2006/02/16 16:03:08 k Exp</code>.
+</p>
+
+<p><code>rasqal_query_get_all_variable_sequence</code> was corrected to match the
+definition - return all variables, not just the bound (<code>SELECT</code>ed) ones.
+Fixes  <a href="http://bugs.librdf.org/mantis/view.php?id=79">Issue#00000079</a>.
+</p>
+
+<p>Added <code>rasqal_query_get_anonymous_variable_sequence</code> to return
+only anonymous variables after change above.
+</p>
+
+<p>Added <code>rasqal_graph_pattern_get_index</code> to get the
+absolute index of a graph pattern in a graph.
+</p>
+
+
+<h3>IOstream class Changes</h3>
+
+<p>Added
+<code>rasqal_query_iostream_write_escaped_counted_string</code> and
+<code>rasqal_query_escape_counted_string</code>
+to format an escaped string suitable for using inside a query.
+</p>
+
+
+<h3>Documentation Changes</h3>
+
+<p>Updated <code>roqet.1</code> for --exec option and new usages.</p>
+
+
+<h2 id="rel0_9_11"><a name="rel0_9_11">Rasqal 0.9.11 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>Duplicated <code>SELECT</code> variables are now detected, give a
+warning and are removed.
+</p>
+
+<p>Rasqal now requires <a href="http://librdf.org/raptor/">raptor</a>
+1.4.8 or newer to get the <em>guess</em> parser that uses URI/name
+and mime type returned from protocol request (if available) to choose
+the correct parser.
+</p>
+
+<p>Added an internal <code>rasqal_map</code> key : value map for use
+with result duplicate detection and ordering.
+</p>
+
+<p>A major source code regoranisation moved all library source code
+to the <code>src/</code> dir, roqet to <code>utils/</code> and other
+documentation to <code>docs/</code>.  This should only affect
+packagers, not any functionality.</p>
+
+<p>Many more function documentation were added to the sources for use
+by gtk-doc.</p>
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Updated to the 
+<a href="http://www.w3.org/TR/2005/WD-rdf-sparql-query-20051123/">SPARQL Query Language for RDF W3C Working Draft 23 November 2005</a>:</p>
+<ul>
+<li>Added <code>isIRI</code> keywords.</li>
+<li>Updated the name definitions to allow initial _ in variable names.</li>
+<li>Changed the decimal and double literal syntax.</li>
+<li>Allow negative numeric literals.</li>
+<li>Change the AND and OR logic when an error is present.</li>
+</ul>
+
+<p>Added a post 2005-11-23 SPARQL WD syntax change: added
+<code>langMatches</code> operator and initial query engine support.
+</p>
+
+<p>Invalid <code>\u</code><em>HHHH</em> and
+<code>\U</code><em>HHHHHHHH</em> hex escapes and floating point
+number formats are detected and warned.</p>
+ 
+<p>Updates to the query engine make <code>DISTINCT</code>
+and <code>ORDER BY</code> now work, including with <code>LIMIT</code>.
+</p>
+
+<p>The lexer now counts line numbers correctly over multi-line
+comments.</p>
+
+<p>Updated changes to the valid characters allowed in SPARQL names
+for variable, prefix and QNames.</p>
+
+
+<h3>RDQL Query Language Changes</h3>
+
+<p>The lexer now counts line numbers correctly over multi-line
+comments.</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>When query result sorting is used with limit
+(SPARQL <code>LIMIT</code>) and offset, they now work correctly,
+performing the limit and offset after ordering the result.  This
+matches the SPARQL query result semantics.
+</p>
+
+<p>The query engine now implements distinct results
+(SPARQL <code>DISTINCT</code>) including with ordering
+(SPARQL <code>ORDER BY</code>).
+</p>
+
+<p>More cases with optional graph patterns (SPARQL
+<code>OPTIONAL</code>s) are now executed correctly.
+Note: this does <em>not</em> mean all cases work, there are known
+problems with executing optional clauses.</p>
+
+<p>Added types for <code>xsd:float</code> (C float)
+and <code>xsd:double</code> (C double); <code>xsd:decimal</code>
+(handled as a string) and <code>xsd:datetime</code> (as a string).
+</p>
+
+<p>Fixed (a compare b) between integers and doubles to be the right sign.
+</p>
+
+<p>Do not promote literals early on in comparisons to strings "perl
+style" but do the best type-based comparsion as late as possible.
+</p>
+
+
+<h3>Query API Changes</h3>
+
+<p>Added <code>rasqal_new_double_literal</code>.</p>
+
+<p>Added <code>rasqal_graph_pattern_visit</code> and type for visitor
+function <code>rasqal_graph_pattern_visit_fn</code>.
+</p>
+
+<p>Added <code>rasqal_new_expression_from_expression</code>.</p>
+
+<p>Added <code>rasqal_expression_visit</code> and type for visitor
+function <code>rasqal_expression_visit_fn</code>.
+</p>
+
+<p>Deprecated function <code>rasqal_new_floating_literal</code> replaced by
+new <code>rasqal_new_double_literal</code>.
+</p>
+
+<p>Deprecated function <code>rasqal_expression_foreach</code>,
+replaced by new <code>rasqal_expression_visit</code>.
+</p>
+
+<p>Function <code>rasqal_expression_evaluate</code> gains a flag
+argument of new enum <code>rasqal_compare_flags</code>.</p>
+
+<p>Added enum <code>rasqal_compare_flags</code> flags for
+<code>rasqal_expression_evaluate</code> or
+<code>rasqal_literal_compare</code>.  Type
+<code>RASQAL_COMPARE_XQUERY</code> can be used with
+to ask for use of XQuery comparison and type promotions.
+</p>
+
+<p>Added <code>rasqal_literal</code> types:
+<code>RASQAL_LITERAL_DECIMAL</code>,
+<code>RASQAL_LITERAL_DATETIME</code>,
+<code>RASQAL_LITERAL_DOUBLE</code> (replacing deprecated
+<code>RASQAL_LITERAL_FLOATING</code>) and
+<code>RASQAL_LITERAL_FLOAT</code>.  Reordered the
+<code>rasqal_literal</code> types in the enum.
+</p>
+
+<p>The enum types in <code>rasqal_literal_type</code> were reordered
+to make them match sparql type promotion.</p>
+
+
+<h3><code>roqet</code> utility program changes</h3>
+
+<p><code>roqet</code> gains -e/--exec option to execute a query
+string directly rather than via a file or URI containing the query.
+</p>
+
+<p>Now writes out XML results format in format with version URI
+<code>http://www.w3.org/2005/06/sparqlResults</code> and short name
+"xml".  The previous version is available with short name "xml-v2".
+The latest version now writes <code>ordered</code>
+and <code>distinct</code> boolean-valued attributes on
+the <code>results</code> element.
+</p>
+
+
+<h3>Configuration Changes</h3>
+
+<p>The autogen.sh script for building from CVS was revamped to be
+more modular.</p>
+
+<p><code>configure</code> now takes an <code>--enable-gtk-doc</code>
+option to enable building of the documentation using the
+<code>gtk-doc</code> utility.  It is by default enabled only if the
+utility is available.
+</p>
+
+
+<h3>Documentation Changes</h3>
+
+<p>The GNOME <code>gtk-doc</code> program is now used to
+automatically extract documentation from source comments into
+reference documentation.  This is then merged with templates and
+additional documentation to provide a reference manual for rasqal
+as XML document which is turned into HTML along with GNOME devhelp
+support.</p>
+
+<p>This new documentation intended to replace the librasqal manual
+page/web page as easier to read document with scope for better
+expanding with more detail of rasqal including examples and tutorial
+information.
+The <a href="http://librdf.org/rasqal/librasqal.html">librasqal</a>
+manual page will continue to contain the summary information for the
+present.
+</p>
+
+
+<h2 id="rel0_9_10"><a name="rel0_9_10">Rasqal 0.9.10 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>The query engine now supports ordering query results, in SPARQL
+this is the <code>ORDER BY</code> clause.</p>
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>The SPARQL parser now passes (accepts) all the 70+
+<em>SyntaxFull</em> tests in the RDF Data Access Working Group (DAWG)
+test suite for SPARQL.  This mostly means accepting optional
+punctuation in some places.
+</p>
+
+<p>Sorting results with <code>ORDER BY</code> now partially works
+however comparison is not done with the SPARQL literal comparison
+rules (after XQuery) but using the existing RDQL-style "string-y"
+comparisons.
+</p>
+
+<p>Allow <code>&lt;&gt;</code> as a URI.</p>
+
+<p>The SPARQL parser now accepts some changes made by the DAWG after
+the last published working draft:
+<a href="http://www.w3.org/TR/2005/WD-rdf-sparql-query-20050419/">SPARQL Query Language for RDF</a>,
+W3C Working Draft, 19 April 2005.  This includes:</p>
+
+<ul>
+<li>In <code>ORDER BY</code>
+<code>ASC(</code>expression<code>)</code> replaces <code>ASC[...]</code>,
+<code>DESC(</code>expression<code>)</code> replaces <code>DESC[...]</code>,
+and it also accepts <code>ORDER BY (</code>expression<code>)</code>.
+<code>ORDER BY </code>func()<code></code> is accepted although at
+present no extension function support is available that could use it.
+</li>
+
+<li><code>[]</code> can be used in the triple predicate position
+as an anonymous existential variable</li>
+
+<li>Enforce that ASK queries cannot use <code>ORDER BY</code>,
+<code>LIMIT</code> or <code>OFFSET</code></li>
+
+</ul>
+
+<p>Omitting <code>WHERE</code> gives a warning.  Don't do that!</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>The query engine now allows sorting of results (<code>ORDER BY</code>
+in SPARQL).  It performs comparisons using the existing RDQL style
+and does not yet support the SPARQL literal comparison rules.  Sorting
+can be done by a sequence of expressions, ascending or descending.
+If the final result is equality, the object pointers are used.</p>
+
+<p>Note: removal of duplicates is not supported yet.</p>
+
+<p>Some test code for datatypes support was added, not enabled by
+default and not yet useful.</p>
+
+
+<h3>Query API Changes</h3>
+
+<p>Removed functions deprecated in 0.9.9.</p>
+
+<p>Added <code>rasqal_graph_pattern_operator</code> enumeration with
+values for the main SPARQL graph patterns, graph pattern class method
+<code>rasqal_graph_pattern_get_operator</code> and graph pattern
+utility function <code>rasqal_graph_pattern_operator_as_string</code></p>
+
+<p>Modified the type of the final argument of
+<code>rasqal_new_graph_pattern_from_sequence</code> and
+<code>rasqal_graph_pattern_add_triples</code> from an integer to a
+<code>rasqal_graph_pattern_operator</code> enumeration.</p>
+
+<p>Deprecated function <code>rasqal_graph_pattern_get_flags</code>
+now always returning 0 replaced by the graph pattern operator
+functions listed above .</p>
+
+
+<h3><code>roqet</code> utility program changes</h3>
+
+<p>Removed deprecated flags -f and -o</p>
+
+
+<h2 id="rel0_9_9"><a name="rel0_9_9">Rasqal 0.9.9 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>SPARQL is now the default query language</p>
+
+<p>Added a signing memory debugging system to aid checking when
+rasqal-allocated memory is freed in another library or vice-versa
+enabled by <code>--with-memory-signing</code> configure option
+(defaults to on in maintainer mode).</p>
+
+<p>Fixed a few internal malloc/frees to use RASQAL_MALLOC / RASQAL_FREE
+so that the above signed memory system worked.</p>
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Grammar updated to follow the
+<a href="http://www.w3.org/TR/2005/WD-rdf-sparql-query-20050419/">SPARQL Query Language for RDF</a>,
+W3C Working Draft, 19 April 2005.  This changes many parts of the syntax:
+</p>
+<ul>
+<li>Turtle/N3 style for triples with abbreviations</li>
+<li><code>{</code> ... <code>}</code> around triple patterns</li>
+<li><code>OPTIONAL</code> instead of <code>[]</code></li>
+<li><code>GRAPH</code> replaces <code>SOURCE</code></li>
+<li><code>FROM NAMED</code> replaces <code>LOAD</code></li>
+<li><code>FILTER</code> replaces <code>AND</code></li>
+<li><code>REGEX</code> replaces <code>?var =~ /match/flags</code>
+and <code>!~</code></li>
+<li>Added <code>LIMIT</code>, <code>OFFSET</code> and
+<code>ORDER BY</code> with <code>ASC[]</code> and <code>DESC[]</code></li>
+<li>Changed function syntax to remove <code>&amp;</code></li>
+<li>Removed old operator tokens: <code>ne</code>, <code>eq</code>, <code>==</code></li>
+</ul>
+
+<p>(Note: the query engine does not support sorting amongst other
+recently added SPARQL features)</p>
+
+<p>SPARQL keywords are now case independent rather than just upper
+or lowercase.</p>
+
+<p>Added """long literals""" after N3 (and soon, Turtle)
+and '''long literals''' for SPARQL only.
+</p>
+
+<p>Added many SPARQL tests from DAWG most not yet approved by the
+working group. Not all pass either because not implemented or
+known bugs.</p>
+
+<p>Added the revised 
+<em>SPARQL Query Results XML Format</em> (the latest version not yet published)
+support to <code>rasqal_query_results_write</code> when called with
+format URI <code>http://www.w3.org/2001/sw/DataAccess/rf1/result2</code>.
+</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Uses the query results limit and offset information to skip
+initial results (offset) and provide a maximum number of results (limit).
+</p>
+
+<p>Moved some engine-specific operations from RDQL and SPARQL parser.
+</p>
+
+<p>Added internal <code>rasqal_formula</code> class for the Turtle
+part of the SPARQL parser
+</p>
+
+<p><strong>Deprecated</strong> the <code>rasqal_triples_source</code>
+factory method <code>new_triples_match</code>.  It is replaced by a
+new method <code>init_triples_match</code> and will be removed from
+the next release.</p>
+
+
+
+<h3>Query API Changes</h3>
+
+<p>Added bnode identifier generation functions:
+<code>rasqal_query_set_default_generate_bnodeid_parameters</code>,
+<code>rasqal_query_set_generate_bnodeid_handler</code> based on the
+raptor API for generating blank node identifiers in the Turtle/N3
+triple style.
+</p>
+
+<p>Added <code>order_conditions_sequence</code> to the query
+structure to store query ordering conditions and added access methods
+<code>rasqal_query_get_order_conditions_sequence</code> and
+<code>rasqal_query_get_order_condition</code> to read the resulting
+expressions.
+</p>
+
+<p>Added expressions for SPARQL ordering conditions:
+<code>RASQAL_EXPR_ORDER_COND_ASC</code>,
+<code>RASQAL_EXPR_ORDER_COND_DESC</code> and
+<code>RASQAL_EXPR_ORDER_COND_NONE</code>.
+</p>
+
+
+<p>Added types for variables in two version - normal and anonymous
+with an new enum <code>rasqal_variable_type</code> and
+<code>rasqal_new_variable_typed</code> to allow creating them.
+</p>
+
+<p>Completed the distinct/limit and offset get/set methods by adding:
+<code>rasqal_query_set_distinct</code>,
+<code>rasqal_query_set_limit</code>,
+<code>rasqal_query_get_offset</code> and
+<code>rasqal_query_set_offset</code>
+</p>
+
+<p>Deprecated the <code>rasqal_triple</code> flags field - the value
+<code>RASQAL_TRIPLE_FLAGS_EXACT</code> was only used in internals of
+the execution engine. The value
+<code>RASQAL_TRIPLE_FLAGS_OPTIONAL</code> was never used.  Optionals
+are now noted on graph patterns.  Deprecated
+<code>rasqal_triple_set_flags</code> and
+<code>rasqal_triple_get_flags</code>.
+</p>
+
+<p>Added enum <code>rasqal_query_verb</code> for the main query verbs:
+<code>RASQAL_QUERY_VERB_SELECT</code>
+<code>RASQAL_QUERY_VERB_CONSTRUCT</code>
+<code>RASQAL_QUERY_VERB_DESCRIBE</code> and
+<code>RASQAL_QUERY_VERB_ASK</code>.
+Added method <code>rasqal_query_get_verb</code> to access the verb.
+</p>
+
+<p>Added <code>rasqal_query_get_query_graph_pattern</code> to get the
+top graph pattern.</p>
+
+<p>Added <code>rasqal_query_get_wildcard</code> to get the query verb
+wildcard flag such as with SPARQL <code>SELECT *</code>
+</p>
+
+<p>Added <code>rasqal_query_get_construct_triples_sequence</code> and
+<code>rasqal_query_get_construct_triple</code> to get the triples
+made from a SPARQL <code>CONSTRUCT</code> query.</p>
+
+
+<h3><code>roqet</code> utility program changes</h3>
+
+<p>Updated roqet to include better query structure walking with
+<code>-w</code> / <code>--walk</code> including listing query verb,
+distinct, limit, offset flags, construct triples and easier to read
+groupings of graph patterns and triples.</p>
+
+<p>Deprecated roqet arguments <code>-f</code> / <code>--format</code>
+and <code>-o</code> / <code>--output</code> in place of
+<code>-r</code> / <code>--results</code> as both choose the query
+results format.
+</p>
+
+<p>SPARQL is now the default query language for roqet.</p>
+
+
+
+<h2 id="rel0_9_8"><a name="rel0_9_8">Rasqal 0.9.8 Changes</a></h2>
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Grammar updated to follow the
+<a href="http://www.w3.org/TR/2005/WD-rdf-sparql-query-20050217/">SPARQL Query Language for RDF</a>,
+W3C Working Draft, 17 February 2005.
+</p>
+
+<p>Added support for casting in constraint expresions for datatyped literals
+with the syntax <em>qname</em><code>(</code><em>literal</em><code>)</code>
+such as <code>xsd:decimal("10")</code>.
+</p>
+
+<p>Added named graphs parsing with <code>LOAD</code> and note that
+<code>UNION</code> cannot be handled yet, <code>SOURCE</code> and
+<code>[</code>...<code>]</code> syntax for optionals are deprecated.
+</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Engine now operates over a hierarchy of
+<code>rasqal_graph_pattern</code> objects, where at the root the
+query has a single <em>query graph</em> rather than a sequence of
+graph patterns.  The query graph contains the former sequence of
+graph patterns.</p>
+
+<p>Constraints can be applied to any graph pattern, not just at the
+top level of a query.</p>
+
+<p>Added casting expressions type <code>RASQAL_EXPR_CAST</code>
+and constructor <code>rasqal_new_cast_expression</code>.</p>
+
+<p>Fixed setting of a triple origin (SPARQL <code>GRAPH</code>) which
+was not working in 0.9.7</p>
+
+<p><code>xsd:boolean</code> RDF literals are now promoted into
+internal <code>RASQAL_LITERAL_BOOLEAN</code> typed
+<code>rasqal_literal</code> like for XSD integer and double.
+</p>
+
+<p>The query engine uses the named graph information when evaluating
+queries, passing it to the <code>rasqal_triples_match</code> factory
+methods either implemented with raptor or redland as a 
+<code>rasqal_triples_source_factory</code> and returning them
+as results of variable bindings.
+</p>
+
+
+
+<h3>Query API Changes</h3>
+
+<p>Added no-arg constructor
+<code>rasqal_new_graph_pattern</code>
+</p>
+
+<p>Added method
+<code>rasqal_graph_pattern_add_triples</code>
+to add triples to an existing graph pattern.
+</p>
+
+<p>Added methods
+<code>rasqal_graph_pattern_add_constraint</code>,
+<code>rasqal_graph_pattern_get_constraint_sequence</code> and
+<code>rasqal_graph_pattern_get_constraint</code>
+to add constraints to a graph pattern.
+</p>
+
+<p>Added method
+<code>rasqal_graph_pattern_add_sub_graph_pattern</code>
+to add a sub-graph pattern to a graph pattern.
+</p>
+
+<p>Added a <em>Data Graph</em> class with constructor
+<code>rasqal_new_data_graph</code>, destructor
+<code>rasqal_free_data_graph</code> and debug method
+<code>rasqal_data_graph_print</code>.
+</p>
+
+<p>Added query methods for data graphs:
+<code>rasqal_query_add_data_graph</code>,
+<code>rasqal_query_get_data_graph_sequence</code>,
+<code>rasqal_query_get_data_graph</code>.
+</p>
+
+<p>Deprecated query methods
+<code>rasqal_query_add_constraint</code>,
+<code>rasqal_query_get_constraint_sequence</code>
+<code>rasqal_query_get_constraint</code>,
+<code>rasqal_query_add_source</code>,
+<code>rasqal_query_get_source_sequence</code> and
+<code>rasqal_query_get_source</code>.  These will be removed in the
+next release.</p>
+
+<p>Removed functions deprecated in previous version:
+<code>rasqal_query_get_variable_sequence</code>
+and <code>rasqal_query_add_triple</code>.
+</p>
+
+
+<h2 id="rel0_9_7"><a name="rel0_9_7">Rasqal 0.9.7 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>Fix a resource clean up when query results are either not read at
+all or not fully exhausted.  This caused a problem in Redland when it
+held on to MySQL database handles despite a query having ended.</p>
+
+<p>Added option <code>-n/--dryrun</code> to <code>roqet</code> to stop after
+preparing the query.  Added option <code>-w/--walk-query</code> to
+walk and print the query using the graph API.</p>
+
+<p>New build configuration and portability fixes for win32 (John Barstow)</p>
+
+<p>Portability fixes for win32 - define <code>RASQAL_INLINE</code>
+and use it as for raptor.  (Dave Viner)</p>
+
+<p>Make rasqal tests work when building against raptor in a sibling
+source tree.</p>
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Added a graph pattern API with <code>rasqal_graph_pattern</code>
+typedef and <code>rasqal_pattern_flags</code> enum with value
+<code>RASQAL_PATTERN_FLAGS_OPTIONAL</code> to allow complete
+walking of the query structure.</p>
+
+<p>Two new methods to the query class were added to support this:
+<code>rasqal_query_get_graph_pattern_sequence</code> to get the
+raptor_sequence of graph patterns in a query and
+<code>rasqal_query_get_graph_pattern</code> to get individual an
+graph pattern by index.</p>
+
+<p>The new graph pattern methods added are:</p>
+<ul>
+  <li><code>rasqal_graph_pattern_get_triple</code> to get a
+  <code>raptor_triple</code> inside a graph pattern.</li>
+  <li><code>rasqal_graph_pattern_get_sub_graph_pattern_sequence</code> to
+  get the raptor_sequence of sub-graph patterns.</li>
+  <li><code>rasqal_graph_pattern_get_sub_graph_pattern</code> to get
+  a sub-graph pattern inside a graph pattern by index.</li>
+  <li><code>rasqal_graph_pattern_get_flags</code> to get a graph
+  pattern's flags.</li>
+  <li><code>rasqal_graph_pattern_print</code> to print a graph
+  pattern in a debug form.</li>
+</ul>
+
+<p>Deprecated <code>rasqal_query_add_triple</code> as it doesn't
+construct the graph patterns and is of little use as it does not
+build the correct query structures.</p>
+
+<p>Added query API methods to get the bound and all variables
+in a query:  <code>rasqal_query_get_bound_variable_sequence</code>
+and <code>rasqal_query_get_all_variable_sequence</code> respectively.
+Deprecated <code>rasqal_query_get_variable_sequence</code> as
+too ambiguous.</p>
+
+<p>With the aid of gcc <code>-Wswitch-enum</code>, found and fixed
+cases where switch on enumerated values were missing cases.  The
+remaining cases return failure or an error message rather than
+abort().  This fixed a crash when comparing for equality a variable
+?x with a blank node value and an interger.</p>
+
+<p>Deleted <code>RASQAL_EXPR_PATTERN</code> as it was never used.</p>
+
+<p>Added <code>rasqal_query_get_distinct</code> to get a
+query-specified distinct results flag.</p>
+
+<p>Added <code>rasqal_query_get_limit</code> to get a query-specified
+limit on the number of results.</p>
+
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Updated some of the SPARQL syntax to match the changes in the
+<a href="http://www.w3.org/TR/2005/WD-rdf-sparql-query-20050217/">SPARQL Query Language for RDF</a>
+W3C Working Draft of 17 February 2005.  Added <code>GRAPH</code>
+replacing <code>SOURCE</code> and <code>WITH</code> replacing
+<code>FROM</code>.  Added warnings about using the older forms
+and about using <code>[</code>...<code>]</code> instead of
+<code>OPTIONAL</code>.
+</p>
+
+<p>Added recording of <code>DISTINCT</code> and <code>LIMIT</code>
+in the query structures but not yet used by the query engine.</p>
+
+
+
+<h3>RDQL Query Language Changes</h3>
+
+<p>None.</p>
+
+
+
+<h2 id="rel0_9_6"><a name="rel0_9_6">Rasqal 0.9.6 Changes</a></h2>
+
+<h3>General Changes</h3>
+
+<p>Fix a bug in writing a query result to XML when blank nodes are
+used. Now also correctly uses the base URI when pass in to the
+writing method.</p>
+
+<p>Added support for three types of query result - bindings (the only
+one in previous versions), an RDF graph and a boolean.  Added
+<code>rasqal_query_results</code> methods to test the type of the
+result: <code>rasqal_query_results_is_bindings</code>,
+<code>rasqal_query_results_is_boolean</code> and
+<code>rasqal_query_results_is_graph</code>.</p>
+
+<p>Added
+<code>rasqal_query_results_get_triple</code>
+to get current triple as a <code>raptor_statement</code>
+and <code>rasqal_query_results_next_triple</code> to move to the next triple.
+</p>
+
+<p>Added 
+<code>rasqal_query_results_get_boolean</code>
+to get a boolean query result value.
+</p>
+
+<p>Added <code>rasqal_triple</code> copy constructor
+<code>rasqal_new_triple_from_triple</code>.
+</p>
+
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Constructs an RDF graph result as a sequence of triples.  This
+enables the SPARQL <code>CONSTRUCT</code> form to work.
+</p>
+
+<p>Can return a boolean result indicating that there were variable
+binding results, but not returning them.  This enables the SPARQL
+<code>ASK</code> form to work.
+</p>
+
+<p>Added a new function expression - rasqal_op enum value
+<code>RASQAL_EXPR_FUNCTION</code>, added new <code>name</code> and
+<code>args</code> fields to the <code>rasqal_expression</code>
+structure and added <code>rasqal_new_function_expression</code> to
+construct this expression.
+</p>
+
+<p>Added new 1-argument expression <code>RASQAL_EXPR_STR</code>
+returning a string version of the expression.</p>
+
+<p>Added new 1-argument expressions operating on RDF literals:
+<code>RASQAL_EXPR_LANG</code> returning the language string of an RDF literal,
+<code>RASQAL_EXPR_DATATYPE</code> returning the datatype URI of an RDF literal.
+</p>
+
+<p>Added new 1-argument testing expressions returning booleans:
+<code>RASQAL_EXPR_BOUND</code> true if the variable argument is bound to a value,
+<code>RASQAL_EXPR_ISURI</code> true if the argument is a URI,
+<code>RASQAL_EXPR_ISBLANK</code> true if the argument is a blank node and
+<code>RASQAL_EXPR_ISLITERAL</code> true if the argument is an RDF literal.
+</p>
+
+<p>Fixed a problem in optional results returning extra results
+with no new bindings.
+</p>
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>The SPARQL Parser now allows UTF-8 and \u, \U in prefixes and
+QNames.
+</p>
+
+<p>Now supports <code>CONSTRUCT</code> and <code>ASK</code>
+queries using the updated query engine features.</p>
+
+<p><code>OPTIONAL</code> can now be used wherever <code>[</code> ...
+<code>]</code> could be used (parser bug fix).</p>
+
+<p>Now supports the SPARQL built-in functions
+<code>STR()</code> returning a string version of the expression,
+<code>LANG()</code> returning the language string of an RDF literal,
+<code>DATATYPE()</code> returning the datatype URI of an RDF literal,
+<code>BOUND()</code> testing if a variable is bound,
+<code>ISURI()</code> testing if an expression is a URI,
+<code>ISBLANK()</code> testing if an expression is a blank node and
+<code>ISLITERAL()</code> testing if an expression is an RDF literal.
+</p>
+
+<p>Now supports SPARQL <code>BASE</code> directive for setting the
+base URI of a query.  This is <em>experimental</em> and may not be in
+the next version or may not be in the final SPARQL language.</p>
+
+<p>The parser now expands QNames correctly when used in literals like
+<code>"blah"^^xsd:string</code>.
+</p>
+
+
+<h3>RDQL Query Language Changes</h3>
+
+<p>The RDQL Parser now allows UTF-8 and \u, \U in prefixes and
+QNames.  This makes RDQL testsuite tests S-03, S-04 and S-05 work.
+</p>
+
+
+
+<h2 id="rel0_9_5"><a name="rel0_9_5">Rasqal 0.9.5 Changes</a></h2>
+
+<p>A release with major changes internal to the query engine to
+operate over graph patterns instead of sequences of triple patterns
+and to add execution of optional graph patterns.  Additionally the
+query results can now be written in a recognised XML format.</p>
+
+<p>This version of Rasqal requires
+<a href="http://librdf.org/raptor/">Raptor</a> 1.4.4.</p>
+
+
+<h3>Core Changes</h3>
+
+<p>Added a <code>rasqal_graph_pattern</code> class for handling
+matching a graph pattern (set of triple patterns) in an
+<code>rasqal_query</code>.  RDQL only has one of these wheras SPARQL
+may have many, and they may be nested (this may change, as SPARQL is
+under development).</p>
+
+<p>Added <code>rasqal_query_results_write</code> method to write
+variable binding query results to a <code>raptor_iostream</code> in
+the XML format defined by
+<a href="http://www.w3.org/TR/2004/WD-rdf-sparql-XMLres-20041221/">SPARQL Variable Binding Results XML Format</a>, W3C Working Draft, 21 December 2004.
+</p>
+
+
+
+<h3>Query Engine Changes</h3>
+
+<p>Updated the query engine to operate over graph patterns rather
+than a single sequence of triple patterns.  The graph patterns may be
+optional, which is used to implement SPARQL optionals.  Nested graph
+patterns are constructed but cannot yet be executed.
+</p>
+
+<p>Added a unary minus expression type.</p>
+
+<p>Improved the type promotion for expression evaluation.  Try to
+evaluate strings as doubles or integers if the operation contains one
+double or integer respectively.</p>
+
+<p>Fixed a memory leak with string matches/non-matches.</p>
+
+
+<h3>SPARQL Query Language Changes</h3>
+
+<p>Optional graph patterns <code>OPTIONAL</code> and
+<code>[</code> ... <code>]</code> now work.</p>
+
+<p>Added the <code>{</code> ... <code>}</code> group syntax and
+removed the <code>(</code> ... <code>)</code> form.</p>
+
+<p><code>$</code> was added as an allowed variable prefixes.</p>
+
+<p>A warning was added to show <code>SOURCE *</code> is ignored.</p>
+
+<p>Added the <code>UNION</code> keyword, unsupported.</p>
+
+<p>Rasqal now passes the
+<a href="http://www.w3.org/2001/sw/DataAccess/">DAWG</a>
+SPARQL 
+<a href="http://www.w3.org/2001/sw/DataAccess/tests/">test cases</a>:
+Optional triples (dawg-opt-query-001, dawg-opt-query-002,
+dawg-opt-query-003, dawg-opt-query-004)
+and examples from query WD (sparql-query-example-2.1a,
+sparql-query-example-2.2a, sparql-query-example-2.3a,
+sparql-query-example-2.4a, sparql-query-example-3)
+</p>
+
+<p>Allow UTF-8 qname prefixes and check name against XML name
+constraints.</p>
+
+<p>Recover lexer state from errors in regexes.</p>
+
+<p>Terminate the lexer on a syntax error, rather than produce
+multiple errors.</p>
+
+
+<h3>RDQL Query Language Changes</h3>
+
+<p>The lexer now handles UTF-8 qname prefixes, enabling RDQL
+testsuite test S-02 to pass.</p>
+
+<p>Allow UTF-8 qname prefixes and check name against XML name
+constraints.</p>
+
+<p>Recover lexer state from errors in regexes.</p>
+
+<p>Terminate the lexer on a syntax error, rather than produce
+multiple errors.</p>
+
+
+
+<h2 id="rel0_9_4"><a name="rel0_9_4">Rasqal 0.9.4 Changes</a></h2>
+
+<p>Pass on raptor parser errors to rasqal's error routines and
+upwards.</p>
+
+<p>Clean up several memory allocations when a query fails to prepare
+or execute fully.</p>
+
+<p>Fixed lexer jams when a query contained an illegal
+variable name after a '?'.</p>
+
+<p>Fixed lexer crashes when a query ended in a regex pattern like
+<code>/abc/</code>.</p>
+
+<p>Tidied up the testing framework so 'make distcheck' works.</p>
+
+
+<h2 id="rel0_9_3"><a name="rel0_9_3">Rasqal 0.9.3 Changes</a></h2>
+
+<p>Rasqal's License was changed from LGPL 2.1/MPL 1.1 to
+LGPL 2.1/Apache 2</p>
+
+<p>Added support for the
+<a href="http://www.w3.org/TR/2004/WD-rdf-sparql-query-20041012/">
+SPARQL Query Language for RDF</a>,
+W3C Working Draft, 12 October 2004
+from the W3C RDF Data Access Working Group (DAWG).
+The support is at the basic syntax level - token lexer and grammar parser
+which passes the first simple tests from the proposed
+DAWG testcases.  No additional query engine support has been added for SPARQL
+features that are not supported by RDQL.
+</p>
+
+<p>Queries can now be prepared and then executed multiple times.</p>
+
+<p>Added configure <code>--enable-query-languages</code> option with
+<code>rdql</code> and <code>sparql</code> as the choices.</p>
+
+<p>Thanks to Chris Pointon for several patches to make Rasqal easier
+to build under Win32.  Applied with some modifications.  Renamed the
+RDQL and SPARQL syntax tokens ERROR to ERROR_TOKEN to help.</p>
+
+<p>Added experimental support for querying multiple sources; the same
+query is executed over each source in turn.  Also added some support
+for returning the source URI which is not yet enabled as this feature
+is in flux in the DAWG work.  This may change or be removed in future
+versions.</p>
+
+<p><code>roqet</code> can specify a data source URI on the command
+line with <code>-s</code> / <code>--source</code>) <em>URI</em> for
+queries executing against an implicit model.</p>
+
+<p>Added the
+<a href="http://www.w3.org/2001/sw/DataAccess/tests/">DAWG SPARQL test cases</a>
+driven from the manifest.n3 format.  Created tests from the examples
+in the working draft.</p>
+
+<p>Added an experimental XML result format for bindings, based on
+DAWG work.  Enabled in <code>roqet</code> with <code>-o xml</code>.
+This is very likely to change or replaced in future versions.</p>
+
+<p>Added <code>roqet</code> argument <code>-d</code> /
+<code>--dump-query</code> to dump the processed query, rather than
+do it by default (0.9.2 and earlier).</p>
+
+<p><code>roqet</code> can now read queries from URIs, using
+the <code>raptor_www</code> class to do the retrieval.</p>
+
+<p>Fixed the <code>configure</code> checks for a posix regex
+function regcomp to correctly discover it is present.</p>
+
+
+<h3>Internal changes</h3>
+
+<p>Added support for declaring prefixes for XML-style QNames both
+before and after their use.</p>
+
+<p>The struct <code>rasqal_prefix</code> gained a
+<code>declared</code> field.</p>
+
+<p>The struct <code>rasqal_triple</code> gained an origin field; not
+used at present but intended to support work on tracking triple
+provenance such as provided by Redland Contexts.</p>
+
+<p>Added methods <code>rasqal_triple_set_origin</code> and
+<code>rasqal_triple_get_origin</code> to support the above.</p>
+
+<p>struct <code>rasqal_triple_meta</code> now takes a 4-array of
+bindings, the fourth being the origin.</p>
+
+<p>Exported function <code>rasqal_set_triples_source_factory</code>
+publically as originally intended.
+</p>
+
+
+<h2 id="rel0_9_2"><a name="rel0_9_2">Rasqal 0.9.2 Changes</a></h2>
+
+<p>This release made minor portability fixes for building with
+C++ and Win32 (untested).</p>
+
+<p>Several functions changed their parameters or return values from
+char* to unsigned char* or const unsigned char* to reflect the
+actual use.</p>
+
+<p>Changed to return a <code>const unsigned char*</code>:<br />
+<code>rasqal_literal_as_string</code>
+</p>
+
+<p>Changed to take <code>const unsigned char*</code> (or add
+<code>const</code>):<br />
+<code>rasqal_new_floating_literal</code><br />
+<code>rasqal_new_pattern_literal</code><br />
+<code>rasqal_new_prefix</code><br />
+<code>rasqal_new_simple_literal</code><br />
+<code>rasqal_new_string_literal</code><br />
+<code>rasqal_new_variable</code><br />
+<code>rasqal_query_has_variable</code><br />
+<code>rasqal_query_results_get_binding_name</code><br />
+<code>rasqal_query_results_get_binding_value_by_name</code><br />
+<code>rasqal_query_results_get_bindings</code><br />
+<code>rasqal_query_set_variable</code><br />
+</p>
+
+
+<h2 id="rel0_9_1"><a name="rel0_9_1">Rasqal 0.9.1 Changes</a></h2>
+
+<p>This release changed the way that results were returned.  A new
+<code>rasqal_query_results</code> class was created.  This allows for
+a clean separation of the two concepts allowing multiple form of the
+results to be retrieved as methods of the query_results class, rather
+than the query class.  The only form of results currently available
+is variable bindings, but RDF graphs will be returned in future,
+as a set of triples in a serialised form.</p>
+
+<p>The execution method <code>rasqal_query_execute</code> was changed
+to return a new object of that class rather than an <code>int</code>
+success or failure.</p>
+
+<p>The following methods of the <code>rasqal_query</code> class
+were renamed and moved to the new <code>rasqal_query_results</code>
+class:</p>
+
+<table>
+<tr>
+<th>0.9.0 name</th> <th>0.9.1+ name</th>
+</tr>
+<tr>
+<td><code>rasqal_query_get_result_count</code></td> <td><code>rasqal_query_results_get_count</code></td>
+</tr>
+<tr>
+<td><code>rasqal_query_next_result</code></td> <td><code>rasqal_query_results_next</code></td>
+</tr>
+<tr>
+<td><code>rasqal_query_results_finished</code></td> <td><code>rasqal_query_results_finished</code></td>
+</tr>
+<tr>
+<td><code>rasqal_query_get_result_bindings</code></td> <td><code>rasqal_query_results_get_bindings</code></td>
+</tr>
+<tr>
+<td><code>rasqal_query_get_result_binding_value</code></td> <td><code>rasqal_query_results_get_binding_value</code></td>
+</tr>
+<tr>
+<td><code>rasqal_query_get_result_binding_name</code></td> <td><code>rasqal_query_results_get_binding_name</code></td>
+</tr>
+<tr>
+<td><code>rasqal_query_get_result_binding_by_name</code></td> <td><code>rasqal_query_results_get_binding_value_by_name</code></td>
+</tr>
+<tr>
+<td><code>rasqal_query_get_bindings_count</code></td> <td><code>rasqal_query_results_get_bindings_count</code></td>
+</tr>
+</table>
+
+<p>A new <code>rasqal_free_query_results</code> destructor was created
+to delete the query results.  (There is no public constructor).</p>
+
+<p>Other minor bugs were fixed such as multiple constraints now being
+ANDed and not ORed, and adding defensive code for when queries fail
+and results methods are invoked.</p>
+
+
+<h2 id="rel0_9_0"><a name="rel0_9_0">Rasqal 0.9.0 Changes</a></h2>
+
+<p>
+It is all new.
+</p>
+
+
+
+<hr />
+
+<p>Copyright (C) 2004-2014 <a href="http://www.dajobe.org/">Dave Beckett</a><br />Copyright (C) 2003-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

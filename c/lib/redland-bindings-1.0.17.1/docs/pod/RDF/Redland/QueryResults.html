@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Redland RDF Application Framework - Perl RDF::Redland::QueryResults Class</title>
+</head>
+<body>
+
+<h1 style="text-align:center">Redland RDF Application Framework - Perl RDF::Redland::QueryResults Class</h1>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+        <li><a href="#name">NAME</a></li>
+        <li><a href="#synopsis">SYNOPSIS</a></li>
+        <li><a href="#description">DESCRIPTION</a></li>
+        <li><a href="#constructor">CONSTRUCTOR</a></li>
+        <li><a href="#methods">METHODS</a></li>
+        <li><a href="#see_also">SEE ALSO</a></li>
+        <li><a href="#author">AUTHOR</a></li>
+</ul>
+
+--></div>
+<!-- INDEX END -->
+
+<h2><a name="name">NAME</a></h2>
+<p>RDF::Redland::QueryResults - Redland RDF Syntax Query Results Class</p>
+
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<pre>
+  use RDF::Redland;
+</pre>
+<pre>
+  ...
+  my $query=new RDF::Redland::Query("query string", undef, undef, "sparql");
+  my $results=$model-&gt;query_execute($query);
+  # or my $results=$query-&gt;execute($model);
+  while(!$results-&gt;finished) {
+    for (my $i=0; $i &lt; $results-&gt;bindings_count(); $i++) {
+      my $name=$results-&gt;binding_name($i);
+      my $value=$results-&gt;binding_value($i);
+      # ... do something with the results
+    }
+    $results-&gt;next_result;
+  }
+</pre>
+<p>The $results in the example is an object of class RDF::Redland::QueryResults.</p>
+
+<h2><a name="description">DESCRIPTION</a></h2>
+<p>This class represents queries of various syntaxes over an RDF::Redland::Model returning a sequence of results that bind variable names to RDF::Redland::Node values.</p>
+
+<h2><a name="constructor">CONSTRUCTOR</a></h2>
+<p>There are no public constructors.</p>
+
+<h2><a name="methods">METHODS</a></h2>
+<dl>
+<dt><strong><a name="count" class="item">count</a></strong></dt>
+<dd>
+<p>Return the number of current results from the query.</p>
+</dd>
+<dt><strong><a name="finished" class="item">finished</a></strong></dt>
+<dd>
+<p>Return non-0 if the results have been exhausted.</p>
+</dd>
+<dt><strong><a name="binding_name" class="item">binding_name INDEX</a></strong></dt>
+<dd>
+<p>Get the name of variable binding <em>INDEX</em> in the array of variable names.</p>
+</dd>
+<dt><strong><a name="binding_names" class="item">binding_names</a></strong></dt>
+<dd>
+<p>Get the names all of the variable bindings as an array.</p>
+</dd>
+<dt><strong><a name="binding_value" class="item">binding_value INDEX</a></strong></dt>
+<dd>
+<p>Get the value of the variable binding <em>INDEX</em> in the current query result.</p>
+</dd>
+<dt><strong><a name="binding_values" class="item">binding_values</a></strong></dt>
+<dd>
+<p>Get the values of all of the variable bindings in the current query result.</p>
+</dd>
+<dt><strong><a name="binding_value_by_name" class="item">binding_value_by_name NAME</a></strong></dt>
+<dd>
+<p>Get the value of the variable binding <em>NAME</em> in the current query result.</p>
+</dd>
+<dt><strong><a name="bindings" class="item">bindings</a></strong></dt>
+<dd>
+<p>Get the variable names and values of the current query result as a hash</p>
+</dd>
+<dt><strong><a name="bindings_count" class="item">bindings_count</a></strong></dt>
+<dd>
+<p>Return the number of variable bindings.</p>
+</dd>
+<dt><strong><a name="next_result" class="item">next_result</a></strong></dt>
+<dd>
+<p>Move to the next query result.</p>
+</dd>
+<dt><strong><a name="as_stream" class="item">as_stream</a></strong></dt>
+<dd>
+<p>Return a new RDF::Redland::Stream object representing the query results as an RDF Graph.</p>
+</dd>
+<dt><strong><a name="to_string_format_uri_base_uri" class="item">to_string [FORMAT-URI [BASE-URI]]</a></strong></dt>
+<dd>
+<p>Serialize to a string syntax in format <em>FORMAT-URI</em> using the optional <em>BASE-URI</em>. The default format when none is given is determined by librdf_query_results_to_string.</p>
+</dd>
+<dt><strong><a name="is_bindings" class="item">is_bindings</a></strong></dt>
+<dd>
+<p>Return non-0 if the query results format is variable bindings</p>
+</dd>
+<dt><strong><a name="is_boolean" class="item">is_boolean</a></strong></dt>
+<dd>
+<p>Return non-0 if the query results format is a boolean</p>
+</dd>
+<dt><strong><a name="is_graph" class="item">is_graph</a></strong></dt>
+<dd>
+<p>Return non-0 if the query results format is an RDF graph</p>
+</dd>
+<dt><strong><a name="get_boolean" class="item">get_boolean</a></strong></dt>
+<dd>
+<p>Get the boolean query result; non-0 is true.</p>
+</dd>
+</dl>
+
+<h2><a name="see_also">SEE ALSO</a></h2>
+<p><a href="Query.html">the RDF::Redland::Query manpage</a></p>
+
+<h2><a name="author">AUTHOR</a></h2>
+<p>Dave Beckett - <a href="http://www.dajobe.org/">http://www.dajobe.org/</a></p>
+<hr />
+
+<p>(C) Copyright 2000-2011 <a href="http://www.dajobe.org/">Dave Beckett</a>, (C) Copyright 2000-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

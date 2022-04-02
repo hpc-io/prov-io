@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Changes between Rasqal 0.9.32 and 0.9.33</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Rasqal RDF Query Library Manual">
+<link rel="up" href="rasqal-changes.html" title="API Changes">
+<link rel="prev" href="rasqal-changes-0-9-30-to-0-9-31.html" title="Changes between Rasqal 0.9.30 and 0.9.31">
+<link rel="next" href="rasqal-changes-0-9-30-to-0-9-30.html" title="Changes between Rasqal 0.9.30 and 0.9.30">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
+<td><a accesskey="p" href="rasqal-changes-0-9-30-to-0-9-31.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="rasqal-changes.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Rasqal RDF Query Library Manual</th>
+<td><a accesskey="n" href="rasqal-changes-0-9-30-to-0-9-30.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="section">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="rasqal-changes-0-9-32-to-0-9-33"></a>Changes between Rasqal 0.9.32 and 0.9.33</h2></div></div></div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="rasqal-changes-new-0-9-32-to-0-9-33"></a>New functions, types and enums</h3></div></div></div>
+<div class="itemizedlist">
+<p class="title"><b>Functions</b></p>
+<ul class="itemizedlist" type="disc">
+<li class="listitem"><p>raptor_sequence* <a class="link" href="rasqal-section-graph-pattern.html#rasqal-graph-pattern-get-triples" title="rasqal_graph_pattern_get_triples ()"><code class="function">rasqal_graph_pattern_get_triples</code></a>(rasqal_query* query, rasqal_graph_pattern* graph_pattern) </p></li>
+<li class="listitem"><p>char* <a class="link" href="rasqal-section-literal.html#rasqal-literal-get-language" title="rasqal_literal_get_language ()"><code class="function">rasqal_literal_get_language</code></a>(rasqal_literal* l) </p></li>
+<li class="listitem"><p>rasqal_literal_type <a class="link" href="rasqal-section-literal.html#rasqal-literal-get-type" title="rasqal_literal_get_type ()"><code class="function">rasqal_literal_get_type</code></a>(rasqal_literal* l) </p></li>
+<li class="listitem"><p>int <a class="link" href="rasqal-section-literal.html#rasqal-literal-is-rdf-literal" title="rasqal_literal_is_rdf_literal ()"><code class="function">rasqal_literal_is_rdf_literal</code></a>(rasqal_literal* l) </p></li>
+<li class="listitem"><p>rasqal_query_results* <a class="link" href="rasqal-section-query-results.html#rasqal-new-query-results-from-string" title="rasqal_new_query_results_from_string ()"><code class="function">rasqal_new_query_results_from_string</code></a>(rasqal_world* world, rasqal_query_results_type type, raptor_uri* base_uri, const char* string, size_t string_len) </p></li>
+<li class="listitem"><p>int <a class="link" href="rasqal-section-variables-table.html#rasqal-variables-table-add2" title="rasqal_variables_table_add2 ()"><code class="function">rasqal_variables_table_add2</code></a>(rasqal_variables_table* vt, rasqal_variable_type type, const unsigned char *name, size_t name_len, rasqal_literal *value) </p></li>
+</ul>
+</div>
+<div class="itemizedlist">
+<p class="title"><b>Types</b></p>
+<ul class="itemizedlist" type="disc"><li class="listitem"><p><a class="link" href="rasqal-section-triples-source.html#rasqal-triples-error-handler2" title="rasqal_triples_error_handler2 ()"><span class="type">rasqal_triples_error_handler2</span></a> - Added for <a class="link" href="rasqal-section-variables-table.html#rasqal-variables-table-add2" title="rasqal_variables_table_add2 ()"><code class="function">rasqal_variables_table_add2</code></a>()</p></li></ul>
+</div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="rasqal-changes-renamed-0-9-32-to-0-9-33"></a>Renamed function and enums</h3></div></div></div>
+<table border="1" id="idp20070576">
+<thead></thead>
+<tbody>
+<tr>
+      <th>0.9.32 function</th>
+      <th>0.9.33 function</th>
+      <th>Notes</th>
+    </tr>
+<tr valign="top">
+      <td>rasqal_query_results_formats_check</td> <td><a class="link" href="rasqal-section-query-results-formatter.html#rasqal-query-results-formats-check2" title="rasqal_query_results_formats_check2 ()"><code class="function">rasqal_query_results_formats_check2</code></a></td> <td>Correctly implements return value: non-0 if exists.</td>
+   </tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="rasqal-changes-changed-0-9-32-to-0-9-33"></a>Changed functions and types</h3></div></div></div>
+<table border="1" id="idp20081376">
+<thead></thead>
+<tbody>
+<tr>
+      <th>0.9.32 function</th>
+      <th>0.9.33 function</th>
+      <th>Notes</th>
+    </tr>
+<tr valign="top">
+      <td>rasqal_query_results* rasqal_new_query_results(rasqal_world* world, rasqal_query* query, rasqal_query_results_type type, rasqal_variables_table* vars_table)</td> <td>rasqal_query_results* <a class="link" href="rasqal-section-query-results.html#rasqal-new-query-results2" title="rasqal_new_query_results2 ()"><code class="function">rasqal_new_query_results2</code></a>(rasqal_world* world, rasqal_query* query, rasqal_query_results_type type)</td> <td>Deprecates <a class="link" href="rasqal-section-query-results.html#rasqal-new-query-results" title="rasqal_new_query_results ()"><code class="function">rasqal_new_query_results</code></a>()</td>
+    </tr>
+</tbody>
+</table>
+<table border="1" id="idp20092528">
+<thead></thead>
+<tbody>
+<tr>
+      <th>0.9.32 type</th>
+      <th>0.9.33 type</th>
+      <th>Notes</th>
+    </tr>
+<tr valign="top">
+      <td>rasqal_triples_source_factory</td> <td><a class="link" href="rasqal-section-triples-source.html#rasqal-triples-source-factory" title="rasqal_triples_source_factory"><span class="type">rasqal_triples_source_factory</span></a></td> <td>API v3: Added init_triples_source2 handler field using <a class="link" href="rasqal-section-triples-source.html#rasqal-triples-error-handler2" title="rasqal_triples_error_handler2 ()"><span class="type">rasqal_triples_error_handler2</span></a>
+</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

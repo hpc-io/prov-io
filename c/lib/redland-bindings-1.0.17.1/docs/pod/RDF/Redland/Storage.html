@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Redland RDF Application Framework - Perl RDF::Redland::Storage Class</title>
+</head>
+<body>
+
+<h1 style="text-align:center">Redland RDF Application Framework - Perl RDF::Redland::Storage Class</h1>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+        <li><a href="#name">NAME</a></li>
+        <li><a href="#synopsis">SYNOPSIS</a></li>
+        <li><a href="#description">DESCRIPTION</a></li>
+        <li><a href="#constructors">CONSTRUCTORS</a></li>
+        <li><a href="#see_also">SEE ALSO</a></li>
+        <li><a href="#author">AUTHOR</a></li>
+</ul>
+
+--></div>
+<!-- INDEX END -->
+
+<h2><a name="name">NAME</a></h2>
+<p>RDF::Redland::Storage - Redland RDF Storage Class</p>
+
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<pre>
+  use RDF::Redland;
+  my $storage=new RDF::Redland::Storage("hashes", "test", "new='yes',hash-type='memory'");
+  ...
+</pre>
+
+<h2><a name="description">DESCRIPTION</a></h2>
+<p>Create objects for storing RDF::Redland::Model objects either persistently or in memory.</p>
+
+<h2><a name="constructors">CONSTRUCTORS</a></h2>
+<dl>
+<dt><strong><a name="new_storage_name_name_options_string" class="item">new STORAGE_NAME [NAME [OPTIONS_STRING]]</a></strong></dt>
+<dd>
+<p>Create a new RDF::Redland::Storage object for the storage factory named <em>STORAGE_NAME</em> with storage named <em>NAME</em> and storage options <em>OPTIONS_STRING</em> which are specific to the storage factory type.</p>
+<p>The storage options may be given either as a Perl hash or as a string. The string form are formatted in the form key1='value1',key2='value2' and the single quotes are required. The Perl hash form follows normal Perl conventions, and the boolean options use normal Perl concepts of truth.</p>
+<p>Currently defined storage options:</p>
+<dl>
+<dt><strong><a name="new_yes" class="item">new='yes'</a></strong></dt>
+<dd>
+<p>Create a new storage erasing any existing one (boolean, default).</p>
+</dd>
+<dt><strong><a name="write_yes" class="item">write='yes'</a></strong></dt>
+<dd>
+<p>Provide write access to store (boolean, default) otherwise is read only.</p>
+</dd>
+<dt><strong><a name="dir_dir" class="item">dir='DIR'</a></strong></dt>
+<dd>
+<p>Work in DIR directory when creating files.</p>
+</dd>
+<dt><strong><a name="mode_mode" class="item">mode='MODE'</a></strong></dt>
+<dd>
+<p>File creation mode, default is (octal) 0644 Takes decimal (123), hex (0x123) or octal (0123).</p>
+</dd>
+<dt><strong><a name="contexts_yes" class="item">contexts='yes'</a></strong></dt>
+<dd>
+<p>Enable statement contexts. Each statement can be stored with an optional context Node and the context retrieved after queries. Boolean.</p>
+</dd>
+<dt><strong><a name="hash_type_type_hashes_storage_only" class="item">hash-type='TYPE' (<em>hashes</em> storage only)</a></strong></dt>
+<dd>
+<p>Use the TYPE hash-type for <em>hashes</em> storage. Current defined types are 'memory' and 'bdb' but is dependent on the hash factories available.</p>
+</dd>
+<dt><strong><a name="index_predicates_yes_hashes_storage_only" class="item">index-predicates='yes' (<em>hashes</em> storage only)</a></strong></dt>
+<dd>
+<p>Enable indexing from predicates to (subject,object) which can in particular be useful for rdf:type relations. Boolean.</p>
+</dd>
+<dt><strong><a name="bulk_no_mysql_storage_only" class="item">bulk='no' (<em>mysql</em> storage only)</a></strong></dt>
+<dd>
+<p>Whether model/storage method add_statements should be optimized, until a model/storage sync operation. Boolean.</p>
+</dd>
+<dt><strong><a name="merge_no_mysql_storage_only" class="item">merge='no' (<em>mysql</em> storage only)</a></strong></dt>
+<dd>
+<p>Whether to maintain a table with merged models. Boolean.</p>
+</dd>
+</dl>
+<p>Example, string form:</p>
+<pre>
+  $storage=new RDF::Redland::Storage("hashes", "test", 
+                            "new='yes',hash-type='bdb',dir='.'");
+</pre>
+<p>Example, Perl hash form:</p>
+<pre>
+  $storage=new RDF::Redland::Storage("hashes", "test", 
+                            {new=&gt;1,hash-type=&gt;'bdb',dir=&gt;'.'});
+</pre>
+<p>Creates a new storage of the <em>hashes</em> type (indexed hashes) named <em>test</em> (these will be file names or URIs if the storage is persistent) and with options <em>new='yes',hash-type='bdb',dir='.'</em> so a new storage is created with BerkeleyDB (BDB) key:value hashes i.e. persistent and in the current directory.</p>
+<p>Example, Perl hash form:</p>
+<pre>
+  $storage=new RDF::Redland::Storage("mysql", "test", {host=&gt;'localhost',database=&gt;'testdb',user=&gt;'testuser',new=&gt;0,password=&gt;'',contexts=&gt;1});
+</pre>
+<p>Uses an existing storage of the <em>mysql</em> type, named <em>test</em> on localhost with database name <em>testdb</em> using a user <em>testuser</em> and no password. Contexts are enabled.</p>
+</dd>
+<dt><strong><a name="new_from_storage" class="item">new_from_storage STORAGE</a></strong></dt>
+<dd>
+<p>Create a new RDF::Redland::Storage object from RDF::Redland::Storage <em>STORAGE</em> (copy constructor). The new storage may have a new name chosen by the storage factory.</p>
+</dd>
+</dl>
+
+<h2><a name="see_also">SEE ALSO</a></h2>
+<p><a href="Model.html">the RDF::Redland::Model manpage</a></p>
+
+<h2><a name="author">AUTHOR</a></h2>
+<p>Dave Beckett - <a href="http://www.dajobe.org/">http://www.dajobe.org/</a></p>
+<hr />
+
+<p>(C) Copyright 2000-2011 <a href="http://www.dajobe.org/">Dave Beckett</a>, (C) Copyright 2000-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Redland RDF Language Bindings - Ruby RDoc - Class: Redland::Statement</title>
+<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+<script src="../js/jquery.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/quicksearch.js" type="text/javascript" charset="utf-8">
+</script>
+<script src="../js/darkfish.js" type="text/javascript" charset="utf-8">
+</script>
+</head>
+<body id="top" class="class">
+<div id="metadata">
+<div id="home-metadata">
+<div id="home-section" class="section">
+<h3 class="section-header"><a href="../index.html">Home</a> <a href="../index.html#classes">Classes</a> <a href="../index.html#methods">Methods</a></h3>
+</div>
+</div>
+<div id="file-metadata">
+<div id="file-list-section" class="section">
+<h3 class="section-header">In Files</h3>
+<div class="section-body">
+<ul>
+<li><a href="../rdf/redland/statement_rb.html?TB_iframe=true&amp;height=550&amp;width=785" class="thickbox" title="rdf/redland/statement.rb">rdf/redland/statement.rb</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="class-metadata"><!-- Parent Class -->
+<div id="parent-class-section" class="section">
+<h3 class="section-header">Parent</h3>
+<p class="link">Object</p>
+</div>
+<!-- Method Quickref -->
+<div id="method-list-section" class="section">
+<h3 class="section-header">Methods</h3>
+<ul class="link-list">
+<li><a href="#method-c-create_finalizer">::create_finalizer</a></li>
+<li><a href="#method-c-new">::new</a></li>
+<li><a href="#method-i-3D-3D">#==</a></li>
+<li><a href="#method-i-object">#object</a></li>
+<li><a href="#method-i-object-3D">#object=</a></li>
+<li><a href="#method-i-predicate">#predicate</a></li>
+<li><a href="#method-i-predicate-3D">#predicate=</a></li>
+<li><a href="#method-i-subject">#subject</a></li>
+<li><a href="#method-i-subject-3D">#subject=</a></li>
+<li><a href="#method-i-to_s">#to_s</a></li>
+</ul>
+</div>
+<!-- Included Modules -->
+<div id="includes-section" class="section">
+<h3 class="section-header">Included Modules</h3>
+<ul class="link-list">
+<li><a class="include" href="Util.html">Redland::Util</a></li>
+</ul>
+</div>
+</div>
+<div id="project-metadata">
+<div id="fileindex-section" class="section project-section">
+<h3 class="section-header">Files</h3>
+<ul>
+<li class="file"><a href="../Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/redland/Makefile.html">Makefile</a></li>
+<li class="file"><a href="../rdf/redland/schemas/Makefile.html">Makefile</a></li>
+</ul>
+</div>
+<div id="classindex-section" class="section project-section">
+<h3 class="section-header">Class/Module Index <span class="search-toggle"><img src="../images/find.png" height="16" width="16" alt="[+]" title="show/hide quicksearch" /></span></h3>
+<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+<fieldset><legend>Quicksearch</legend> <input type="text" name="quicksearch" value="" class="quicksearch-field" /></fieldset>
+</form>
+<ul class="link-list">
+<li><a href="../Redland.html">Redland</a></li>
+<li><a href="../Redland/BNode.html">Redland::BNode</a></li>
+<li><a href="../Redland/ContextParser.html">Redland::ContextParser</a></li>
+<li><a href="../Redland/FileStore.html">Redland::FileStore</a></li>
+<li><a href="../Redland/HashOpen.html">Redland::HashOpen</a></li>
+<li><a href="../Redland/HashStore.html">Redland::HashStore</a></li>
+<li><a href="../Redland/Literal.html">Redland::Literal</a></li>
+<li><a href="../Redland/MemoryStore.html">Redland::MemoryStore</a></li>
+<li><a href="../Redland/MergedModel.html">Redland::MergedModel</a></li>
+<li><a href="../Redland/Model.html">Redland::Model</a></li>
+<li><a href="../Redland/Namespace.html">Redland::Namespace</a></li>
+<li><a href="../Redland/Node.html">Redland::Node</a></li>
+<li><a href="../Redland/NodeIterator.html">Redland::NodeIterator</a></li>
+<li><a href="../Redland/NodeTypeError.html">Redland::NodeTypeError</a></li>
+<li><a href="../Redland/OWL.html">Redland::OWL</a></li>
+<li><a href="../Redland/Parser.html">Redland::Parser</a></li>
+<li><a href="../Redland/Query.html">Redland::Query</a></li>
+<li><a href="../Redland/QueryResults.html">Redland::QueryResults</a></li>
+<li><a href="../Redland/RDFS.html">Redland::RDFS</a></li>
+<li><a href="../Redland/RedlandError.html">Redland::RedlandError</a></li>
+<li><a href="../Redland/Resource.html">Redland::Resource</a></li>
+<li><a href="../Redland/Serializer.html">Redland::Serializer</a></li>
+<li><a href="../Redland/Statement.html">Redland::Statement</a></li>
+<li><a href="../Redland/Stream.html">Redland::Stream</a></li>
+<li><a href="../Redland/TripleStore.html">Redland::TripleStore</a></li>
+<li><a href="../Redland/Uri.html">Redland::Uri</a></li>
+<li><a href="../Redland/Util.html">Redland::Util</a></li>
+<li><a href="../Redland/World.html">Redland::World</a></li>
+<li><a href="../DC.html">DC</a></li>
+<li><a href="../FOAF.html">FOAF</a></li>
+</ul>
+<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+</div>
+</div>
+</div>
+<div id="documentation">
+<h1 class="class">Redland::Statement</h1>
+<div id="description" class="description">
+<p><a href="../Redland.html">Redland</a> <a href="Statement.html">Statement</a> (triple class). The main means of manipulating statements is by the subject,predicate,and object properties</p>
+<pre>
+require 'rdf'
+Statement creation from nodes
+statement1 = Statement.new(node1,node2,node3)
+statement2 = Statement.new(:statement=&gt;statement)
+
+if statement2.resource?
+  puts "statement2.subject has uri #{statement2.subject.uri}"
+</pre></div>
+<!-- description -->
+<div id="5Buntitled-5D" class="documentation-section"><!-- Attributes -->
+<div id="attribute-method-details" class="method-section section">
+<h3 class="section-header">Attributes</h3>
+<div id="statement-attribute-method" class="method-detail"><a name="statement" id="statement"></a>
+<div class="method-heading attribute-method-heading"><span class="method-name">statement</span><span class="attribute-access-type">[R]</span></div>
+<div class="method-description">
+<p>the internal librdf statement</p>
+</div>
+</div>
+</div>
+<!-- attribute-method-details -->
+<!-- Methods -->
+<div id="public-class-method-details" class="method-section section">
+<h3 class="section-header">Public Class Methods</h3>
+<div id="create_finalizer-method" class="method-detail"><a name="method-c-create_finalizer" id="method-c-create_finalizer"></a>
+<div class="method-heading"><span class="method-name">create_finalizer</span><span class="method-args">(statement)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>You shouldn't use this. Used internally for cleanup.</p>
+<div class="method-source-code" id="create_finalizer-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Statement</span>.<span class="ruby-identifier">create_finalizer</span>(<span class="ruby-identifier">statement</span>)
+  <span class="ruby-identifier">proc</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span> <span class="ruby-constant">Redland</span><span class="ruby-operator">::</span><span class="ruby-identifier">librdf_free_statement</span>(<span class="ruby-identifier">statement</span>) }
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- create_finalizer-source --></div>
+</div>
+<!-- create_finalizer-method -->
+<div id="new-method" class="method-detail"><a name="method-c-new" id="method-c-new"></a>
+<div class="method-heading"><span class="method-name">new</span><span class="method-args">(subject=nil,predicate=nil,object=nil,model=nil)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>create a new <a href="Statement.html">Statement</a> with subject,predicate,and object the subject, predicate, and objects can be of class String or <a href="Uri.html">Uri</a>.</p>
+<div class="method-source-code" id="new-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">subject</span>=<span class="ruby-keyword">nil</span>,<span class="ruby-identifier">predicate</span>=<span class="ruby-keyword">nil</span>,<span class="ruby-identifier">object</span>=<span class="ruby-keyword">nil</span>,<span class="ruby-identifier">model</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@model</span> = <span class="ruby-identifier">model</span>
+  
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">subject</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">subject</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:from_object</span>)
+      <span class="ruby-ivar">@statement</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_statement_from_statement</span>(<span class="ruby-identifier">subject</span>[<span class="ruby-value">:from_object</span>])
+      <span class="ruby-ivar">@model</span> = <span class="ruby-identifier">subject</span>[<span class="ruby-value">:model</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">subject</span>
+      <span class="ruby-identifier">s</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">subject</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Uri</span>)<span class="ruby-operator">||</span> (<span class="ruby-identifier">subject</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>)
+        <span class="ruby-identifier">subject</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">subject</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">s</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">subject</span>.<span class="ruby-identifier">node</span>)
+    <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">predicate</span>
+      <span class="ruby-identifier">p</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>    
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">predicate</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Uri</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">predicate</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>)
+        <span class="ruby-identifier">predicate</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">predicate</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">p</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">predicate</span>.<span class="ruby-identifier">node</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">object</span>
+      <span class="ruby-identifier">o</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>    
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Uri</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>)
+        <span class="ruby-identifier">object</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">o</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">node</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@statement</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_statement_from_nodes</span>(<span class="ruby-identifier">$world</span>.<span class="ruby-identifier">world</span>,<span class="ruby-identifier">s</span>,<span class="ruby-identifier">p</span>,<span class="ruby-identifier">o</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">RedlandError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">"Statement construction failed"</span>) <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@statement</span>
+  <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">define_finalizer</span>(<span class="ruby-keyword">self</span>,<span class="ruby-constant">Statement</span>.<span class="ruby-identifier">create_finalizer</span>(<span class="ruby-ivar">@statement</span>))
+
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- new-source --></div>
+</div>
+<!-- new-method --></div>
+<!-- public-class-method-details -->
+<div id="public-instance-method-details" class="method-section section">
+<h3 class="section-header">Public Instance Methods</h3>
+<div id="3D-3D-method" class="method-detail"><a name="method-i-3D-3D" id="method-i-3D-3D"></a>
+<div class="method-heading"><span class="method-name">==</span><span class="method-args">(other)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Equivalency. Only works for comparing two Statements</p>
+<div class="method-source-code" id="3D-3D-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">return</span> (<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_equals</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>,<span class="ruby-identifier">other</span>.<span class="ruby-identifier">statement</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- 3D-3D-source --></div>
+</div>
+<!-- 3D-3D-method -->
+<div id="object-method" class="method-detail"><a name="method-i-object" id="method-i-object"></a>
+<div class="method-heading"><span class="method-name">object</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>return the object of the statement triple. The return value is either a <a href="Literal.html">Literal</a> or <a href="Resource.html">Resource</a> depending if object returned from the store is literal or not</p>
+<div class="method-source-code" id="object-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">object</span>()
+  <span class="ruby-identifier">object_node</span> = <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_get_object</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Literal</span>.<span class="ruby-identifier">from_node</span>(<span class="ruby-identifier">object_node</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_literal?</span>(<span class="ruby-identifier">object_node</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_node</span>,<span class="ruby-ivar">@model</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- object-source --></div>
+</div>
+<!-- object-method -->
+<div id="object-3D-method" class="method-detail"><a name="method-i-object-3D" id="method-i-object-3D"></a>
+<div class="method-heading"><span class="method-name">object=</span><span class="method-args">(value)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>set the object of the statement</p>
+<div class="method-source-code" id="object-3D-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">object=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_set_object</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>,
+                                        <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">value</span>.<span class="ruby-identifier">node</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_set_object</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- object-3D-source --></div>
+</div>
+<!-- object-3D-method -->
+<div id="predicate-method" class="method-detail"><a name="method-i-predicate" id="method-i-predicate"></a>
+<div class="method-heading"><span class="method-name">predicate</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>return the predicate of the statement triple.</p>
+<div class="method-source-code" id="predicate-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">predicate</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">wrap_node</span>(<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_get_predicate</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>))
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- predicate-source --></div>
+</div>
+<!-- predicate-method -->
+<div id="predicate-3D-method" class="method-detail"><a name="method-i-predicate-3D" id="method-i-predicate-3D"></a>
+<div class="method-heading"><span class="method-name">predicate=</span><span class="method-args">(value)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>set the predicate of the statement</p>
+<div class="method-source-code" id="predicate-3D-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">predicate=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_set_predicate</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>,
+                                           <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">value</span>.<span class="ruby-identifier">node</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_set_predicate</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- predicate-3D-source --></div>
+</div>
+<!-- predicate-3D-method -->
+<div id="subject-method" class="method-detail"><a name="method-i-subject" id="method-i-subject"></a>
+<div class="method-heading"><span class="method-name">subject</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>return the subject of the statement triple. The subject is of class <a href="Resource.html">Resource</a></p>
+<div class="method-source-code" id="subject-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subject</span>()
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Resource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_get_subject</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>),<span class="ruby-ivar">@model</span>)
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- subject-source --></div>
+</div>
+<!-- subject-method -->
+<div id="subject-3D-method" class="method-detail"><a name="method-i-subject-3D" id="method-i-subject-3D"></a>
+<div class="method-heading"><span class="method-name">subject=</span><span class="method-args">(value)</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>set the subject of the statement</p>
+<div class="method-source-code" id="subject-3D-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subject=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_set_subject</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>,
+                                         <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_new_node_from_node</span>(<span class="ruby-identifier">value</span>.<span class="ruby-identifier">node</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_set_subject</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- subject-3D-source --></div>
+</div>
+<!-- subject-3D-method -->
+<div id="to_s-method" class="method-detail"><a name="method-i-to_s" id="method-i-to_s"></a>
+<div class="method-heading"><span class="method-name">to_s</span><span class="method-args">()</span> <span class="method-click-advice">click to toggle source</span></div>
+<div class="method-description">
+<p>Convert this <a href="Statement.html">Statement</a> to a string</p>
+<div class="method-source-code" id="to_s-source">
+<pre>
+<span class="ruby-comment"># File rdf/redland/statement.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>()
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RedlandError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">"Statement is invalid"</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Redland</span>.<span class="ruby-identifier">librdf_statement_to_string</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">statement</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre></div>
+<!-- to_s-source --></div>
+</div>
+<!-- to_s-method --></div>
+<!-- public-instance-method-details --></div>
+<!-- 5Buntitled-5D --></div>
+<!-- documentation -->
+<hr />
+
+<div class="outerHeader">
+Go to <a href="/" target="_parent">Redland Home</a> - 
+<a href="/bindings/" target="_parent">Language Bindings Home</a> - 
+<a href="/docs/ruby.html" target="_parent">Ruby API Home</a>
+</div>
+
+<p>(C) Copyright 2004-2013 <a href="http://www.dajobe.org/" target="_parent">Dave Beckett</a>, (C) Copyright 2004-2005 <a href="http://www.bristol.ac.uk/" target="_parent">University of Bristol</a></p>
+
+</div> <!-- end outerBlock -->
+
+</body>
+</html>

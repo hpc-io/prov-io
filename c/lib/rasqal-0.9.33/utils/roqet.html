@@ -1,0 +1,103 @@
+<!-- Creator     : groff version 1.21 -->
+<!-- CreationDate: Sun Dec  7 10:41:26 2014 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style type="text/css">
+/*<![CDATA[*/
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+/*]]>*/
+</style>
+<title>Rasqal RDF Query Library - Rasqal RDF parser utility</title>
+</head>
+<body>
+<h1>Rasqal RDF Query Library - Rasqal RDF parser utility</h1>
+<hr />
+<h2>NAME <a name="NAME" id="NAME"></a></h2>
+<p style="margin-left:11%; margin-top: 1em">roqet &minus; Rasqal RDF query utility</p>
+<h2>SYNOPSIS <a name="SYNOPSIS" id="SYNOPSIS"></a></h2>
+<p style="margin-left:11%; margin-top: 1em"><b>roqet</b> [<b>OPTIONS</b>] <i>&lt;query-URI&gt; [base-URI]</i> <b><br />
+roqet</b> [<b>OPTIONS</b>]<b>-e</b> <i>query-string [base-URI]</i> <b><br />
+roqet</b> [<b>OPTIONS</b>]<b>-p</b> <i>sparql-protocol-service-URI query-URI [base-URI]</i> <b><br />
+roqet</b> [<b>OPTIONS</b>]<b>-p</b> <i>sparql-protocol-service-URI</i> [<b>-e</b> <i>query-string</i> ] <i>[base-URI]</i> <b><br />
+roqet</b> [<b>OPTIONS</b>]<b>-t</b> <i>query results file [base-URI]</i></p>
+<h2>DESCRIPTION <a name="DESCRIPTION" id="DESCRIPTION"></a></h2>
+<p style="margin-left:11%; margin-top: 1em">The <b>roqet</b> utility allows querying of RDF content using the <b>Rasqal</b> RDF query library, printing the results for variable bindings, RDF graph or boolean results in a variety of formats. The query is read from <i>query-URI</i> and the optional <i>base-URI</i> is used as the base URI of the query if present.</p>
+<h2>MAIN OPTIONS <a name="MAIN_OPTIONS"></a></h2>
+<p style="margin-left:11%; margin-top: 1em">roqet uses the usual GNU command line syntax, with long options starting with two dashes (&rsquo;-&rsquo;) if supported by the getopt_long function. Otherwise only the short options are available. <b><br />
+&minus;e, &minus;&minus;exec QUERY</b></p>
+<p style="margin-left:22%;">Execute the query string in the argument <i>QUERY</i> instead of reading the query from a URI (when <b>&minus;e</b> / <b>&minus;&minus;exec</b> is not given).</p>
+<p style="margin-left:11%;"><b>&minus;i, &minus;&minus;input LANGUAGE</b></p>
+<p style="margin-left:22%;">Set the input query <i>LANGUAGE</i> to one of the supported languages which includes &rsquo;sparql&rsquo; (SPARQL Query Language for RDF, default), &rsquo;sparql11&rsquo; and &rsquo;laqrs&rsquo;. The full list of supported languages and subsets is given in the help summary with the <b>&minus;h</b> / <b>&minus;&minus;help</b> option.</p>
+<p style="margin-left:11%;"><b>&minus;p, &minus;&minus;protocol SERVICE-URI</b></p>
+<p style="margin-left:22%;">Call the SPARQL HTTP protocol <i>SERVICE-URI</i> to execute the query instead of executing it inside the Rasqal query engine locally ( when <b>-e</b> is given, or a query string given)</p>
+<p style="margin-left:11%;"><b>&minus;r, &minus;&minus;results FORMAT</b></p>
+<p style="margin-left:22%;">Set the query results output <i>FORMAT</i></p>
+<p style="margin-left:22%; margin-top: 1em">For variable bindings, the values of <i>FORMAT</i> vary upon what Rasqal supports but include &rsquo;simple&rsquo; for a simple text format (default), &rsquo;xml&rsquo; for the SPARQL Query Results XML format, &rsquo;csv&rsquo; for SPARQL CSV, &rsquo;tsv&rsquo; for SPARQL TSV, &rsquo;rdfxml&rsquo; and &rsquo;turtle&rsquo; for RDF syntax formats, and &rsquo;json&rsquo; for a JSON version of the results.</p>
+<p style="margin-left:22%; margin-top: 1em">For RDF graph results, the values of <i>FORMAT</i> are &rsquo;ntriples&rsquo; (N-Triples, default), &rsquo;rdfxml-abbrev&rsquo; (RDF/XML Abbreviated), &rsquo;rdfxml&rsquo; (RDF/XML), &rsquo;turtle&rsquo; (Turtle), &rsquo;json&rsquo; (RDF/JSON resource centric), &rsquo;json-triples&rsquo; (RDF/JSON triples) or &rsquo;rss-1.0&rsquo; (RSS 1.0, also an RDF/XML syntax).</p>
+<p style="margin-left:22%; margin-top: 1em">The exact list of formats depends on what libraptor2(3) was built with but is given correct in the usage message with &minus;h.</p>
+<p style="margin-left:11%;"><b>&minus;R, &minus;&minus;results-input-format FORMAT</b></p>
+<p style="margin-left:22%;">Set the query results input <i>FORMAT</i></p>
+<p style="margin-left:22%; margin-top: 1em">This is for use with &minus;t and takes values of &rsquo;xml&rsquo; for the SPARQL Query Results XML format,, &rsquo;csv&rsquo; for SPARQL CSV,, &rsquo;tsv&rsquo; for SPARQL TSV, &rsquo;turtle&rsquo; and &rsquo;rdfxml&rsquo; for RDF syntax formats.</p>
+<p style="margin-left:11%;"><b>&minus;t, &minus;&minus;results&minus;input FILE</b></p>
+<p style="margin-left:22%;">Read query results from <i>FILE</i></p>
+<h2>OTHER OPTIONS <a name="OTHER_OPTIONS"></a></h2>
+<p style="margin-left:11%; margin-top: 1em"><i><b>&minus;c, &minus;&minus;count</b></i></p>
+<p style="margin-left:22%;">Only count the triples and produce no other output.</p>
+<p style="margin-left:11%;"><b>&minus;d, &minus;&minus;dump&minus;query FORMAT</b></p>
+<p style="margin-left:22%;">Print the parsed query out in a given <i>FORMAT</i> one of &rsquo;none&rsquo; (default), &rsquo;debug&rsquo;, &rsquo;structure&rsquo; or &rsquo;sparql&rsquo;</p>
+<p style="margin-left:11%;"><b>&minus;D, &minus;&minus;data URI</b></p>
+<p style="margin-left:22%;">Add RDF data source URI (not a named graph). If no data sources are given, the query itself must point to the data such as via SPARQL FROM <i>uri</i> statements.</p>
+<p style="margin-left:11%;"><b>&minus;E, &minus;&minus;ignore&minus;errors</b></p>
+<p style="margin-left:22%;">Do not print error messages and do not exit with a non-0 status.</p>
+<p style="margin-left:11%;"><b>&minus;f, &minus;&minus;feature NAME(=VALUE)</b></p>
+<p style="margin-left:22%;">Set query feature <i>NAME</i> to the <i>VALUE</i> or integer 1 if omitted. The known features can be shown with <b>-f help</b> or <b>--feature help</b>.</p>
+<p style="margin-left:11%;"><b>&minus;F, &minus;&minus;format NAME</b></p>
+<p style="margin-left:22%;">Set the data source format <i>name</i> for subsequent data graphs called with <b>&minus;D</b> / <b>&minus;&minus;data</b> or <b>&minus;G</b> / <b>&minus;&minus;named</b>. The default if this is not specified is for the query engine to guess. The <i>name</i> is a Raptor parser name.</p>
+<p style="margin-left:11%;"><b>&minus;G, &minus;&minus;named URI</b></p>
+<p style="margin-left:22%;">Add RDF data source URI (named graph)</p>
+<p style="margin-left:11%;"><b>&minus;h, &minus;&minus;help</b></p>
+<p style="margin-left:22%;">Show a summary of the options.</p>
+<p style="margin-left:11%;"><b>&minus;n, &minus;&minus;dryrun</b></p>
+<p style="margin-left:22%;">Prepare the query but do not execute it.</p>
+<p style="margin-left:11%;"><b>&minus;q, &minus;&minus;quiet</b></p>
+<p style="margin-left:22%;">No extra information messages.</p>
+<p style="margin-left:11%;"><b>&minus;s, &minus;&minus;source URI</b></p>
+<p style="margin-left:22%;">Add RDF data source URI (named graph) <i>URI</i> by adding it to the list of query data source URIs. <i>FORMAT</i> to &rsquo;simple&rsquo; (default) or &rsquo;xml&rsquo; (an experimental XML format)</p>
+<p style="margin-left:11%;"><b>&minus;v, &minus;&minus;version</b></p>
+<p style="margin-left:22%;">Print the rasqal library version and exit.</p>
+<p style="margin-left:11%;"><b>&minus;W, &minus;&minus;warnings LEVEL</b></p>
+<p style="margin-left:22%;">Set the warning <i>LEVEL</i> in the range 0 (do not warn about anything) to 100 (show every warning). The Rasqal default is in the middle (50).</p>
+<h2>EXAMPLES <a name="EXAMPLES" id="EXAMPLES"></a></h2>
+<p style="margin-left:22%; margin-top: 1em"><b>roqet sparql-query-file.rq</b></p>
+<p style="margin-left:11%; margin-top: 1em">Run a SPARQL query contained in the local file sparql-query-file.rq. The data used would be described in FROM statements in the query file.</p>
+<p style="margin-left:22%; margin-top: 1em"><b>roqet -q -i sparql http://example.org/sparql-query.rq</b></p>
+<p style="margin-left:11%; margin-top: 1em">Run a SPARQL query that is in the web at URI http://example.org/sparql-query.rq without an extra messages (quiet, -q).</p>
+<p style="margin-left:22%; margin-top: 1em"><b>roqet -q query-file.rq http://example.org/base/</b></p>
+<p style="margin-left:11%; margin-top: 1em">Run an query (default languge SPARQL) from a local file query-file.rq but using base URI http://example.org/base/ to resolve any relative URIs.</p>
+<p style="margin-left:22%; margin-top: 1em"><b>roqet -q -i sparql -r xml http://example.org/sparql-query.rq</b></p>
+<p style="margin-left:11%; margin-top: 1em">Run a SPARQL query that is in the web at URI http://example.org/sparql-query.rq and format the results in the SPARQL Query Results XML format with no extra messages.</p>
+<p style="margin-left:22%; margin-top: 1em"><b>roqet -i sparql -e &rsquo;SELECT * WHERE { ?s ?p ?o }&rsquo; -D stuff.rdf</b></p>
+<p style="margin-left:11%; margin-top: 1em">Run a SPARQL query given on the command line against data in the file stuff.rdf. The type of the file will be guessed and likely is of format RDF/XML.</p>
+<p style="margin-left:22%; margin-top: 1em"><b>roqet -t result.srx -r html</b></p>
+<p style="margin-left:11%; margin-top: 1em">Read a SPARQL query results in SPARQL Query Results XML format (default) and print it in HTML.</p>
+<p style="margin-left:22%; margin-top: 1em"><b>roqet -t result.ttl -R turtle -r csv</b></p>
+<p style="margin-left:11%; margin-top: 1em">Read a SPARQL query results in RDF/Turtle format and print it in CSV.</p>
+<h2>CONFORMING TO <a name="CONFORMING_TO"></a></h2>
+<p style="margin-left:11%; margin-top: 1em"><i>SPARQL 1.1 Query Language</i>, Steve Harris and Andy Seaborne (eds), W3C Recommendation, 21 March 2013 <a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/">http://www.w3.org/TR/2013/REC-sparql11-query-20130321/</a></p>
+<p style="margin-left:11%; margin-top: 1em"><i>SPARQL Query Results XML Format (Second Edition)</i>, Sandro Hawke (Second Edition ed), Jeen Broekstra and Dave Beckett (eds), W3C Recommendation, 21 March 2013. <a href="http://www.w3.org/TR/2013/REC-rdf-sparql-XMLres-20130321/">http://www.w3.org/TR/2013/REC-rdf-sparql-XMLres-20130321/</a></p>
+<h2>SEE ALSO <a name="SEE_ALSO"></a></h2>
+<p style="margin-left:11%; margin-top: 1em"><b>librasqal(3),</b>libraptor(3)</p>
+<h2>CHANGES <a name="CHANGES" id="CHANGES"></a></h2>
+<h2>AUTHOR <a name="AUTHOR" id="AUTHOR"></a></h2>
+<p style="margin-left:11%; margin-top: 1em">Dave Beckett - <a href="http://www.dajobe.org/">http://www.dajobe.org/</a></p>
+<hr />
+
+<p>Copyright 2002-2014 <a href="http://www.dajobe.org/">Dave Beckett</a><br />2002-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

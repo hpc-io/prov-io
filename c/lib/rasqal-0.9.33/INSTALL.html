@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>Rasqal RDF Query Library - Building and Installing from Source</title>
+</head>
+<body>
+
+<h1>Rasqal RDF Query Library - Building and Installing from Source</h1>
+
+<h2>1. Getting the sources</h2>
+
+<p>There are several ways to get the sources.  The most stable and
+tested versions are the sources shipped with each release and these
+are recommended as the first place to start.  If you want to get a
+newer set, then there are nightly snapshots made of the development
+sources, which may not yet be committed to GIT.  For the
+latest developent sources, anonymous GIT access is available
+but this may require some configuring of developer tools that are not
+needed for the snapshot releases.
+</p>
+
+<p>The source bundle and package files contain all the HTML files and
+documentation provided on the web site.
+</p>
+
+<h2>1.1 Getting the sources from releases</h2>
+
+<p><b>This is the recommended source to build and install Rasqal.</b>  It
+ensures that a tested and working set of files are used.</p>
+
+<p>The sources are available from
+<a href="http://download.librdf.org/source/">http://download.librdf.org/source/</a>.</p>
+
+
+<h2>1.2 Getting the sources from GIT</h2>
+
+<p><b>This is the recommended source for developers</b>.  It provides
+the latest beta or unstable code.  For a stable version, use a release
+as described above.</p>
+
+<pre>
+  git clone git://github.com/dajobe/rasqal.git
+  cd rasqal
+</pre>
+
+<p>At this stage, or after a <tt>git pull</tt> you will
+need to create the automake and autoconf derived files, as described
+below in <a href="#sec-create-configure">Create the configure program</a>
+by using the <code>autogen.sh</code> script.</p>
+
+<p>Building Rasqal in this way requires some particular development
+tools not needed when building from snapshot releases - automake,
+autoconf, libtool, gtk-doc and dependencies.
+The <code>autogen.sh</code> script looks for the newest versions of
+the auto* tools and checks that they meet the minimum versions.</p>
+
+<p>Building from development sources rather than from a release also
+requires some additional development tools.  Presently this includes
+the <a href="http://flex.sourceforge.net/">flex scanner generator</a>
+version 2.5.31 or later and the GNU Bison parser generator.
+The <code>configure</code> script checks that the minimum versions
+are present.  There are optional dependencies that will be used if
+present such as MPFR or GMP for decimal arithmetic and PCRE for
+regex support.</p>
+
+
+
+<h2>2. Configuring and building</h2>
+
+<p>Rasqal uses the GNU automake and autoconf to handle system
+dependency checking.  It is developed and built on x86 Linux
+and x86 OSX but is also tested on other systems occasionally.
+</p>
+
+<p><b>Required</b> (Rasqal will not build without these):</p>
+<ul>
+<li>The <a href="http://librdf.org/raptor/">Raptor RDF Syntax Library</a>
+version 2.0.4 or later for parsing RDF, retrieving WWW content from
+URIs and other utility classes.
+</li>
+</ul>
+
+<p><b>Recommended</b> (Optional):
+</p>
+<ul>
+<li><a href="http://www.pcre.org/">PCRE</a> regex library
+or another implementing the POSIX regex API.</li>
+<li><a href="http://www.mpfr.org/">GNU multiple-precision floating-point library (MPFR)</a> or
+<a href="http://gmplib.org/">GNU Multiple Precision Arithmetic Library (GMP)</a>
+
+libraries for decimal arithmetic.
+</li>
+</ul>
+<p>
+If some of the recommended libraries are not present some of the
+tests will fail and the query engine will fail to handle regex
+matches or decimal arithmetic accurately.
+</p>
+
+
+<h3><a id="sec-create-configure" name="sec-create-configure"></a>2.1. Create <code>configure</code> program</h3>
+
+<p>If there is a <code>configure</code> program, skip to the next
+section.</p>
+
+<p>If there is no <tt>configure</tt> program, you should create it 
+using the <tt>autogen.sh</tt> script, as long as you have the
+<a href="http://www.gnu.org/software/automake/automake.html">automake</a> and
+<a href="http://www.gnu.org/software/autoconf/autoconf.html">autoconf</a>
+tools.  This is done by:</p>
+<pre>
+  ./autogen.sh
+</pre>
+
+<p>and you can also pass along arguments intended for configure (see
+below for what these are):</p>
+<pre>
+  ./autogen.sh --prefix=/usr/local/somewhere
+</pre>
+
+<blockquote>
+<p>On OSX you may have to explicitly set the <code>LIBTOOLIZE</code>
+variable for the <code>libtoolize</code> utility since on
+OSX <code>libtoolize</code> is a different program:</p>
+<pre>
+  LIBTOOLIZE=glibtoolize ./autogen.sh
+</pre>
+</blockquote>
+
+<p>autogen.sh also checks out the libmtwist GIT submodule and/or
+updates it with the latest sources.</p>
+
+<p>Alternatively you can run them by hand (<b>not recommended</b>) with:</p>
+<pre>
+  aclocal; autoheader; automake --add-missing; autoconf
+</pre>
+<p><b>however</b> this will not do any of the GIT submodule checkout
+or updates that are needed for libmtwist.
+</p>
+
+<p>The automake and autoconf tools have many different versions and
+at present development is being done with automake 1.11.1 (minimum
+version 1.11), autoconf 2.65 (minimum version 2.62) and libtool
+2.2.10 (minimum version 2.2.0).  These are only needed when compiling
+from GIT sources.  autogen.sh enforces the requirements.
+</p>
+
+<p>Rasqal also requires
+<a href="http://flex.sourceforge.net/">flex</a> version 2.5.31 or newer
+(2.5.4 will not work) and
+<a href="http://www.gnu.org/software/bison/bison.html">GNU Bison</a>
+to build lexers and parsers.
+These are only required when building from GIT.</p>
+
+
+<h3>2.2 Options for <tt>configure</tt></h3>
+
+<p>Rasqal's configure supports the following options:</p>
+
+<dl>
+<dt><code>--enable-debug</code><br /></dt>
+<dd><p>Enable debugging statements for developing the code.  Should
+NOT be used with any regular build that is installed since it slows
+the code and generates lots of extra output.  This is a maintainer
+option.
+</p></dd>
+
+<dt><code>--enable-query-languages=</code><em>LANGUAGES</em><br /></dt>
+<dd><p>Select the RDF query languages to build from the list:<br />
+<code>sparql laqrs</code><br />
+The default when this option is omitted is to enable all query languages
+except the experimental one, laqrs.  <em>LANGUAGES</em> takes a
+space-separated value.
+</p>
+</dd>
+
+<dt><code>--enable-release</code><br /></dt>
+<dd><p>Enable configuration for building a release by not removing
+<code>-O</code> options for compiler flags.  This is a maintainer
+option.
+</p></dd>
+
+<dt><code>--with-digest-library=</code><em>NAME</em><br /></dt>
+<dd><p>Pick the message digest library approach to use from the
+choices of <tt>mhash</tt> (the default when available),
+<tt>gcrypt</tt> (when libgcrypt is available) and <tt>internal</tt>
+(always available, providing only MD5 and SHA1).
+</p></dd>
+
+<dt><code>--with-gmp=</code><em>PATH</em><br /></dt>
+<dd><p>Set the installation path for the
+<a href="http://gmplib.org/">GNU Multiple Precision Arithmetic Library (GMP)</a>
+if it is not in the standard lib/include prefix.
+</p></dd>
+
+<dt><code>--with-libgcrypt-config=</code><em>PATH</em><br /></dt>
+<dd><p>Set the path of the libgcrypt <code>libgcrypt-config</code>
+program that provides the compiling and linking flags.  Enables
+libgcrypt for use as a message digest.
+See also <code>--with-digest-library</code>
+</p></dd>
+
+<dt><code>--with-memory-signing</code><br /></dt>
+<dd><p>Enable signing of memory allocations so that when memory is
+allocated with malloc() and released free(), a check is made that the
+memory was allocated in the same library.</p></dd>
+
+<dt><code>--with-mpfr=</code><em>PATH</em><br /></dt>
+<dd><p>Set the installation path for the
+<a href="http://www.mpfr.org/">GNU multiple-precision floating-point library (MPFR)</a>
+if it is not in the standard lib/include prefix.
+</p></dd>
+
+<dt><code>--with-random-approach=</code><em>ALGO</em><br /></dt>
+<dd><p>Pick the random number generator approach to use from the
+choices of <tt>mtwist</tt> (the default - this is bundled with rasqal
+and can be used without any additional installs), <tt>gmp</tt> (when
+GMP is available and used for decimals), <tt>random_r</tt> (glibc
+initstate_r and random_r), <tt>rand_r</tt> (POSIX rand_r),
+<tt>random</tt> (BSD initstate and random) and <tt>rand</tt> (POSIX
+srand and rand).  </p></dd>
+
+<dt><code>--with-regex-library=</code>NAME<br /></dt>
+<dd><p>Pick a regex library to use - either <tt>pcre</tt> (default)
+for the <a href="http://www.pcre.org/">PCRE</a>
+or <tt>posix</tt> a POSIX regex implementation in the C library
+</p>
+</dd>
+
+<dt><code>--with-pcre-config=</code><em>NAME</em><br /></dt>
+<dd><p>Set the path to the <a href="http://www.pcre.org/">PCRE</a> pcre-config program</p></dd>
+
+</dl>
+
+
+<h3>2.3 Configuring</h3>
+
+<p>The default configuration will install into /usr/local:
+</p>
+<pre>
+   ./configure
+</pre>
+
+<p>To install into the standard Unix / Linux (and also Cygwin) system
+directory, use:
+</p>
+<pre>
+   ./configure --prefix=/usr
+</pre>
+
+
+<p>Append to the line any additional options you need like this:
+</p>
+<pre>
+   ./configure --prefix=/usr --enable-query-languages=sparql
+</pre>
+
+<p>The <code>configure</code> script uses
+<a href="http://pkg-config.freedesktop.org/wiki/"><code>pkg-config(1)</code></a>
+to find an installed version of Raptor . If configure reports that it
+cannot find Raptor, try <code>$ pkg-config raptor2 --modversion</code>
+on the command line and if there is an error or nothing is shown,
+then pkg-config is not properly installed and configured.  Use 'man
+pkg-config(1)' to read how to set <code>PKG_CONFIG_PATH</code> which
+should include a directory where <code>raptor2.pc</code> is installed.
+When it is correct, the above command will return the Raptor version.
+</p>
+
+<h3>2.4 Compiling</h3>
+
+<p>Compile the library and the <tt>roqet</tt> utility with:</p>
+<pre>
+   make
+</pre>
+<p>Note: GNU make is probably required which may be called
+gmake or gnumake if your system has a different make available too.
+</p>
+
+
+<h3>2.5 Testing</h3>
+
+<p>Rasqal has a built-in test suite that can be invoked with:
+</p>
+<pre>
+  make check
+</pre>
+
+<p>which should emit lots of exciting test messages to the screen but
+conclude with something like:<br />
+  <tt>All </tt><em>n</em><tt> tests passed</tt><br />
+if everything works correctly.  There might be some regex
+or decimal tests that fail if no POSIX regex library or multiple
+precision numeric library was available when Rasqal was compiled.</p>
+
+
+<h3>2.6 Installing</h3>
+
+<p>Install the library and the <tt>roqet</tt> utility into the area
+configure with <code>--prefix</code> (or /usr/local if not given)
+with:</p>
+<pre>
+   make install
+</pre>
+<p>Note: This may require root access if the destination area is
+a system directory such as /usr.  In that case you may have to do
+<code>sudo make install</code>.
+</p>
+
+
+<h2>3. Using the library</h2>
+
+<h3>3.1 Documentation</h3>
+
+<p>Rasqal includes a reference manual for the library but no tutorial
+at this time.  This is installed into
+<em>PREFIX</em><code>/share/gtk-doc/html/rasqal</code>
+and is also available from the
+<a href="http://librdf.org/rasqal/api/">Rasqal web site</a>.
+</p>
+
+<h3>3.2 Examples</h3>
+
+<p>At present, to get a good idea of how to use Rasqal in a program,
+check out the source for roqet in src/roqet.c which uses the library
+extensively with the recommended APIs.
+</p>
+
+
+<h3>3.3 roqet utility</h3>
+
+<p>Rasqal provides an RDF query utility program called
+<em>roqet</em> which can do a variety of query operations on local
+and remote data, local and remote queries and running queries on
+SPARQL protocol services.
+</p>
+
+<p>See the roqet manual page for full details using 'man roqet'
+or read the HTML version in docs/roqet.html or on the
+<a href="http://librdf.org/rasqal/roqet.html">Rasqal website</a>.
+</p>
+
+
+<hr />
+
+<p>Copyright (C) 2003-2014 <a href="http://www.dajobe.org/">Dave Beckett</a><br />Copyright (C) 2003-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

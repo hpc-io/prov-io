@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>Redland RDF Application Framework - PHP Interface</title>
+</head>
+<body>
+
+<h1 style="text-align:center">Redland RDF Application Framework - PHP Interface</h1>
+
+<h2>Installing the Redland PHP interface</h2>
+
+<p>This is built if <tt>--with-php</tt> is given to the configure
+line.  The standard 'make' at the top level will build it.</p>
+
+<p>You can also compile the PHP interface by hand as follows:</p>
+
+<pre>
+  cd php
+  make
+
+  # optional
+  make check
+</pre>
+
+<p>To install it system wide do this as <em>root</em> (or maybe via
+sudo make install).  NOTE: This is untested:</p>
+
+<pre>
+  root# make install
+</pre>
+
+<p>The PHP interface has been used with PHP 4.3.8, 4.3.3, 4.3.2,
+4.2.2, 4.1.2 and 5.1.2 and is beta quality - has been used in
+production.</p>
+
+
+<h2>Redland PHP API Introduction</h2>
+
+<p>The PHP API is an object-based API with the class names and method
+names flattened into PHP procedure names like this:
+librdf_<em>class</em>_<em>method</em> - the same names as in the
+underlying C API.  The object references
+become PHP variables.</p>
+
+<h2>Testing the Redland PHP interface</h2>
+
+<p>There is not yet an example program to exercise the PHP interface.</p>
+
+
+<hr />
+
+<p>Copyright (C) 2002-2007 <a href="http://www.dajobe.org/">Dave Beckett</a>, Copyright (C) 2002-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

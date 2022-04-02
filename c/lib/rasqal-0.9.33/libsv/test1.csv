@@ -1,0 +1,31 @@
+subject,predicate,object
+,,
+#,simple,#
+cat,sat,mat
+,,
+#,quoting,#
+"this is",a,test
+this,"is a",test
+this,is,"a test"
+,,
+#,commas in quotes,#
+"this,is",a,test
+this,"is,a",test
+this,is,"a,test"
+,,
+#,illegal quotes,#
+",","
+"","",""
+""",""","""
+,,
+#,1 double quote,#
+"""","""",""""
+,,
+#,2 double quotes,#
+"""""","""""",""""""
+,,
+#,3 double quotes,#
+"""""""","""""""",""""""""
+,,
+#,more quoting,#
+quoting,"can ""be""",fun

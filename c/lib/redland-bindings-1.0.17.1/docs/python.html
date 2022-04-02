@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>Redland RDF Application Framework - Python Interface</title>
+</head>
+<body>
+
+<h1>Redland RDF Application Framework - Python Interface</h1>
+
+<h2>Installing the Redland Python interface</h2>
+
+<p>This is built if <tt>--with-python</tt> is given to the configure
+line, or <tt>--with-python=python2.3</tt> to use a particular python
+version/program.  The standard 'make' at the top level will build it.</p>
+
+<p>You can also compile the python interface by hand as follows:</p>
+
+<pre>
+  cd python
+  make
+
+  # optional - runs the pyunit tests
+  make check
+</pre>
+
+<p>To install it system wide do this as <em>root</em> (or maybe via
+sudo make install):</p>
+
+<pre>
+  root# make install
+</pre>
+
+<p>If you do not want it installed system wide, or do not have write
+access to the system python area, you can install into any directory
+you like by setting the <code>DESTDIR</code> as follows:</p>
+
+<pre>
+  $ make install DESTDIR=/path/to/wherever
+</pre>
+
+<p>although you will likely need let python know about this area
+either by the <code>PYTHONPATH</code> environment variable or some
+other mechanism.  The shared library that provides the interface
+<code>Redland.so</code> (or similar name) will also be installed and
+the system will not find it unless that directory is pointed at.
+This is system specific but the choices are setting environment
+variables <code>DYLD_LIBRARY_PATH</code> (OSX),
+<code>LD_LIBRARY_PATH</code> (everyone else) or editing the
+<code>/etc/ld.so.conf</code> file (Linux, others?).  See your system
+documentation or manual pages about shared library linking such as
+<code>ld.so(1)</code>.
+</p>
+
+
+<p>The python interface for Redland is mature and requires Python 2.3
+(preferred) or 2.2.  It has been tested with the following
+versions:</p>
+
+<blockquote>
+2.3.3 on Linux/x86<br />
+2.3.3 on FreeBSD/x86<br />
+2.3 on OSX/PPC<br />
+2.2 on Linux/x86
+</blockquote>
+
+
+
+<h2>Testing the Redland Python interface</h2>
+
+<p>If you did the install above, run the python example program with:</p>
+<pre>
+  python example.py
+</pre>
+<p>(Using the same chosen earlier)</p>
+
+<p>Otherwise, to run it in the source tree you need to find out the
+architecture-specific sub-directory it created in the <em>build</em>
+directory such as <em>build/lib.linux-i686-2.2</em> and run it with:</p>
+<pre>
+  PYTHONPATH=build/lib.linux-i686-2.3 python example.py
+</pre>
+
+<p>and the result should be:</p>
+<pre>
+  found statement: {[http://www.dajobe.org/], [http://purl.org/dc/elements/1.1/creator], "Dave Beckett"}
+  Parsing URI (file) ../data/dc.rdf
+  Parsing added 3 statements
+  Printing all statements
+  Statement: {[http://www.dajobe.org/], [http://purl.org/dc/elements/1.1/description], "The generic home page of Dave Beckett."}
+  Statement: {[http://www.dajobe.org/], [http://purl.org/dc/elements/1.1/title], "Dave Beckett's Home Page"}
+  Statement: {[http://www.dajobe.org/], [http://purl.org/dc/elements/1.1/creator], "Dave Beckett"}
+  Statement: {[http://www.dajobe.org/], [http://purl.org/dc/elements/1.1/creator], "Dave Beckett"}
+  Writing model to test-out.rdf as rdf/xml
+</pre>
+
+
+
+
+<h2>Using the Redland Python API</h2>
+
+<p>Read the pydoc <a href="pydoc/RDF.html">Redland Python API</a>
+for full details of the classes and methods provided along with
+examples of use.</p>
+
+<p>The Python API is an object-based API reflecting the same structure
+of the Redland objects with simple mappings between them:</p>
+
+<table border="1">
+<tr>
+<th>Concept</th><th>Redland Class</th><th>Python Class</th><th>Purpose</th>
+</tr>
+<tr>
+<td>Resource / Literal</td><td><span class="redland_class">librdf_node</span></td><td><a href="pydoc/RDF.html#Node"><tt>RDF.Node</tt></a></td>
+<td>RDF Model &amp; Syntax nodes</td>
+</tr>
+<tr>
+<td>Statement / Triple</td><td><span class="redland_class">librdf_statement</span></td><td><a href="pydoc/RDF.html#Statement"><tt>RDF.Statement</tt></a></td>
+<td>RDF Model &amp; Syntax arcs (statements, triples) [isa Resource]</td>
+</tr>
+<tr>
+<td>Model</td><td><span class="redland_class">librdf_model</span></td><td><a href="pydoc/RDF.html#Model"><tt>RDF.Model</tt></a></td>
+<td>Set of <em>Statement</em>s usually held in one <em>Storage</em>.</td>
+</tr>
+<tr>
+<td>Storage</td><td><span class="redland_class">librdf_storage</span></td><td><a href="pydoc/RDF.html#Storage"><tt>RDF.Storage</tt></a></td>
+<td>Storage for <em>Model</em>s either persistant or in-memory.</td>
+</tr>
+<tr>
+<td>Stream</td><td><span class="redland_class">librdf_stream</span></td><td><a href="pydoc/RDF.html#Stream"><tt>RDF.Stream</tt></a></td>
+<td>Providing sequences of <em>Statement</em>s from <em>Parser</em>s, queries.</td>
+</tr>
+<tr>
+<td>Parser</td><td><span class="redland_class">librdf_parser</span></td><td><a href="pydoc/RDF.html#Parser"><tt>RDF.Parser</tt></a></td>
+<td>Syntaxes parsers delivering <em>Stream</em> of <em>Statement</em>s or writing to a <em>Model</em></td>
+</tr>
+<tr>
+<td>Query</td><td><span class="redland_class">librdf_query</span></td><td><a href="pydoc/RDF.html#Query"><tt>RDF.Query</tt></a></td>
+<td>Querying of an <em>Model</em> delivering a <em>QueryResults</em></td>
+</tr>
+<tr>
+<td>QueryResults</td><td><span class="redland_class">librdf_query_results</span></td><td><a href="pydoc/RDF.html#QueryResults"><tt>RDF.QueryResults</tt></a></td>
+<td>Results of applying an <em>Query</em> to a <em>Model</em> giving either variable bindings with <em>Node</em> values or <em>Stream</em> of <em>Statement</em>s</td>
+</tr>
+<tr>
+<td>Serializer</td><td><span class="redland_class">librdf_serializer</span></td><td><a href="pydoc/RDF.html#Serializer"><tt>RDF.Serializer</tt></a></td>
+<td>Serializes a <em>Model</em> into a syntax such as RDF/XML</td>
+</tr>
+<tr>
+<td>Iterator</td><td><span class="redland_class">librdf_iterator</span></td><td><a href="pydoc/RDF.html#Iterator"><tt>RDF.Iterator</tt></a></td>
+<td>Enumerating lists (of <em>Node</em>) from queries.</td>
+</tr>
+<tr>
+<td>URI</td><td><span class="redland_class">librdf_uri</span></td><td><a href="pydoc/RDF.html#Uri"><tt>RDF.Uri</tt></a></td>
+<td>Provides URIs for <em>Resource</em>s, <em>Parser</em>s, ...</td>
+</tr>
+<tr>
+<td>World</td><td>&nbsp;</td><td><a href="pydoc/RDF.html#World"><tt>RDF.World</tt></a></td>
+<td>RDF wrapper class handling Redland startup/shutdown</td>
+</tr>
+<tr>
+<td>Digest</td><td><span class="redland_class">librdf_digest</span></td><td>&nbsp;</td>
+<td>Internal content digest class</td>
+</tr>
+<tr>
+<td>Hash</td><td><span class="redland_class">librdf_hash</span></td><td>&nbsp;</td>
+<td>Internal key:value maps class</td>
+</tr>
+</table>
+
+
+<hr />
+
+<p>Copyright (C) 2000-2007 <a href="http://www.dajobe.org/">Dave Beckett</a>, Copyright (C) 2000-2005 <a href="http://www.bristol.ac.uk/">University of Bristol</a></p>
+
+</body>
+</html>

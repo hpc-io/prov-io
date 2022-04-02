@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<book id="index" xmlns:xi="http://www.w3.org/2003/XInclude">
+  <bookinfo>
+    <title>Rasqal RDF Query Library Manual</title>
+    <releaseinfo>Manual for <ulink url="http://librdf.org/rasqal/">Rasqal</ulink> &version;</releaseinfo>
+
+    <author>
+      <firstname>Dave</firstname>
+      <surname>Beckett</surname>
+      <affiliation>
+	<address>
+	  <otheraddr><ulink url="http://www.dajobe.org/">http://www.dajobe.org/</ulink></otheraddr>
+	</address>
+      </affiliation>
+    </author>
+
+    <legalnotice>
+    <para>
+      This documentation is Free Software / Open Source - you can
+      redistribute it and/or modify it under the same licenses as
+      <ulink url="http://librdf.org/rasqal/">Rasqal</ulink>.
+      It is licensed under the following three licenses as alternatives:
+      <orderedlist>
+	<listitem><para>GNU Lesser General Public License (LGPL) V2.1 or any newer version</para></listitem>
+	<listitem><para>GNU General Public License (GPL) V2 or any newer version</para></listitem>
+	<listitem><para>Apache License, V2.0 or any newer version</para></listitem>
+      </orderedlist>
+      You may not use this documentation except in compliance with at
+      least one of the above three licenses. See the
+      <ulink url="http://librdf.org/rasqal/">Rasqal</ulink>
+      site for the full license terms.
+    </para>
+
+    </legalnotice>
+
+    <copyright>
+      <year>2003</year>
+      <year>2004</year>
+      <year>2005</year>
+      <year>2006</year>
+      <year>2007</year>
+      <year>2008</year>
+      <year>2009</year>
+      <year>2010</year>
+      <year>2011</year>
+      <year>2012</year>
+      <year>2013</year>
+      <year>2014</year>
+      <holder>Dave Beckett</holder>
+    </copyright>
+    <copyright>
+      <year>2003</year>
+      <year>2004</year>
+      <year>2005</year>
+      <holder>University of Bristol</holder>
+    </copyright>
+  </bookinfo>
+
+  <chapter id="rasqal">
+    <title>Rasqal Overview</title>
+    <para>
+<ulink url="http://librdf.org/rasqal/">Rasqal</ulink> is an RDF query
+library providing APIs to parse query syntaxes (SPARQL and RDQL),
+build and manipulate the query structures, form query algebras and
+execution plans and execute the queries into query result sets.
+    </para>
+
+  </chapter>
+
+  <part id="reference-manual">
+    <title>Reference Manual</title>
+
+    <partintro id="reference-manual-introduction">
+      <para>This part contains the Rasqal Reference Manual
+      which comprehensively describes every class and function of the API.
+      </para>
+    </partintro>
+      
+    <xi:include href="xml/section-general.xml"/>
+    <xi:include href="xml/section-data.xml"/>
+    <xi:include href="xml/section-expression.xml"/>
+    <xi:include href="xml/section-graph_pattern.xml"/>
+    <xi:include href="xml/section-literal.xml"/>
+    <xi:include href="xml/section-prefix.xml"/>
+    <xi:include href="xml/section-query.xml"/>
+    <xi:include href="xml/section-query_results.xml"/>
+    <xi:include href="xml/section-query_results_formatter.xml"/>
+    <xi:include href="xml/section-row.xml"/>
+    <xi:include href="xml/section-service.xml"/>
+    <xi:include href="xml/section-triple.xml"/>
+    <xi:include href="xml/section-triples_source.xml"/>
+    <xi:include href="xml/section-variable.xml"/>
+    <xi:include href="xml/section-variables-table.xml"/>
+    <xi:include href="xml/section-updates.xml"/>
+    <xi:include href="xml/section-utilities.xml"/>
+    <xi:include href="xml/section-xsd.xml"/>
+
+    <!-- <xi:include href="xml/section-unused.xml"/> -->
+
+    <xi:include href="rasqal-changes.xml"/>
+  </part>
+  <index id="indexes">
+    <title>Index</title>
+  </index>
+</book>
