@@ -195,10 +195,11 @@ void accumulate_duration(duration_ht* counts, const char* func_name,
     }
 }
 
+/* Initialize file handle within this function with given path */
 void stat_print(duration_ht* counts, const char* path) {
-    FILE* stat_file;
+    FILE* stat_file_handle;
     if (path) {
-        stat_file = fopen(path,"w");
+        stat_file_handle = fopen(path,"w");
     }
     char pline[2048];
     hti it = stat_iterator(counts);
@@ -206,13 +207,31 @@ void stat_print(duration_ht* counts, const char* path) {
     while (stat_next(&it)) {
         sprintf(pline,
             "%s %d us\n", it.key, *(int*)it.value);
-        if (stat_file != NULL) {
-            fputs(pline, stat_file);
+        if (stat_file_handle != NULL) {
+            fputs(pline, stat_file_handle);
         }
         else {
             printf("%s", pline);
         }        
         free(it.value);
     }
-    fclose(stat_file);
+    fclose(stat_file_handle);
+}
+
+/* Write to a given handle */
+void stat_print_(duration_ht* counts, FILE* stat_file_handle) {
+    char pline[2048];
+    hti it = stat_iterator(counts);
+    // Iteratively print out accumulated duration hash table, freeing values as we go.
+    while (stat_next(&it)) {
+        sprintf(pline,
+            "%s %d us\n", it.key, *(int*)it.value);
+        if (stat_file_handle != NULL) {
+            fputs(pline, stat_file_handle);
+        }
+        else {
+            printf("%s", pline);
+        }        
+        free(it.value);
+    }
 }

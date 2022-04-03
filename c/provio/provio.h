@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 #include <pthread.h>
+#include "rdf.h"
+
 
 typedef enum ProvLevel {
     Default, //no file write, only screen print
@@ -37,6 +39,7 @@ typedef struct ProvenanceHelper {
     // file_prov_info_t* opened_files;//linkedlist,
 } provio_helper_t;
 
+
 struct prov_fields {
     char data_object[512];              // Name of the data object
     char io_api[512];                   // H5G/H5D/H5A/H5T
@@ -51,6 +54,10 @@ struct prov_fields {
 } prov_fields;
 
 int prov_write(provio_helper_t* helper_in, struct prov_fields* fields);
+
+void load_config(prov_params* params) {
+	
+}
 
 #endif
 

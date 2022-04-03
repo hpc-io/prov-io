@@ -22,12 +22,18 @@ DYNLDFLAGS = $(DEBUG) -shared -fPIC
 LDFLAGS = $(DEBUG) $(LIBS)
 ARFLAGS = rs
 
-# Shared library VOL connector
+
 STATSRC = stat.c
 STATOBJ = $(STATSRC:.c=.o)
+CONFSRC = config.c
+CONFOBJ = $(CONFSRC:.c=.o)
+
+# Shared library
 DYNSRC = provio.c 
 DYNOBJ = $(DYNSRC:.c=.o)
 DYNLIB = libprovio.so
+
+DEPOBJ = $(STATOBJ) $(CONFOBJ)
 
 #DYNLIB = libh5prov.dylib
 #DYNDBG = libh5prov.dylib.dSYM
@@ -47,12 +53,14 @@ $(EXEXE): $(EXSRC) $(STATLIB) $(DYNLIB)
 
 $(DYNLIB): $(DYNSRC)
 		$(CC) $(DYNCFLAGS) $(STATSRC) -o $(STATOBJ) -c
+		$(CC) $(DYNCFLAGS) $(CONFSRC) -o $(CONFOBJ) -c
 		$(CC) $(DYNCFLAGS) $(DYNSRC) -o $(DYNOBJ) -c
 		$(CC) $(STATOBJ) $(DYNOBJ) $(DYNLDFLAGS) $(LIBS) -o $(DYNLIB)
 
 .PHONY: clean all
 clean:
 		rm -rf $(DYNOBJ) $(DYNLIB) $(DYNDBG) \
-			$(EXOBJ) $(EXEXE) $(EXDBG)
+			$(EXOBJ) $(EXEXE) $(EXDBG) \
+			$(DEPOBJ) 
 # 		rm -rf $(DYNOBJ) $(DYNLIB) $(DYNDBG) 
 # 			$(EXOBJ) $(EXEXE) $(EXDBG)

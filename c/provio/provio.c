@@ -1,5 +1,5 @@
 // #include <unistd.h>
-
+#include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -9,31 +9,14 @@
 #include <string.h>
 #include <unistd.h>
 
+// #ifdef PARALLEL
+#include <mpi.h> 
+// #endif
+
 #include "provio.h"
 #include "stat.h"
-// #include ""
+#include "config.h"
 
-
-/* Provenance parameters */
-typedef struct prov_params {
-    char* prov_base_uri;
-    char* prov_prefix;
-    char* stat_file_path;
-    char* new_graph_path;
-    char* legacy_graph_path;
-    int enable_stat_file;
-    int enable_legacy_graph;
-    int enable_file_prov;
-    int enable_group_prov;
-    int enable_dataset_prov;
-    int enable_attr_prov;
-    int enable_dtype_prov;
-    int enable_api_prov;
-    int enable_duration_prov;
-    int enable_program_prov;
-    int enable_thread_prov;
-    int enable_user_prov;
-} prov_params;
 
 
 /* Global variables */
@@ -48,16 +31,44 @@ char* program_name;
 char* program_uuid;
 int program_name_tracked = 0;
 // MPI rank ID
-#ifdef H5_HAVE_PARALLEL
+// #ifdef H5_HAVE_PARALLEL
 char mpi_rank[16];
 int mpi_rank_int;
 char num_ranks[16];
 int num_ranks_int;
 int mpi_rank_tracked = 0;
-#endif
+// #endif
 // User info
 int user_tracked = 0;
 // Host info
+
+/* statistics */
+struct Stat prov_stat;
+
+/* static variables */
+static provio_helper_t* PROV_HELPER = NULL;
+
+
+/* Helper functions */
+static void get_time_str(char *str_out);
+static void get_mpi_rank();
+static char* alloc_uuid(char* name);
+static void prov_fill_data_object(struct prov_fields* fields, const char* name, 
+    const char* relation, const char* type);
+
+
+
+void get_time_str(char *str_out){
+    time_t rawtime;
+    struct tm * timeinfo;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    *str_out = '\0';
+    sprintf(str_out, "%d/%d/%d %d:%d:%d", timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+}
+
 
 static void get_mpi_rank() {
     /* Get RANK ID */
@@ -426,67 +437,55 @@ int prov_write(provio_helper_t* helper_in, struct prov_fields* fields){
     }
 //    unsigned tmp = PROV_WRITE_TOTAL_TIME;
 
-    PROV_WRITE_TOTAL_TIME += (get_time_usec() - start);
+    Stat.PROV_WRITE_TOTAL_TIME += (get_time_usec() - start);
 
     return 0;
 }
 
 
-void prov_helper_teardown(prov_helper_t* helper){
+void prov_helper_teardown(provio_helper_t* helper){
     
     if (librdf_prov_file_handler != NULL) {
        /* Redland: serialize to file */
        unsigned long start = get_time_usec();
        librdf_serializer_serialize_model_to_file_handle(serializer, librdf_prov_file_handler, NULL, model_prov);
        fclose(librdf_prov_file_handler);
-       PROV_SERIALIZE_TIME += (get_time_usec() - start);
+       prov_stat.PROV_SERIALIZE_TIME += (get_time_usec() - start);
     }
 
     if(helper){// not null
-   char pline[2048];
-   if (mpi_rank_int == 0) {
-      sprintf(pline,
-         "+ MPI RANK %d\n"
-         "TOTAL_PROV_OVERHEAD %lu us\n"
-         "TOTAL_NATIVE_H5_TIME %lu us\n"
-         "PROV_WRITE_TOTAL_TIME %lu us\n"
-         "FILE_LINKED_LIST_TOTAL_TIME %lu us\n"
-         "DS_LINKED_LIST_TOTAL_TIME %lu us\n"
-         "GRP_LINKED_LIST_TOTAL_TIME %lu us\n"
-         "DT_LINKED_LIST_TOTAL_TIME %lu us\n"
-         "ATTR_LINKED_LIST_TOTAL_TIME %lu us\n"
-         "PROV_SERIALIZATION_TIME %lu us\n",
-         mpi_rank_int,
-         TOTAL_PROV_OVERHEAD,
-         TOTAL_NATIVE_H5_TIME,
-         PROV_WRITE_TOTAL_TIME,
-         FILE_LL_TOTAL_TIME,
-         DS_LL_TOTAL_TIME,
-         GRP_LL_TOTAL_TIME,
-         DT_LL_TOTAL_TIME,
-         ATTR_LL_TOTAL_TIME,
-         PROV_SERIALIZE_TIME);
-                if (helper->stat_file_handle != NULL) {
-                        fputs(pline, helper->stat_file_handle);
-                }
-                else {
-                        printf("%s", pline);
-      }
-      // Iteratively print out accumulated duration hash table, freeing values as we go.
-      hti it = ht_iterator(counts);
-      while (ht_next(&it)) {
-                    sprintf(pline,
-                        "%s %d us\n", it.key, *(int*)it.value);
-                    free(it.value);
-          if (helper->stat_file_handle != NULL) {
-                        fputs(pline, helper->stat_file_handle);
-                    }
-                      else {
-                        printf("%s", pline);
-          }
-      }
-                ht_destroy(counts);
-   }
+        char pline[2048];
+        if (mpi_rank_int == 0) {
+            sprintf(pline,
+                "+ MPI RANK %d\n"
+                "TOTAL_PROV_OVERHEAD %lu us\n"
+                "TOTAL_NATIVE_H5_TIME %lu us\n"
+                "PROV_WRITE_TOTAL_TIME %lu us\n"
+                "FILE_LINKED_LIST_TOTAL_TIME %lu us\n"
+                "DS_LINKED_LIST_TOTAL_TIME %lu us\n"
+                "GRP_LINKED_LIST_TOTAL_TIME %lu us\n"
+                "DT_LINKED_LIST_TOTAL_TIME %lu us\n"
+                "ATTR_LINKED_LIST_TOTAL_TIME %lu us\n"
+                "PROV_SERIALIZATION_TIME %lu us\n",
+                mpi_rank_int,
+                prov_stat.TOTAL_PROV_OVERHEAD,
+                prov_stat.TOTAL_NATIVE_H5_TIME,
+                prov_stat.PROV_WRITE_TOTAL_TIME,
+                prov_stat.FILE_LL_TOTAL_TIME,
+                prov_stat.DS_LL_TOTAL_TIME,
+                prov_stat.GRP_LL_TOTAL_TIME,
+                prov_stat.DT_LL_TOTAL_TIME,
+                prov_stat.ATTR_LL_TOTAL_TIME,
+                prov_stat.PROV_SERIALIZE_TIME);
+            if (helper->stat_file_handle != NULL) {
+                    fputs(pline, helper->stat_file_handle);
+            }
+            else {
+                    printf("%s", pline);
+            }
+            
+            stat_print_(counts, helper->stat_file_handle);
+        }
     }
         
         // if(helper->prov_level == File_only || helper->prov_level ==File_and_print){//no file
