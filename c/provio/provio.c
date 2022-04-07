@@ -1,4 +1,3 @@
-// #include <unistd.h>
 #include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
@@ -9,56 +8,45 @@
 #include <string.h>
 #include <unistd.h>
 
-// #ifdef PARALLEL
-#include <mpi.h> 
-// #endif
 
 #include "provio.h"
-#include "stat.h"
-#include "config.h"
 
 
+#define DEFAULT_FUNCTION_PREFIX "H5VL_provenance_"
+#define LEGACY_PREFIX "file"
 
 /* Global variables */
-char* program_name;
 
-/* Configuration global variables */
-prov_params params;
+// Configuration
+prov_config config;
 
-/* Other provenance global variables */
-// Name of the program
-char* program_name;
-char* program_uuid;
-int program_name_tracked = 0;
-// MPI rank ID
-// #ifdef H5_HAVE_PARALLEL
-char mpi_rank[16];
-int mpi_rank_int;
-char num_ranks[16];
-int num_ranks_int;
-int mpi_rank_tracked = 0;
-// #endif
-// User info
-int user_tracked = 0;
-// Host info
+// Provenance fields
 
-/* statistics */
-struct Stat prov_stat;
+// MPI rank 
+int MPI_RANK;
+int NUM_OF_RANK;
 
-/* static variables */
-static provio_helper_t* PROV_HELPER = NULL;
+// Process
+int PROC_ID;
+
+// Thread
+int THREAD_ID;
+
+// Flags
+int MPI_RANK_TRACKED = 0;   
+int PROC_NAME_TRACKED = 0;
+int USER_TRACKED = 0;
 
 
 /* Helper functions */
 static void get_time_str(char *str_out);
-static void get_mpi_rank();
+static int get_mpi_rank(prov_fields* fields);
 static char* alloc_uuid(char* name);
-static void prov_fill_data_object(struct prov_fields* fields, const char* name, 
-    const char* relation, const char* type);
+// static char* add_prefix();
+static char* get_process_name_by_pid(const int pid);
 
 
-
-void get_time_str(char *str_out){
+static void get_time_str(char *str_out){
     time_t rawtime;
     struct tm * timeinfo;
 
@@ -66,18 +54,18 @@ void get_time_str(char *str_out){
     timeinfo = localtime ( &rawtime );
 
     *str_out = '\0';
-    sprintf(str_out, "%d/%d/%d %d:%d:%d", timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+    sprintf(str_out, "%d/%d/%d %d:%d:%d", timeinfo->tm_mon + 1, timeinfo->tm_mday, 
+        timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 }
 
 
-static void get_mpi_rank() {
-    /* Get RANK ID */
-    MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank_int); 
-    MPI_Comm_size(MPI_COMM_WORLD, &num_ranks_int);
-    sprintf(mpi_rank,"%d", mpi_rank_int); 
-    sprintf(num_ranks,"%d", num_ranks_int);
+/* Get RANK ID */
+static int get_mpi_rank(prov_fields* fields) {
+    MPI_Comm_rank(MPI_COMM_WORLD, &MPI_RANK); 
+    MPI_Comm_size(MPI_COMM_WORLD, &NUM_OF_RANK);
+    sprintf(fields->mpi_rank,"%d", MPI_RANK); 
+    return 0;
 }
-
 
 /* Provenance helper methods */
 static char* alloc_uuid(char* name) {
@@ -90,127 +78,413 @@ static char* alloc_uuid(char* name) {
     return uuid_;
 }
 
-static void prov_fill_data_object(struct prov_fields* fields, const char* name, 
-    const char* relation, const char* type) {
-    strcpy(fields->data_object, name);
-    // if (*program_uuid) {
-    //     strcat(fields->data_object, "--");
-    //     strcat(fields->data_object, program_uuid);
-    // }
-    strcpy(fields->relation, relation);
-    strcpy(fields->type, type);        
+// static char* add_prefix(char* node) {
+//     char* tmp = malloc(64);
+//     strcpy(tmp, "file:");
+//     strcat(tmp, node);
+//     return tmp;
+// }
+
+static char* get_process_name_by_pid(const int pid)
+{
+    char* name = (char*)calloc(1024,sizeof(char));
+    if(name){
+        sprintf(name, "/proc/%d/cmdline",pid);
+        FILE* f = fopen(name,"r");
+        if(f){
+            size_t size;
+            size = fread(name, sizeof(char), 1024, f);
+            if(size>0){
+                if('\n'==name[size-1])
+                    name[size-1]='\0';
+            }
+            fclose(f);
+        }
+    }
+    return name;
 }
 
 
-/* Initialize ProvenanceHelper */
-provio_helper_t * provio_helper_init(char* file_path, Prov_level prov_level, char* prov_line_format)
-{
+void prov_fill_data_object(prov_fields* fields, const char* obj_name, 
+    const char* type) {
+    strcpy(fields->data_object, obj_name);
+    // if (fields->proc_uuid) {
+    //     strcat(fields->data_object, "--");
+    //     strcat(fields->data_object, fields->proc_uuid);
+    // }
+    strcpy(fields->type, type);      
+}
+
+
+void prov_fill_relation(prov_fields* fields, const char* relation) {
+    strcpy(fields->relation, relation);
+}
+
+
+void prov_fill_io_api(prov_fields* fields, const char* io_api, unsigned long duration) {
+    strcpy(fields->io_api, io_api);  
+    fields->duration = duration; 
+}
+
+
+void func_stat(const char* func_name, unsigned long elapsed) {
+    accumulate_duration(FUNCTION_FREQUENCY, func_name, elapsed);
+}
+
+
+/* Initialize provenance helper */
+provio_helper_t* provio_helper_init(prov_fields* fields) {
+
+    get_time_str(fields->proc_start_time);
+
+    /* Load configuration */
+    assert(config.prov_level);
+    assert(config.enable_stat_file);
+    assert(config.stat_file_path);
+    assert(config.prov_line_format);
+    // if (!config.legacy_graph_path) 
+    //     assert(config.new_graph_path);
+    // if (!config.new_graph_path) 
+    //     assert(config.legacy_graph_path);
+
+
     provio_helper_t* new_helper = (provio_helper_t *)calloc(1, sizeof(provio_helper_t));
 
-    if(prov_level >= 2) {//write to file
-        if(!file_path){
+    if(config.prov_level >= 2) {//write to file
+        if(!config.new_graph_path && !config.legacy_graph_path){
             printf("prov_helper_init() failed, provenance file path is not set.\n");
             return NULL;
         }
     }
-
-    new_helper->prov_file_path = strdup(file_path);
-    new_helper->prov_line_format = strdup(prov_line_format);
-    new_helper->prov_level = prov_level;
-    new_helper->pid = getpid();
-    new_helper->tid = pthread_self();
-
-
-    // new_helper->opened_files = NULL;
-    // new_helper->opened_files_cnt = 0;
-
-    getlogin_r(new_helper->user_name, 32);
     
-    /* Don't use it */
-    //if(new_helper->prov_level == File_only || new_helper->prov_level == File_and_print)
-        // new_helper->prov_file_handle = fopen(new_helper->prov_file_path, "a");
-        // new_helper->prov_file_handle = fopen(new_helper->prov_file_path, "w");
 
-    // c1 = get_time_usec();
-    if (mpi_rank_int == 0) {
+    if (MPI_RANK == 0) {
         /* Create stat file */
-        // if (enable_stat_file)
-   new_helper->stat_file_handle = fopen(params.stat_file_path, "a");
-    }
-    // c2 = get_time_usec();
-
-    if (!strcmp(new_helper->prov_line_format, "rdf")) {
-        
-   /* Open or create provenance file */
-   strcat(params.new_graph_path, mpi_rank);
-        // Append 
-        librdf_prov_file_handler = fopen(params.new_graph_path, "a");
-        // Overwrite
-        // librdf_prov_file_handler = fopen(params.prov_file_path, "w");
-
-        // In-memory store 
-        storage_prov = librdf_new_storage(world, "memory", NULL, NULL);
-        model_prov = librdf_new_model(world, storage_prov, NULL); 
-
-        // Store with BerkeleyDB 
-        //if(!(storage_prov = librdf_new_storage(world, "hashes", "prov",
-        //                          "hash-type='bdb',dir='.'"))) {
-        //    storage_prov = librdf_new_storage(world, "hashes", "prov",
-        //                              "new='yes',hash-type='bdb',dir='.'");
-        //}
-        //model_prov = librdf_new_model(world, storage_prov, NULL);
-   
-   // Parser and load legacy graph into model. 
-   // We don't parse legacy graph in this version since it will need advance 
-        // MPI thread coordiation mechanism to fully support cross-rank graph insertion.
-   /*
-   
-   librdf_parser *parser = librdf_new_parser(world, "turtle", NULL, NULL);
-        char legacy_uri_str[256] = "file:";
-        char legacy_path[256] = "prov_old.turtle";
-   FILE *legacy_path_handler;
-        legacy_path_handler = fopen(legacy_path, "r");
-        if(legacy_path_handler == NULL) {
-            printf("Old provenance file not found\n");
+        if (config.enable_stat_file) {
+            new_helper->stat_file_handle = fopen(config.stat_file_path, "a");
         }
-        else {
-            strcat(legacy_uri_str, legacy_path);
-            librdf_uri* legacy_uri=librdf_new_uri(world, (const unsigned char*)legacy_uri_str);
-          
-            if(librdf_parser_parse_into_model(parser,legacy_uri,legacy_uri,model_prov)) {
-                fprintf(stderr, "Failed to parse old provenance file into model, check path %s\n", legacy_path);
+        FUNCTION_FREQUENCY = stat_create(config.num_of_apis);
+    }
+
+    if(config.prov_level == File_only || config.prov_level == File_and_print) {
+    
+        if (!strcmp(config.prov_line_format, "rdf") || !strcmp(config.prov_line_format, "RDF")) {
+
+            /* Open or create provenance file */
+            if (config.legacy_graph_path && config.enable_legacy_graph) {
+                new_helper->legacy_prov_file_handle = fopen(config.legacy_graph_path, "w");
             }
-            librdf_free_uri(legacy_uri);
+            if (config.new_graph_path) {
+                if (!config.enable_legacy_graph) {
+                    char tmp[32]; 
+                    sprintf(tmp, "%d", MPI_RANK);
+                    strcat(config.new_graph_path, ".RANK-");
+                    strcat(config.new_graph_path, tmp);
+                    new_helper->new_prov_file_handle = fopen(config.new_graph_path, "w");
+                    printf("Created a new provenance file\n");
+                }
+            else 
+                printf("NEW_GRAPH_PATH conflicts with ENABLE_LEGACY_GRAPH=T\n");                
+            }            
         }
-   fclose(legacy_path_handler);
-        librdf_free_parser(parser);
-   */
     }
-
-    // c3 = get_time_usec();
-
-    // _dic_init();
-    _dic_init_int();
 
     return new_helper;
 }
 
+void provio_init(prov_fields* fields) {
 
-int prov_write(provio_helper_t* helper_in, struct prov_fields* fields){
+    load_config(&config);
+
+    // Get RANK ID 
+    get_mpi_rank(fields);
+
+    // Get process ID
+    PROC_ID = getpid();
+    sprintf(fields->pid,"%d", PROC_ID); 
+
+    // Get thread ID
+    THREAD_ID = pthread_self();
+    sprintf(fields->tid,"%d", THREAD_ID); 
+
+    // Get process name
+    fields->proc_name = get_process_name_by_pid(PROC_ID);
+    fields->proc_uuid =alloc_uuid(fields->proc_name);
+
+    getlogin_r(fields->user_name, 32);
+
+
+#ifdef LIBRDF_H
+    /* Initialise Redland environment */
+    world = librdf_new_world();
+    librdf_world_open(world);
+    serializer = librdf_new_serializer(world, "turtle", NULL, NULL);
+
+    /* Set up base uri and prefix */
+    if (config.prov_base_uri)
+        base_uri = librdf_new_uri(world, (const unsigned char *)config.prov_base_uri);
+    else
+        base_uri = NULL;
+    
+    librdf_serializer_set_namespace(serializer, base_uri, config.prov_prefix);
+
+    provio_uri = librdf_new_uri(world, (const unsigned char *)"http://www.w3.org/ns/provio#");
+    librdf_serializer_set_namespace(serializer, provio_uri, "provio");
+
+    node_prefix = librdf_new_uri(world, (const unsigned char *)"/");
+    librdf_serializer_set_namespace(serializer, node_prefix, LEGACY_PREFIX);
+
+    // In-memory store 
+    storage_prov = librdf_new_storage(world, "memory", NULL, NULL);
+    model_prov = librdf_new_model(world, storage_prov, NULL); 
+
+    // Store with BerkeleyDB 
+    if (config.enable_bdb) {
+        if(!(storage_prov = librdf_new_storage(world, "hashes", "prov",
+                                 "hash-type='bdb',dir='.'"))) {
+           storage_prov = librdf_new_storage(world, "hashes", "prov",
+                                     "new='yes',hash-type='bdb',dir='.'");
+        }
+    }
+
+    model_prov = librdf_new_model(world, storage_prov, NULL);
+
+    // Parser and load legacy graph into model. 
+    // We don't parse legacy graph in this version since it will need advance 
+    // MPI thread coordiation mechanism to fully support cross-rank graph insertion.
+
+    librdf_parser *parser = librdf_new_parser(world, "turtle", NULL, NULL);
+    char legacy_uri_str[256] = "file:";
+    if (config.legacy_graph_path && config.enable_legacy_graph) {
+        FILE *legacy_path_handler;
+        legacy_path_handler = fopen(config.legacy_graph_path, "r");
+        if(legacy_path_handler == NULL) {
+            printf("Old provenance file not found\n");
+        }
+        else {
+            strcat(legacy_uri_str, config.legacy_graph_path);
+            printf("Legacy graph: %s\n", config.legacy_graph_path);
+            librdf_uri* legacy_uri=librdf_new_uri(world, (const unsigned char*)legacy_uri_str);
+          
+            if(librdf_parser_parse_into_model(parser,legacy_uri,legacy_uri,model_prov)) {
+                fprintf(stderr, "Failed to parse old provenance file into model, check path %s\n", 
+                    config.legacy_graph_path);
+            }
+            librdf_free_uri(legacy_uri);
+            fclose(legacy_path_handler);
+        }
+        librdf_free_parser(parser);
+    }
+#endif
+
+}
+
+
+int add_user_record_Redland(prov_fields* fields) {
+    // User     
+    if (config.enable_user_prov) {
+        if (USER_TRACKED == 0) {
+            statement=librdf_new_statement_from_nodes(world, 
+               librdf_new_node_from_uri_string(world, (const unsigned char *)fields->user_name),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Agent")
+               );
+            librdf_model_add_statement(model_prov, statement);
+
+            statement=librdf_new_statement_from_nodes(world, 
+               librdf_new_node_from_uri_string(world, (const unsigned char *)fields->user_name),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasMemberOf"),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:User")
+               );
+            librdf_model_add_statement(model_prov, statement);
+
+            USER_TRACKED = 1;
+        }
+    }    
+    return 0;
+}
+
+int add_mpi_rank_record_Redland(prov_fields* fields) {
+    // MPI rank ID
+    if (config.enable_thread_prov && fields->mpi_rank) {
+        if (MPI_RANK_TRACKED == 0) {
+            statement=librdf_new_statement_from_nodes(world, 
+               librdf_new_node_from_uri_string(world, (const unsigned char *)fields->mpi_rank),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Agent")
+               );
+            librdf_model_add_statement(model_prov, statement);
+
+            statement=librdf_new_statement_from_nodes(world, 
+               librdf_new_node_from_uri_string(world, (const unsigned char *)fields->mpi_rank),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasMemberOf"),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:Thread")
+               );
+            librdf_model_add_statement(model_prov, statement);
+
+            if (config.enable_user_prov) {
+               statement=librdf_new_statement_from_nodes(world, 
+                  librdf_new_node_from_uri_string(world, (const unsigned char *)fields->mpi_rank),
+                  librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:actedOnBehalfOf"),
+                  librdf_new_node_from_uri_string(world, (const unsigned char*)fields->user_name)
+                                             );
+               librdf_model_add_statement(model_prov, statement);
+            }
+            MPI_RANK_TRACKED = 1;
+        }
+    }
+    return 0;
+}
+
+int add_program_record_Redland(prov_fields* fields) {
+    // program name
+    if (config.enable_program_prov) {
+        if (PROC_NAME_TRACKED == 0) {
+            statement=librdf_new_statement_from_nodes(world,
+               librdf_new_node_from_uri_string(world, (const unsigned char *)fields->proc_name),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Agent")
+               );
+            librdf_model_add_statement(model_prov, statement);
+
+            statement=librdf_new_statement_from_nodes(world, 
+               librdf_new_node_from_uri_string(world, (const unsigned char *)fields->proc_name),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasMemberOf"),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:Program")
+               );
+            librdf_model_add_statement(model_prov, statement);
+
+            if (config.enable_thread_prov && fields->mpi_rank) {
+               statement=librdf_new_statement_from_nodes(world,
+                  librdf_new_node_from_uri_string(world, (const unsigned char *)fields->proc_name),
+                  librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:actedOnBehalfOf"),
+                  librdf_new_node_from_uri_string(world, (const unsigned char*)fields->mpi_rank)
+                  );
+               librdf_model_add_statement(model_prov, statement);
+            }
+
+            statement=librdf_new_statement_from_nodes(world, 
+                librdf_new_node_from_uri_string(world, (const unsigned char *)fields->proc_name),
+                librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:startedAtTime"),
+                librdf_new_node_from_literal(world, (const unsigned char*)fields->proc_start_time, NULL, 0)
+            );
+            librdf_model_add_statement(model_prov, statement);
+
+            PROC_NAME_TRACKED = 1;
+        }
+        if (fields->proc_end_time) {
+            statement=librdf_new_statement_from_nodes(world, 
+                librdf_new_node_from_uri_string(world, (const unsigned char *)fields->proc_name),
+                librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:endedAtTime"),
+                librdf_new_node_from_literal(world, (const unsigned char*)fields->proc_end_time, NULL, 0)
+            );
+            librdf_model_add_statement(model_prov, statement);
+        }
+    }
+    return 0;
+}
+
+int add_io_api_record_Redland(prov_fields* fields, char* duration_) {
+    // I/O API
+    if (config.enable_api_prov) {
+        statement=librdf_new_statement_from_nodes(world, 
+            librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api),
+            librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
+            librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Activity")
+            );
+        librdf_model_add_statement(model_prov, statement);
+
+        if (config.enable_program_prov) {
+            statement=librdf_new_statement_from_nodes(world,
+               librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasAssociatedWith"),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)fields->proc_name)
+               );
+            librdf_model_add_statement(model_prov, statement);    
+        }      
+
+        if (config.enable_duration_prov) {
+            statement=librdf_new_statement_from_nodes(world, 
+               librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api),
+               librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:elapsed"),
+               librdf_new_node_from_literal(world, (const unsigned char*)duration_, NULL, 0)
+               );
+            librdf_model_add_statement(model_prov, statement);
+        }
+    }
+    return 0;
+}
+
+int add_data_obj_record_Redland(prov_fields* fields) {
+    // Data object
+    if ((config.enable_file_prov && (!strcmp(fields->type, "provio:File"))) ||
+        (config.enable_group_prov && (!strcmp(fields->type, "provio:Group"))) ||
+        (config.enable_dataset_prov && (!strcmp(fields->type, "provio:Dataset"))) ||
+        (config.enable_attr_prov && (!strcmp(fields->type, "provio:Attr"))) ||
+        (config.enable_dtype_prov && (!strcmp(fields->type, "provio:Datatype")))) {
+
+    statement=librdf_new_statement_from_nodes(world, 
+        librdf_new_node_from_uri_string(world, (const unsigned char *)fields->data_object),
+        librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
+        librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Entity")
+        );
+    librdf_model_add_statement(model_prov, statement);
+
+    statement=librdf_new_statement_from_nodes(world, 
+        librdf_new_node_from_uri_string(world, (const unsigned char*)fields->data_object),
+        librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasMemberOf"),
+        librdf_new_node_from_uri_string(world, (const unsigned char *)fields->type)
+        );
+    librdf_model_add_statement(model_prov, statement);
+
+    if (config.enable_api_prov) {
+        statement=librdf_new_statement_from_nodes(world, 
+            librdf_new_node_from_uri_string(world, (const unsigned char *)fields->data_object),
+            librdf_new_node_from_uri_string(world, (const unsigned char *)fields->relation),
+            librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api)
+            );
+        librdf_model_add_statement(model_prov, statement);
+    }
+
+      if (config.enable_program_prov) {
+        statement=librdf_new_statement_from_nodes(world, 
+            librdf_new_node_from_uri_string(world, (const unsigned char*)fields->data_object),
+            librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasAttributedTo"),
+            librdf_new_node_from_uri_string(world, (const unsigned char *)fields->proc_name)
+            );
+        librdf_model_add_statement(model_prov, statement);  
+        }
+    }
+    return 0;
+}
+
+int add_program_record(prov_fields* fields) {
+    int ret = add_program_record_Redland(fields);
+    return ret;
+}
+
+/* Add Redland provenance statement */
+int add_prov_record_Redland(prov_fields* fields, char* duration_) {
+    int ret;
+    ret = add_user_record_Redland(fields);
+    ret = add_mpi_rank_record_Redland(fields);
+    ret = add_io_api_record_Redland(fields, duration_);
+    ret = add_data_obj_record_Redland(fields);
+    return ret;
+}
+
+
+int add_prov_record(provio_helper_t* helper_in, prov_fields* fields){
     unsigned long start = get_time_usec();
-    const char* base = "H5VL_provenance_"; //to be replace by H5
+    const char* base = DEFAULT_FUNCTION_PREFIX; //to be replace by H5
     size_t base_len;
     size_t io_api_len;
-    char time[64];
     char pline[1024];
     char duration_[256];
 
     assert(helper_in);
+    assert(fields);
 
-    get_time_str(time);
-
-
-    // printf("MPI RANK: %d\n", mpi_rank_int);
 
     /* Trimming long VOL function names */
     base_len = strlen(base);
@@ -218,205 +492,53 @@ int prov_write(provio_helper_t* helper_in, struct prov_fields* fields){
 
     if(io_api_len > base_len) {//strlen(H5VL_provenance_) == 16.
         size_t i = 0;
-
         for(; i < base_len; i++)
             if(base[i] != fields->io_api[i])
                 break;
     }
 
-    if(!strcmp(PROV_HELPER->prov_line_format, "rdf")) {
+    if(!strcmp(config.prov_line_format, "rdf") || !strcmp(config.prov_line_format, "RDF")) {
         sprintf(duration_, "%lu", fields->duration);
     }
     else
         sprintf(pline, "%s %luus\n", fields->io_api, fields->duration);//assume less than 64 functions
 
     /* Allocate UUID to io_api */
-    // alloc_uuid(fields->data_object);
     alloc_uuid(fields->io_api);
     
-    // Copy agent info to pro_fields structure
-    strcpy(fields->program_name, program_name);
-#ifdef H5_HAVE_PARALLEL
-    strcpy(fields->mpi_rank, "MPI_rank_");
-    strcat(fields->mpi_rank, mpi_rank);
-#endif
+    char tmp_rank[128];
 
-    //printf("Func name:[%s], hash index = [%u], overhead = [%lu]\n",  fields->io_api, genHash(fields->io_api), duration);
-    switch(helper_in->prov_level){
+    if (fields->mpi_rank) {
+        strcpy(tmp_rank, "MPI_rank_");
+        strcat(tmp_rank, fields->mpi_rank);
+        strcpy(fields->mpi_rank, tmp_rank);
+    }
+
+    switch(config.prov_level){
         case File_only:
-            if(!strcmp(PROV_HELPER->prov_line_format, "rdf")) {
-                /* Provenance statement */
-                // User     
-
-                if (params.enable_user_prov) {
-                    if (user_tracked == 0) {
-                        statement=librdf_new_statement_from_nodes(world, 
-                           librdf_new_node_from_uri_string(world, (const unsigned char *)helper_in->user_name),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Agent")
-                           );
-                        librdf_model_add_statement(model_prov, statement);
-
-                        statement=librdf_new_statement_from_nodes(world, 
-                           librdf_new_node_from_uri_string(world, (const unsigned char *)helper_in->user_name),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasMemberOf"),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:User")
-                           );
-                        librdf_model_add_statement(model_prov, statement);
-
-                        user_tracked = 1;
-                    }
-                }
-
-                // MPI rank ID
-                if (params.enable_thread_prov) {
-                    if (mpi_rank_tracked == 0) {
-#ifdef H5_HAVE_PARALLEL
-                        statement=librdf_new_statement_from_nodes(world, 
-                           librdf_new_node_from_uri_string(world, (const unsigned char *)fields->mpi_rank),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Agent")
-                           );
-                        librdf_model_add_statement(model_prov, statement);
-
-                        statement=librdf_new_statement_from_nodes(world, 
-                           librdf_new_node_from_uri_string(world, (const unsigned char *)fields->mpi_rank),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasMemberOf"),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:Thread")
-                           );
-                        librdf_model_add_statement(model_prov, statement);
-
-                        if (params.enable_user_prov) {
-                           statement=librdf_new_statement_from_nodes(world, 
-                              librdf_new_node_from_uri_string(world, (const unsigned char *)fields->mpi_rank),
-                              librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:actedOnBehalfOf"),
-                              librdf_new_node_from_uri_string(world, (const unsigned char*)helper_in->user_name)
-                                                         );
-                           librdf_model_add_statement(model_prov, statement);
-                        }
-#endif
-                        mpi_rank_tracked = 1;
-                    }
-                }
-
-                // program name
-                if (params.enable_program_prov) {
-                    if (program_name_tracked == 0) {
-                        statement=librdf_new_statement_from_nodes(world,
-                           librdf_new_node_from_uri_string(world, (const unsigned char *)fields->program_name),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Agent")
-                           );
-                        librdf_model_add_statement(model_prov, statement);
-
-                        statement=librdf_new_statement_from_nodes(world, 
-                           librdf_new_node_from_uri_string(world, (const unsigned char *)fields->program_name),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasMemberOf"),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:Program")
-                           );
-                        librdf_model_add_statement(model_prov, statement);
-
-                        if (params.enable_thread_prov) {
-#ifdef H5_HAVE_PARALLEL
-                           statement=librdf_new_statement_from_nodes(world,
-                              librdf_new_node_from_uri_string(world, (const unsigned char *)fields->program_name),
-                              librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:actedOnBehalfOf"),
-                              librdf_new_node_from_uri_string(world, (const unsigned char*)fields->mpi_rank)
-                              );
-                           librdf_model_add_statement(model_prov, statement);
-#endif
-                        }
-                        program_name_tracked = 1;
-                    }
-                }
-
-                // io_api
-                if (params.enable_api_prov) {
-                    statement=librdf_new_statement_from_nodes(world, 
-                        librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api),
-                        librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
-                        librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Activity")
-                        );
-                    librdf_model_add_statement(model_prov, statement);
-
-                    if (params.enable_program_prov) {
-                        statement=librdf_new_statement_from_nodes(world,
-                           librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasAssociatedWith"),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)fields->program_name)
-                           );
-                        librdf_model_add_statement(model_prov, statement);    
-                    }      
-
-                    statement=librdf_new_statement_from_nodes(world, 
-                        librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api),
-                        librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:startedAtTime"),
-                        librdf_new_node_from_literal(world, (const unsigned char*)time, NULL, 0)
-                        );
-                    librdf_model_add_statement(model_prov, statement);
-
-                    if (params.enable_duration_prov) {
-                        statement=librdf_new_statement_from_nodes(world, 
-                           librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api),
-                           librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:elapsed"),
-                           librdf_new_node_from_literal(world, (const unsigned char*)duration_, NULL, 0)
-                           );
-                        librdf_model_add_statement(model_prov, statement);
-                    }
-                }
-
-               // data object
-               if ((params.enable_file_prov && (!strcmp(fields->type, "provio:File"))) ||
-                    (params.enable_group_prov && (!strcmp(fields->type, "provio:Group"))) ||
-                    (params.enable_dataset_prov && (!strcmp(fields->type, "provio:Dataset"))) ||
-                    (params.enable_attr_prov && (!strcmp(fields->type, "provio:Attr"))) ||
-                    (params.enable_dtype_prov && (!strcmp(fields->type, "provio:Datatype")))) {
-
-                  statement=librdf_new_statement_from_nodes(world, 
-                     librdf_new_node_from_uri_string(world, (const unsigned char *)fields->data_object),
-                     librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:type"),
-                     librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:Entity")
-                     );
-                  librdf_model_add_statement(model_prov, statement);
-
-                  statement=librdf_new_statement_from_nodes(world, 
-                     librdf_new_node_from_uri_string(world, (const unsigned char*)fields->data_object),
-                     librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasMemberOf"),
-                     librdf_new_node_from_uri_string(world, (const unsigned char *)fields->type)
-                     );
-                  librdf_model_add_statement(model_prov, statement);
-
-                  if (params.enable_api_prov) {
-                     statement=librdf_new_statement_from_nodes(world, 
-                        librdf_new_node_from_uri_string(world, (const unsigned char *)fields->data_object),
-                        librdf_new_node_from_uri_string(world, (const unsigned char *)fields->relation),
-                        librdf_new_node_from_uri_string(world, (const unsigned char *)fields->io_api)
-                        );
-                     librdf_model_add_statement(model_prov, statement);
-                  }
-
-                  if (params.enable_program_prov) {
-                     statement=librdf_new_statement_from_nodes(world, 
-                        librdf_new_node_from_uri_string(world, (const unsigned char*)fields->data_object),
-                        librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasAttributedTo"),
-                        librdf_new_node_from_uri_string(world, (const unsigned char *)fields->program_name)
-                        );
-                     librdf_model_add_statement(model_prov, statement);  
-                  }
-               }     
+            if(!strcmp(config.prov_line_format, "rdf") || !strcmp(config.prov_line_format, "RDF")) {
+#ifdef LIBRDF_H
+                add_prov_record_Redland(fields, duration_);
+#endif      
             }
-
-            else
-                fputs(pline, helper_in->prov_file_handle);               
+            else {
+                if (config.enable_legacy_graph)
+                    fputs(pline, helper_in->legacy_prov_file_handle);
+                fputs(pline, helper_in->new_prov_file_handle);
+            }
             break;
 
         case File_and_print:
-            if(!strcmp(PROV_HELPER->prov_line_format, "rdf")) {
-                ;
+            if(!strcmp(config.prov_line_format, "rdf") || !strcmp(config.prov_line_format, "RDF")) {
+#ifdef LIBRDF_H
+                add_prov_record_Redland(fields, duration_);
+#endif                 
             }
-
-            else
-                fputs(pline, helper_in->prov_file_handle);                
+            else {
+                if (config.enable_legacy_graph)
+                    fputs(pline, helper_in->legacy_prov_file_handle);
+                fputs(pline, helper_in->new_prov_file_handle);
+            }
             printf("%s", pline);
             break;
 
@@ -432,76 +554,83 @@ int prov_write(provio_helper_t* helper_in, struct prov_fields* fields){
             break;
     }
 
-    if(helper_in->prov_level == (File_only | File_and_print)){
-        fputs(pline, helper_in->prov_file_handle);
-    }
 //    unsigned tmp = PROV_WRITE_TOTAL_TIME;
 
-    Stat.PROV_WRITE_TOTAL_TIME += (get_time_usec() - start);
+    prov_stat.PROV_WRITE_TOTAL_TIME += (get_time_usec() - start);
 
     return 0;
 }
 
 
-void prov_helper_teardown(provio_helper_t* helper){
-    
-    if (librdf_prov_file_handler != NULL) {
-       /* Redland: serialize to file */
-       unsigned long start = get_time_usec();
-       librdf_serializer_serialize_model_to_file_handle(serializer, librdf_prov_file_handler, NULL, model_prov);
-       fclose(librdf_prov_file_handler);
-       prov_stat.PROV_SERIALIZE_TIME += (get_time_usec() - start);
+void provio_helper_teardown(provio_helper_t* helper, prov_fields* fields){
+    get_time_str(fields->proc_end_time);
+    add_program_record(fields);
+
+    if (helper->legacy_prov_file_handle || helper->new_prov_file_handle) {
+        /* Redland: serialize to file */
+        unsigned long start = get_time_usec();
+        if (config.enable_legacy_graph) {
+            if(!strcmp(config.prov_line_format, "rdf") || !strcmp(config.prov_line_format, "RDF")) {
+#ifdef LIBRDF_H
+        librdf_serializer_serialize_model_to_file_handle(serializer, 
+            helper->legacy_prov_file_handle, NULL, model_prov);
+#endif      
+            }
+        }
+        else {
+            if(!strcmp(config.prov_line_format, "rdf") || !strcmp(config.prov_line_format, "RDF")) {
+    #ifdef LIBRDF_H
+            librdf_serializer_serialize_model_to_file_handle(serializer, 
+                helper->new_prov_file_handle, NULL, model_prov);
+    #endif      
+            }
+        }
+        if (helper->legacy_prov_file_handle)
+            fclose(helper->legacy_prov_file_handle);
+        if (helper->new_prov_file_handle)
+            fclose(helper->new_prov_file_handle);
+        prov_stat.PROV_SERIALIZE_TIME += (get_time_usec() - start);
     }
 
-    if(helper){// not null
-        char pline[2048];
-        if (mpi_rank_int == 0) {
-            sprintf(pline,
-                "+ MPI RANK %d\n"
-                "TOTAL_PROV_OVERHEAD %lu us\n"
-                "TOTAL_NATIVE_H5_TIME %lu us\n"
-                "PROV_WRITE_TOTAL_TIME %lu us\n"
-                "FILE_LINKED_LIST_TOTAL_TIME %lu us\n"
-                "DS_LINKED_LIST_TOTAL_TIME %lu us\n"
-                "GRP_LINKED_LIST_TOTAL_TIME %lu us\n"
-                "DT_LINKED_LIST_TOTAL_TIME %lu us\n"
-                "ATTR_LINKED_LIST_TOTAL_TIME %lu us\n"
-                "PROV_SERIALIZATION_TIME %lu us\n",
-                mpi_rank_int,
-                prov_stat.TOTAL_PROV_OVERHEAD,
-                prov_stat.TOTAL_NATIVE_H5_TIME,
-                prov_stat.PROV_WRITE_TOTAL_TIME,
-                prov_stat.FILE_LL_TOTAL_TIME,
-                prov_stat.DS_LL_TOTAL_TIME,
-                prov_stat.GRP_LL_TOTAL_TIME,
-                prov_stat.DT_LL_TOTAL_TIME,
-                prov_stat.ATTR_LL_TOTAL_TIME,
-                prov_stat.PROV_SERIALIZE_TIME);
-            if (helper->stat_file_handle != NULL) {
-                    fputs(pline, helper->stat_file_handle);
-            }
-            else {
-                    printf("%s", pline);
-            }
-            
-            stat_print_(counts, helper->stat_file_handle);
+    char pline[2048];
+    if (MPI_RANK == 0) {
+        if (helper->stat_file_handle != NULL) {
+            stat_print_(0, &prov_stat, FUNCTION_FREQUENCY, helper->stat_file_handle);
         }
+        else {
+            printf("%s", pline);
+        }
+        
+        stat_destroy(FUNCTION_FREQUENCY);
     }
         
-        // if(helper->prov_level == File_only || helper->prov_level ==File_and_print){//no file
-            // fflush(helper->prov_file_handle);
-            // fclose(helper->prov_file_handle);
-        // }
-
-        // _dic_free();
-   if (mpi_rank_int == 0 && helper->stat_file_handle != NULL) {
+    if (MPI_RANK == 0 && helper->stat_file_handle != NULL) {
          fflush(helper->stat_file_handle);
          fclose(helper->stat_file_handle);
-   }
+    }
+    /* Free provenacne helper */
+    free(helper);
+}
 
-        if(helper->prov_file_path)
-            free(helper->prov_file_path);
-        if(helper->prov_line_format)
-            free(helper->prov_line_format);
-        free(helper);
+void provio_term(prov_fields* fields) {
+#ifdef LIBRDF_H
+    /* Free Redland pointers */    
+    librdf_free_statement(statement);
+    librdf_free_serializer(serializer);
+    librdf_free_memory(base_uri);
+    librdf_free_memory(provio_uri);    
+    librdf_free_model(model_prov);
+    librdf_free_storage(storage_prov);
+    librdf_free_world(world);
+#endif
+    /* Free provenance fields */
+    free(fields->proc_name);
+
+    /* Free provenance configuration */
+    free(config.prov_base_uri);
+    free(config.prov_prefix);
+    free(config.stat_file_path);
+    free(config.new_graph_path);
+    free(config.legacy_graph_path);
+    free(config.prov_line_format);
 }

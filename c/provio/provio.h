@@ -4,62 +4,68 @@
 
 #include <stdio.h>
 #include <pthread.h>
+// #ifdef PARALLEL
+#include <mpi.h> 
+// #endif
+
 #include "rdf.h"
+#include "config.h"
+#include "stat.h"
 
 
-typedef enum ProvLevel {
-    Default, //no file write, only screen print
-    Print_only,
-    File_only,
-    File_and_print,
-    Level3,
-    Level4,
-    Disabled
-}Prov_level;
 
-typedef enum ProvInfoLevel {
-    Base, 
-    Performance,
-    Region
-}ProvInfo_Level;
-
-typedef struct ProvenanceHelper {
-    /* Provenance properties */
-    char* prov_file_path;
-    FILE* prov_file_handle;
+typedef struct PROVIOHelper {
+    FILE* legacy_prov_file_handle;
+    FILE* new_prov_file_handle;
     FILE* stat_file_handle;
-    Prov_level prov_level;
-    char* prov_line_format;
-    char user_name[32];
-    int pid;
-    pthread_t tid;
-    char proc_name[64];
-    int ptr_cnt;
-    // int opened_files_cnt;
-    // file_prov_info_t* opened_files;//linkedlist,
 } provio_helper_t;
 
 
-struct prov_fields {
+typedef struct prov_fields {
     char data_object[512];              // Name of the data object
     char io_api[512];                   // H5G/H5D/H5A/H5T
-    char program_name[512];             // Name of the program
-#ifdef H5_HAVE_PARALLEL
+    char* proc_name;             // Name of the program
+    char* proc_uuid;
+    char proc_start_time[64];
+    char proc_end_time[64];
+    char pid[32];
+    char tid[32];
+// #ifdef MPI_INCLUDED
     char mpi_rank[128];                 // MPI rank ID
-#endif
-    char user[512];                     // Current user
+// #endif
+    char user_name[32];                 // Current user
     unsigned long duration;             // I/O API duration
     char type[128];                     // Data object type: Group/Dataset/Attr/Datatype
     char relation[128];                 // relation between data object and I/O API
 } prov_fields;
 
-int prov_write(provio_helper_t* helper_in, struct prov_fields* fields);
 
-void load_config(prov_params* params) {
-	
-}
+/* statistics */
+Stat prov_stat;
+duration_ht* FUNCTION_FREQUENCY;
 
-#endif
+/* User APIs */
+void provio_init(prov_fields* fields);
+void provio_term(prov_fields* fields);
 
+provio_helper_t* provio_helper_init(prov_fields* fields);
+void provio_helper_teardown(provio_helper_t* helper, prov_fields* fields);
 
+// Fill in data object name and api name
+void prov_fill_data_object(prov_fields* fields, const char* obj_name, const char* type);
+void prov_fill_relation(prov_fields* fields, const char* relation);
+void prov_fill_io_api(prov_fields* fields, const char* io_api, unsigned long duration);
 
+int add_prov_record(provio_helper_t* helper_in, prov_fields* fields);
+int add_program_record(prov_fields* fields);
+// int add_user_record_Redland(prov_fields* fields);
+// int add_mpi_rank_record_Redland(prov_fields* fields);
+// int add_program_record_Redland(prov_fields* fields);
+// int add_thread_record_Redland(prov_fields* fields);
+// int add_io_api_record_Redland(prov_fields* fields, char* time, char* duration_);
+// int add_data_obj_record_Redland(prov_fields* fields);
+
+// function level stat helper
+void func_stat(const char* func_name, unsigned long elapsed);
+
+#endif 

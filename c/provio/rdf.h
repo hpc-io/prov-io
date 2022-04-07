@@ -30,7 +30,7 @@ librdf_statement *statement;
 librdf_serializer* serializer;
 librdf_uri* base_uri;
 librdf_uri* provio_uri;
-FILE* librdf_prov_file_handler;
+librdf_uri* node_prefix;
 #endif /* Redland RDF */
 
 #ifdef LIBRDF_H

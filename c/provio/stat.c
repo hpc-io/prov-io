@@ -3,17 +3,15 @@
 #include <string.h>
 #include <sys/time.h>
 
-// #include "provio.h"
 #include "stat.h"
 
 
 // To be modified later
-#define INITIAL_CAPACITY 62     // 62 H5VL_provenance methods in total
 #define STAT_FUNC_MOD 733       //a reasonably big size to avoid expensive collision handling, make sure it works with 62 function names.
 
 
 //shorten function id: use hash value
-static char* FUNC_DIC[STAT_FUNC_MOD];
+static char** FUNC_DIC;
 
 unsigned long get_time_usec(void) {
     struct timeval tp;
@@ -31,6 +29,10 @@ void _dic_init(void){
     for(int i = 0; i < STAT_FUNC_MOD; i++){
         FUNC_DIC[i] = NULL;
     }
+}
+
+void func_dic_alloc() {
+    FUNC_DIC = malloc(STAT_FUNC_MOD*sizeof(char*));
 }
 
 
@@ -54,14 +56,16 @@ unsigned int genHash(const char *msg) {
     return func_index;
 }
 
-duration_ht* stat_create(void) {
+duration_ht* stat_create(int capacity) {
     // Allocate space for hash table struct.
+    func_dic_alloc();
+    _dic_init_int();
     duration_ht* table = malloc(sizeof(duration_ht));
     if (table == NULL) {
         return NULL;
     }
     table->length = 0;
-    table->capacity = INITIAL_CAPACITY;
+    table->capacity = capacity;
 
     // Allocate (zero'd) space for entry buckets.
     table->entries = calloc(table->capacity, sizeof(duration_entry));
@@ -196,12 +200,40 @@ void accumulate_duration(duration_ht* counts, const char* func_name,
 }
 
 /* Initialize file handle within this function with given path */
-void stat_print(duration_ht* counts, const char* path) {
+void stat_print(int MPI_RANK, Stat* prov_stat, duration_ht* counts, 
+    const char* path) {
     FILE* stat_file_handle;
     if (path) {
         stat_file_handle = fopen(path,"w");
     }
+
     char pline[2048];
+
+    if(prov_stat) {
+        sprintf(pline,
+        "+ MPI RANK %d\n"
+        "TOTAL_PROV_OVERHEAD %lu us\n"
+        "TOTAL_NATIVE_H5_TIME %lu us\n"
+        "PROV_WRITE_TOTAL_TIME %lu us\n"
+        "FILE_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "DS_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "GRP_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "DT_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "ATTR_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "PROV_SERIALIZATION_TIME %lu us\n",
+        MPI_RANK,
+        prov_stat->TOTAL_PROV_OVERHEAD,
+        prov_stat->TOTAL_NATIVE_H5_TIME,
+        prov_stat->PROV_WRITE_TOTAL_TIME,
+        prov_stat->FILE_LL_TOTAL_TIME,
+        prov_stat->DS_LL_TOTAL_TIME,
+        prov_stat->GRP_LL_TOTAL_TIME,
+        prov_stat->DT_LL_TOTAL_TIME,
+        prov_stat->ATTR_LL_TOTAL_TIME,
+        prov_stat->PROV_SERIALIZE_TIME);
+        fputs(pline, stat_file_handle);
+    }
+
     hti it = stat_iterator(counts);
     // Iteratively print out accumulated duration hash table, freeing values as we go.
     while (stat_next(&it)) {
@@ -219,8 +251,35 @@ void stat_print(duration_ht* counts, const char* path) {
 }
 
 /* Write to a given handle */
-void stat_print_(duration_ht* counts, FILE* stat_file_handle) {
+void stat_print_(int MPI_RANK, Stat* prov_stat, duration_ht* 
+    counts, FILE* stat_file_handle) {
     char pline[2048];
+
+    if(prov_stat) {
+        sprintf(pline,
+        "+ MPI RANK %d\n"
+        "TOTAL_PROV_OVERHEAD %lu us\n"
+        "TOTAL_NATIVE_H5_TIME %lu us\n"
+        "PROV_WRITE_TOTAL_TIME %lu us\n"
+        "FILE_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "DS_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "GRP_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "DT_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "ATTR_LINKED_LIST_TOTAL_TIME %lu us\n"
+        "PROV_SERIALIZATION_TIME %lu us\n",
+        MPI_RANK,
+        prov_stat->TOTAL_PROV_OVERHEAD,
+        prov_stat->TOTAL_NATIVE_H5_TIME,
+        prov_stat->PROV_WRITE_TOTAL_TIME,
+        prov_stat->FILE_LL_TOTAL_TIME,
+        prov_stat->DS_LL_TOTAL_TIME,
+        prov_stat->GRP_LL_TOTAL_TIME,
+        prov_stat->DT_LL_TOTAL_TIME,
+        prov_stat->ATTR_LL_TOTAL_TIME,
+        prov_stat->PROV_SERIALIZE_TIME);
+        fputs(pline, stat_file_handle);
+    }
+
     hti it = stat_iterator(counts);
     // Iteratively print out accumulated duration hash table, freeing values as we go.
     while (stat_next(&it)) {

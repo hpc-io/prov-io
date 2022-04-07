@@ -5,16 +5,19 @@
 
 
 #define CFG_LINE_LEN_MAX 510
+#define INITIAL_CAPACITY 62  // 62 H5VL_provenance methods in total
+
 
 /* Configuration parser */
-static void prov_params_init(prov_params* params_out){
+void prov_params_init(prov_config* params_out){
     if(!params_out)
-        params_out = (prov_params*) calloc(1, sizeof(prov_params));
+        params_out = (prov_config*) calloc(1, sizeof(prov_config));
     (*params_out).prov_base_uri = NULL;
     (*params_out).prov_prefix = NULL;
     (*params_out).stat_file_path = NULL;
     (*params_out).new_graph_path = NULL;
     (*params_out).legacy_graph_path = NULL;
+    (*params_out).prov_line_format = NULL;
     (*params_out).enable_stat_file = 0;
     (*params_out).enable_legacy_graph = 0;
     (*params_out).enable_file_prov = 0;
@@ -27,13 +30,16 @@ static void prov_params_init(prov_params* params_out){
     (*params_out).enable_program_prov = 0;
     (*params_out).enable_thread_prov = 0;
     (*params_out).enable_user_prov = 0;
+    (*params_out).enable_bdb = 0;
+    (*params_out).num_of_apis = INITIAL_CAPACITY;
+    (*params_out).prov_level = Default;
 }
 
 #define CFG_DELIMS "=\n"
 
 char* _parse_val(char* val_in){
     char* val_str = strdup(val_in);
-    char *tok = strtok(val_str, "#");
+    char *tok = strtok(val_str, "*");
     char* val = NULL;
     val = strdup(tok);
 //    printf("_parse_val: val_in = [%s], val = [%s]\n", val_in, val);
@@ -42,7 +48,7 @@ char* _parse_val(char* val_in){
     return val;
 }
 
-int _set_params(char *key, char *val_in, prov_params *params_in_out) {
+int _set_params(char *key, char *val_in, prov_config* params_in_out) {
     if (!params_in_out)
         return 0;
     char* val = _parse_val(val_in);
@@ -82,7 +88,23 @@ int _set_params(char *key, char *val_in, prov_params *params_in_out) {
         } else {
             (*params_in_out).legacy_graph_path = strdup(val);
         }
-    } else if (strcmp(key, "ENABLE_STAT_FILE") == 0) {
+    } else if(strcmp(key, "FORMAT") == 0) {
+        if (strcmp(val, "") == 0){
+            printf("Blank provenace format!\n");
+            return -1;
+        } else {
+            (*params_in_out).prov_line_format = strdup(val);
+        }
+    } 
+    else if(strcmp(key, "PROV_LEVEL") == 0) {
+        if (strcmp(val, "") == 0){
+            printf("Blank provenace level!\n");
+            return -1;
+        } else {
+            (*params_in_out).prov_level = atoi(val);
+        }
+    } 
+    else if (strcmp(key, "ENABLE_STAT_FILE") == 0) {
         if (val[0] == 'T' || val[0] == 't')
             (*params_in_out).enable_stat_file = 1;
         else
@@ -142,6 +164,14 @@ int _set_params(char *key, char *val_in, prov_params *params_in_out) {
             (*params_in_out).enable_program_prov = 1;
         else
             (*params_in_out).enable_program_prov = 0;
+    } else if (strcmp(key, "NUM_OF_APIS") == 0) {
+        if (val[0] > 0)
+            (*params_in_out).enable_program_prov = atoi(val);
+    } else if (strcmp(key, "ENABLE_BDB") == 0) {
+        if (val[0] == 'T' || val[0] == 't')
+            (*params_in_out).enable_bdb = 1;
+        else
+            (*params_in_out).enable_bdb = 0;
     }
 
     if(val)
@@ -149,13 +179,13 @@ int _set_params(char *key, char *val_in, prov_params *params_in_out) {
     return 1;
 }
 
-static int read_config(const char *file_path, prov_params *params_out) {
+int read_config(const char *file_path, prov_config *params_out) {
     char cfg_line[CFG_LINE_LEN_MAX] = "";
 
     if (!params_out)
-        params_out = (prov_params*) calloc(1, sizeof(prov_params));
+        params_out = (prov_config*) calloc(1, sizeof(prov_config));
     else
-        memset(params_out, 0, sizeof(prov_params));
+        memset(params_out, 0, sizeof(prov_config));
     //Default settings
     prov_params_init(params_out);
     (*params_out).stat_file_path = strdup(file_path);
@@ -165,7 +195,7 @@ static int read_config(const char *file_path, prov_params *params_out) {
     int parsed = 1;
 
     while (fgets(cfg_line, CFG_LINE_LEN_MAX, file) && (parsed == 1)) {
-        if (cfg_line[0] == '#') {
+        if (cfg_line[0] == '*') {
             continue;
         }
         char *tokens[2];
@@ -178,18 +208,19 @@ static int read_config(const char *file_path, prov_params *params_out) {
             }
             else
                 return -1;
-        } else
-            return -1;
+        } else 
+            return -1; 
         parsed = _set_params(tokens[0], tokens[1], params_out);
     }
-    if (parsed < 0)
+    if (parsed < 0) 
         return -1;
     return 0;
 }
 
 /* Load configuration based on environmental variables */
-void _load_config(prov_params* params) {
-    char *path = getenv("VOL_PROV_CONFIG");
-    if (path)
-        read_config(path, params);
+void load_config(prov_config* config) {
+    const char *path = getenv("PROVIO_CONFIG");
+    if (path) {
+        read_config(path, config);
+    }
 }

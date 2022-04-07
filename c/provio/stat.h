@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 
-struct Stat {
+typedef struct Stat {
     unsigned long TOTAL_PROV_OVERHEAD;
     unsigned long TOTAL_NATIVE_H5_TIME;
     unsigned long PROV_WRITE_TOTAL_TIME;
@@ -30,8 +30,6 @@ typedef struct {
     size_t length;      // number of items in hash table
 } duration_ht;
 
-duration_ht* counts;
-
 typedef struct {
     const char* key;  // current key
     void* value;      // current value
@@ -47,13 +45,14 @@ void _dic_init_int(void);
 
 
 /* Stat hash table user methods */
-duration_ht* stat_create(void);
+duration_ht* stat_create(int capacity);
 void stat_destroy(duration_ht* table);
 void accumulate_duration(duration_ht* counts, const char* func_name,
                             unsigned long elapsed);
 // Dump to file, print if leave as NULL
-void stat_print(duration_ht* counts, const char* path);
-void stat_print_(duration_ht* counts, FILE* stat_file_handle);
+void stat_print(int MPI_RANK, Stat* prov_stat, 
+        duration_ht* counts, const char* path);
+void stat_print_(int MPI_RANK, Stat* prov_stat, 
+        duration_ht* counts, FILE* stat_file_handle);
 
 #endif
-
