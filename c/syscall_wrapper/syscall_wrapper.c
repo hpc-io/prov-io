@@ -2,64 +2,8 @@
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <errno.h>
-#include <sys/stat.h>
-#include <serd.h>
-#include <redland.h>
 
-#include "librdf.h"
-#include "gotcha/gotcha.h"
-
-
-/* Global variables */
-char* program_name;
-
-/* Redland global variables */
-librdf_world* world;
-librdf_storage* storage;
-librdf_model* model;
-librdf_statement *statement;
-librdf_serializer* serializer;
-
-
-/* Helper functions */
-
-static
-unsigned long get_time_usec(void) {
-    struct timeval tp;
-
-    gettimeofday(&tp, NULL);
-    return (unsigned long)((1000000 * tp.tv_sec) + tp.tv_usec);
-}
-
-void get_time_str(char *str_out){
-    time_t rawtime;
-    struct tm * timeinfo;
-
-    time ( &rawtime );
-    timeinfo = localtime ( &rawtime );
-
-    *str_out = '\0';
-    sprintf(str_out, "%d/%d/%d %d:%d:%d", timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-}
-
-static const char* get_process_name_by_pid(const int pid)
-{
-    char* name = (char*)calloc(1024,sizeof(char));
-    if(name){
-        sprintf(name, "/proc/%d/cmdline",pid);
-        FILE* f = fopen(name,"r");
-        if(f){
-            size_t size;
-            size = fread(name, sizeof(char), 1024, f);
-            if(size>0){
-                if('\n'==name[size-1])
-                    name[size-1]='\0';
-            }
-            fclose(f);
-        }
-    }
-    return name;
-}
+#include "provio.h"
 
 
 /* Local level one wrappers */
@@ -140,58 +84,6 @@ struct gotcha_binding_t funcs[] = {
    { "mkdir", mkdir_, &wrappee_mkdir_handle }
 };
 
-struct prov_fields {
-    char entity[64];
-    char activity[64];
-    char agent[64];
-    char type[64];
-    char relation[64];
-    int entity_id;
-    int activity_id;
-    int agent_id;
-    int relation_id;
-    unsigned long duration;
-} prov_fields;
-
-static void prov_fill(struct prov_fields* fields, const char* name, 
-    const char* relation, const char* type, const char* agent) {
-    strcpy(fields->entity, name);
-    strcpy(fields->relation, relation);
-    strcpy(fields->type, type);        
-    strcpy(fields->agent, agent);
-}
-
-int prov_write(struct prov_fields* fields){
-   unsigned long start = get_time_usec();
-   size_t base_len;
-   size_t activity_len;
-   char time[64];
-   char pline[512];
-   char duration_[256];
-
-   get_time_str(time);
-
-   sprintf(duration_, "%lu", fields->duration);
-
-   /* Redland */
-   statement=librdf_new_statement_from_nodes(world, librdf_new_node_from_uri_string(world, fields->entity),
-                                 librdf_new_node_from_uri_string(world, (const unsigned char*)"provio:ofType"),
-                                 librdf_new_node_from_literal(world, fields->type, NULL, 0)
-                                 );
-   librdf_model_add_statement(model, statement);
-   statement=librdf_new_statement_from_nodes(world, librdf_new_node_from_uri_string(world, fields->entity),
-                                 librdf_new_node_from_uri_string(world, fields->relation),
-                                 librdf_new_node_from_literal(world, fields->activity, NULL, 0)
-                                 );
-   librdf_model_add_statement(model, statement);
-   statement=librdf_new_statement_from_nodes(world, librdf_new_node_from_uri_string(world, fields->entity),
-                                 librdf_new_node_from_uri_string(world, (const unsigned char*)"prov:wasAttributedTo"),
-                                 librdf_new_node_from_literal(world, fields->agent, NULL, 0)
-                                 );
-   librdf_model_add_statement(model, statement);                     
-   return 0;
-}
-
 
 /* Gotcha wrappers */
 
@@ -206,21 +98,26 @@ int mkdir_wrapper(const char* path, mode_t mode) {
    int ret;
    struct prov_fields fields;
 
-   const char* name = "./newdir";
-   const char* relation = "provio:wasWrittenBy";
-   const char* type = "provio:Directory";
+
    const char* agent = program_name;
 
    typeof(&mkdir_) wrappee_mkdir = gotcha_get_wrappee(wrappee_mkdir_handle); // get my wrappee from Gotcha
    m1 = get_time_usec();
    ret = wrappee_mkdir(path, mode);
    m2 = get_time_usec();
-   if(!ret) {
-      prov_fill(&fields, name, relation, type, agent);
-      fields.duration = get_time_usec() - start;
-      strcpy(fields.activity, "mkdir");
-      prov_write(&fields);  
-   } 
+
+    /* PROV-IO instrument start */
+    const char* io_api = "mkdir";
+    const char* relation = "prov:wasGeneratedBy";
+    const char* type = "provio:Directory"; 
+    prov_fill_data_object(&fields, path, type);
+    prov_fill_relation(&fields, relation);
+    prov_fill_io_api(&fields, io_api, get_time_usec() - start);
+    add_prov_record(&config, provio_helper, &fields);
+    func_stat(__func__, (get_time_usec() - start - (m2 - m1)));
+    prov_stat.TOTAL_PROV_OVERHEAD += (get_time_usec() - start - (m2 - m1));
+    /* PROV-IO instrument end */
+
    return ret;
 }
 
