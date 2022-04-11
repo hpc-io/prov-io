@@ -44,6 +44,8 @@ typedef struct prov_config {
     Prov_level prov_level;      
 } prov_config;
 
+void init_config(prov_config* config);
 void load_config(prov_config* config);
+void free_config(prov_config* config);
 
 #endif

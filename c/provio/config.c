@@ -9,7 +9,7 @@
 
 
 /* Configuration parser */
-void prov_params_init(prov_config* params_out){
+void init_config(prov_config* params_out){
     if(!params_out)
         params_out = (prov_config*) calloc(1, sizeof(prov_config));
     (*params_out).prov_base_uri = NULL;
@@ -33,6 +33,18 @@ void prov_params_init(prov_config* params_out){
     (*params_out).enable_bdb = 0;
     (*params_out).num_of_apis = INITIAL_CAPACITY;
     (*params_out).prov_level = Default;
+}
+
+void free_config(prov_config* params_out) {
+    if(params_out) {
+    /* Free provenance configuration */
+        free(params_out->prov_base_uri);
+        free(params_out->prov_prefix);
+        free(params_out->stat_file_path);
+        free(params_out->new_graph_path);
+        free(params_out->legacy_graph_path);
+        free(params_out->prov_line_format);
+    }
 }
 
 #define CFG_DELIMS "=\n"
@@ -166,7 +178,7 @@ int _set_params(char *key, char *val_in, prov_config* params_in_out) {
             (*params_in_out).enable_program_prov = 0;
     } else if (strcmp(key, "NUM_OF_APIS") == 0) {
         if (val[0] > 0)
-            (*params_in_out).enable_program_prov = atoi(val);
+            (*params_in_out).num_of_apis = atoi(val);
     } else if (strcmp(key, "ENABLE_BDB") == 0) {
         if (val[0] == 'T' || val[0] == 't')
             (*params_in_out).enable_bdb = 1;
@@ -184,10 +196,11 @@ int read_config(const char *file_path, prov_config *params_out) {
 
     if (!params_out)
         params_out = (prov_config*) calloc(1, sizeof(prov_config));
-    else
+    else {
         memset(params_out, 0, sizeof(prov_config));
+    }
     //Default settings
-    prov_params_init(params_out);
+    init_config(params_out);
     (*params_out).stat_file_path = strdup(file_path);
 
     FILE *file = fopen(file_path, "r");
@@ -216,6 +229,7 @@ int read_config(const char *file_path, prov_config *params_out) {
         return -1;
     return 0;
 }
+
 
 /* Load configuration based on environmental variables */
 void load_config(prov_config* config) {
