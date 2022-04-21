@@ -15,3 +15,4 @@ openvirtuoso (optional)
   - hdf5 (provided in the repo)
 
 
+- pip install graphviz
