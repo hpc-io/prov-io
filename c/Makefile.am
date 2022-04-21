@@ -1,7 +1,15 @@
+ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+AM_CFLAGS = $(EXTRA_INCLUDES) $(EXTRA_CFLAGS)
+
 SUBDIRS = 
-SUBDIRS += lib
-SUBDIRS += libprovio
-SUBDIRS += syscall_wrapper
+SUBDIRS += provio
 SUBDIRS += test
-SUBDIRS += vol-provenance
+
+#if BUILD_SYSCALL_WRAPPER
+#	SUBDIRS += syscall_wrapper
+#endif
+
+#if BUILD_VOLPROVENANCE
+#	SUBDIRS += vol-provenance
+#endif
 

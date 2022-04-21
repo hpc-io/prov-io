@@ -1,23 +1,25 @@
-AM_CFLAGS = $(INTI_CFLAGS)
-
-
-lib_LTLIBRARIES=libtest.la
-libtest_la_SOURCES=test.cpp
-libtest_la_CFLAGS=-fPIC
-libtest_la_CPPFLAGS=-fPIC
-libtest_la_CXXFLAGS=-fPIC
-libtest_la_LDFLAGS= -shared -fPIC
-
+# Headers
 noinst_HEADERS = 
 noinst_HEADERS += rdf.h
+noinst_HEADERS += config.h
 noinst_HEADERS += stat.h
 noinst_HEADERS += provio.h
 
-
-provio_SOURCES =
-provio_SOURCES += stat.c
-provio_SOURCES += provio.c
-
-provio_LDADD = $(top_builddir)/lib/librdf
+# Static Lib
+noinst_LTLIBRARIES =
+noinst_LTLIBRARIES += libprovio.la
 
 
+# Tests
+nobase_bin_PROGRAMS =
+nobase_bin_PROGRAMS += stat_test
+nobase_bin_PROGRAMS += config_test
+nobase_bin_PROGRAMS += provio_test
+
+# Sources
+libprovio_la_SOURCES =
+libprovio_la_SOURCES += config.c
+libprovio_la_SOURCES += stat.c
+libprovio_la_SOURCES += provio.c
+
+libprovio_la_LIBADD = $(top_builddir)/lib/librdf/src/librdf.la
