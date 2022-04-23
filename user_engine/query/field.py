@@ -2,7 +2,7 @@ import rdflib
 
 g = rdflib.Graph()
 
-g.parse("/global/homes/r/rzhan/topreco/code/prov/prov.rdf", format = "turtle")
+g.parse("./prov.ttl", format = "turtle")
 
 qres = g.query(
     """SELECT ?x ?version ?accuracy

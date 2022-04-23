@@ -1,0 +1,1694 @@
+@prefix ns1: <https://www.w3.org/ns/mls#> .
+
+"['batch_size', '2022-01-20 18:37:21.640456']" ns1:Name "batch_size" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "25" ;
+    ns1:Version "v6" .
+
+"['batch_size', '2022-01-20 18:41:11.540599']" ns1:Name "batch_size" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "25" ;
+    ns1:Version "v6" .
+
+"['batch_size', '2022-01-20 18:41:55.398673']" ns1:Name "batch_size" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "25" ;
+    ns1:Version "v6" .
+
+"['batch_size', '2022-01-20 18:42:37.242542']" ns1:Name "batch_size" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "25" ;
+    ns1:Version "v6" .
+
+"['batch_size', '2022-01-20 18:45:36.771379']" ns1:Name "batch_size" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "25" ;
+    ns1:Version "v6" .
+
+"['batch_size', '2022-01-20 18:46:44.775374']" ns1:Name "batch_size" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "25" ;
+    ns1:Version "v6" .
+
+"['do_profiling', '2022-01-20 18:37:21.640456']" ns1:Name "do_profiling" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling', '2022-01-20 18:41:11.540599']" ns1:Name "do_profiling" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling', '2022-01-20 18:41:55.398673']" ns1:Name "do_profiling" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling', '2022-01-20 18:42:37.242542']" ns1:Name "do_profiling" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling', '2022-01-20 18:45:36.771379']" ns1:Name "do_profiling" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling', '2022-01-20 18:46:44.775374']" ns1:Name "do_profiling" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling_only', '2022-01-20 18:37:21.640456']" ns1:Name "do_profiling_only" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling_only', '2022-01-20 18:41:11.540599']" ns1:Name "do_profiling_only" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling_only', '2022-01-20 18:41:55.398673']" ns1:Name "do_profiling_only" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling_only', '2022-01-20 18:42:37.242542']" ns1:Name "do_profiling_only" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling_only', '2022-01-20 18:45:36.771379']" ns1:Name "do_profiling_only" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['do_profiling_only', '2022-01-20 18:46:44.775374']" ns1:Name "do_profiling_only" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['early_stopping_delay', '2022-01-20 18:37:21.640456']" ns1:Name "early_stopping_delay" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "500" ;
+    ns1:Version "v6" .
+
+"['early_stopping_delay', '2022-01-20 18:41:11.540599']" ns1:Name "early_stopping_delay" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "500" ;
+    ns1:Version "v6" .
+
+"['early_stopping_delay', '2022-01-20 18:41:55.398673']" ns1:Name "early_stopping_delay" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "500" ;
+    ns1:Version "v6" .
+
+"['early_stopping_delay', '2022-01-20 18:42:37.242542']" ns1:Name "early_stopping_delay" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "500" ;
+    ns1:Version "v6" .
+
+"['early_stopping_delay', '2022-01-20 18:45:36.771379']" ns1:Name "early_stopping_delay" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "500" ;
+    ns1:Version "v6" .
+
+"['early_stopping_delay', '2022-01-20 18:46:44.775374']" ns1:Name "early_stopping_delay" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "500" ;
+    ns1:Version "v6" .
+
+"['early_stopping_metric', '2022-01-20 18:37:21.640456']" ns1:Name "early_stopping_metric" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "auc_te" ;
+    ns1:Version "v6" .
+
+"['early_stopping_metric', '2022-01-20 18:41:11.540599']" ns1:Name "early_stopping_metric" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "auc_te" ;
+    ns1:Version "v6" .
+
+"['early_stopping_metric', '2022-01-20 18:41:55.398673']" ns1:Name "early_stopping_metric" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "auc_te" ;
+    ns1:Version "v6" .
+
+"['early_stopping_metric', '2022-01-20 18:42:37.242542']" ns1:Name "early_stopping_metric" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "auc_te" ;
+    ns1:Version "v6" .
+
+"['early_stopping_metric', '2022-01-20 18:45:36.771379']" ns1:Name "early_stopping_metric" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "auc_te" ;
+    ns1:Version "v6" .
+
+"['early_stopping_metric', '2022-01-20 18:46:44.775374']" ns1:Name "early_stopping_metric" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "auc_te" ;
+    ns1:Version "v6" .
+
+"['edge', '2022-01-20 18:37:21.640456']" ns1:Name "edge" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Solution" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['edge', '2022-01-20 18:41:11.540599']" ns1:Name "edge" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Solution" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['edge', '2022-01-20 18:41:55.398673']" ns1:Name "edge" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Solution" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['edge', '2022-01-20 18:42:37.242542']" ns1:Name "edge" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Solution" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['edge', '2022-01-20 18:45:36.771379']" ns1:Name "edge" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Solution" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['edge', '2022-01-20 18:46:44.775374']" ns1:Name "edge" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Solution" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['event_num', '2022-01-20 18:37:21.640456']" ns1:Name "event_num" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "eventNumber" ;
+    ns1:Version "v6" .
+
+"['event_num', '2022-01-20 18:41:11.540599']" ns1:Name "event_num" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "eventNumber" ;
+    ns1:Version "v6" .
+
+"['event_num', '2022-01-20 18:41:55.398673']" ns1:Name "event_num" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "eventNumber" ;
+    ns1:Version "v6" .
+
+"['event_num', '2022-01-20 18:42:37.242542']" ns1:Name "event_num" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "eventNumber" ;
+    ns1:Version "v6" .
+
+"['event_num', '2022-01-20 18:45:36.771379']" ns1:Name "event_num" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "eventNumber" ;
+    ns1:Version "v6" .
+
+"['event_num', '2022-01-20 18:46:44.775374']" ns1:Name "event_num" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "eventNumber" ;
+    ns1:Version "v6" .
+
+"['evts_per_record', '2022-01-20 18:37:21.640456']" ns1:Name "evts_per_record" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "100" ;
+    ns1:Version "v6" .
+
+"['evts_per_record', '2022-01-20 18:41:11.540599']" ns1:Name "evts_per_record" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "100" ;
+    ns1:Version "v6" .
+
+"['evts_per_record', '2022-01-20 18:41:55.398673']" ns1:Name "evts_per_record" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "100" ;
+    ns1:Version "v6" .
+
+"['evts_per_record', '2022-01-20 18:42:37.242542']" ns1:Name "evts_per_record" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "100" ;
+    ns1:Version "v6" .
+
+"['evts_per_record', '2022-01-20 18:45:36.771379']" ns1:Name "evts_per_record" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "100" ;
+    ns1:Version "v6" .
+
+"['evts_per_record', '2022-01-20 18:46:44.775374']" ns1:Name "evts_per_record" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "100" ;
+    ns1:Version "v6" .
+
+"['fold', '2022-01-20 18:37:21.640456']" ns1:Name "fold" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "fold" ;
+    ns1:Version "v6" .
+
+"['fold', '2022-01-20 18:41:11.540599']" ns1:Name "fold" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "fold" ;
+    ns1:Version "v6" .
+
+"['fold', '2022-01-20 18:41:55.398673']" ns1:Name "fold" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "fold" ;
+    ns1:Version "v6" .
+
+"['fold', '2022-01-20 18:42:37.242542']" ns1:Name "fold" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "fold" ;
+    ns1:Version "v6" .
+
+"['fold', '2022-01-20 18:45:36.771379']" ns1:Name "fold" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "fold" ;
+    ns1:Version "v6" .
+
+"['fold', '2022-01-20 18:46:44.775374']" ns1:Name "fold" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "fold" ;
+    ns1:Version "v6" .
+
+"['fold_val', '2022-01-20 18:37:21.640456']" ns1:Name "fold_val" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "3" ;
+    ns1:Version "v6" .
+
+"['fold_val', '2022-01-20 18:41:11.540599']" ns1:Name "fold_val" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "3" ;
+    ns1:Version "v6" .
+
+"['fold_val', '2022-01-20 18:41:55.398673']" ns1:Name "fold_val" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "3" ;
+    ns1:Version "v6" .
+
+"['fold_val', '2022-01-20 18:42:37.242542']" ns1:Name "fold_val" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "3" ;
+    ns1:Version "v6" .
+
+"['fold_val', '2022-01-20 18:45:36.771379']" ns1:Name "fold_val" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "3" ;
+    ns1:Version "v6" .
+
+"['fold_val', '2022-01-20 18:46:44.775374']" ns1:Name "fold_val" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "3" ;
+    ns1:Version "v6" .
+
+"['global', '2022-01-20 18:37:21.640456']" ns1:Name "global" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['global', '2022-01-20 18:41:11.540599']" ns1:Name "global" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['global', '2022-01-20 18:41:55.398673']" ns1:Name "global" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['global', '2022-01-20 18:42:37.242542']" ns1:Name "global" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['global', '2022-01-20 18:45:36.771379']" ns1:Name "global" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['global', '2022-01-20 18:46:44.775374']" ns1:Name "global" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['input_directory', '2022-01-20 18:37:21.640456']" ns1:Name "input_directory" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id" ;
+    ns1:Version "v6" .
+
+"['input_directory', '2022-01-20 18:41:11.540599']" ns1:Name "input_directory" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id" ;
+    ns1:Version "v6" .
+
+"['input_directory', '2022-01-20 18:41:55.398673']" ns1:Name "input_directory" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id" ;
+    ns1:Version "v6" .
+
+"['input_directory', '2022-01-20 18:42:37.242542']" ns1:Name "input_directory" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id" ;
+    ns1:Version "v6" .
+
+"['input_directory', '2022-01-20 18:45:36.771379']" ns1:Name "input_directory" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id" ;
+    ns1:Version "v6" .
+
+"['input_directory', '2022-01-20 18:46:44.775374']" ns1:Name "input_directory" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id" ;
+    ns1:Version "v6" .
+
+"['jet_btag', '2022-01-20 18:37:21.640456']" ns1:Name "jet_btag" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['jet_btag', '2022-01-20 18:41:11.540599']" ns1:Name "jet_btag" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['jet_btag', '2022-01-20 18:41:55.398673']" ns1:Name "jet_btag" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['jet_btag', '2022-01-20 18:42:37.242542']" ns1:Name "jet_btag" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['jet_btag', '2022-01-20 18:45:36.771379']" ns1:Name "jet_btag" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['jet_btag', '2022-01-20 18:46:44.775374']" ns1:Name "jet_btag" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['jet_e', '2022-01-20 18:37:21.640456']" ns1:Name "jet_e" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_e" ;
+    ns1:Version "v6" .
+
+"['jet_e', '2022-01-20 18:41:11.540599']" ns1:Name "jet_e" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_e" ;
+    ns1:Version "v6" .
+
+"['jet_e', '2022-01-20 18:41:55.398673']" ns1:Name "jet_e" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_e" ;
+    ns1:Version "v6" .
+
+"['jet_e', '2022-01-20 18:42:37.242542']" ns1:Name "jet_e" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_e" ;
+    ns1:Version "v6" .
+
+"['jet_e', '2022-01-20 18:45:36.771379']" ns1:Name "jet_e" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_e" ;
+    ns1:Version "v6" .
+
+"['jet_e', '2022-01-20 18:46:44.775374']" ns1:Name "jet_e" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_e" ;
+    ns1:Version "v6" .
+
+"['jet_eta', '2022-01-20 18:37:21.640456']" ns1:Name "jet_eta" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_eta" ;
+    ns1:Version "v6" .
+
+"['jet_eta', '2022-01-20 18:41:11.540599']" ns1:Name "jet_eta" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_eta" ;
+    ns1:Version "v6" .
+
+"['jet_eta', '2022-01-20 18:41:55.398673']" ns1:Name "jet_eta" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_eta" ;
+    ns1:Version "v6" .
+
+"['jet_eta', '2022-01-20 18:42:37.242542']" ns1:Name "jet_eta" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_eta" ;
+    ns1:Version "v6" .
+
+"['jet_eta', '2022-01-20 18:45:36.771379']" ns1:Name "jet_eta" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_eta" ;
+    ns1:Version "v6" .
+
+"['jet_eta', '2022-01-20 18:46:44.775374']" ns1:Name "jet_eta" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_eta" ;
+    ns1:Version "v6" .
+
+"['jet_phi', '2022-01-20 18:37:21.640456']" ns1:Name "jet_phi" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_phi" ;
+    ns1:Version "v6" .
+
+"['jet_phi', '2022-01-20 18:41:11.540599']" ns1:Name "jet_phi" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_phi" ;
+    ns1:Version "v6" .
+
+"['jet_phi', '2022-01-20 18:41:55.398673']" ns1:Name "jet_phi" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_phi" ;
+    ns1:Version "v6" .
+
+"['jet_phi', '2022-01-20 18:42:37.242542']" ns1:Name "jet_phi" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_phi" ;
+    ns1:Version "v6" .
+
+"['jet_phi', '2022-01-20 18:45:36.771379']" ns1:Name "jet_phi" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_phi" ;
+    ns1:Version "v6" .
+
+"['jet_phi', '2022-01-20 18:46:44.775374']" ns1:Name "jet_phi" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_phi" ;
+    ns1:Version "v6" .
+
+"['jet_pt', '2022-01-20 18:37:21.640456']" ns1:Name "jet_pt" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_pt" ;
+    ns1:Version "v6" .
+
+"['jet_pt', '2022-01-20 18:41:11.540599']" ns1:Name "jet_pt" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_pt" ;
+    ns1:Version "v6" .
+
+"['jet_pt', '2022-01-20 18:41:55.398673']" ns1:Name "jet_pt" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_pt" ;
+    ns1:Version "v6" .
+
+"['jet_pt', '2022-01-20 18:42:37.242542']" ns1:Name "jet_pt" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_pt" ;
+    ns1:Version "v6" .
+
+"['jet_pt', '2022-01-20 18:45:36.771379']" ns1:Name "jet_pt" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_pt" ;
+    ns1:Version "v6" .
+
+"['jet_pt', '2022-01-20 18:46:44.775374']" ns1:Name "jet_pt" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "jet_pt" ;
+    ns1:Version "v6" .
+
+"['latent_size', '2022-01-20 18:37:21.640456']" ns1:Name "latent_size" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "128" ;
+    ns1:Version "v6" .
+
+"['latent_size', '2022-01-20 18:41:11.540599']" ns1:Name "latent_size" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "128" ;
+    ns1:Version "v6" .
+
+"['latent_size', '2022-01-20 18:41:55.398673']" ns1:Name "latent_size" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "128" ;
+    ns1:Version "v6" .
+
+"['latent_size', '2022-01-20 18:42:37.242542']" ns1:Name "latent_size" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "128" ;
+    ns1:Version "v6" .
+
+"['latent_size', '2022-01-20 18:45:36.771379']" ns1:Name "latent_size" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "128" ;
+    ns1:Version "v6" .
+
+"['latent_size', '2022-01-20 18:46:44.775374']" ns1:Name "latent_size" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "128" ;
+    ns1:Version "v6" .
+
+"['learning_rate', '2022-01-20 18:37:21.640456']" ns1:Name "learning_rate" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "0.001" ;
+    ns1:Version "v6" .
+
+"['learning_rate', '2022-01-20 18:41:11.540599']" ns1:Name "learning_rate" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "0.001" ;
+    ns1:Version "v6" .
+
+"['learning_rate', '2022-01-20 18:41:55.398673']" ns1:Name "learning_rate" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "0.001" ;
+    ns1:Version "v6" .
+
+"['learning_rate', '2022-01-20 18:42:37.242542']" ns1:Name "learning_rate" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "0.001" ;
+    ns1:Version "v6" .
+
+"['learning_rate', '2022-01-20 18:45:36.771379']" ns1:Name "learning_rate" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "0.001" ;
+    ns1:Version "v6" .
+
+"['learning_rate', '2022-01-20 18:46:44.775374']" ns1:Name "learning_rate" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "0.001" ;
+    ns1:Version "v6" .
+
+"['model_directory', '2022-01-20 18:37:21.640456']" ns1:Name "model_directory" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_directory', '2022-01-20 18:41:11.540599']" ns1:Name "model_directory" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_directory', '2022-01-20 18:41:55.398673']" ns1:Name "model_directory" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_directory', '2022-01-20 18:42:37.242542']" ns1:Name "model_directory" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_directory', '2022-01-20 18:45:36.771379']" ns1:Name "model_directory" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_directory', '2022-01-20 18:46:44.775374']" ns1:Name "model_directory" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_name', '2022-01-20 18:37:21.640456']" ns1:Name "model_name" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_name', '2022-01-20 18:41:11.540599']" ns1:Name "model_name" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_name', '2022-01-20 18:41:55.398673']" ns1:Name "model_name" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_name', '2022-01-20 18:42:37.242542']" ns1:Name "model_name" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_name', '2022-01-20 18:45:36.771379']" ns1:Name "model_name" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['model_name', '2022-01-20 18:46:44.775374']" ns1:Name "model_name" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "tttt_new_distinct" ;
+    ns1:Version "v6" .
+
+"['n_epochs', '2022-01-20 18:37:21.640456']" ns1:Name "n_epochs" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "60" ;
+    ns1:Version "v6" .
+
+"['n_epochs', '2022-01-20 18:41:11.540599']" ns1:Name "n_epochs" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "1" ;
+    ns1:Version "v6" .
+
+"['n_epochs', '2022-01-20 18:41:55.398673']" ns1:Name "n_epochs" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "1" ;
+    ns1:Version "v6" .
+
+"['n_epochs', '2022-01-20 18:42:37.242542']" ns1:Name "n_epochs" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "1" ;
+    ns1:Version "v6" .
+
+"['n_epochs', '2022-01-20 18:45:36.771379']" ns1:Name "n_epochs" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "1" ;
+    ns1:Version "v6" .
+
+"['n_epochs', '2022-01-20 18:46:44.775374']" ns1:Name "n_epochs" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "1" ;
+    ns1:Version "v6" .
+
+"['nbjet', '2022-01-20 18:37:21.640456']" ns1:Name "nbjet" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['nbjet', '2022-01-20 18:41:11.540599']" ns1:Name "nbjet" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['nbjet', '2022-01-20 18:41:55.398673']" ns1:Name "nbjet" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['nbjet', '2022-01-20 18:42:37.242542']" ns1:Name "nbjet" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['nbjet', '2022-01-20 18:45:36.771379']" ns1:Name "nbjet" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['nbjet', '2022-01-20 18:46:44.775374']" ns1:Name "nbjet" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "PCBtag" ;
+    ns1:Version "v6" .
+
+"['nhadtops', '2022-01-20 18:37:21.640456']" ns1:Name "nhadtops" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nHadTops" ;
+    ns1:Version "v6" .
+
+"['nhadtops', '2022-01-20 18:41:11.540599']" ns1:Name "nhadtops" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nHadTops" ;
+    ns1:Version "v6" .
+
+"['nhadtops', '2022-01-20 18:41:55.398673']" ns1:Name "nhadtops" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nHadTops" ;
+    ns1:Version "v6" .
+
+"['nhadtops', '2022-01-20 18:42:37.242542']" ns1:Name "nhadtops" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nHadTops" ;
+    ns1:Version "v6" .
+
+"['nhadtops', '2022-01-20 18:45:36.771379']" ns1:Name "nhadtops" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nHadTops" ;
+    ns1:Version "v6" .
+
+"['nhadtops', '2022-01-20 18:46:44.775374']" ns1:Name "nhadtops" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nHadTops" ;
+    ns1:Version "v6" .
+
+"['njet', '2022-01-20 18:37:21.640456']" ns1:Name "njet" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nJets" ;
+    ns1:Version "v6" .
+
+"['njet', '2022-01-20 18:41:11.540599']" ns1:Name "njet" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nJets" ;
+    ns1:Version "v6" .
+
+"['njet', '2022-01-20 18:41:55.398673']" ns1:Name "njet" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nJets" ;
+    ns1:Version "v6" .
+
+"['njet', '2022-01-20 18:42:37.242542']" ns1:Name "njet" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nJets" ;
+    ns1:Version "v6" .
+
+"['njet', '2022-01-20 18:45:36.771379']" ns1:Name "njet" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nJets" ;
+    ns1:Version "v6" .
+
+"['njet', '2022-01-20 18:46:44.775374']" ns1:Name "njet" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nJets" ;
+    ns1:Version "v6" .
+
+"['nlep', '2022-01-20 18:37:21.640456']" ns1:Name "nlep" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nLeptons" ;
+    ns1:Version "v6" .
+
+"['nlep', '2022-01-20 18:41:11.540599']" ns1:Name "nlep" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nLeptons" ;
+    ns1:Version "v6" .
+
+"['nlep', '2022-01-20 18:41:55.398673']" ns1:Name "nlep" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nLeptons" ;
+    ns1:Version "v6" .
+
+"['nlep', '2022-01-20 18:42:37.242542']" ns1:Name "nlep" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nLeptons" ;
+    ns1:Version "v6" .
+
+"['nlep', '2022-01-20 18:45:36.771379']" ns1:Name "nlep" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nLeptons" ;
+    ns1:Version "v6" .
+
+"['nlep', '2022-01-20 18:46:44.775374']" ns1:Name "nlep" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "nLeptons" ;
+    ns1:Version "v6" .
+
+"['node', '2022-01-20 18:37:21.640456']" ns1:Name "node" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['node', '2022-01-20 18:41:11.540599']" ns1:Name "node" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['node', '2022-01-20 18:41:55.398673']" ns1:Name "node" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['node', '2022-01-20 18:42:37.242542']" ns1:Name "node" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['node', '2022-01-20 18:45:36.771379']" ns1:Name "node" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['node', '2022-01-20 18:46:44.775374']" ns1:Name "node" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Solution" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['num_layers', '2022-01-20 18:37:21.640456']" ns1:Name "num_layers" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "2" ;
+    ns1:Version "v6" .
+
+"['num_layers', '2022-01-20 18:41:11.540599']" ns1:Name "num_layers" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "2" ;
+    ns1:Version "v6" .
+
+"['num_layers', '2022-01-20 18:41:55.398673']" ns1:Name "num_layers" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "2" ;
+    ns1:Version "v6" .
+
+"['num_layers', '2022-01-20 18:42:37.242542']" ns1:Name "num_layers" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "2" ;
+    ns1:Version "v6" .
+
+"['num_layers', '2022-01-20 18:45:36.771379']" ns1:Name "num_layers" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "2" ;
+    ns1:Version "v6" .
+
+"['num_layers', '2022-01-20 18:46:44.775374']" ns1:Name "num_layers" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "2" ;
+    ns1:Version "v6" .
+
+"['num_processing_steps', '2022-01-20 18:37:21.640456']" ns1:Name "num_processing_steps" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "4" ;
+    ns1:Version "v6" .
+
+"['num_processing_steps', '2022-01-20 18:41:11.540599']" ns1:Name "num_processing_steps" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "4" ;
+    ns1:Version "v6" .
+
+"['num_processing_steps', '2022-01-20 18:41:55.398673']" ns1:Name "num_processing_steps" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "4" ;
+    ns1:Version "v6" .
+
+"['num_processing_steps', '2022-01-20 18:42:37.242542']" ns1:Name "num_processing_steps" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "4" ;
+    ns1:Version "v6" .
+
+"['num_processing_steps', '2022-01-20 18:45:36.771379']" ns1:Name "num_processing_steps" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "4" ;
+    ns1:Version "v6" .
+
+"['num_processing_steps', '2022-01-20 18:46:44.775374']" ns1:Name "num_processing_steps" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "4" ;
+    ns1:Version "v6" .
+
+"['output_directory', '2022-01-20 18:37:21.640456']" ns1:Name "output_directory" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/od" ;
+    ns1:Version "v6" .
+
+"['output_directory', '2022-01-20 18:41:11.540599']" ns1:Name "output_directory" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/od" ;
+    ns1:Version "v6" .
+
+"['output_directory', '2022-01-20 18:41:55.398673']" ns1:Name "output_directory" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/od" ;
+    ns1:Version "v6" .
+
+"['output_directory', '2022-01-20 18:42:37.242542']" ns1:Name "output_directory" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/od" ;
+    ns1:Version "v6" .
+
+"['output_directory', '2022-01-20 18:45:36.771379']" ns1:Name "output_directory" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/od" ;
+    ns1:Version "v6" .
+
+"['output_directory', '2022-01-20 18:46:44.775374']" ns1:Name "output_directory" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/od" ;
+    ns1:Version "v6" .
+
+"['pre_other', '2022-01-20 18:37:21.640456']" ns1:Name "pre_other" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "3Nj_Nbj_Nl_2Tm3" ;
+    ns1:Version "v6" .
+
+"['pre_other', '2022-01-20 18:41:11.540599']" ns1:Name "pre_other" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "3Nj_Nbj_Nl_2Tm3" ;
+    ns1:Version "v6" .
+
+"['pre_other', '2022-01-20 18:41:55.398673']" ns1:Name "pre_other" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "3Nj_Nbj_Nl_2Tm3" ;
+    ns1:Version "v6" .
+
+"['pre_other', '2022-01-20 18:42:37.242542']" ns1:Name "pre_other" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "3Nj_Nbj_Nl_2Tm3" ;
+    ns1:Version "v6" .
+
+"['pre_other', '2022-01-20 18:45:36.771379']" ns1:Name "pre_other" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "3Nj_Nbj_Nl_2Tm3" ;
+    ns1:Version "v6" .
+
+"['pre_other', '2022-01-20 18:46:44.775374']" ns1:Name "pre_other" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "3Nj_Nbj_Nl_2Tm3" ;
+    ns1:Version "v6" .
+
+"['profiling_steps', '2022-01-20 18:37:21.640456']" ns1:Name "profiling_steps" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "10" ;
+    ns1:Version "v6" .
+
+"['profiling_steps', '2022-01-20 18:41:11.540599']" ns1:Name "profiling_steps" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "10" ;
+    ns1:Version "v6" .
+
+"['profiling_steps', '2022-01-20 18:41:55.398673']" ns1:Name "profiling_steps" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "10" ;
+    ns1:Version "v6" .
+
+"['profiling_steps', '2022-01-20 18:42:37.242542']" ns1:Name "profiling_steps" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "10" ;
+    ns1:Version "v6" .
+
+"['profiling_steps', '2022-01-20 18:45:36.771379']" ns1:Name "profiling_steps" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "10" ;
+    ns1:Version "v6" .
+
+"['profiling_steps', '2022-01-20 18:46:44.775374']" ns1:Name "profiling_steps" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "10" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_1', '2022-01-20 18:37:21.640456']" ns1:Name "reco_triplet_1" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_0" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_1', '2022-01-20 18:41:11.540599']" ns1:Name "reco_triplet_1" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_0" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_1', '2022-01-20 18:41:55.398673']" ns1:Name "reco_triplet_1" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_0" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_1', '2022-01-20 18:42:37.242542']" ns1:Name "reco_triplet_1" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_0" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_1', '2022-01-20 18:45:36.771379']" ns1:Name "reco_triplet_1" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_0" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_1', '2022-01-20 18:46:44.775374']" ns1:Name "reco_triplet_1" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_0" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_2', '2022-01-20 18:37:21.640456']" ns1:Name "reco_triplet_2" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_1" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_2', '2022-01-20 18:41:11.540599']" ns1:Name "reco_triplet_2" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_1" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_2', '2022-01-20 18:41:55.398673']" ns1:Name "reco_triplet_2" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_1" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_2', '2022-01-20 18:42:37.242542']" ns1:Name "reco_triplet_2" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_1" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_2', '2022-01-20 18:45:36.771379']" ns1:Name "reco_triplet_2" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_1" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_2', '2022-01-20 18:46:44.775374']" ns1:Name "reco_triplet_2" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_1" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_3', '2022-01-20 18:37:21.640456']" ns1:Name "reco_triplet_3" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_2" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_3', '2022-01-20 18:41:11.540599']" ns1:Name "reco_triplet_3" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_2" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_3', '2022-01-20 18:41:55.398673']" ns1:Name "reco_triplet_3" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_2" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_3', '2022-01-20 18:42:37.242542']" ns1:Name "reco_triplet_3" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_2" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_3', '2022-01-20 18:45:36.771379']" ns1:Name "reco_triplet_3" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_2" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_3', '2022-01-20 18:46:44.775374']" ns1:Name "reco_triplet_3" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_2" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_4', '2022-01-20 18:37:21.640456']" ns1:Name "reco_triplet_4" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_3" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_4', '2022-01-20 18:41:11.540599']" ns1:Name "reco_triplet_4" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_3" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_4', '2022-01-20 18:41:55.398673']" ns1:Name "reco_triplet_4" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_3" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_4', '2022-01-20 18:42:37.242542']" ns1:Name "reco_triplet_4" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_3" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_4', '2022-01-20 18:45:36.771379']" ns1:Name "reco_triplet_4" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_3" ;
+    ns1:Version "v6" .
+
+"['reco_triplet_4', '2022-01-20 18:46:44.775374']" ns1:Name "reco_triplet_4" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Branches" ;
+    ns1:Value "reco_triplet_3" ;
+    ns1:Version "v6" .
+
+"['root_directory', '2022-01-20 18:37:21.640456']" ns1:Name "root_directory" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code" ;
+    ns1:Version "v6" .
+
+"['root_directory', '2022-01-20 18:41:11.540599']" ns1:Name "root_directory" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code" ;
+    ns1:Version "v6" .
+
+"['root_directory', '2022-01-20 18:41:55.398673']" ns1:Name "root_directory" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code" ;
+    ns1:Version "v6" .
+
+"['root_directory', '2022-01-20 18:42:37.242542']" ns1:Name "root_directory" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code" ;
+    ns1:Version "v6" .
+
+"['root_directory', '2022-01-20 18:45:36.771379']" ns1:Name "root_directory" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code" ;
+    ns1:Version "v6" .
+
+"['root_directory', '2022-01-20 18:46:44.775374']" ns1:Name "root_directory" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code" ;
+    ns1:Version "v6" .
+
+"['shuffle_buffer_size', '2022-01-20 18:37:21.640456']" ns1:Name "shuffle_buffer_size" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "-1" ;
+    ns1:Version "v6" .
+
+"['shuffle_buffer_size', '2022-01-20 18:41:11.540599']" ns1:Name "shuffle_buffer_size" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "-1" ;
+    ns1:Version "v6" .
+
+"['shuffle_buffer_size', '2022-01-20 18:41:55.398673']" ns1:Name "shuffle_buffer_size" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "-1" ;
+    ns1:Version "v6" .
+
+"['shuffle_buffer_size', '2022-01-20 18:42:37.242542']" ns1:Name "shuffle_buffer_size" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "-1" ;
+    ns1:Version "v6" .
+
+"['shuffle_buffer_size', '2022-01-20 18:45:36.771379']" ns1:Name "shuffle_buffer_size" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "-1" ;
+    ns1:Version "v6" .
+
+"['shuffle_buffer_size', '2022-01-20 18:46:44.775374']" ns1:Name "shuffle_buffer_size" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Hyperparameters" ;
+    ns1:Value "-1" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_train', '2022-01-20 18:37:21.640456']" ns1:Name "tfrec_dir_train" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold[^3]*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_train', '2022-01-20 18:41:11.540599']" ns1:Name "tfrec_dir_train" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold[^3]*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_train', '2022-01-20 18:41:55.398673']" ns1:Name "tfrec_dir_train" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold[^3]*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_train', '2022-01-20 18:42:37.242542']" ns1:Name "tfrec_dir_train" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold[^3]*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_train', '2022-01-20 18:45:36.771379']" ns1:Name "tfrec_dir_train" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold[^3]*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_train', '2022-01-20 18:46:44.775374']" ns1:Name "tfrec_dir_train" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold[^3]*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_val', '2022-01-20 18:37:21.640456']" ns1:Name "tfrec_dir_val" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold3*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_val', '2022-01-20 18:41:11.540599']" ns1:Name "tfrec_dir_val" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold3*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_val', '2022-01-20 18:41:55.398673']" ns1:Name "tfrec_dir_val" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold3*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_val', '2022-01-20 18:42:37.242542']" ns1:Name "tfrec_dir_val" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold3*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_val', '2022-01-20 18:45:36.771379']" ns1:Name "tfrec_dir_val" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold3*.tfrec" ;
+    ns1:Version "v6" .
+
+"['tfrec_dir_val', '2022-01-20 18:46:44.775374']" ns1:Name "tfrec_dir_val" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/id/*fold3*.tfrec" ;
+    ns1:Version "v6" .
+
+"['training_directory', '2022-01-20 18:37:21.640456']" ns1:Name "training_directory" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/td" ;
+    ns1:Version "v6" .
+
+"['training_directory', '2022-01-20 18:41:11.540599']" ns1:Name "training_directory" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/td" ;
+    ns1:Version "v6" .
+
+"['training_directory', '2022-01-20 18:41:55.398673']" ns1:Name "training_directory" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/td" ;
+    ns1:Version "v6" .
+
+"['training_directory', '2022-01-20 18:42:37.242542']" ns1:Name "training_directory" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/td" ;
+    ns1:Version "v6" .
+
+"['training_directory', '2022-01-20 18:45:36.771379']" ns1:Name "training_directory" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/td" ;
+    ns1:Version "v6" .
+
+"['training_directory', '2022-01-20 18:46:44.775374']" ns1:Name "training_directory" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Training" ;
+    ns1:Value "/global/homes/r/rzhan/topreco/code/trained_results/tttt_new_distinct/td" ;
+    ns1:Version "v6" .
+
+"['use_mass', '2022-01-20 18:37:21.640456']" ns1:Name "use_mass" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Edges" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_mass', '2022-01-20 18:41:11.540599']" ns1:Name "use_mass" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Edges" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_mass', '2022-01-20 18:41:55.398673']" ns1:Name "use_mass" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Edges" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_mass', '2022-01-20 18:42:37.242542']" ns1:Name "use_mass" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Edges" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_mass', '2022-01-20 18:45:36.771379']" ns1:Name "use_mass" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Edges" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_mass', '2022-01-20 18:46:44.775374']" ns1:Name "use_mass" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Edges" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_pcbtag', '2022-01-20 18:37:21.640456']" ns1:Name "use_pcbtag" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Edges" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pcbtag', '2022-01-20 18:41:11.540599']" ns1:Name "use_pcbtag" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Edges" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pcbtag', '2022-01-20 18:41:55.398673']" ns1:Name "use_pcbtag" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Edges" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pcbtag', '2022-01-20 18:42:37.242542']" ns1:Name "use_pcbtag" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Edges" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pcbtag', '2022-01-20 18:45:36.771379']" ns1:Name "use_pcbtag" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Edges" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pcbtag', '2022-01-20 18:46:44.775374']" ns1:Name "use_pcbtag" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Edges" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_other', '2022-01-20 18:37:21.640456']" ns1:Name "use_pre_other" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_pre_other', '2022-01-20 18:41:11.540599']" ns1:Name "use_pre_other" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_pre_other', '2022-01-20 18:41:55.398673']" ns1:Name "use_pre_other" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_pre_other', '2022-01-20 18:42:37.242542']" ns1:Name "use_pre_other" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_pre_other', '2022-01-20 18:45:36.771379']" ns1:Name "use_pre_other" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_pre_other', '2022-01-20 18:46:44.775374']" ns1:Name "use_pre_other" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "True" ;
+    ns1:Version "v6" .
+
+"['use_pre_set1', '2022-01-20 18:37:21.640456']" ns1:Name "use_pre_set1" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set1', '2022-01-20 18:41:11.540599']" ns1:Name "use_pre_set1" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set1', '2022-01-20 18:41:55.398673']" ns1:Name "use_pre_set1" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set1', '2022-01-20 18:42:37.242542']" ns1:Name "use_pre_set1" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set1', '2022-01-20 18:45:36.771379']" ns1:Name "use_pre_set1" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set1', '2022-01-20 18:46:44.775374']" ns1:Name "use_pre_set1" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set2', '2022-01-20 18:37:21.640456']" ns1:Name "use_pre_set2" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set2', '2022-01-20 18:41:11.540599']" ns1:Name "use_pre_set2" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set2', '2022-01-20 18:41:55.398673']" ns1:Name "use_pre_set2" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set2', '2022-01-20 18:42:37.242542']" ns1:Name "use_pre_set2" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set2', '2022-01-20 18:45:36.771379']" ns1:Name "use_pre_set2" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set2', '2022-01-20 18:46:44.775374']" ns1:Name "use_pre_set2" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set3', '2022-01-20 18:37:21.640456']" ns1:Name "use_pre_set3" ;
+    ns1:Quality "0.755172440785399" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set3', '2022-01-20 18:41:11.540599']" ns1:Name "use_pre_set3" ;
+    ns1:Quality "0.7544311422031051" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set3', '2022-01-20 18:41:55.398673']" ns1:Name "use_pre_set3" ;
+    ns1:Quality "0.7542637472688437" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set3', '2022-01-20 18:42:37.242542']" ns1:Name "use_pre_set3" ;
+    ns1:Quality "0.7538815015709348" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set3', '2022-01-20 18:45:36.771379']" ns1:Name "use_pre_set3" ;
+    ns1:Quality "0.7541463613609745" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+
+"['use_pre_set3', '2022-01-20 18:46:44.775374']" ns1:Name "use_pre_set3" ;
+    ns1:Quality "0.7557547073002722" ;
+    ns1:Type "Preselection" ;
+    ns1:Value "False" ;
+    ns1:Version "v6" .
+

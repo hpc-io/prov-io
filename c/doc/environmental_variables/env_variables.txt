@@ -1,0 +1,77 @@
+export HDF5_VOL_CONNECTOR="provenance under_vol=0;under_info={};path=/home/runzhou/Downloads/vol-provenance-Cori/my_trace.log;level=2;format=rdf"
+
+export HDF5_PLUGIN_PATH=/home/runzhou/Downloads/vol-provenance-Cori
+
+export LD_LIBRARY_PATH=/home/runzhou/Downloads/vol-provenance-Cori:/home/runzhou/Downloads/myhdfstuff/hdf5-develop/build/hdf5/lib:/home/runzhou/Downloads/serd/build:$LD_LIBRARY_PATH
+
+export PROVIO_CONFIG=/home/runzhou/Downloads/vol-provenance-Cori/prov.cfg
+
+./vpicio_uni_h5.exe ./my_data.dat 2 2 1 ./my_trace.log
+
+export HDF5_USE_FILE_LOCKING=FALSE
+
+# *****Cori******
+
+export HDF5_VOL_CONNECTOR="provenance under_vol=0;under_info={};path=/global/cscratch1/sd/rzhan/vol-provenance/my_trace.log;level=2;format=rdf"
+
+
+export HDF5_PLUGIN_PATH=/global/cscratch1/sd/rzhan/vol-provenance
+
+export PROVIO_CONFIG=/global/cscratch1/sd/rzhan/vol-provenance/prov.cfg
+
+export LD_LIBRARY_PATH=/global/homes/r/rzhan/hdf5_develop/build/hdf5/lib:/global/homes/r/rzhan/Redland/librdf-bdb/lib:/global/cscratch1/sd/rzhan/vol-provenance:/global/homes/r/rzhan/Redland/lib-rasqal/lib:/global/homes/r/rzhan/Redland/lib-raptor/lib:/global/homes/r/rzhan/lib:/opt/cray/job/2.2.4-7.0.1.1_3.53__g36b56f4.ari/lib64:/opt/gcc/8.3.0/snos/lib64
+
+or 
+
+export LD_LIBRARY_PATH=/global/homes/r/rzhan/hdprov_writef5_develop/build/hdf5/lib:/global/homes/r/rzhan/Redland/librdf-bdb/lib:/global/homes/r/rzhan/vol-provenance:/global/homes/r/rzhan/Redland/lib-rasqal/lib:/global/homes/r/rzhan/Redland/lib-raptor/lib:/global/homes/r/rzhan/lib:$LD_LIBRARY_PATH
+
+or
+
+export LD_LIBRARY_PATH=/global/homes/r/rzhan/vol-provenance:/global/homes/r/rzhan/hdf5_develop/build/hdf5/lib:$LD_LIBRARY_PATH
+
+(******for test: overhead comparison with plain text provenance******)
+
+export HDF5_VOL_CONNECTOR="provenance under_vol=0;under_info={};path=/global/homes/r/rzhan/vol-provenance/my_trace.log;level=2;format="char pline[2048];
+
+
+export HDF5_PLUGIN_PATH=/global/homes/r/rzhan/vol-provenance
+
+export LD_LIBRARY_PATH=/global/homes/r/rzhan/hdf5_develop/build/hdf5/lib:/global/homes/r/rzhan/Redland/librdf-bdb/lib:/global/homes/r/rzhan/vol-provenance:/global/homes/r/rzhan/Redland/lib-rasqal/lib:/global/homes/r/rzhan/Redland/lib-raptor/lib:/global/homes/r/rzhan/lib:/opt/cray/job/2.2.4-7.0.1.1_3.53__g36b56f4.ari/lib64:/opt/gcc/8.3.0/snos/lib64
+
+
+(for gdb test)
+
+set environment HDF5_PLUGIN_PATH=/global/homes/r/rzhan/vol-provenance
+
+set environment HDF5_VOL_CONNECTOR="provenance under_vol=0;under_info={};path=/global/homes/r/rzhan/vol-provenance/my_trace.log;level=2;format="
+
+
+
+# vol-provenance
+
+export HDF5_VOL_CONNECTOR="provenance under_vol=0;under_info={};path=/global/cscratch1/sd/rzhan/vol-provenance-archive/vol-provenance/my_trace.log;level=2;format="
+
+export HDF5_PLUGIN_PATH=/global/cscratch1/sd/rzhan/vol-provenance-archive/vol-provenance
+
+export LD_LIBRARY_PATH=/global/homes/r/rzhan/hdf5_develop/build/hdf5/lib:/global/homes/r/rzhan/Redland/librdf-bdb/lib:/global/homes/r/rzhan/vol-provenance-archive/vol-provenance:/global/homes/r/rzhan/Redland/lib-rasqal/lib:/global/homes/r/rzhan/Redland/lib-raptor/lib:/global/homes/r/rzhan/lib:$LD_LIBRARY_PATH
+
+
+
+## H5Bench env variables ##
+export MPICH_MAX_THREAD_SAFETY=multiple
+
+export H5BENCH_EXE=/home/runzhou/Downloads/myhdfstuff/h5bench/build
+
+export H5BENCH_CONFIG=/home/runzhou/Downloads/myhdfstuff/h5bench/h5bench_patterns/sample_config
+
+export H5BENCH_INPUT=/home/runzhou/Downloads/myhdfstuff/h5bench/build/test.h5
+
+# Cori
+export H5BENCH_EXE=/global/cscratch1/sd/rzhan/h5bench/build
+export H5BENCH_CONFIG=/global/cscratch1/sd/rzhan/h5bench/h5bench_patterns/sample_config
+export H5BENCH_INPUT=/global/cscratch1/sd/rzhan/h5bench/build/test.h5
+
+
+module swap PrgEnv-gnu/6.0.5 PrgEnv-intel
+
+export BGW_DIR=/global/cscratch1/sd/rzhan/BGW/BerkeleyGW-3.0/bin
