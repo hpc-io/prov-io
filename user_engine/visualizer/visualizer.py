@@ -19,7 +19,9 @@
 # #if not in interactive mode for 
 # plt.show()
 
+# <https://github.com/hpc-io/prov-io/blob/master/c/doc/example_prov.ttl>
+
 import requests
 
 # Replace with your provenance file or uri
-response = requests.get("http://www.ldf.fi/service/rdf-grapher?rdf=example_prov.ttl&from=ttl&to=png")
+response = requests.get("http://www.ldf.fi/service/rdf-grapher?rdf=<https://github.com/hpc-io/prov-io/blob/master/c/doc/example_prov.ttl>&from=ttl&to=png")
