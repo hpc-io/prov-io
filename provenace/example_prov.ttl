@@ -1,3 +1,8 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provio: <http://www.w3.org/ns/provio#> .
+@prefix file: </> .
+
 <Bob>
     <prov:ofType> <prov:Agent> ;
     <prov:wasMemberOf> <provio:User> .
