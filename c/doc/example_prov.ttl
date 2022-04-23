@@ -12,7 +12,7 @@
 <H5Dcreate2--b1>
     <prov:ofType> <prov:Activity> ;
     <prov:wasMemberOf> <provio:IOAPI:Create> ;
-    <prov:wasAssociatedWith> <vpicio_uni_h5.exe--a1> ;
+    <prov:wasAssociatedWith> <vpicio_uni_h5.exe--a1> .
 </Timestep_0/x>
     <prov:ofType> <prov:Entity> ;
     <prov:wasAttributedTo> <vpicio_uni_h5.exe--a1> ;
