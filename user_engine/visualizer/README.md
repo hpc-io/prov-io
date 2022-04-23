@@ -1,4 +1,4 @@
-# RDF visualization
+# Provenance visualization
 PROV-IO uses the web service RDF Grapher for provenance visualization. <br />
 RDF Grapher is based on Redland Raptor an Graphviz. <br />
 RDF Grapher is available at: https://www.ldf.fi/service/rdf-grapher.
