@@ -1,3 +1,0 @@
-# Selecting the same variable (?c) multiple times in a select
-SELECT ?c ?c ?p ?o
-WHERE { ?c ?p ?o }

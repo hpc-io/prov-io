@@ -1,4 +1,0 @@
-INSERT { <http://example.org/subject>
-  <http://example.org/predicate>
-  <http://example.org/object>
-}

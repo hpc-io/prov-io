@@ -1,3 +1,0 @@
-# Most useless binding query
-
-SELECT * WHERE { } VALUES ?a { }

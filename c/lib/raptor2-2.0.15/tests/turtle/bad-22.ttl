@@ -1,3 +1,0 @@
-# Turtle spec does not allow . in namespace name (token name)
-@prefix ex:  <http://example.org/ex#> .
-ex:not.allowed ex:not.allowed ex:not.allowed .

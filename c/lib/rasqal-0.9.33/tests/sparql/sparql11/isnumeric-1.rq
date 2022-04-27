@@ -1,7 +1,0 @@
-PREFIX :  <http://books.example/>
-
-SELECT *
-WHERE {
-  ?s ?p ?o .
-  FILTER isNUMERIC(?o)
-}
