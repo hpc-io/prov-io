@@ -11,15 +11,20 @@ Other pulications:  <br />
 [Towards A Practical Provenance Framework for Scientific Data on HPC Systems](https://github.com/hpc-io/prov-io/blob/master/doc/FAST_22_WiP_PROV-IO.pdf) (poster@[FAST'22](https://www.usenix.org/conference/fast22)) <br />
 
 ## Dependencies
+PROV-IO needs to be built with ```libtool```. Install it by: <br /> 
+```
 sudo apt-get install gcc make
 sudo apt-get install autoconf automake libtool pkg-config
-
-librdf
-librdf Python binding
-openvirtuoso (optional)
+```
+PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python binding. <br /> 
+[Please see the instruction on installing librdf here](https://librdf.org/INSTALL.html) <br /> 
+[Please see the instruction on installing librdf here](https://librdf.org/bindings/) <br /> 
+It will suppurt other RDF backend in the future: <br /> 
+```openvirtuoso``` (optional) <br /> 
 
 - To use instrumented hdf5 vol provenance connector
-  - hdf5 (provided in the repo)
-
-
-- pip install graphviz
+  - hdf5 (provided in the repo). Build and install hdf5:
+```
+cd hdf5
+./autogen.sh
+```
