@@ -35,3 +35,12 @@ cd hdf5
   - GOTCHA. Build and install GOTCHA:
 ```
 ```
+
+Redland RDF library <br />
+
+- Raptor
+ - https://librdf.org/raptor/INSTALL.html
+- Rasqal
+ - https://librdf.org/rasqal/INSTALL.html
+- librdf
+ - https://librdf.org/INSTALL.html
