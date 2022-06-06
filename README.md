@@ -44,3 +44,6 @@ Redland RDF library <br />
  - https://librdf.org/rasqal/INSTALL.html
 - librdf
  - https://librdf.org/INSTALL.html
+- librdf bindings
+ - https://librdf.org/INSTALL.html
+ - Only build Python part
