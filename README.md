@@ -51,9 +51,8 @@ Redland RDF library <br />
  - https://librdf.org/INSTALL.html
  - Only build Python part
 
-Guide for docker file: <br />  
+To use Python extensible class and also a guide for docker file: <br />  
 
 export PKG_CONFIG_PATH <br /> 
 export PYTHON_PATH <br /> 
-
-
+export LD_LIBRARY_PATH <br /> 
