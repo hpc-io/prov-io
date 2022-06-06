@@ -55,4 +55,4 @@ To use Python extensible class and also a guide for docker file: <br />
 
 export PKG_CONFIG_PATH <br /> 
 export PYTHON_PATH <br /> 
-export LD_LIBRARY_PATH <br /> 
+export LD_LIBRARY_PATH (add libraptor librasqal librdf)<br /> 
