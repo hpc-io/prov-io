@@ -48,3 +48,6 @@ Redland RDF library <br />
 - librdf bindings
  - https://librdf.org/INSTALL.html
  - Only build Python part
+ 
+export PKG_CONFIG_PATH
+export PYTHON_PATH
