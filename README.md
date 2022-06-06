@@ -17,7 +17,7 @@ sudo apt-get install gcc make
 sudo apt-get install autoconf automake libtool pkg-config
 sudo apt-get install python python-dev
 (Python extensible class:)
-pip3 install Pillow
+python3
 ```
 PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python binding. <br /> 
 [Please see the instruction on installing librdf here](https://librdf.org/INSTALL.html) <br /> 
