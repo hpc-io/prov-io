@@ -87,6 +87,7 @@ class PROVIO(Provenance):
    #              RDF.Uri('ns1:hasValue'),
    #              RDF.Node(_value)))
 			self.add_triple(_field, 'ns1:hasValue', _value, 'value')
+			self.add_triple(_field, 'ns1:belongsTo', _version, 'uri')
 
 
 	def add_metric_to_version(self, metric, value, **args):
