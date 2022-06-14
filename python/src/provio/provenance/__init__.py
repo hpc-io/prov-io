@@ -66,12 +66,12 @@ class PROVIO(Provenance):
 
 		else: 
 			_type = Extensible(field)._subclass
-
-		# self._model.add_statement(RDF.Statement(RDF.Uri(_field),
-		#                    RDF.Uri('ns1:Type'),
-		#                    RDF.Uri(_type)))
 		self.add_triple(_field, 'ns1:Type', _type, 'value')
-
+		
+		# Create a triple of version
+		if self._enable_version:		
+			self.add_triple(_field, 'ns1:belongsTo', self._version, 'uri')
+	
 		# Create a triple of value 
 		_value = None
 		if 'value' in args:
@@ -83,9 +83,6 @@ class PROVIO(Provenance):
 					print('Unsupported value type')
 			else:
 				_value = args['value']
-			# self._model.add_statement(RDF.Statement(RDF.Uri(_field),
-   #              RDF.Uri('ns1:hasValue'),
-   #              RDF.Node(_value)))
 			self.add_triple(_field, 'ns1:hasValue', _value, 'value')
 			self.add_triple(_field, 'ns1:belongsTo', _version, 'uri')
 
