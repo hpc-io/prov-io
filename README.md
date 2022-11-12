@@ -27,9 +27,8 @@ sudo apt-get install autoconf automake libtool pkg-config
 ```
 PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python binding. <br /> 
 [Please see the instruction on installing librdf here](https://librdf.org/INSTALL.html) <br /> 
-[Please see the instruction on installing librdf here](https://librdf.org/bindings/) <br /> 
-It will suppurt other RDF backend in the future: <br /> 
-```openvirtuoso``` (optional) <br /> 
+[Please see the instruction on installing librdf language binding here](https://librdf.org/bindings/) <br /> 
+
 
 MPI <br /> 
 
