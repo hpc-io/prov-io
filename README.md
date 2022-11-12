@@ -24,38 +24,31 @@ PROV-IO C library needs to be built with ```libtool```. Install it by: <br />
 ```
 sudo apt-get install gcc make
 sudo apt-get install autoconf automake libtool pkg-config
+sudo apt-get install libltdl-dev curl libxml2
 ```
 PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python binding. <br /> 
 [Please see the instruction on installing librdf here](https://librdf.org/INSTALL.html) <br /> 
 [Please see the instruction on installing librdf language binding here](https://librdf.org/bindings/) <br /> 
 
-### PROV-IO HDF5 Lib Connector
+## PROV-IO Python Library
+PROV-IO Python Library is to track workflow information defined in PROV-IO Extensible class.
+Follow instructions in [python](https://github.com/hpc-io/prov-io/tree/master/python) to use it.
+
+## PROV-IO HDF5 Lib Connector
 PROV-IO HDF5 Lib Connector is used to track HDF5 I/O. Follow instructions to build it:
-- hdf5 (provided in the repo). Build and install hdf5:
+- Install HDF5 (provided in the repo). Build and install hdf5:
 ```
 cd hdf5
 ./autogen.sh
 ```
 
-- To use instrumented POSIX Syscall wrapper
-  - GOTCHA. Build and install GOTCHA:
-```
+- Build HDF5 vol-connector instrumented with PROV-IO:
 ```
 
-Redland RDF library <br />
+```
 
-- Raptor
- - https://librdf.org/raptor/INSTALL.html
-- Rasqal
- - https://librdf.org/rasqal/INSTALL.html
-- librdf
- - https://librdf.org/INSTALL.html
-- librdf bindings
- - https://librdf.org/INSTALL.html
- - Only build Python part
-
-To use Python extensible class and also a guide for docker file: <br />  
-
-export PKG_CONFIG_PATH <br /> 
-export PYTHON_PATH <br /> 
-export LD_LIBRARY_PATH (add libraptor librasqal librdf)<br /> 
+## PROV-IO Syscall Wrapper
+PROV-IO Syscall Wrapper is used to track frequently used POSIX I/O APIs. Follow instructions to build it:
+- Build and install GOTCHA:
+```
+```
