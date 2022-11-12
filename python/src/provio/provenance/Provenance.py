@@ -90,9 +90,10 @@ class Provenance():
 			Load provenance from a file
 			'''
 			if 'load_format' not in args:
-				print('Parsing as default format turtle')
+				pass
 			else:
 				self._format = args['load_format']
+			print('Parsing as format: ' + self._format)
 			self._parser = RDF.Parser(self._format)
 			self._parser.parse_into_model(self._model, 'file:' + args['load_provenance'], ' ')
 

@@ -10,7 +10,8 @@ Configuration
 Metrics
 (Workflow) Types
 """
-DEFAULT_SUBCLASS_PATH = '/home/runzhou/PROV-IO/python/extensible_class/' # Replace with your path
+#DEFAULT_SUBCLASS_PATH = '/home/runzhou/PROV-IO/python/extensible_class/' # Replace with your path
+DEFAULT_SUBCLASS_PATH = os.environ['SUBCLASS_PATH']
 DEFAULT_SUBCLASS = 'DefaultSubclass'
 DEFAULT_FIELD = 'DefaultField'
 
