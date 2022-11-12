@@ -30,8 +30,8 @@ Other common dependencies:
 sudo apt-get install libltdl-dev curl libxml2
 ```
 PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python binding. <br /> 
-[Instruction for installing librdf here](https://librdf.org/INSTALL.html) <br /> 
-[Instruction for installing librdf language binding here](https://librdf.org/bindings/) <br /> 
+[Instructions of installing Redland librdf](https://librdf.org/INSTALL.html) <br /> 
+[Instructions of installing Redland language binding](https://librdf.org/bindings/) <br /> 
 
 ## PROV-IO Python Library
 PROV-IO Python Library is to track workflow information defined in PROV-IO Extensible class.
