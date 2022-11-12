@@ -5,7 +5,7 @@ PROV-IO is a provenance management framework for scientific data I/O libraries. 
 
 ## Publications
 Please cite the following paper if you use PROV-IO:  <br /> 
-[PROV-IO: An I/O-Centric Provenance Framework for Scientific Data on HPC Systems](https://www.hpdc.org/2022/) ([HPDC'22](https://www.hpdc.org/2022/)) [[Bibtex]()] <br /> 
+[PROV-IO: An I/O-Centric Provenance Framework for Scientific Data on HPC Systems]([https://www.hpdc.org/2022/](https://dl.acm.org/doi/10.1145/3502181.3531477)) ([HPDC'22](https://www.hpdc.org/2022/)) [[Bibtex]()] <br /> 
 Other pulications:  <br /> 
 [Towards A Practical Provenance Framework for Scientific Data on HPC Systems](https://github.com/hpc-io/prov-io/blob/master/doc/FAST_22_WiP_PROV-IO.pdf) (poster@[FAST'22](https://www.usenix.org/conference/fast22)) <br />
 
