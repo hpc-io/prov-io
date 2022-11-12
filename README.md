@@ -20,13 +20,10 @@ docker pull rzhan/prov-io:megatron-lm
 ```
 
 ## Dependencies
-PROV-IO needs to be built with ```libtool```. Install it by: <br /> 
+PROV-IO C library needs to be built with ```libtool```. Install it by: <br /> 
 ```
 sudo apt-get install gcc make
 sudo apt-get install autoconf automake libtool pkg-config
-sudo apt-get install python python-dev
-(Python extensible class:)
-python3
 ```
 PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python binding. <br /> 
 [Please see the instruction on installing librdf here](https://librdf.org/INSTALL.html) <br /> 
