@@ -29,11 +29,9 @@ PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python b
 [Please see the instruction on installing librdf here](https://librdf.org/INSTALL.html) <br /> 
 [Please see the instruction on installing librdf language binding here](https://librdf.org/bindings/) <br /> 
 
-
-MPI <br /> 
-
-- To use instrumented hdf5 vol provenance connector
-  - hdf5 (provided in the repo). Build and install hdf5:
+### PROV-IO HDF5 Lib Connector
+PROV-IO HDF5 Lib Connector is used to track HDF5 I/O. Follow instructions to build it:
+- hdf5 (provided in the repo). Build and install hdf5:
 ```
 cd hdf5
 ./autogen.sh
