@@ -10,7 +10,7 @@ Other pulications:  <br />
 [Towards A Practical Provenance Framework for Scientific Data on HPC Systems](https://github.com/hpc-io/prov-io/blob/master/doc/FAST_22_WiP_PROV-IO.pdf) (poster@[FAST'22](https://www.usenix.org/conference/fast22)) <br />
 
 ## Setup
-The easiest way of trying out PROV-IO is through Docker container. PROV-IO Docker image is available now at [rzhan/prov-io](https://hub.docker.com/repository/docker/rzhan/prov-io). It uses Debian 4.19 as the base image and has Python 3.9 installed. Download the basic PROV-IO Docker image with:
+The easiest way of trying out PROV-IO is through Docker container. PROV-IO Docker image is available now at [rzhan/prov-io](https://hub.docker.com/repository/docker/rzhan/prov-io). It uses Debian 11 as the base image and has Python 3.9 installed. Download the basic PROV-IO Docker image with:
 ```
 docker pull rzhan/prov-io:1.0
 ```
