@@ -31,26 +31,37 @@ PROV-IO's RDF schema is based on Redland ```librdf``` (including ```raptor2-2.0.
 ```
 sudo apt-get install libltdl-dev libxml2
 ```
-We provide the specific versions of ```librdf``` at: https://github.com/hpc-io/prov-io/tree/master/c/lib. Unzip and install them. <br />
-To install ```raptor2-2.0.15```:
+We provide specific releases of ```librdf``` at: https://github.com/hpc-io/prov-io/tree/master/c/lib. Unzip and install them. <br />
+First, install ```raptor2-2.0.15```:
 ```
 cd raptor2-2.0.15
+./autogen.sh
 ./configure --prefix=<your_install_path>/lib-raptor
 make & make install
 ```
-Export paths (```CFLAGS```,```LDFLAGS```, ```LIB```, ```PKG_CONFIG_PATH```) for ```libraptor```:
+Export paths for ```lib-raptor```:
 ```
 export CFLAGS=-I<your_install_path>/lib-raptor/include/raptor2
 export LDFLAGS=-L<your_install_path>/lib-raptor/lib
 export LIBS='-lraptor2'
 export PKG_CONFIG_PATH=<your_install_path>/lib-raptor/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
-and install ```rasqal-0.9.33```:
+Next, install ```rasqal-0.9.33```:
 ```
 cd rasqal-0.9.33
-./configure --prefix=<your_install_path>
+./autogen.sh
+./configure --prefix=<your_install_path>/lib-rasqal
 make & make install
 ```
+Similarly, export paths for ```lib-rasqal```:
+```
+export CFLAGS=$CFLAGS' -I<your_install_path>/lib-rasqal/include/rasqal'
+export LDFLAGS=$LDFLAGS' -L<your_install_path>/lib-rasqal/lib'
+export LIBS=$LIBS' -lrasqal'
+export PKG_CONFIG_PATH=/global/homes/r/rzhan/Redland/lib-rasqal/lib/pkgconfig:$PKG_CONFIG_PATH
+```
+
+
 
 ## PROV-IO Python Library
 PROV-IO Python Library is to track workflow information defined in PROV-IO Extensible class.
