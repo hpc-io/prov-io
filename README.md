@@ -8,7 +8,7 @@ Please cite the following paper if your project uses PROV-IO:  <br />
 [PROV-IO: An I/O-Centric Provenance Framework for Scientific Data on HPC Systems](https://dl.acm.org/doi/10.1145/3502181.3531477) ([HPDC'22](https://www.hpdc.org/2022/)) [[Bibtex](https://github.com/hpc-io/prov-io/blob/master/doc/acm_3502181.3531477.bib)] <br /> 
 Other pulications:  <br /> 
 [Towards A Practical Provenance Framework for Scientific Data on HPC Systems](https://github.com/hpc-io/prov-io/blob/master/doc/FAST_22_WiP_PROV-IO.pdf) (poster@[FAST'22](https://www.usenix.org/conference/fast22)) <br />
-[PROV-IO+: A Cross-Platform Provenance Framework for Scientific Data on HPC Systems[]()](https://arxiv.org/abs/2308.00891) <br />
+[PROV-IO+: A Cross-Platform Provenance Framework for Scientific Data on HPC Systems](https://arxiv.org/abs/2308.00891) <br />
 
 ## Setup
 The easiest way of trying out PROV-IO is through Docker container. PROV-IO Docker image is available now at [rzhan/prov-io](https://hub.docker.com/repository/docker/rzhan/prov-io). It uses Debian 11 as the base image and has Python 3.9 installed. Download the basic PROV-IO Docker image with:
