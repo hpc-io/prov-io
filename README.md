@@ -37,7 +37,7 @@ First, install ```raptor2-2.0.15```:
 cd raptor2-2.0.15
 ./autogen.sh
 ./configure --prefix=<your_install_path>/lib-raptor
-make & make install
+make && make install
 ```
 Export paths for ```lib-raptor```:
 ```
@@ -51,7 +51,7 @@ Next, install ```rasqal-0.9.33```:
 cd rasqal-0.9.33
 ./autogen.sh
 ./configure --prefix=<your_install_path>/lib-rasqal
-make & make install
+make && make install
 ```
 Similarly, export paths for ```lib-rasqal```:
 ```
@@ -64,7 +64,7 @@ Install ```librdf-1.0.17```:
 ```
 ./autogen.sh
 ./configure --prefix=<your_install_path>/librdf [--enable-bdb]
-make & make install
+make && make install
 ```
 Finally, install the Python binding (```redland-bindings-1.0.17.1```):
 ```
