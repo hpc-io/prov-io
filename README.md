@@ -11,11 +11,11 @@ Other pulications:  <br />
 [PROV-IO+: A Cross-Platform Provenance Framework for Scientific Data on HPC Systems](https://arxiv.org/abs/2308.00891) (preprint)<br />
 
 ## Setup
-The easiest way of trying out PROV-IO is through Docker container. PROV-IO Docker image is available now at [rzhan/prov-io](https://hub.docker.com/repository/docker/rzhan/prov-io). It uses Debian 11 as the base image and has Python 3.9 installed. Download the basic PROV-IO Docker image with:
+The easiest way of trying out PROV-IO is through ```docker```. PROV-IO Docker image is available now at [rzhan/prov-io](https://hub.docker.com/repository/docker/rzhan/prov-io). The PROV-IO ```docker``` image is based on Debian 11 with Python 3.9 installed. Download the basic PROV-IO Docker image by:
 ```
 docker pull rzhan/prov-io:1.0
 ```
-We also publish the Docker image of [Megatron-LM](https://github.com/NVIDIA/Megatron-LM) instrumented with PROV-IO as an example. Download the instrumented Megatron-LM docker image with:
+We also publish the Docker image of [Megatron-LM](https://github.com/NVIDIA/Megatron-LM) instrumented with PROV-IO as an example. Download the instrumented Megatron-LM docker image by:
 ```
 docker pull rzhan/prov-io:megatron-lm
 ```
