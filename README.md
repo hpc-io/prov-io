@@ -21,6 +21,7 @@ docker pull rzhan/prov-io:megatron-lm
 ```
 
 ## Dependencies
+This is for building PROV-IO from scratch.
 PROV-IO C library needs to be built with ```libtool```. Install it by: <br /> 
 ```
 sudo apt-get install gcc make
