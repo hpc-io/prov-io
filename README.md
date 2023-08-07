@@ -60,8 +60,18 @@ export LDFLAGS=$LDFLAGS' -L<your_install_path>/lib-rasqal/lib'
 export LIBS=$LIBS' -lrasqal'
 export PKG_CONFIG_PATH=<your_install_path>/lib-rasqal/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
-
-
+Install ```librdf-1.0.17```:
+```
+./autogen.sh
+./configure --prefix=<your_install_path>/librdf [--enable-bdb]
+make & make install
+```
+Finally, install the Python binding (```redland-bindings-1.0.17.1```):
+```
+./autogen.sh
+./configure --with-python
+make && make install
+```
 
 ## PROV-IO Python Library
 PROV-IO Python Library is to track workflow information defined in PROV-IO Extensible class.
