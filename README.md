@@ -4,7 +4,7 @@
 PROV-IO is an I/O-centric provenance management framework for scientific data. It provides an interface for data provenance tracking and stores provenance as RDF triples. [PROV-IO data model](https://github.com/hpc-io/prov-io/blob/master/doc/provio-latest.png) follows [W3C PROV-DM](https://www.w3.org/TR/prov-dm/) and is an extension of it. PROV-IO can be used to track HDF5 application's provenance by utilizing [HDF5 vol-provenance connector](https://github.com/hpc-io/vol-provenance). We have tested PROV-IO on Ubuntu 18.04, Redhat 8 and Cray Linux.
 
 ## Publications
-Please cite the following paper if you use PROV-IO:  <br /> 
+Please cite the following paper if your project uses PROV-IO:  <br /> 
 [PROV-IO: An I/O-Centric Provenance Framework for Scientific Data on HPC Systems](https://dl.acm.org/doi/10.1145/3502181.3531477) ([HPDC'22](https://www.hpdc.org/2022/)) [[Bibtex](https://github.com/hpc-io/prov-io/blob/master/doc/acm_3502181.3531477.bib)] <br /> 
 Other pulications:  <br /> 
 [Towards A Practical Provenance Framework for Scientific Data on HPC Systems](https://github.com/hpc-io/prov-io/blob/master/doc/FAST_22_WiP_PROV-IO.pdf) (poster@[FAST'22](https://www.usenix.org/conference/fast22)) <br />
