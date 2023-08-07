@@ -25,9 +25,9 @@ PROV-IO C library needs to be built with ```libtool```. Install it by: <br />
 sudo apt-get install gcc make
 sudo apt-get install autoconf automake libtool pkg-config
 ```
-Other common dependencies: 
+PROV-IO's RDF schema is currently based on Redland ```librdf``` (including ```raptor2-2.0.15```, ```rasqal-0.9.33```, ```librdf-1.0.17```) and its Python binding (```redland-bindings-1.0.17.1```). Install the dependencies first: <br />  
 ```
-sudo apt-get install libltdl-dev curl libxml2
+sudo apt-get install libltdl-dev libxml2
 ```
 PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python binding. <br /> 
 [Instructions of installing Redland librdf](https://librdf.org/INSTALL.html) <br /> 
