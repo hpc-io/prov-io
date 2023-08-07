@@ -27,13 +27,30 @@ PROV-IO library needs to be built with ```libtool```. Install it by: <br />
 sudo apt-get install gcc make
 sudo apt-get install autoconf automake libtool pkg-config
 ```
-PROV-IO's RDF schema is currently based on Redland ```librdf``` (including ```raptor2-2.0.15```, ```rasqal-0.9.33```, ```librdf-1.0.17```) and its Python binding (```redland-bindings-1.0.17.1```). Install the dependencies first: <br />  
+PROV-IO's RDF schema is based on Redland ```librdf``` (including ```raptor2-2.0.15```, ```rasqal-0.9.33```, ```librdf-1.0.17```) and its Python binding (```redland-bindings-1.0.17.1```). Install the dependencies first: <br />  
 ```
 sudo apt-get install libltdl-dev libxml2
 ```
-PROV-IO's RDF schema is currently based on Redland ```librdf``` and its Python binding. <br /> 
-[Instructions of installing Redland librdf](https://librdf.org/INSTALL.html) <br /> 
-[Instructions of installing Redland language binding](https://librdf.org/bindings/) <br /> 
+We provide the specific versions of ```librdf``` at: https://github.com/hpc-io/prov-io/tree/master/c/lib. Unzip and install them. <br />
+To install ```raptor2-2.0.15```:
+```
+cd raptor2-2.0.15
+./configure --prefix=<your_install_path>/lib-raptor
+make & make install
+```
+Export paths (```CFLAGS```,```LDFLAGS```, ```LIB```, ```PKG_CONFIG_PATH```) for ```libraptor```:
+```
+export CFLAGS=-I<your_install_path>/lib-raptor/include/raptor2
+export LDFLAGS=-L<your_install_path>/lib-raptor/lib
+export LIBS='-lraptor2'
+export PKG_CONFIG_PATH=<your_install_path>/lib-raptor/lib/pkgconfig:$PKG_CONFIG_PATH
+```
+and install ```rasqal-0.9.33```:
+```
+cd rasqal-0.9.33
+./configure --prefix=<your_install_path>
+make & make install
+```
 
 ## PROV-IO Python Library
 PROV-IO Python Library is to track workflow information defined in PROV-IO Extensible class.
