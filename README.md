@@ -77,7 +77,10 @@ make && make install
 PROV-IO Python Library is to track workflow information defined in PROV-IO Extensible class.
 Follow instructions in [python](https://github.com/hpc-io/prov-io/tree/master/python) to use it.
 
-## PROV-IO HDF5 Lib Connector
+
+## PROV-IO C Library
+
+### Tracking HDF5 Applications with HDF5 VOL Connector
 PROV-IO HDF5 Lib Connector is used to track HDF5 I/O. Follow instructions to build it:
 - Install HDF5 (provided in the repo). Build and install hdf5:
 ```
