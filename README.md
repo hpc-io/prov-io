@@ -58,7 +58,7 @@ Similarly, export paths for ```lib-rasqal```:
 export CFLAGS=$CFLAGS' -I<your_install_path>/lib-rasqal/include/rasqal'
 export LDFLAGS=$LDFLAGS' -L<your_install_path>/lib-rasqal/lib'
 export LIBS=$LIBS' -lrasqal'
-export PKG_CONFIG_PATH=/global/homes/r/rzhan/Redland/lib-rasqal/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=<your_install_path>/lib-rasqal/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
 
 
