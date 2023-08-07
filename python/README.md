@@ -18,4 +18,4 @@ export PYTHONPATH=<your_provio_path>/prov-io/python/src:$PYTHONPATH
 export SUBCLASS_PATH=<your_provio_path>/prov-io/python/extensible_class/
 ```
 
-An example is provided in [test/test_provenance.py](https://github.com/hpc-io/prov-io/blob/master/python/test/test_provenance.py). This example shows how to use PROV-IO APIs. You can also use it test if you installed PROV-IO correctly.
+An example is provided in [test/test_provenance.py](https://github.com/hpc-io/prov-io/blob/master/python/test/test_provenance.py). This example shows how to use PROV-IO APIs. You can also use it TO test if you installed PROV-IO Python library correctly.
