@@ -29,7 +29,7 @@ PROV-IO library needs to be built with ```libtool```. Install it by: <br />
 sudo apt-get install -y gcc make
 sudo apt-get install -y autoconf automake libtool pkg-config gtk-doc-tools 
 ```
-PROV-IO's RDF schema is based on Redland ```librdf``` (including ```raptor2-2.0.15```, ```rasqal-0.9.33```, ```librdf-1.0.17```) and its Python binding (```redland-bindings-1.0.17.1```). Install the dependencies first: <br />  
+PROV-IO's RDF schema is based on Redland ```librdf``` (including ```raptor2-2.0.15```, ```rasqal-0.9.33```, ```librdf-1.0.17```) and its Python binding (```redland-bindings-1.0.17.1```). Install their dependencies first: <br />  
 ```
 sudo apt-get install -y libltdl-dev libxml2 libxml2-dev flex bison swig uuid uuid-dev
 ```
