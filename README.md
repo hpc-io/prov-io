@@ -65,6 +65,7 @@ cd c/provio
 Open ```Makefile```, set ```PROV_IO_PATH``` to ```<your_prov_io_path>```, save and quit, then:
 ```
 make
+export LD_LIBRARY_PATH=<your_prov_io_path>/c/provio
 ```
 To run a basic PROV-IO test, in the same directory: 
 ```
