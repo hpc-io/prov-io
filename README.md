@@ -85,7 +85,7 @@ make
 export HDF5_VOL_CONNECTOR="provenance under_vol=0;under_info={};path=<trace_file_path>/my_trace.log;level=2;format="           
 HDF5_PLUGIN_PATH=<hdf5_vol_connector_path>                                                                                     
 ```
-Note: ```HDF5_VOL_CONNECTOR``` contains the original provenance file (plain text) configurations of HDF5 provenance vol-connector. PROV-IO configuration is in it's own configuration file under ```$PROVIO_CONFIG```. ```<hdf5_vol_connector_path>``` is the path that holds libh5prov.so.
+Note: ```HDF5_VOL_CONNECTOR``` contains the original provenance file (plain text) configurations of HDF5 provenance vol-connector. PROV-IO configuration is in it's own configuration file under ```$PROVIO_CONFIG```. ```<hdf5_vol_connector_path>``` is the path that holds ```libh5prov.so```.
 - Run a testcase application (VPIC) under the same directory:
 ```
 ./vpicio_uni_h5.exe ./my_data.dat 2 2 1 ./my_trace.log
