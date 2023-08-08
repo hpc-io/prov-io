@@ -8,7 +8,7 @@
 #include <mpi.h> 
 // #endif
 
-#include "rdf.h"
+
 #include "config.h"
 #include "stat.h"
 
