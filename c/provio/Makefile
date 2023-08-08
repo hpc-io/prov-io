@@ -1,29 +1,35 @@
-#Your HDF5 install path
-HDF5_DIR=/home/runzhou/Downloads/myhdfstuff/hdf5-develop/build/hdf5
-REDLAND_DIR=/home/runzhou/Downloads/librdf
+# Redland install path
+PROV_IO_PATH=
+REDLAND_DIR=$(PROV_IO_PATH)/c/lib
+RAPTOR_DIR=$(REDLAND_DIR)/lib-raptor
+RASQAL_DIR=$(REDLAND_DIR)/lib-rasqal
+LIBRDF_DIR=$(REDLAND_DIR)/librdf
 
+# Compiler
 CC=mpicc
-# CC=gcc
-AR=ar
 
-
+# Debug flags
 DEBUG=-g -O0
-LIBRDF_EXTERNAL_CPPFLAGS = -I/usr/local/include/raptor2 -I/usr/local/include/rasqal
-INCLUDES=-I$(HDF5_DIR)/include $(LIBRDF_EXTERNAL_CPPFLAGS) -I/$(REDLAND_DIR)/src
-DYNLIB_INCLUDE=-I/home/runzhou/PROV-IO/c/provio
 
-CFLAGS = $(DEBUG) $(INCLUDES) -Wall
+# Redland header files
+INCLUDES=-I$(RAPTOR_DIR)/include/raptor2 -I$(RASQAL_DIR)/include/rasqal -I$(LIBRDF_DIR)/include
+
+# CFLAGS
+CFLAGS=$(DEBUG) $(INCLUDES) -Wall
+
+# Redland libray path
+LIBS=-L$(RAPTOR_DIR)/lib -lraptor2 -L$(RASQAL_DIR)/lib -lrasqal -L$(LIBRDF_DIR)/lib -lrdf
+
+# PROV-IO header file
+DYNLIB_INCLUDE=-I$(PROV_IO_PATH)/c/provio
+
+
 DYNCFLAGS = $(DEBUG) $(INCLUDES) -Wall -fPIC 
 DYNLIB_CFLAGS = $(CFLAGS) $(DYNLIB_INCLUDE)
-
-#LIBS=-L$(HDF5_DIR)/lib -L$(MPI_DIR)/lib -lhdf5 -lz
-LIBRDF_DIRECT_LIBS =  -L/usr/local/lib -lraptor2 -L/usr/local/lib -lrasqal -L$(REDLAND_DIR)/src -lrdf
-LIBS=-L$(HDF5_DIR)/lib -lhdf5 -lz $(LIBRDF_DIRECT_LIBS)
 DYNLDFLAGS = $(DEBUG) -shared -fPIC 
 # DYNLDFLAGS = $(DEBUG) -dynamiclib -current_version 1.0 -fPIC $(LIBS)
 LDFLAGS = $(DEBUG) $(LIBS)
-ARFLAGS = rs
-DYNLIB_LDFLAGS=-L/home/runzhou/PROV-IO/c/provio -lprovio
+DYNLIB_LDFLAGS=-L$(PROV_IO_PATH)/c/provio -lprovio
 
 
 STATSRC = stat.c
@@ -41,25 +47,22 @@ DEPOBJ = $(STATOBJ) $(CONFOBJ)
 #DYNLIB = libh5prov.dylib
 #DYNDBG = libh5prov.dylib.dSYM
 
-# Testcase section
+# Tests
 STATTEST = stat_test.c
 STATTEST_OBJ = $(STATTEST:.c=.o)
 STATTEST_EXE = $(STATTEST:.c=)
 STATTEST_DBUG = $(STATTEST:.c=.dSYM)
 STATTEST_OUT = stat.txt
-
 CONFIGTEST = config_test.c
 CONFIGTEST_OBJ = $(CONFIGTEST:.c=.o)
 CONFIGTEST_EXE = $(CONFIGTEST:.c=)
 CONFIGTEST_DBUG = $(CONFIGTEST:.c=.dSYM)
-
 LIBTEST = provio_test.c
 LIBTEST_OBJ = $(LIBTEST:.c=.o)
 LIBTEST_EXE = $(LIBTEST:.c=)
 LIBTEST_DBUG = $(LIBTEST:.c=.dSYM)
 
 all: $(STATTEST_EXE) $(CONFIGTEST_EXE) $(LIBTEST_EXE) $(DYNLIB) 
-# all: $(DYNLIB)
 
 $(STATTEST_EXE): $(STATTEST) $(STATOBJ) 
 		$(CC) $(CFLAGS) $^ -o $(STATTEST_EXE)
@@ -79,7 +82,8 @@ $(LIBTEST_EXE): $(LIBTEST) $(DYNLIB)
 .PHONY: clean all
 clean:
 		rm -rf $(DYNOBJ) $(DYNLIB) $(DYNDBG) \
-			$(STATTEST_OBJ) $(STATTEST_EXE) $(STATTEST_DBUG) $(STATTEST_OUT)\
+			$(STATTEST_OBJ) $(STATTEST_EXE) $(STATTEST_DBUG) $(STATTEST_OUT) \
+			$(CONFIGTEST_OBJ) $(CONFIGTEST_EXE) $(CONFIGTEST_DBUG) \
+			$(LIBTEST_OBJ) $(LIBTEST_EXE) $(LIBTEST_DBUG) \
 			$(DEPOBJ)
-# 		rm -rf $(DYNOBJ) $(DYNLIB) $(DYNDBG) 
-# 			$(STATTEST_OBJ) $(STATTEST_EXE) $(STATTEST_DBUG)
+

@@ -2,19 +2,13 @@
 #include "provio.h"
 #include <mpi.h>
 
-/* PROV-IO instrument start */
-/* PROV-IO instrument end */
-
-// /* statistics */
-// Stat prov_stat;
-// duration_ht* FUNCTION_FREQUENCY;
 
 void function_1(prov_config* config, provio_helper_t* helper, prov_fields* fields) {
 	/* Fill in provenance fields */
 	const char* obj_name = "Attr_1";
 	const char* type = "provio:Attr";
 	const char* io_api = "function_1";
-    const char* relation = "prov:wasGeneratedBy";
+    	const char* relation = "prov:wasGeneratedBy";
 	prov_fill_data_object(fields, obj_name, type);
 	prov_fill_relation(fields, relation);
 
@@ -26,7 +20,7 @@ void function_1(prov_config* config, provio_helper_t* helper, prov_fields* field
 
 	add_prov_record(config, helper, fields);
 
-    prov_stat.TOTAL_PROV_OVERHEAD += elapsed;
+    	prov_stat.TOTAL_PROV_OVERHEAD += elapsed;
 	func_stat(__func__, elapsed);
 }
 
@@ -35,13 +29,14 @@ int main() {
 	prov_config config;
 	prov_fields fields;
 
+	load_config(&config);
 
 	MPI_Init(NULL, NULL);
 
 	/* Initialize provenance fields and others */
 
 	provio_init(&config, &fields);
-
+	
 	/* Initialize provenance helper */
 	provio_helper_t* helper;
 	helper = provio_helper_init(&config, &fields);
@@ -56,7 +51,7 @@ int main() {
 	/* Free provenance structures */
 	provio_term(&config, &fields);
 
-    MPI_Finalize();
+    	MPI_Finalize();
 
 	return 0;
 }

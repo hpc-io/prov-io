@@ -237,4 +237,9 @@ void load_config(prov_config* config) {
     if (path) {
         read_config(path, config);
     }
+    else {
+    	printf("Export provenance config file path first.\n");
+    	exit(-1);
+    }
+    
 }
