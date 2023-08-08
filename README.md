@@ -31,8 +31,9 @@ PROV-IO's RDF schema is based on Redland ```librdf``` (including ```raptor2-2.0.
 ```
 sudo apt-get install -y libltdl-dev libxml2 libxml2-dev flex bison swig
 ```
-We provide specific releases of ```librdf``` at: https://github.com/hpc-io/prov-io/tree/master/c/lib. Unzip and install them. <br />
-First, install ```raptor2-2.0.15``` and export path:
+We provide specific releases of ```librdf``` at: https://github.com/hpc-io/prov-io/tree/master/c/lib. Unzip and install them in the sequence of ```raptor2-2.0.15```->```rasqal-0.9.33```->```librdf-1.0.17```->```redland-bindings-1.0.17.1```. <br />
+
+We use ```raptor2-2.0.15``` installation and export path:
 ```
 cd raptor2-2.0.15
 ./autogen.sh
