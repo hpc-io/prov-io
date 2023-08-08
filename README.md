@@ -21,7 +21,7 @@ docker pull rzhan/prov-io:megatron-lm
 ```
 
 ## Build from Scratch
-This is for building PROV-IO from scratch.
+This section for building PROV-IO from scratch.
 
 ### Dependencies
 PROV-IO library needs to be built with ```libtool```. Install it by: <br /> 
