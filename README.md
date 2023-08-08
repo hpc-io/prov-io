@@ -20,7 +20,9 @@ We also publish the ```docker``` image of [Megatron-LM](https://github.com/NVIDI
 docker pull rzhan/prov-io:megatron-lm
 ```
 
-## Dependencies
+## Build from Scratch
+
+### Dependencies
 This is for building PROV-IO from scratch.
 PROV-IO library needs to be built with ```libtool```. Install it by: <br /> 
 ```
