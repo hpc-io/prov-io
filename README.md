@@ -82,8 +82,8 @@ make
 ```
 - To redirect HDF5 I/Os to provenance vol-connector, set these environment variables:
 ```
-export HDF5_VOL_CONNECTOR="provenance under_vol=0;under_info={};path=<trace_file_path>/my_trace.log;level=2;format="  # these are HDF5 provenance vol-connector original provenance file (plain text) configurations, PROV-IO configuration is in it's own configuration file under $PROVIO_CONFIG
-HDF5_PLUGIN_PATH=<hdf5_vol_connector_path> #the path that holds libh5prov.so.
+export HDF5_VOL_CONNECTOR="provenance under_vol=0;under_info={};path=<trace_file_path>/my_trace.log;level=2;format="           # these are HDF5 provenance vol-connector original provenance file (plain text) configurations, PROV-IO configuration is in it's own configuration file under $PROVIO_CONFIG
+HDF5_PLUGIN_PATH=<hdf5_vol_connector_path>                                                                                     # the path that holds libh5prov.so.
 ```
 - Run a testcase application (VPIC) under the same directory:
 ```
