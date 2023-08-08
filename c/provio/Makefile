@@ -1,5 +1,5 @@
 # Redland install path
-PROV_IO_PATH=
+PROV_IO_PATH=$(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../)
 REDLAND_DIR=$(PROV_IO_PATH)/c/lib
 RAPTOR_DIR=$(REDLAND_DIR)/lib-raptor
 RASQAL_DIR=$(REDLAND_DIR)/lib-rasqal
