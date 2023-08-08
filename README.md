@@ -106,7 +106,7 @@ Check out query engine at: https://github.com/hpc-io/prov-io/tree/master/user_en
 Check out query engine at: https://github.com/hpc-io/prov-io/tree/master/user_engine/visualizer. An example of visualized RDF provenance is also given.
 
 
-# Contact
+## Contact
 If you run into issues when using PROV-IO, please email me at hanrz AT iastate DOT edu. I'm more than happy to help.
 
 
