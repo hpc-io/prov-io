@@ -58,7 +58,7 @@ Follow instructions in [/python](https://github.com/hpc-io/prov-io/tree/master/p
 
 ## PROV-IO C Library
 PROV-IO C library tracks low level I/O information. 
-Build PROV C library:
+Build PROV-IO C library:
 ```
 cd c/provio
 ```
