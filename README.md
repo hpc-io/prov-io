@@ -47,7 +47,7 @@ Then, install ```rasqal-0.9.33``` and ```librdf-1.0.17``` using similar commands
 Finally, install the Python binding (```redland-bindings-1.0.17.1```):
 ```
 ./autogen.sh
-./configure --with-python
+./configure --with-python 
 make && make install
 ```
 
