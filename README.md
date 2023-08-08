@@ -43,7 +43,7 @@ cd raptor2-2.0.15
 make && make install
 export PKG_CONFIG_PATH=<your_prov_io_path>/lib/lib-raptor/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
-Then, install ```rasqal-0.9.33``` and ```librdf-1.0.17``` with similar commands with correct path. <br />
+Then, install ```rasqal-0.9.33``` and ```librdf-1.0.17``` using similar commands with correct path. <br />
 Finally, install the Python binding (```redland-bindings-1.0.17.1```):
 ```
 ./autogen.sh
