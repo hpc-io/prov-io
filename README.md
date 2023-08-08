@@ -79,7 +79,7 @@ Check out the provenance file (```prov.turtle```) and stat file (```prov.stat```
 PROV-IO HDF5 Lib Connector is used to track HDF5 I/O. Follow instructions to build it:
 - Install HDF5 (provided in the repo: https://github.com/hpc-io/prov-io/tree/master/packages). Build and install hdf5:
 ```
-cd hdf5
+cd hdf5-1.13.0-develop
 ./autogen.sh
 ```
 
