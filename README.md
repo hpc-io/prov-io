@@ -33,7 +33,7 @@ sudo apt-get install -y libltdl-dev libxml2 libxml2-dev flex bison swig
 ```
 We provide specific releases of ```librdf``` at: https://github.com/hpc-io/prov-io/tree/master/c/lib. Unzip and install them in the sequence of ```raptor2-2.0.15```->```rasqal-0.9.33```->```librdf-1.0.17```->```redland-bindings-1.0.17.1```. <br />
 
-We use ```raptor2-2.0.15``` installation and export path:
+For example, install ```raptor2-2.0.15``` and export path:
 ```
 cd raptor2-2.0.15
 ./autogen.sh
@@ -41,21 +41,7 @@ cd raptor2-2.0.15
 make && make install
 export PKG_CONFIG_PATH=<your_prov_io_path>/lib/lib-raptor/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
-Next, install ```rasqal-0.9.33``` and export path:
-```
-cd rasqal-0.9.33
-./autogen.sh
-./configure --prefix=<your_install_path>/lib-rasqal
-make && make install
-export PKG_CONFIG_PATH=<your_prov_io_path>/lib/lib-rasqal/lib/pkgconfig:$PKG_CONFIG_PATH
-```
-Install ```librdf-1.0.17``` and export path:
-```
-./autogen.sh
-./configure --prefix=<your_prov_io_path>/lib/librdf [--enable-bdb]
-make && make install
-export PKG_CONFIG_PATH=<your_prov_io_path>/lib/librdf/lib/pkgconfig:$PKG_CONFIG_PATH
-```
+Then, install ```rasqal-0.9.33``` and ```librdf-1.0.17``` with similar commands with correct path. <br />
 Finally, install the Python binding (```redland-bindings-1.0.17.1```):
 ```
 ./autogen.sh
