@@ -103,7 +103,7 @@ Syscall Wrapper is still under testing, stay tuned!
 ## Query Engine
 Check out query engine at: https://github.com/hpc-io/prov-io/tree/master/user_engine/query.
 ## Visualization
-Check out query engine at: https://github.com/hpc-io/prov-io/tree/master/user_engine/visualizer. An example of visualized RDF provenance is also given.
+Check out visualizer at: https://github.com/hpc-io/prov-io/tree/master/user_engine/visualizer. An example of visualized RDF provenance is also given.
 
 
 ## Contact
