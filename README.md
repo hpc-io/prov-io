@@ -58,12 +58,9 @@ Follow instructions in [/python](https://github.com/hpc-io/prov-io/tree/master/p
 
 ## PROV-IO C Library
 PROV-IO C library tracks low level I/O information. 
-Build PROV-IO C library:
+Build PROV-IO C library and export path:
 ```
 cd c/provio
-```
-Open ```Makefile```, set ```PROV_IO_PATH``` to ```<your_prov_io_path>```, save and quit, then:
-```
 make
 export LD_LIBRARY_PATH=<your_prov_io_path>/c/provio
 ```
