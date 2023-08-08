@@ -32,33 +32,28 @@ PROV-IO's RDF schema is based on Redland ```librdf``` (including ```raptor2-2.0.
 sudo apt-get install -y libltdl-dev libxml2 libxml2-dev flex bison swig
 ```
 We provide specific releases of ```librdf``` at: https://github.com/hpc-io/prov-io/tree/master/c/lib. Unzip and install them. <br />
-First, install ```raptor2-2.0.15```:
+First, install ```raptor2-2.0.15``` and export path:
 ```
 cd raptor2-2.0.15
 ./autogen.sh
 ./configure --prefix=<your_prov_io_path>/lib/lib-raptor
 make && make install
-```
-Export path for ```lib-raptor```:
-```
 export PKG_CONFIG_PATH=<your_prov_io_path>/lib/lib-raptor/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
-Next, install ```rasqal-0.9.33```:
+Next, install ```rasqal-0.9.33``` and export path:
 ```
 cd rasqal-0.9.33
 ./autogen.sh
 ./configure --prefix=<your_install_path>/lib-rasqal
 make && make install
-```
-Similarly, export paths for ```lib-rasqal```:
-```
 export PKG_CONFIG_PATH=<your_prov_io_path>/lib/lib-rasqal/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
-Install ```librdf-1.0.17```:
+Install ```librdf-1.0.17``` and export path:
 ```
 ./autogen.sh
 ./configure --prefix=<your_prov_io_path>/lib/librdf [--enable-bdb]
 make && make install
+export PKG_CONFIG_PATH=<your_prov_io_path>/lib/librdf/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
 Finally, install the Python binding (```redland-bindings-1.0.17.1```):
 ```
