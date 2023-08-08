@@ -39,11 +39,8 @@ cd raptor2-2.0.15
 ./configure --prefix=<your_prov_io_path>/lib/lib-raptor
 make && make install
 ```
-Export paths for ```lib-raptor```:
+Export path for ```lib-raptor```:
 ```
-export CFLAGS=-I<your_prov_io_path>/lib/lib-raptor/include/raptor2
-export LDFLAGS=-L<your_prov_io_path>/lib/lib-raptor/lib
-export LIBS='-lraptor2'
 export PKG_CONFIG_PATH=<your_prov_io_path>/lib/lib-raptor/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
 Next, install ```rasqal-0.9.33```:
@@ -55,9 +52,6 @@ make && make install
 ```
 Similarly, export paths for ```lib-rasqal```:
 ```
-export CFLAGS=$CFLAGS' -I<your_prov_io_path>/lib/lib-rasqal/include/rasqal'
-export LDFLAGS=$LDFLAGS' -L<your_prov_io_path>/lib/lib-rasqal/lib'
-export LIBS=$LIBS' -lrasqal'
 export PKG_CONFIG_PATH=<your_prov_io_path>/lib/lib-rasqal/lib/pkgconfig:$PKG_CONFIG_PATH
 ```
 Install ```librdf-1.0.17```:
