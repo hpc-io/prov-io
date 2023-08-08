@@ -107,7 +107,7 @@ Check out query engine at: https://github.com/hpc-io/prov-io/tree/master/user_en
 
 
 # Contact
-If you run into issues when using PROV-IO, please email me at hanrz AT iastate DOT edu.
+If you run into issues when using PROV-IO, please email me at hanrz AT iastate DOT edu. I'm more than happy to help.
 
 
 
