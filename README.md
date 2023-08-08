@@ -53,7 +53,7 @@ make && make install
 
 ## PROV-IO Python Library
 PROV-IO Python library tracks provenance information defined in PROV-IO Extensible class.
-Follow instructions in [python](https://github.com/hpc-io/prov-io/tree/master/python) to use it.
+Follow instructions in [/python](https://github.com/hpc-io/prov-io/tree/master/python) to use it.
 
 
 ## PROV-IO C Library
